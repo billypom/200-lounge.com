@@ -53,7 +53,7 @@ export default function Home({results}) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{player_name} | 200 Lounge</title>
+        <title>Mogi Details | 200 Lounge</title>
         <meta name="description" content="200 Lounge Player Profile" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
