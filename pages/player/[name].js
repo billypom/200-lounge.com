@@ -43,7 +43,7 @@ export async function getServerSideProps(context) {
 }
 
 
-export default function Home({results}) {
+export default function Player({results}) {
   const items = results.map((results) =>
     <tr key={results.player_id}>
       <td className={styles.description}>{results.player_name}</td>
