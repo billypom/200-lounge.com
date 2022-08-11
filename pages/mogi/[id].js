@@ -46,7 +46,7 @@ export async function getServerSideProps(context) {
 export default function Home({results}) {
     const items = results.map((results) =>
     <p key={results.mogi_id}>
-        <img src={results.table_url}></img>
+        <Image src={results.table_url}></Image>
     </p>
   )
 
