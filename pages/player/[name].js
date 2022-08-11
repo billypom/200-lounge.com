@@ -2,13 +2,13 @@ import Head from 'next/head'
 import mysql from 'mysql2'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
-import { useRouter } from 'next/router'
 
 
 // Create MySQL connection - Populate Q&A
-export async function getServerSideProps() {
-  const router = useRouter()
-  const { playerName } = router.query
+export async function getServerSideProps(context) {
+  // console.log(context)
+  const { params } = context
+  const player = params.name
   const connection = mysql.createConnection(
     {
       host: process.env.db_host,
@@ -23,7 +23,7 @@ export async function getServerSideProps() {
   // Store table results
   let results = await new Promise((resolve, reject) => {
     connection.query(
-      'SELECT player_name, mkc_id, country_code, twitch_link, mmr, peak_mmr FROM player WHERE player_name = ?;', [playerName], (error, results) => {
+      'SELECT player_id, player_name, mkc_id, country_code, twitch_link, mmr, peak_mmr FROM player WHERE player_name = ? LIMIT 1;', [player], (error, results) => {
         if (error) reject(error);
         else resolve(results);
       }
@@ -33,6 +33,7 @@ export async function getServerSideProps() {
   // Parse mysql output into json table
   results = JSON.parse(JSON.stringify(results))
   // console.log(results)
+  console.log(results)
   // End connection to server
   connection.end();
   // return props as object ALWAYS
@@ -44,15 +45,21 @@ export async function getServerSideProps() {
 
 export default function Home({results}) {
   const items = results.map((results) =>
-    <p key={results.id} loading="lazy">
-      <p className={styles.description}>name: {results.player_name}</p><br></br><p className={styles.description}>mmr: {results.mmr}</p>
-    </p>
+    <tr key={results.player_id}>
+      <td className={styles.description}>{results.player_name}</td>
+      <td className={styles.description}>{results.country_code}</td>
+      <td className={styles.description}>{results.mmr}</td>
+      <td className={styles.description}>{results.peak_mmr}</td>
+      <td className={styles.description}><a href={"https://mariokartcentral.com/mkc/registry/players/" + results.mkc_id}>MKC</a></td>
+      <td className={styles.description}><a href={"https://twitch.tv/" + results.twitch_link}>Twitch</a></td>
+    </tr>
   )
+  const player_name = results.player_name
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>results.player_name | 200 Lounge</title>
+        <title>{player_name} | 200 Lounge</title>
         <meta name="description" content="200 Lounge Player Profile" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -62,7 +69,17 @@ export default function Home({results}) {
           under construction
         </h1>
         <div className='max-w-2xl'>
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Country</th>
+              <th>MMR</th>
+              <th>Peak MMR</th>
+              <th>MKC Profile</th>
+              <th>Twitch Channel</th>
+            </tr>
             {items}
+          </table>
           </div>
       </main>
     </div>
