@@ -46,7 +46,7 @@ export async function getServerSideProps(context) {
 export default function Mogi({results}) {
     const items = results.map((results) =>
     <p key={results.mogi_id}>
-        <Image src={results.table_url} alt='mogi results image'></Image>
+        <Image src={results.table_url} alt='mogi results image' width='860' height='520'></Image>
     </p>
   )
   console.log(`${results.table_url}`)
