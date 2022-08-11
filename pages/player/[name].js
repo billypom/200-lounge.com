@@ -59,7 +59,7 @@ export default function Player({results}) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{player_name} | 200 Lounge</title>
+        <title>Player Details | 200 Lounge</title>
         <meta name="description" content="200 Lounge Player Profile" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
