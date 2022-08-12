@@ -1,3 +1,20 @@
+
+.tableheader {
+  color:#fafafa;
+  background-color: #462761;
+}
+
+.cool_column {
+  color:#fafafa;
+  background-color: #462761;
+  cursor: pointer;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
 .container {
   padding: 0 2rem;
 }
@@ -43,6 +60,7 @@
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
+  font-weight: bold;
 }
 
 .title,

@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import mysql from 'mysql2'
+import Link from 'next/link'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
+import { DataGrid } from '@mui/x-data-grid';
 
 
 // Create MySQL connection - Populate Q&A
@@ -16,6 +18,7 @@ export async function getServerSideProps(context) {
       password: process.env.db_password,
       database: process.env.db_database,
       insecureAuth: true,
+      supportBigNumbers: true,
     }
   )
   // Connect to server
@@ -32,19 +35,33 @@ export async function getServerSideProps(context) {
   );
   // Parse mysql output into json table
   results = JSON.parse(JSON.stringify(results))
-  // console.log(results)
   console.log(results)
+  console.log('Player ID: ')
+  console.log(results[0].player_id)
+
+  connection.connect();
+  let pm_results = await new Promise((resolve, reject) => {
+    connection.query(
+      'SELECT pm.mogi_id, pm.mmr_change, m.mogi_format FROM player_mogi pm JOIN mogi m ON pm.mogi_id = m.mogi_id WHERE pm.player_id = ?;', [results[0].player_id], (error, pm_results) => {
+        if (error) reject(error);
+        else resolve(pm_results);
+      }
+    );
+  });
+  pm_results = JSON.parse(JSON.stringify(pm_results))
+  console.log(pm_results)
+
   // End connection to server
   connection.end();
   // return props as object ALWAYS
   return {
-    props: { results }
+    props: { results, pm_results }
   }
 }
 
 
-export default function Player({results}) {
-  const items = results.map((results) =>
+export default function Player({results, pm_results}) {
+  const player_items = results.map((results) =>
     <tr key={results.player_id}>
       <td className={styles.description}>{results.player_name}</td>
       <td className={styles.description}>{results.country_code}</td>
@@ -54,7 +71,13 @@ export default function Player({results}) {
       <td className={styles.description}><a href={"https://twitch.tv/" + results.twitch_link}>Twitch</a></td>
     </tr>
   )
-  const player_name = results.player_name
+
+  const mogi_items = pm_results.map((pm_results) =>
+    <tr key={pm_results.mogi_id}>
+      <td className={styles.description}><Link href={"/mogi/" + pm_results.mogi_id}>Mogi</Link></td>
+      <td className={styles.description}>{pm_results.mmr_change}</td>
+    </tr>
+  )
 
   return (
     <div className={styles.container}>
@@ -78,9 +101,18 @@ export default function Player({results}) {
               <th>MKC Profile</th>
               <th>Twitch Channel</th>
             </tr>
-            {items}
+            {player_items}
           </table>
-          </div>
+        </div>
+        <div className='max-w-2xl'>
+          <table>
+            <tr>
+              <th>Mogi</th>
+              <th>MMR +/-</th>
+            </tr>
+            {mogi_items}
+          </table>
+        </div>
       </main>
     </div>
   )

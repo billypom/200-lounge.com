@@ -16,6 +16,7 @@ export async function getServerSideProps(context) {
       password: process.env.db_password,
       database: process.env.db_database,
       insecureAuth: true,
+      supportBigNumbers: true,
     }
   )
   // Connect to server
