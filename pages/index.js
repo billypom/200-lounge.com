@@ -5,10 +5,10 @@ import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import TableRow, { tableRowClasses } from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import PropTypes from 'prop-types';
-import { useTheme, createTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import TableFooter from '@mui/material/TableFooter';
 import TablePagination from '@mui/material/TablePagination';
@@ -22,31 +22,13 @@ import Head from 'next/head'
 import mysql from 'mysql2'
 import styles from '../styles/Home.module.css'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid'
+import ReactCountryFlag from "react-country-flag"
 
 
 
 
 function TablePaginationActions(props) {
-    // const theme = useTheme();
-    const theme = createTheme({
-      lounge: {
-        grandmaster: '#AE0000',
-        master: '#A580BB',
-        diamond: '#C7E5EB',
-        platinum: '#488C8E',
-        gold: '#FFC900',
-        silver: '#DEDEDE',
-        bronze: '#B87B23',
-        iron: '#6C6357',
-        peak: '#FFE400',
-        positive: '#51FF1E',
-        negative: '#FF1E1E',
-        white: '#FFFFFF',
-        dark: '#202020',
-        lessdark: '#464646',
-        hyperlink: '#00C9FF',
-      },
-    });
+    const theme = useTheme();
     const { count, page, rowsPerPage, onPageChange } = props;
   
     const handleFirstPageButtonClick = (event) => {
@@ -132,7 +114,24 @@ export async function getServerSideProps() {
     // Store table results
     let rows = await new Promise((resolve, reject) => {
       connection.query(
-        'SELECT player_id, player_name, mkc_id, country_code, twitch_link, mmr, peak_mmr FROM player;', (error, rows) => {
+        `SELECT p.player_id, 
+        RANK() OVER ( ORDER BY p.mmr DESC ) as "Rank",
+        p.country_code as "Country", 
+        p.player_name as "Player Name", 
+        p.mmr as "MMR", 
+        p.peak_mmr as "Peak MMR", 
+        CONCAT(tenpm.wins, "-", tenpm.losses) as "Win/Loss (Last 10)",
+        tenpm.last_ten_change as "Gain/Loss (Last 10)",
+        pm.events_played as "Events Played",
+        pm.largest_gain as "Largest Gain",
+        pm.largest_loss as "Largest Loss"
+        FROM player as p 
+        JOIN (SELECT ten.player_id, SUM(CASE WHEN ten.mmr_change > 0 THEN 1 ELSE 0 END) as wins, SUM(CASE WHEN ten.mmr_change <= 0 THEN 1 ELSE 0 END) as losses, SUM(mmr_change) as last_ten_change
+          FROM (SELECT player_id, mmr_change FROM (SELECT mogi_id FROM mogi ORDER BY create_date DESC LIMIT 10) as m JOIN player_mogi ON m.mogi_id = player_mogi.mogi_id) as ten
+          GROUP BY player_id) as tenpm
+        ON p.player_id = tenpm.player_id
+        JOIN (SELECT player_id, count(*) as events_played, MAX(mmr_change) as largest_gain, MIN(mmr_change) as largest_loss FROM player_mogi GROUP BY player_id) as pm
+        ON p.player_id = pm.player_id`, (error, rows) => {
           if (error) reject(error);
           else resolve(rows);
         }
@@ -152,24 +151,22 @@ export async function getServerSideProps() {
 
 
 
-
-
-
-
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.lounge.peak,
-    color: theme.palette.peak,
+    color: theme.palette.text.secondary,
+    fontSize: 20,
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: 18,
+    fontWeight: 750,
+    backgroundColor: theme.palette.text.primary,
+    color: 'white'
   },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: theme.palette.text.secondary
   },
   // hide last border
   '&:last-child td, &:last-child th': {
@@ -186,53 +183,41 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 export default function Leaderboard({ rows }) {
-
-  console.log(typeof rows);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+  const [rowsPerPage, setRowsPerPage] = React.useState(50);
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
   const columns = Object.keys(rows[0]);
-
   const [sortedBy, setSortedBy] = useState({
-    column: columns[0],
-    asc: true,
+    column: columns[1],
+    asc: false,
   });
-
   const [query, setQuery] = useState("")
-
-
   // bubble sort the data
   function sort(rows) {
-    const {column, asc } = sortedBy;
-    return rows.sort((a, b) => {
-      if (a[column].toString() > b[column].toString()) return asc ? -1 : 1
-      if (b[column].toString() > a[column].toString()) return asc ? 1 : -1
+    const { column, asc } = sortedBy;
+    return rows.sort(function(a, b) {
+      // I removed a[column].toString() in order to sort numbers properly.
+      // There should be no type mismatches in my data... i think
+      if (a[column] > b[column]) return asc ? -1 : 1
+      if (b[column] > a[column]) return asc ? 1 : -1
       return 0;
     });
   }
-
   function filter(rows) {
     return rows.filter((row) => 
       columns.some(
         (column) => row[column] ? row[column].toString().toLowerCase().indexOf(query.toLowerCase()) > -1 : "")
       );
   }
-
-
-
   return (
     <div className={styles.container}>
       <Head>
@@ -240,7 +225,6 @@ export default function Leaderboard({ rows }) {
         <meta name="description" content="MK8DX 200cc Lounge Leaderboard" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main className={styles.main}>
         <h1 className={styles.title}>
           under construction
@@ -274,19 +258,70 @@ export default function Leaderboard({ rows }) {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {(rowsPerPage >0
+                    {(rowsPerPage > 0
                       ? sort(filter(rows)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage):sort(filter(rows))).map((row) => (
+
                       <StyledTableRow key={row.player_id}>
-                        {/* {columns.map(column => <StyledTableCell >{row[column]}</StyledTableCell>)} */}
-                        {/* <StyledTableCell align="center">{rows}</StyledTableCell> */}
-                        {/* <StyledTableCell align="center">{row.player_id}</StyledTableCell> */}
-                        <StyledTableCell align="center">{row.player_name}</StyledTableCell>
-                        <StyledTableCell align="center"><a href={"https://mariokartcentral.com/forums/index.php?members/" + row.mkc_id}>MKC</a></StyledTableCell>
-                        <StyledTableCell align="center">{row.country_code}</StyledTableCell>
-                        <StyledTableCell align="center">{row.twitch_link}</StyledTableCell>
-                        <StyledTableCell align="center">{row.mmr}</StyledTableCell>
-                        <StyledTableCell align="center">{row.peak_mmr}</StyledTableCell>
+
+                        <StyledTableCell align="center">
+                          <div className={row.MMR >= 11000 ? 'font text-red-800' : row.MMR >= 9000 ? 'font text-violet-500' : row.MMR >= 7500 ? 'font text-cyan-200' : row.MMR >= 6000 ? 'font text-cyan-700' : row.MMR >= 4500 ? 'font text-yellow-500' : row.MMR >= 3000 ? 'font text-gray-400' : row.MMR >= 1500 ? 'font text-orange-400' : 'font text-stone-500'}>
+                            <a href={"/player/" + row['Player Name']}>
+                              <div className='cursor-pointer hover:underline'>
+                              {parseInt(row.Rank)}
+                              </div>
+                            </a>
+                          </div>
+                        </StyledTableCell>
                         
+                        <StyledTableCell align="center">
+                          <ReactCountryFlag countryCode={row.Country} style={{width: '2rem', height: '2rem'}} svg />
+                        </StyledTableCell>
+
+                        <StyledTableCell align="center">
+                          <div className={row.MMR >= 11000 ? 'font text-red-800' : row.MMR >= 9000 ? 'font text-violet-500' : row.MMR >= 7500 ? 'font text-cyan-200' : row.MMR >= 6000 ? 'font text-cyan-700' : row.MMR >= 4500 ? 'font text-yellow-500' : row.MMR >= 3000 ? 'font text-gray-400' : row.MMR >= 1500 ? 'font text-orange-400' : 'font text-stone-500'}>
+                            <a href={"/player/" + row['Player Name']}>
+                              <div className='cursor-pointer hover:underline'>
+                              {row['Player Name']}
+                              </div>
+                            </a>
+                          </div>
+                        </StyledTableCell>
+                        
+                        <StyledTableCell align="center">
+                          <div className={row.MMR >= 11000 ? 'font text-red-800' : row.MMR >= 9000 ? 'font text-violet-500' : row.MMR >= 7500 ? 'font text-cyan-200' : row.MMR >= 6000 ? 'font text-cyan-700' : row.MMR >= 4500 ? 'font text-yellow-500' : row.MMR >= 3000 ? 'font text-gray-400' : row.MMR >= 1500 ? 'font text-orange-400' : 'font text-stone-500'}>
+                          {row.MMR}
+                          </div>
+                        </StyledTableCell>
+
+                        <StyledTableCell align="center">
+                          <div className={row.MMR >= 11000 ? 'font text-red-800' : row.MMR >= 9000 ? 'font text-violet-500' : row.MMR >= 7500 ? 'font text-cyan-200' : row.MMR >= 6000 ? 'font text-cyan-700' : row.MMR >= 4500 ? 'font text-yellow-500' : row.MMR >= 3000 ? 'font text-gray-400' : row.MMR >= 1500 ? 'font text-orange-400' : 'font text-stone-500'}>
+                            {row['Peak MMR']}
+                          </div>
+                        </StyledTableCell>
+                        
+                        <StyledTableCell align="center">{row['Win/Loss (Last 10)']}</StyledTableCell>
+
+                        <StyledTableCell align="center">
+                          <div className={row['Gain/Loss (Last 10)'] > 0 ? 'font text-green-500': 'font text-red-500'}>
+                            {row['Gain/Loss (Last 10)']}
+                          </div>
+                        </StyledTableCell>
+
+                        <StyledTableCell align="center">
+                            {row['Events Played']}
+                        </StyledTableCell>
+
+                        <StyledTableCell align="center">
+                          <div className={row['Largest Gain'] > 0 ? 'font text-green-500': 'font text-red-500'}>
+                            {row['Largest Gain']}
+                          </div>
+                        </StyledTableCell>
+
+                        <StyledTableCell align="center">
+                          <div className={row['Largest Loss'] > 0 ? 'font text-green-500': 'font text-red-500'}>
+                            {row['Largest Loss']}
+                          </div>
+                        </StyledTableCell>
                       </StyledTableRow>
                     ))}
                     {emptyRows > 0 && (

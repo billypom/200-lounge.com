@@ -35,9 +35,6 @@ export async function getServerSideProps(context) {
   );
   // Parse mysql output into json table
   results = JSON.parse(JSON.stringify(results))
-  console.log(results)
-  console.log('Player ID: ')
-  console.log(results[0].player_id)
 
   connection.connect();
   let pm_results = await new Promise((resolve, reject) => {

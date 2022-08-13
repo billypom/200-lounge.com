@@ -2,6 +2,7 @@
 .tableheader {
   color:#fafafa;
   background-color: #462761;
+  justify-content: center;
 }
 
 .cool_column {
@@ -43,6 +44,14 @@
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
 }
 
 .title a {
