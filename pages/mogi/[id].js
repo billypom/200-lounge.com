@@ -56,8 +56,8 @@ export default function Mogi({results}) {
     <div className={styles.container}>
       <Head>
         <title>Mogi Details | 200 Lounge</title>
-        <meta name="description" content="200 Lounge Player Profile" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="200 Lounge Mogi Details" />
+        <link rel="icon" href="/200.png" />
       </Head>
 
       <main className={styles.main}>

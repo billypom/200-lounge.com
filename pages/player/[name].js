@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 import { DataGrid } from '@mui/x-data-grid';
+import ReactCountryFlag from "react-country-flag"
 
 
 // Create MySQL connection - Populate Q&A
@@ -81,7 +82,7 @@ export default function Player({results, pm_results}) {
       <Head>
         <title>Player Details | 200 Lounge</title>
         <meta name="description" content="200 Lounge Player Profile" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/200.png" />
       </Head>
 
       <main className={styles.main}>

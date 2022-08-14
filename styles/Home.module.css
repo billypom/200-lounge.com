@@ -1,13 +1,66 @@
+.navbar {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  background-color: rgb(51, 57, 71);
+  justify-content: center;
+  min-width: 100%;
+  top: 0;
+  z-index: 1;
+  background-size: 100%;
+  font-size: xx-large;
+}
+
+.navitem {
+  padding-right: 2rem;
+}
+
+.navitem:hover,
+.navitem:focus,
+.navitem:active {
+  border-color: #eaeaea;
+  color: #67e8f9;
+  cursor: pointer;
+}
+
+.tier_title {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 4rem;
+  font-weight: bold;
+  padding-top: 4rem;
+}
+
+.records_table {
+  padding: 1rem;
+  margin: auto; /* this good */
+  margin-top: 0; /* this good */
+  max-width: 100%; /* combination of all three gives me whaat i want */
+}
+
 
 .tableheader {
   color:#fafafa;
-  background-color: #462761;
-  justify-content: center;
+  background-color: #1d185f;
 }
 
 .cool_column {
   color:#fafafa;
-  background-color: #462761;
+  cursor: pointer;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: xx-large
+}
+
+.leaderboard_style {
+  align-items: left;
+}
+
+.leaderboard_text {
+  color:#fafafa;
   cursor: pointer;
   display: flex;
   flex: 1;
@@ -18,11 +71,11 @@
 
 .container {
   padding: 0 2rem;
+  margin: auto;
 }
 
 .main {
   min-height: 100vh;
-  padding: 4rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -55,7 +108,7 @@
 }
 
 .title a {
-  color: #0070f3;
+  color: #67e8f9;
   text-decoration: none;
 }
 
@@ -64,6 +117,7 @@
 .title a:active {
   text-decoration: underline;
 }
+
 
 .title {
   margin: 0;
@@ -115,8 +169,8 @@
 .card:hover,
 .card:focus,
 .card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+  color: #67e8f9;
+  border-color: #67e8f9;
 }
 
 .card h2 {

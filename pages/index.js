@@ -23,6 +23,7 @@ import mysql from 'mysql2'
 import styles from '../styles/Home.module.css'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid'
 import ReactCountryFlag from "react-country-flag"
+import Link from 'next/link'
 
 
 
@@ -218,33 +219,48 @@ export default function Leaderboard({ rows }) {
         (column) => row[column] ? row[column].toString().toLowerCase().indexOf(query.toLowerCase()) > -1 : "")
       );
   }
+
+
+
+
+
+
+
+
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>200 Lounge</title>
+        <title>200 Lounge | Leaderboard</title>
         <meta name="description" content="MK8DX 200cc Lounge Leaderboard" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/200.png" />
       </Head>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          under construction
+          200cc lounge leaderboard
         </h1>
         
-        <div className="flex flex-col gap-2 w-50">
+        <div className="flex flex-col p-6 gap-2">
           <input 
-            className="border border-gray-400 text-white placeholder:text-white w-full p-2" type="text" value={query} onChange={(e) => setQuery(e.target.value)}/>
-              <TableContainer component={Paper}>
-                <Table stickyHeader sx={{ minWidth: 900 }} aria-label="customized table">
+            className="border border-gray-400 text-white placeholder:text-gray justify-start m-auto max-w-100 p-2" 
+            type="text" 
+            placeholder="(search)" 
+            value={query} 
+            onChange={(e) => setQuery(e.target.value)}/>
+        </div>
+        <div className="m-auto p-6 gap-2">
+              <TableContainer component={Paper} className={styles.leaderboard_style}>
+                <Table stickyHeader aria-label="customized table">
                   <TableHead>
                     <TableRow>
                       {
                         columns.map(column => ( column === "player_id" ? <></> :
                           <StyledTableCell className={styles.tableheader}>
                             <div 
-                              className={styles.cool_column} 
+                              className={styles.leaderboard_text} 
                               onClick={() => 
                                 setSortedBy((prev) => ({column: column, asc: !prev.asc}))}>
-                                  <div>{column}</div>
+                                  <div>{column.toLowerCase()}</div>
                                   <div>{sortedBy.column === column &&
                                     (sortedBy.asc 
                                       ? <ChevronUpIcon className="w-5 h-5"/>
@@ -264,12 +280,12 @@ export default function Leaderboard({ rows }) {
                       <StyledTableRow key={row.player_id}>
 
                         <StyledTableCell align="center">
-                          <div className={row.MMR >= 11000 ? 'font text-red-800' : row.MMR >= 9000 ? 'font text-violet-500' : row.MMR >= 7500 ? 'font text-cyan-200' : row.MMR >= 6000 ? 'font text-cyan-700' : row.MMR >= 4500 ? 'font text-yellow-500' : row.MMR >= 3000 ? 'font text-gray-400' : row.MMR >= 1500 ? 'font text-orange-400' : 'font text-stone-500'}>
-                            <a href={"/player/" + row['Player Name']}>
+                          <div className={row.MMR >= 11000 ? 'font text-red-800' : row.MMR >= 9000 ? 'font text-violet-500' : row.MMR >= 7500 ? 'font text-cyan-200' : row.MMR >= 6000 ? 'font text-cyan-600' : row.MMR >= 4500 ? 'font text-yellow-500' : row.MMR >= 3000 ? 'font text-gray-400' : row.MMR >= 1500 ? 'font text-orange-400' : 'font text-stone-500'}>
                               <div className='cursor-pointer hover:underline'>
-                              {parseInt(row.Rank)}
+                              <Link href={"/player/" + row['Player Name']}>
+                                {parseInt(row.Rank)}
+                              </Link>
                               </div>
-                            </a>
                           </div>
                         </StyledTableCell>
                         
@@ -278,23 +294,23 @@ export default function Leaderboard({ rows }) {
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className={row.MMR >= 11000 ? 'font text-red-800' : row.MMR >= 9000 ? 'font text-violet-500' : row.MMR >= 7500 ? 'font text-cyan-200' : row.MMR >= 6000 ? 'font text-cyan-700' : row.MMR >= 4500 ? 'font text-yellow-500' : row.MMR >= 3000 ? 'font text-gray-400' : row.MMR >= 1500 ? 'font text-orange-400' : 'font text-stone-500'}>
-                            <a href={"/player/" + row['Player Name']}>
+                          <div className={row.MMR >= 11000 ? 'font text-red-800' : row.MMR >= 9000 ? 'font text-violet-500' : row.MMR >= 7500 ? 'font text-cyan-200' : row.MMR >= 6000 ? 'font text-cyan-600' : row.MMR >= 4500 ? 'font text-yellow-500' : row.MMR >= 3000 ? 'font text-gray-400' : row.MMR >= 1500 ? 'font text-orange-400' : 'font text-stone-500'}>
                               <div className='cursor-pointer hover:underline'>
-                              {row['Player Name']}
+                              <Link href={"/player/" + row['Player Name']}>
+                                {row['Player Name']}
+                              </Link>
                               </div>
-                            </a>
                           </div>
                         </StyledTableCell>
                         
                         <StyledTableCell align="center">
-                          <div className={row.MMR >= 11000 ? 'font text-red-800' : row.MMR >= 9000 ? 'font text-violet-500' : row.MMR >= 7500 ? 'font text-cyan-200' : row.MMR >= 6000 ? 'font text-cyan-700' : row.MMR >= 4500 ? 'font text-yellow-500' : row.MMR >= 3000 ? 'font text-gray-400' : row.MMR >= 1500 ? 'font text-orange-400' : 'font text-stone-500'}>
+                          <div className={row.MMR >= 11000 ? 'font text-red-800' : row.MMR >= 9000 ? 'font text-violet-500' : row.MMR >= 7500 ? 'font text-cyan-200' : row.MMR >= 6000 ? 'font text-cyan-600' : row.MMR >= 4500 ? 'font text-yellow-500' : row.MMR >= 3000 ? 'font text-gray-400' : row.MMR >= 1500 ? 'font text-orange-400' : 'font text-stone-500'}>
                           {row.MMR}
                           </div>
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className={row.MMR >= 11000 ? 'font text-red-800' : row.MMR >= 9000 ? 'font text-violet-500' : row.MMR >= 7500 ? 'font text-cyan-200' : row.MMR >= 6000 ? 'font text-cyan-700' : row.MMR >= 4500 ? 'font text-yellow-500' : row.MMR >= 3000 ? 'font text-gray-400' : row.MMR >= 1500 ? 'font text-orange-400' : 'font text-stone-500'}>
+                          <div className={row.MMR >= 11000 ? 'font text-red-800' : row.MMR >= 9000 ? 'font text-violet-500' : row.MMR >= 7500 ? 'font text-cyan-200' : row.MMR >= 6000 ? 'font text-cyan-600' : row.MMR >= 4500 ? 'font text-yellow-500' : row.MMR >= 3000 ? 'font text-gray-400' : row.MMR >= 1500 ? 'font text-orange-400' : 'font text-stone-500'}>
                             {row['Peak MMR']}
                           </div>
                         </StyledTableCell>
@@ -331,10 +347,10 @@ export default function Leaderboard({ rows }) {
                     )}
                   </TableBody>
                   <TableFooter>
-                      <TableRow>
+                      <StyledTableRow>
                           <TablePagination
                           rowsPerPageOptions={[10, 25, {label: 'All', value: -1}]}
-                          colSpan={3}
+                          colSpan={10}
                           count={rows.length}
                           rowsPerPage={rowsPerPage}
                           page={page}
@@ -348,7 +364,7 @@ export default function Leaderboard({ rows }) {
                           onRowsPerPageChange={handleChangeRowsPerPage}
                           ActionsComponent={TablePaginationActions}
                           />
-                      </TableRow>
+                      </StyledTableRow>
                   </TableFooter>
                 </Table>
               </TableContainer>

@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import * as React from 'react';
 import { Box, ThemeProvider, createTheme } from '@mui/system';
+import Navbar from '../components/Navbar';
 
 const theme = createTheme({
   palette: {
@@ -37,6 +38,7 @@ const theme = createTheme({
 
 function MyApp({ Component, pageProps }) {
   return <>
+  <Navbar/>
   <ThemeProvider theme={theme}/>
   <Component {...pageProps} />
   </>
