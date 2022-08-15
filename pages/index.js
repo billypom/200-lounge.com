@@ -255,7 +255,7 @@ export default function Leaderboard({ rows }) {
               <TableContainer component={Paper} className={styles.leaderboard_style}>
                 <Table stickyHeader aria-label="customized table">
                   <TableHead>
-                    <TableRow class={styles.tableheader}>
+                    <TableRow>
                       {
                         columns.map(column => ( column === "player_id" ? <></> :
                           <StyledTableCell>
