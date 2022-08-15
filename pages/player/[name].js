@@ -310,7 +310,7 @@ export default function Player({ results, rows, lg, ll }) {
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div>
+                        <div className={styles.tableheader}>
                           Event
                         </div>
                       </StyledTableCell>

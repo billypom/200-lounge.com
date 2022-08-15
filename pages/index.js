@@ -178,7 +178,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-
+const StyledTableHead = styles(TableRow)(({theme}) => ({
+  root: {
+    backgroundColor: "red"
+  }
+}))
 
 
 
@@ -254,7 +258,7 @@ export default function Leaderboard({ rows }) {
         <div className="m-auto p-6 gap-2">
               <TableContainer component={Paper} className={styles.leaderboard_style}>
                 <Table stickyHeader aria-label="customized table">
-                  <TableHead>
+                  <StyledTableHead>
                     <TableRow>
                       {
                         columns.map(column => ( column === "player_id" ? <></> :
@@ -275,7 +279,7 @@ export default function Leaderboard({ rows }) {
                         ))
                       }
                     </TableRow>
-                  </TableHead>
+                  </StyledTableHead>
                   <TableBody>
                     {(rowsPerPage > 0
                       ? sort(filter(rows)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage):sort(filter(rows))).map((row) => (
