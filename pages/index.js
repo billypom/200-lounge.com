@@ -319,7 +319,7 @@ export default function Leaderboard({ rows }) {
                           </div>
                         </StyledTableCell>
                         
-                        <StyledTableCell align="center">{(row['Win Rate']* 100).toFixed(2)}</StyledTableCell>
+                        <StyledTableCell align="center">{(row['Win Rate']* 100).toFixed(2)}%</StyledTableCell>
 
                         <StyledTableCell align="center">{row['Win/Loss (Last 10)']}</StyledTableCell>
 

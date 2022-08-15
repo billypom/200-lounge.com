@@ -171,10 +171,12 @@ export async function getServerSideProps(context) {
     );
   }
   );
-  console.log('jfkldjlfkjdslkfjskfjdlkjfkldsfjlksdjfksdjfksdjk')
   // Parse mysql output into json table
   results = JSON.parse(JSON.stringify(results))
   // console.log(results)
+
+
+
 
   let rows = await new Promise((resolve, reject) => {
     connection.query(
@@ -191,16 +193,43 @@ export async function getServerSideProps(context) {
   });
   rows = JSON.parse(JSON.stringify(rows))
 
+
+
+
+  let lg = await new Promise((resolve, reject) => {
+    connection.query(
+      `SELECT mogi_id FROM player_mogi WHERE player_id = ? AND mmr_change = ?`, [results[0].player_id, results[0]["Largest Gain"]], (error, lg) => {
+        if (error) reject(error);
+        else resolve(lg);
+      }
+    );
+  });
+  lg = JSON.parse(JSON.stringify(lg))
+
+
+
+
+
+  let ll = await new Promise((resolve, reject) => {
+    connection.query(
+      `SELECT mogi_id FROM player_mogi WHERE player_id = ? AND mmr_change = ?`, [results[0].player_id, results[0]["Largest Loss"]], (error, ll) => {
+        if (error) reject(error);
+        else resolve(ll);
+      }
+    );
+  });
+  ll = JSON.parse(JSON.stringify(ll))
+
   // End connection to server
   connection.end();
   // return props as object ALWAYS
   return {
-    props: { results, rows }
+    props: { results, rows, lg, ll }
   }
 }
 
 
-export default function Player({ results, rows }) {
+export default function Player({ results, rows, lg, ll }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(50);
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -228,18 +257,52 @@ export default function Player({ results, rows }) {
            <div className={results[0].rank_name === "Grandmaster" ? 'text-red-800' : results[0].rank_name === "Master" ? 'text-violet-700' : results[0].rank_name === "Diamond" ? 'text-cyan-200' : results[0].rank_name === "Platinum" ? 'text-cyan-600' : results[0].rank_name === "Gold" ? 'text-yellow-500' : results[0].rank_name === "Silver" ? 'text-gray-400' : results[0].rank_name === "Bronze" ? 'text-orange-400' : results[0].rank_name === "Iron" ? 'text-stone-500' : 'text-white'}>{results[0]["Player Name"]} - {results[0].rank_name}</div>
           
         </h1>
-        <div className='max-w-2xl'>
-          <table>
-            <tr>
-              <th>Name</th>
-              <th>Country</th>
-              <th>MMR</th>
-              <th>Peak MMR</th>
-              <th>MKC Profile</th>
-              <th>Twitch Channel</th>
-            </tr>
-            {/* {player_items} */}
-          </table>
+        <div className='flex flex-row flex-wrap max-w-xl m-auto justify-center'>
+          <div className={styles.player_page_stats}>
+            <h2 className='text-xl font-bold'>rank</h2>
+            <div className='text-white'>{results[0]["Rank"]}</div>
+          </div>
+
+          <div className={styles.player_page_stats}>
+            <h2 className='text-xl font-bold'>mmr</h2>
+            <div className={results[0]["MMR"] >= 11000 ? 'text-red-800' : results[0]["MMR"] >= 9000 ? 'text-violet-700' : results[0]["MMR"] >= 7500 ? 'text-cyan-200' : results[0]["MMR"] >= 6000 ? 'text-cyan-600' : results[0]["MMR"] >= 4500 ? 'text-yellow-500' : results[0]["MMR"] >= 3000 ? 'text-gray-400' : results[0]["MMR"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["MMR"]}</div>
+          </div>
+
+          <div className={styles.player_page_stats}>
+            <h2 className='text-xl font-bold'>peak mmr</h2>
+            <div className={results[0]["Peak MMR"] >= 11000 ? 'text-red-800' : results[0]["Peak MMR"] >= 9000 ? 'text-violet-700' : results[0]["Peak MMR"] >= 7500 ? 'text-cyan-200' : results[0]["Peak MMR"] >= 6000 ? 'text-cyan-600' : results[0]["Peak MMR"] >= 4500 ? 'text-yellow-500' : results[0]["Peak MMR"] >= 3000 ? 'text-gray-400' : results[0]["Peak MMR"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["Peak MMR"]}</div>
+          </div>
+
+          <div className={styles.player_page_stats}>
+            <h2 className='text-xl font-bold'>win rate</h2>
+            <div className='text-white'>{results[0]["Win Rate"]}</div>
+          </div>
+
+          <div className={styles.player_page_stats}>
+            <h2 className='text-xl font-bold'>win/loss (last 10)</h2>
+            <div className='text-white'>{results[0]["Win/Loss (Last 10)"]}</div>
+          </div>
+
+          <div className={styles.player_page_stats}>
+            <h2 className='text-xl font-bold'>+/- (last 10)</h2>
+            <div className='text-white'>{results[0]["Gain/Loss (Last 10)"]}</div>
+          </div>
+
+          <div className={styles.player_page_stats}>
+            <h2 className='text-xl font-bold'>events played</h2>
+            <div className='text-white'>{results[0]["Events Played"]}</div>
+          </div>
+
+          <div className={styles.player_page_stats}>
+            <h2 className='text-xl font-bold'>largest gain</h2>
+            <div className='cursor-pointer hover:underline text-cyan-300'><Link href={"/mogi/" + lg[0].mogi_id}>{results[0]["Largest Gain"]}</Link></div>
+          </div>
+
+          <div className={styles.player_page_stats}>
+            <h2 className='text-xl font-bold'>largest loss</h2>
+            <div className='cursor-pointer hover:underline text-cyan-300'><Link href={"/mogi/" + lg[0].mogi_id}>{results[0]["Largest Loss"]}</Link></div>
+          </div>
+
         </div>
         <div className="m-auto p-6 gap-2">
               <TableContainer component={Paper} className={styles.leaderboard_style}>
