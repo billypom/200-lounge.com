@@ -153,7 +153,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {all1.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -201,7 +201,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {all2.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -249,7 +249,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {all3.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -297,7 +297,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {all4.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -345,7 +345,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {all6.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -409,7 +409,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {a1.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -457,7 +457,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {a2.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -505,7 +505,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {a3.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -553,7 +553,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {a4.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -601,7 +601,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {a6.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -665,7 +665,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {b1.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -713,7 +713,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {b2.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -761,7 +761,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {b3.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -809,7 +809,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {b4.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -857,7 +857,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {b6.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -927,7 +927,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {c1.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -975,7 +975,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {c2.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -1023,7 +1023,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {c3.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -1071,7 +1071,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {c4.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -1119,7 +1119,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {c6.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -1187,7 +1187,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {sq2.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                         </StyledTableCell>
 
@@ -1230,7 +1230,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {sq2.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -1278,7 +1278,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {sq3.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -1326,7 +1326,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {sq4.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
@@ -1374,7 +1374,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableHead>
                   <TableBody>
                     {sq6.map((row, idx) => (
-                      <StyledTableRow>
+                      <StyledTableRow key={row.mogi_id}>
                         <StyledTableCell align="center">
                           <div className="text-4xl">
                             {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
