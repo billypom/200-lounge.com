@@ -129,22 +129,22 @@ export default function Mogi({ results, pm }) {
                 <Table stickyHeader aria-label="customized table">
                   <TableHead>
                     <TableRow>
-                      <StyledTableCell className={styles.tableheader}>
+                      <StyledTableCell>
                         <div className={styles.tableheader}>
                           player
                         </div>
                       </StyledTableCell>
-                      <StyledTableCell className={styles.tableheader}>
+                      <StyledTableCell>
                         <div className={styles.tableheader}>
                           prev mmr
                         </div>
                       </StyledTableCell>
-                      <StyledTableCell className={styles.tableheader}>
+                      <StyledTableCell>
                         <div className={styles.tableheader}>
                           +/-
                         </div>
                       </StyledTableCell>
-                      <StyledTableCell className={styles.tableheader}>
+                      <StyledTableCell>
                         <div className={styles.tableheader}>
                           mmr
                         </div>
