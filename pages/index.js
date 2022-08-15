@@ -170,7 +170,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.text.secondary
+    backgroundColor: theme.palette.text.secondary,
   },
   // hide last border
   '&:last-child td, &:last-child th': {
@@ -178,7 +178,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const StyledTableHead = styles(TableRow)(({theme}) => ({
+const StyledTableHead = styled(TableRow)(({theme}) => ({
   root: {
     backgroundColor: "red"
   },
