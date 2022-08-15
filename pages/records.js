@@ -162,7 +162,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -210,7 +210,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -258,7 +258,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -306,7 +306,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -354,7 +354,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -418,7 +418,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -466,7 +466,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -514,7 +514,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -562,7 +562,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -610,7 +610,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -674,7 +674,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -722,7 +722,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -770,7 +770,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -818,7 +818,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -866,7 +866,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -936,7 +936,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -984,7 +984,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -1032,7 +1032,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -1080,7 +1080,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -1128,7 +1128,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -1239,7 +1239,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -1287,7 +1287,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -1335,7 +1335,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
@@ -1383,7 +1383,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
