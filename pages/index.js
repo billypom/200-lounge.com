@@ -181,8 +181,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const StyledTableHead = styles(TableRow)(({theme}) => ({
   root: {
     backgroundColor: "red"
-  }
-}))
+  },
+}));
 
 
 
