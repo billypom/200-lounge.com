@@ -99,55 +99,59 @@ function TablePaginationActions(props) {
 
 
 
-export async function getServerSideProps() {
-    const connection = mysql.createConnection(
-      {
-        host: process.env.db_host,
-        user: process.env.db_username,
-        password: process.env.db_password,
-        database: process.env.db_database,
-        insecureAuth: true,
-        supportBigNumbers: true,
+export async function getServerSideProps(context) {
+  const { params } = context
+  const connection = mysql.createConnection(
+    {
+      host: process.env.db_host,
+      user: process.env.db_username,
+      password: process.env.db_password,
+      database: process.env.db_database,
+      insecureAuth: true,
+      supportBigNumbers: true,
+    }
+  )
+  // Connect to server
+  connection.connect();
+  // Store table results
+  let rows = await new Promise((resolve, reject) => {
+    connection.query(
+      `SELECT p.player_id, 
+      RANK() OVER ( ORDER BY p.mmr DESC ) as "Rank",
+      p.country_code as "Country", 
+      p.player_name as "Player Name", 
+      p.mmr as "MMR", 
+      p.peak_mmr as "Peak MMR", 
+      (wintable.wins/pm.events_played) as "Win Rate",
+      CONCAT(tenpm.wins, "-", tenpm.losses) as "Win/Loss (Last 10)",
+      tenpm.last_ten_change as "Gain/Loss (Last 10)",
+      pm.events_played as "Events Played",
+      pm.largest_gain as "Largest Gain",
+      pm.largest_loss as "Largest Loss"
+      FROM player as p 
+      JOIN (SELECT ten.player_id, SUM(CASE WHEN ten.mmr_change > 0 THEN 1 ELSE 0 END) as wins, SUM(CASE WHEN ten.mmr_change <= 0 THEN 1 ELSE 0 END) as losses, SUM(mmr_change) as last_ten_change
+        FROM (SELECT player_id, mmr_change FROM (SELECT mogi_id FROM mogi ORDER BY create_date DESC LIMIT 10) as m JOIN player_mogi ON m.mogi_id = player_mogi.mogi_id) as ten
+        GROUP BY player_id) as tenpm
+      ON p.player_id = tenpm.player_id
+      JOIN (SELECT player_id, count(*) as events_played, MAX(mmr_change) as largest_gain, MIN(mmr_change) as largest_loss FROM player_mogi GROUP BY player_id) as pm
+      ON p.player_id = pm.player_id
+        JOIN (SELECT player_id, sum(if(mmr_change>0,1,0)) as wins FROM player_mogi GROUP BY player_id) as wintable
+      ON wintable.player_id = p.player_id`, (error, rows) => {
+        if (error) reject(error);
+        else resolve(rows);
       }
-    )
-    // Connect to server
-    connection.connect();
-    // Store table results
-    let rows = await new Promise((resolve, reject) => {
-      connection.query(
-        `SELECT p.player_id, 
-        RANK() OVER ( ORDER BY p.mmr DESC ) as "Rank",
-        p.country_code as "Country", 
-        p.player_name as "Player Name", 
-        p.mmr as "MMR", 
-        p.peak_mmr as "Peak MMR", 
-        CONCAT(tenpm.wins, "-", tenpm.losses) as "Win/Loss (Last 10)",
-        tenpm.last_ten_change as "Gain/Loss (Last 10)",
-        pm.events_played as "Events Played",
-        pm.largest_gain as "Largest Gain",
-        pm.largest_loss as "Largest Loss"
-        FROM player as p 
-        JOIN (SELECT ten.player_id, SUM(CASE WHEN ten.mmr_change > 0 THEN 1 ELSE 0 END) as wins, SUM(CASE WHEN ten.mmr_change <= 0 THEN 1 ELSE 0 END) as losses, SUM(mmr_change) as last_ten_change
-          FROM (SELECT player_id, mmr_change FROM (SELECT mogi_id FROM mogi ORDER BY create_date DESC LIMIT 10) as m JOIN player_mogi ON m.mogi_id = player_mogi.mogi_id) as ten
-          GROUP BY player_id) as tenpm
-        ON p.player_id = tenpm.player_id
-        JOIN (SELECT player_id, count(*) as events_played, MAX(mmr_change) as largest_gain, MIN(mmr_change) as largest_loss FROM player_mogi GROUP BY player_id) as pm
-        ON p.player_id = pm.player_id`, (error, rows) => {
-          if (error) reject(error);
-          else resolve(rows);
-        }
-      );
-    }
     );
-    // Parse mysql output into json table
-    rows = JSON.parse(JSON.stringify(rows).replace(/\:null/gi, "\:\"\""))
-    // End connection to server
-    connection.end();
-    // return props as object ALWAYS
-    return {
-      props: { rows }
-    }
   }
+  );
+  // Parse mysql output into json table
+  rows = JSON.parse(JSON.stringify(rows).replace(/\:null/gi, "\:\"\""))
+  // End connection to server
+  connection.end();
+  // return props as object ALWAYS
+  return {
+    props: { rows }
+  }
+}
 
 
 
@@ -280,7 +284,7 @@ export default function Leaderboard({ rows }) {
                       <StyledTableRow key={row.player_id}>
 
                         <StyledTableCell align="center">
-                          <div className={row.MMR >= 11000 ? 'font text-red-800' : row.MMR >= 9000 ? 'font text-violet-500' : row.MMR >= 7500 ? 'font text-cyan-200' : row.MMR >= 6000 ? 'font text-cyan-600' : row.MMR >= 4500 ? 'font text-yellow-500' : row.MMR >= 3000 ? 'font text-gray-400' : row.MMR >= 1500 ? 'font text-orange-400' : 'font text-stone-500'}>
+                          <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'text-violet-700' : row.MMR >= 7500 ? 'text-cyan-200' : row.MMR >= 6000 ? 'text-cyan-600' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                               <div className='cursor-pointer hover:underline'>
                               <Link href={"/player/" + row['Player Name']}>
                                 {parseInt(row.Rank)}
@@ -294,7 +298,7 @@ export default function Leaderboard({ rows }) {
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className={row.MMR >= 11000 ? 'font text-red-800' : row.MMR >= 9000 ? 'font text-violet-500' : row.MMR >= 7500 ? 'font text-cyan-200' : row.MMR >= 6000 ? 'font text-cyan-600' : row.MMR >= 4500 ? 'font text-yellow-500' : row.MMR >= 3000 ? 'font text-gray-400' : row.MMR >= 1500 ? 'font text-orange-400' : 'font text-stone-500'}>
+                          <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'text-violet-700' : row.MMR >= 7500 ? 'text-cyan-200' : row.MMR >= 6000 ? 'text-cyan-600' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                               <div className='cursor-pointer hover:underline'>
                               <Link href={"/player/" + row['Player Name']}>
                                 {row['Player Name']}
@@ -304,21 +308,23 @@ export default function Leaderboard({ rows }) {
                         </StyledTableCell>
                         
                         <StyledTableCell align="center">
-                          <div className={row.MMR >= 11000 ? 'font text-red-800' : row.MMR >= 9000 ? 'font text-violet-500' : row.MMR >= 7500 ? 'font text-cyan-200' : row.MMR >= 6000 ? 'font text-cyan-600' : row.MMR >= 4500 ? 'font text-yellow-500' : row.MMR >= 3000 ? 'font text-gray-400' : row.MMR >= 1500 ? 'font text-orange-400' : 'font text-stone-500'}>
+                          <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'text-violet-700' : row.MMR >= 7500 ? 'text-cyan-200' : row.MMR >= 6000 ? 'text-cyan-600' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                           {row.MMR}
                           </div>
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className={row.MMR >= 11000 ? 'font text-red-800' : row.MMR >= 9000 ? 'font text-violet-500' : row.MMR >= 7500 ? 'font text-cyan-200' : row.MMR >= 6000 ? 'font text-cyan-600' : row.MMR >= 4500 ? 'font text-yellow-500' : row.MMR >= 3000 ? 'font text-gray-400' : row.MMR >= 1500 ? 'font text-orange-400' : 'font text-stone-500'}>
+                          <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'text-violet-700' : row.MMR >= 7500 ? 'text-cyan-200' : row.MMR >= 6000 ? 'text-cyan-600' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                             {row['Peak MMR']}
                           </div>
                         </StyledTableCell>
                         
+                        <StyledTableCell align="center">{(row['Win Rate']* 100).toFixed(2)}</StyledTableCell>
+
                         <StyledTableCell align="center">{row['Win/Loss (Last 10)']}</StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className={row['Gain/Loss (Last 10)'] > 0 ? 'font text-green-500': 'font text-red-500'}>
+                          <div className={row['Gain/Loss (Last 10)'] > 0 ? 'text-green-500': 'text-red-500'}>
                             {row['Gain/Loss (Last 10)']}
                           </div>
                         </StyledTableCell>
@@ -328,13 +334,13 @@ export default function Leaderboard({ rows }) {
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className={row['Largest Gain'] > 0 ? 'font text-green-500': 'font text-red-500'}>
+                          <div className={row['Largest Gain'] > 0 ? 'text-green-500': 'text-red-500'}>
                             {row['Largest Gain']}
                           </div>
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className={row['Largest Loss'] > 0 ? 'font text-green-500': 'font text-red-500'}>
+                          <div className={row['Largest Loss'] > 0 ? 'text-green-500': 'text-red-500'}>
                             {row['Largest Loss']}
                           </div>
                         </StyledTableCell>
@@ -350,7 +356,7 @@ export default function Leaderboard({ rows }) {
                       <StyledTableRow>
                           <TablePagination
                           rowsPerPageOptions={[10, 25, {label: 'All', value: -1}]}
-                          colSpan={10}
+                          colSpan={columns.length}
                           count={rows.length}
                           rowsPerPage={rowsPerPage}
                           page={page}

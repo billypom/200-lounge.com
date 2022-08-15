@@ -162,12 +162,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }><div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div></Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }><div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div></Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -210,12 +210,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -258,12 +258,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -306,12 +306,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -354,12 +354,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
@@ -418,12 +418,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -466,12 +466,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -514,12 +514,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -562,12 +562,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -610,12 +610,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
@@ -674,12 +674,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -722,12 +722,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -770,12 +770,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -818,12 +818,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -866,12 +866,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
@@ -936,12 +936,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -984,12 +984,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -1032,12 +1032,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -1080,12 +1080,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -1128,12 +1128,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
@@ -1239,12 +1239,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -1287,12 +1287,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -1335,12 +1335,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -1383,12 +1383,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                            <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="font text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}

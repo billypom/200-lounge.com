@@ -1,10 +1,124 @@
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow, { tableRowClasses } from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import PropTypes from 'prop-types';
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import TableFooter from '@mui/material/TableFooter';
+import TablePagination from '@mui/material/TablePagination';
+import IconButton from '@mui/material/IconButton';
+import FirstPageIcon from '@mui/icons-material/FirstPage';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import LastPageIcon from '@mui/icons-material/LastPage';
 import Head from 'next/head'
 import mysql from 'mysql2'
+import styles from '../../styles/Home.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
-import styles from '../../styles/Home.module.css'
-import { DataGrid } from '@mui/x-data-grid';
-import ReactCountryFlag from "react-country-flag"
+
+
+
+function TablePaginationActions(props) {
+  const theme = useTheme();
+  const { count, page, rowsPerPage, onPageChange } = props;
+
+  const handleFirstPageButtonClick = (event) => {
+    onPageChange(event, 0);
+  };
+
+  const handleBackButtonClick = (event) => {
+    onPageChange(event, page - 1);
+  };
+
+  const handleNextButtonClick = (event) => {
+    onPageChange(event, page + 1);
+  };
+
+  const handleLastPageButtonClick = (event) => {
+    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+  };
+
+  return (
+    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+      <IconButton
+        onClick={handleFirstPageButtonClick}
+        disabled={page === 0}
+        aria-label="first page"
+      >
+        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+      </IconButton>
+      <IconButton
+        onClick={handleBackButtonClick}
+        disabled={page === 0}
+        aria-label="previous page"
+      >
+        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+      </IconButton>
+      <IconButton
+        onClick={handleNextButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="next page"
+      >
+        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+      </IconButton>
+      <IconButton
+        onClick={handleLastPageButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="last page"
+      >
+        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+      </IconButton>
+    </Box>
+  );
+}
+
+TablePaginationActions.propTypes = {
+  count: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
+  rowsPerPage: PropTypes.number.isRequired,
+};
+
+
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    color: theme.palette.text.secondary,
+    fontSize: 20,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 18,
+    fontWeight: 750,
+    backgroundColor: theme.palette.text.primary,
+    color: 'white'
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.text.secondary
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
+
+
+
+
+
+
+
+
+
 
 
 // Create MySQL connection - Populate Q&A
@@ -27,55 +141,79 @@ export async function getServerSideProps(context) {
   // Store table results
   let results = await new Promise((resolve, reject) => {
     connection.query(
-      'SELECT player_id, player_name, mkc_id, country_code, twitch_link, mmr, peak_mmr FROM player WHERE player_name = ? LIMIT 1;', [player], (error, results) => {
+      `SELECT p.player_id, 
+      RANK() OVER ( ORDER BY p.mmr DESC ) as "Rank",
+      p.country_code as "Country", 
+      p.player_name as "Player Name", 
+      p.mmr as "MMR", 
+      p.peak_mmr as "Peak MMR", 
+        ROUND((wintable.wins/pm.events_played)*100,2) as "Win Rate",
+      CONCAT(tenpm.wins, "-", tenpm.losses) as "Win/Loss (Last 10)",
+      tenpm.last_ten_change as "Gain/Loss (Last 10)",
+      pm.events_played as "Events Played",
+      pm.largest_gain as "Largest Gain",
+      pm.largest_loss as "Largest Loss",
+      r.rank_name
+      FROM player as p 
+      JOIN ranks as r ON r.rank_id = p.rank_id 
+      JOIN (SELECT ten.player_id, SUM(CASE WHEN ten.mmr_change > 0 THEN 1 ELSE 0 END) as wins, SUM(CASE WHEN ten.mmr_change <= 0 THEN 1 ELSE 0 END) as losses, SUM(mmr_change) as last_ten_change
+        FROM (SELECT player_id, mmr_change FROM (SELECT mogi_id FROM mogi ORDER BY create_date DESC LIMIT 10) as m JOIN player_mogi ON m.mogi_id = player_mogi.mogi_id) as ten
+        GROUP BY player_id) as tenpm
+      ON p.player_id = tenpm.player_id
+      JOIN (SELECT player_id, count(*) as events_played, MAX(mmr_change) as largest_gain, MIN(mmr_change) as largest_loss FROM player_mogi GROUP BY player_id) as pm
+      ON p.player_id = pm.player_id
+        JOIN (SELECT player_id, sum(if(mmr_change>0,1,0)) as wins FROM player_mogi GROUP BY player_id) as wintable
+      ON wintable.player_id = p.player_id
+      WHERE p.player_name= ?`, [player], (error, results) => {
         if (error) reject(error);
         else resolve(results);
       }
     );
   }
   );
+  console.log('jfkldjlfkjdslkfjskfjdlkjfkldsfjlksdjfksdjfksdjk')
   // Parse mysql output into json table
   results = JSON.parse(JSON.stringify(results))
+  // console.log(results)
 
-  connection.connect();
-  let pm_results = await new Promise((resolve, reject) => {
+  let rows = await new Promise((resolve, reject) => {
     connection.query(
-      'SELECT pm.mogi_id, pm.mmr_change, m.mogi_format FROM player_mogi pm JOIN mogi m ON pm.mogi_id = m.mogi_id WHERE pm.player_id = ?;', [results[0].player_id], (error, pm_results) => {
+      `SELECT pm.mogi_id, pm.mmr_change, pm.new_mmr, CONCAT(if(t.tier_name="sq","Squad Queue",CONCAT("Tier-",t.tier_name))," ", if(m.mogi_format=1,"FFA",CONCAT(m.mogi_format,"v",m.mogi_format))) as title, UNIX_TIMESTAMP(m.create_date) as create_date
+      FROM player_mogi pm 
+      JOIN mogi m ON pm.mogi_id = m.mogi_id 
+      JOIN tier t on m.tier_id = t.tier_id
+      WHERE pm.player_id = ?
+      ORDER BY m.create_date DESC`, [results[0].player_id], (error, rows) => {
         if (error) reject(error);
-        else resolve(pm_results);
+        else resolve(rows);
       }
     );
   });
-  pm_results = JSON.parse(JSON.stringify(pm_results))
-  console.log(pm_results)
+  rows = JSON.parse(JSON.stringify(rows))
 
   // End connection to server
   connection.end();
   // return props as object ALWAYS
   return {
-    props: { results, pm_results }
+    props: { results, rows }
   }
 }
 
 
-export default function Player({results, pm_results}) {
-  const player_items = results.map((results) =>
-    <tr key={results.player_id}>
-      <td className={styles.description}>{results.player_name}</td>
-      <td className={styles.description}>{results.country_code}</td>
-      <td className={styles.description}>{results.mmr}</td>
-      <td className={styles.description}>{results.peak_mmr}</td>
-      <td className={styles.description}><a href={"https://mariokartcentral.com/mkc/registry/players/" + results.mkc_id}>MKC</a></td>
-      <td className={styles.description}><a href={"https://twitch.tv/" + results.twitch_link}>Twitch</a></td>
-    </tr>
-  )
+export default function Player({ results, rows }) {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(50);
+  // Avoid a layout jump when reaching the last page with empty rows.
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
-  const mogi_items = pm_results.map((pm_results) =>
-    <tr key={pm_results.mogi_id}>
-      <td className={styles.description}><Link href={"/mogi/" + pm_results.mogi_id}>Mogi</Link></td>
-      <td className={styles.description}>{pm_results.mmr_change}</td>
-    </tr>
-  )
 
   return (
     <div className={styles.container}>
@@ -87,7 +225,8 @@ export default function Player({results, pm_results}) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          under construction
+           <div className={results[0].rank_name === "Grandmaster" ? 'text-red-800' : results[0].rank_name === "Master" ? 'text-violet-700' : results[0].rank_name === "Diamond" ? 'text-cyan-200' : results[0].rank_name === "Platinum" ? 'text-cyan-600' : results[0].rank_name === "Gold" ? 'text-yellow-500' : results[0].rank_name === "Silver" ? 'text-gray-400' : results[0].rank_name === "Bronze" ? 'text-orange-400' : results[0].rank_name === "Iron" ? 'text-stone-500' : 'text-white'}>{results[0]["Player Name"]} - {results[0].rank_name}</div>
+          
         </h1>
         <div className='max-w-2xl'>
           <table>
@@ -99,18 +238,98 @@ export default function Player({results, pm_results}) {
               <th>MKC Profile</th>
               <th>Twitch Channel</th>
             </tr>
-            {player_items}
+            {/* {player_items} */}
           </table>
         </div>
-        <div className='max-w-2xl'>
-          <table>
-            <tr>
-              <th>Mogi</th>
-              <th>MMR +/-</th>
-            </tr>
-            {mogi_items}
-          </table>
-        </div>
+        <div className="m-auto p-6 gap-2">
+              <TableContainer component={Paper} className={styles.leaderboard_style}>
+                <Table stickyHeader aria-label="customized table">
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell className={styles.tableheader}>
+                        <div className={styles.tableheader}>
+                          Event
+                        </div>
+                      </StyledTableCell>
+                      <StyledTableCell className={styles.tableheader}>
+                        <div className={styles.tableheader}>
+                          Time
+                        </div>
+                      </StyledTableCell>
+                      <StyledTableCell className={styles.tableheader}>
+                        <div className={styles.tableheader}>
+                          +/-
+                        </div>
+                      </StyledTableCell>
+                      <StyledTableCell className={styles.tableheader}>
+                        <div className={styles.tableheader}>
+                          MMR
+                        </div>
+                      </StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {(rowsPerPage > 0
+                      ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage):rows).map((row) => (
+
+                      <StyledTableRow key={row.mogi_id}>
+
+                        <StyledTableCell align="center">
+                          <Link href={"/mogi/" + row.mogi_id}>
+                            <div className='cursor-pointer hover:underline text-cyan-300'>
+                              {row.title}
+                            </div>
+                          </Link>
+                        </StyledTableCell>
+
+                        <StyledTableCell align="center">
+                            <div className='text-white'>
+                              {(new Date(row.create_date * 1000)).toLocaleString()}
+                            </div>
+                        </StyledTableCell>
+
+                        <StyledTableCell align="center">
+                            <div className={row.mmr_change > 0 ? 'text-green-500': 'text-red-500'}>
+                              {row.mmr_change}
+                            </div>
+                        </StyledTableCell>
+
+                        <StyledTableCell align="center">
+                            <div className={row.new_mmr >= 11000 ? 'text-red-800' : row.new_mmr >= 9000 ? 'text-violet-700' : row.new_mmr >= 7500 ? 'text-cyan-200' : row.new_mmr >= 6000 ? 'text-cyan-600' : row.new_mmr >= 4500 ? 'text-yellow-500' : row.new_mmr >= 3000 ? 'text-gray-400' : row.new_mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                              {row.new_mmr}
+                            </div>
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    ))}
+                    {emptyRows > 0 && (
+                      <TableRow style={{height: 53 * emptyRows }}>
+                          <TableCell colSpan={6} />
+                      </TableRow>
+                    )}
+                  </TableBody>
+                  <TableFooter>
+                      <StyledTableRow>
+                          <TablePagination
+                          rowsPerPageOptions={[10, 25, {label: 'All', value: -1}]}
+                          colSpan={rows[0].length}
+                          count={rows.length}
+                          rowsPerPage={rowsPerPage}
+                          page={page}
+                          SelectProps={{
+                              inputProps: {
+                                  'aria-label': 'rows per page',
+                              },
+                              native: true,
+                          }}
+                          onPageChange={handleChangePage}
+                          onRowsPerPageChange={handleChangeRowsPerPage}
+                          ActionsComponent={TablePaginationActions}
+                          />
+                      </StyledTableRow>
+                  </TableFooter>
+                </Table>
+              </TableContainer>
+            </div>
       </main>
     </div>
   )
