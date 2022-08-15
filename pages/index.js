@@ -255,11 +255,11 @@ export default function Leaderboard({ rows }) {
         <div className="m-auto p-6 gap-2">
               <TableContainer component={Paper} className={styles.leaderboard_style}>
                 <Table stickyHeader aria-label="customized table">
-                  <TableHead className={styles.tableheader}>
+                  <TableHead>
                     <TableRow>
                       {
                         columns.map(column => ( column === "player_id" ? <></> :
-                          <StyledTableCell>
+                          <StyledTableCell className={styles.tableheader}>
                             <div 
                               className={styles.leaderboard_text} 
                               onClick={() => 

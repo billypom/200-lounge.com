@@ -50,13 +50,12 @@
 
 
 .tableheader {
-  color:#fafafa;
+  /* color:#fafafa; */
   background-color: #1d185f;
 }
 
 .cool_column {
   color:#fafafa;
-  background-color: #1d185f;
   cursor: pointer;
   display: flex;
   flex: 1;
@@ -72,7 +71,6 @@
 
 .leaderboard_text {
   color:#fafafa;
-  background-color: #1d185f;
   cursor: pointer;
   display: flex;
   flex: 1;
