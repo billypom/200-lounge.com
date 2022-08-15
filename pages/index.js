@@ -178,7 +178,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const StyledTableHead = styled(TableRow)(({theme}) => ({
+const StyledTableHead = styled(TableHead)(({theme}) => ({
   root: {
     backgroundColor: "red"
   },
