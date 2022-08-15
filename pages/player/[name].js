@@ -309,23 +309,23 @@ export default function Player({ results, rows, lg, ll }) {
                 <Table stickyHeader aria-label="customized table">
                   <TableHead>
                     <TableRow>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.tableheader}>
+                      <StyledTableCell>
+                        <div className={styles.leaderboard_text}>
                           Event
                         </div>
                       </StyledTableCell>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.tableheader}>
+                      <StyledTableCell>
+                        <div className={styles.leaderboard_text}>
                           Time
                         </div>
                       </StyledTableCell>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.tableheader}>
+                      <StyledTableCell>
+                        <div className={styles.leaderboard_text}>
                           +/-
                         </div>
                       </StyledTableCell>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.tableheader}>
+                      <StyledTableCell>
+                        <div className={styles.leaderboard_text}>
                           MMR
                         </div>
                       </StyledTableCell>

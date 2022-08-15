@@ -130,22 +130,22 @@ export default function Mogi({ results, pm }) {
                   <TableHead>
                     <TableRow>
                       <StyledTableCell>
-                        <div className={styles.tableheader}>
+                        <div className={styles.leaderboard_text}>
                           player
                         </div>
                       </StyledTableCell>
                       <StyledTableCell>
-                        <div className={styles.tableheader}>
+                        <div className={styles.leaderboard_text}>
                           prev mmr
                         </div>
                       </StyledTableCell>
                       <StyledTableCell>
-                        <div className={styles.tableheader}>
+                        <div className={styles.leaderboard_text}>
                           +/-
                         </div>
                       </StyledTableCell>
                       <StyledTableCell>
-                        <div className={styles.tableheader}>
+                        <div className={styles.leaderboard_text}>
                           mmr
                         </div>
                       </StyledTableCell>
