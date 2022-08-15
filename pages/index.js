@@ -157,7 +157,7 @@ export async function getServerSideProps() {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    color: theme.palette.text.secondary,
+    backgroundColor: '#1d185f',
     fontSize: 20,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -258,7 +258,7 @@ export default function Leaderboard({ rows }) {
                     <TableRow class={styles.tableheader}>
                       {
                         columns.map(column => ( column === "player_id" ? <></> :
-                          <TableCell className={styles.tableheader}>
+                          <StyledTableCell>
                             <div 
                               className={styles.leaderboard_text} 
                               onClick={() => 
@@ -271,7 +271,7 @@ export default function Leaderboard({ rows }) {
                                     )}
                                 </div>
                             </div>
-                          </TableCell>
+                          </StyledTableCell>
                         ))
                       }
                     </TableRow>

@@ -82,7 +82,7 @@ export async function getServerSideProps() {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    color: theme.palette.text.secondary,
+    backgroundColor: '#1d185f',
     fontSize: 20,
   },
   [`&.${tableCellClasses.body}`]: {
