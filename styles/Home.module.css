@@ -51,6 +51,8 @@
 
 .tableheader {
   /* color:#fafafa; */
+  font-weight: 800;
+  font-size: large;
   background-color: #1d185f;
 }
 

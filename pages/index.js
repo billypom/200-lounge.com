@@ -99,8 +99,7 @@ function TablePaginationActions(props) {
 
 
 
-export async function getServerSideProps(context) {
-  const { params } = context
+export async function getServerSideProps() {
   const connection = mysql.createConnection(
     {
       host: process.env.db_host,
@@ -259,7 +258,7 @@ export default function Leaderboard({ rows }) {
                     <TableRow>
                       {
                         columns.map(column => ( column === "player_id" ? <></> :
-                          <StyledTableCell className={styles.tableheader}>
+                          <TableCell className={styles.tableheader}>
                             <div 
                               className={styles.leaderboard_text} 
                               onClick={() => 
@@ -272,7 +271,7 @@ export default function Leaderboard({ rows }) {
                                     )}
                                 </div>
                             </div>
-                          </StyledTableCell>
+                          </TableCell>
                         ))
                       }
                     </TableRow>
