@@ -311,12 +311,12 @@ export default function Player({ results, rows, lg, ll }) {
                     <TableRow>
                       <StyledTableCell>
                         <div className={styles.leaderboard_text}>
-                          Event
+                          event
                         </div>
                       </StyledTableCell>
                       <StyledTableCell>
                         <div className={styles.leaderboard_text}>
-                          Time
+                          time
                         </div>
                       </StyledTableCell>
                       <StyledTableCell>
@@ -326,7 +326,7 @@ export default function Player({ results, rows, lg, ll }) {
                       </StyledTableCell>
                       <StyledTableCell>
                         <div className={styles.leaderboard_text}>
-                          MMR
+                          mmr
                         </div>
                       </StyledTableCell>
                     </TableRow>
