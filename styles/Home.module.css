@@ -15,7 +15,6 @@
   justify-content: center;
   min-width: 100%;
   top: 0;
-  z-index: 1;
   background-size: 100%;
   font-size: xx-large;
 }
@@ -82,7 +81,7 @@
 }
 
 .container {
-  padding: 0 2rem;
+  /* padding: 0 2rem; */
   margin: auto;
 }
 

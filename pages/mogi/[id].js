@@ -124,7 +124,7 @@ export default function Mogi({ results, pm }) {
         </h1>
         <div className='max-w-2xl pt-5'>
           <div><Image src={results[0].table_url} alt='mogi results image' width='860' height='520'></Image></div>
-          <div className="m-auto p-6 gap-2">
+          <div className="m-auto p-3">
               <TableContainer component={Paper} className={styles.leaderboard_style}>
                 <Table stickyHeader aria-label="customized table">
                   <TableHead>

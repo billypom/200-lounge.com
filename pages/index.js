@@ -17,7 +17,7 @@ import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Head from 'next/head'
 import mysql from 'mysql2'
 import styles from '../styles/Home.module.css'
@@ -180,7 +180,31 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 
+const useMediaQuery = (width) => {
+  const [targetReached, setTargetReached] = useState(false);
 
+  const updateTarget = useCallback((e) => {
+    if (e.matches) {
+      setTargetReached(true);
+    } else {
+      setTargetReached(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia(`(max-width: ${width}px)`);
+    media.addListener(updateTarget);
+
+    // Check on mount (callback is not called until a change occurs)
+    if (media.matches) {
+      setTargetReached(true);
+    }
+
+    return () => media.removeListener(updateTarget);
+  }, []);
+
+  return targetReached;
+};
 
 
 
@@ -224,22 +248,22 @@ export default function Leaderboard({ rows }) {
   }
 
 
-  const [width, setWidth]   = useState(typeof window === 'undefined' ? 0 : window.innerWidth);
-  const [height, setHeight] = useState(typeof window === 'undefined' ? 0 : window.innerHeight);
-  const updateDimensions = () => {
-      if (typeof window !== 'undefined') {
-      setWidth(window.innerWidth);
-      setHeight(window.innerHeight);
-      }
-  }
-  useEffect(() => {
-      window.addEventListener("resize", updateDimensions);
-      return () => window.removeEventListener("resize", updateDimensions);
-  }, [updateDimensions]);
+  // const [width, setWidth]   = useState(typeof window === 'undefined' ? 0 : window.innerWidth);
+  // const [height, setHeight] = useState(typeof window === 'undefined' ? 0 : window.innerHeight);
+  // const updateDimensions = () => {
+  //     if (typeof window !== 'undefined') {
+  //     setWidth(window.innerWidth);
+  //     setHeight(window.innerHeight);
+  //     }
+  // }
+  // useEffect(() => {
+  //     window.addEventListener("resize", updateDimensions);
+  //     return () => window.removeEventListener("resize", updateDimensions);
+  // }, [updateDimensions]);
 
 
 
-
+  const isMobile = useMediaQuery(768)
 
 
   return (
@@ -266,9 +290,9 @@ export default function Leaderboard({ rows }) {
               <TableContainer component={Paper} className={styles.leaderboard_style}>
                 <Table stickyHeader aria-label="customized table">
                   <TableHead>
-                    <TableRow>
+                    <TableRow >
                       {
-                        columns.map((column, idx) => ( column === "player_id" ? <></> : width < 700 && idx > 4 ? <></> :
+                        columns.map((column, idx) => ( column === "player_id" ? <></> : isMobile && idx > 4 ? <></> :
                           <StyledTableCell>
                             <div 
                               className={styles.leaderboard_text} 
@@ -290,8 +314,7 @@ export default function Leaderboard({ rows }) {
                   <TableBody>
                     {(rowsPerPage > 0
                       ? sort(filter(rows)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage):sort(filter(rows))).map((row, idx) => (
-                        width < 700 ? 
-                        <>
+                        isMobile ? 
                           <StyledTableRow key={row.player_id}>
                             <StyledTableCell align="center">
                               <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'text-violet-700' : row.MMR >= 7500 ? 'text-cyan-200' : row.MMR >= 6000 ? 'text-cyan-600' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
@@ -322,8 +345,7 @@ export default function Leaderboard({ rows }) {
                               {row.MMR}
                               </div>
                             </StyledTableCell>
-                          </StyledTableRow>
-                          </> :
+                          </StyledTableRow> :
                       <StyledTableRow key={row.player_id}>
 
                         <StyledTableCell align="center">
