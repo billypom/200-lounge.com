@@ -254,7 +254,7 @@ export default function Leaderboard({ rows }) {
           200cc lounge leaderboard
         </h1>
         
-        <div className="flex flex-col p-6 gap-2">
+        <div className="flex flex-col p-3 gap-2">
           <input 
             className="border border-gray-400 text-white placeholder:text-gray justify-start m-auto max-w-100 p-2" 
             type="text" 
@@ -262,7 +262,7 @@ export default function Leaderboard({ rows }) {
             value={query} 
             onChange={(e) => setQuery(e.target.value)}/>
         </div>
-        <div className="m-auto p-1 gap-2">
+        <div className="m-auto p-1">
               <TableContainer component={Paper} className={styles.leaderboard_style}>
                 <Table stickyHeader aria-label="customized table">
                   <TableHead>

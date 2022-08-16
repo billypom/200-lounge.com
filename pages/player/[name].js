@@ -305,7 +305,7 @@ export default function Player({ results, rows, lg, ll }) {
           </div>
 
         </div>
-        <div className="m-auto p-6 gap-2">
+        <div className="m-auto p-1">
               <TableContainer component={Paper} className={styles.leaderboard_style}>
                 <Table stickyHeader aria-label="customized table">
                   <TableHead>
