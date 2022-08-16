@@ -85,6 +85,13 @@
   margin: auto;
 }
 
+@media (max-width: 1000px) {
+  .container {
+    padding: 0 0;
+    margin: auto;
+  }
+}
+
 .main {
   min-height: 100vh;
   flex: 1;
@@ -204,10 +211,6 @@
   .grid {
     width: 100%;
     flex-direction: column;
-  }
-  .container {
-    /* padding: 0 2rem; */
-    margin: auto;
   }
 }
 
