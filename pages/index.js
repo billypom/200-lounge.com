@@ -17,7 +17,7 @@ import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head'
 import mysql from 'mysql2'
 import styles from '../styles/Home.module.css'
@@ -49,7 +49,7 @@ function TablePaginationActions(props) {
     };
   
     return (
-      <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+      <Box sx={{ flexShrink: 0, ml: 2.5, bgcolor: '#a5a5ac' }}>
         <IconButton
           onClick={handleFirstPageButtonClick}
           disabled={page === 0}
@@ -224,7 +224,18 @@ export default function Leaderboard({ rows }) {
   }
 
 
-
+  const [width, setWidth]   = useState(typeof window === 'undefined' ? 0 : window.innerWidth);
+  const [height, setHeight] = useState(typeof window === 'undefined' ? 0 : window.innerHeight);
+  const updateDimensions = () => {
+      if (typeof window !== 'undefined') {
+      setWidth(window.innerWidth);
+      setHeight(window.innerHeight);
+      }
+  }
+  useEffect(() => {
+      window.addEventListener("resize", updateDimensions);
+      return () => window.removeEventListener("resize", updateDimensions);
+  }, [updateDimensions]);
 
 
 
@@ -251,13 +262,13 @@ export default function Leaderboard({ rows }) {
             value={query} 
             onChange={(e) => setQuery(e.target.value)}/>
         </div>
-        <div className="m-auto p-6 gap-2">
+        <div className="m-auto p-1 gap-2">
               <TableContainer component={Paper} className={styles.leaderboard_style}>
                 <Table stickyHeader aria-label="customized table">
                   <TableHead>
                     <TableRow>
                       {
-                        columns.map(column => ( column === "player_id" ? <></> :
+                        columns.map((column, idx) => ( column === "player_id" ? <></> : width < 700 && idx > 4 ? <></> :
                           <StyledTableCell>
                             <div 
                               className={styles.leaderboard_text} 
@@ -278,8 +289,41 @@ export default function Leaderboard({ rows }) {
                   </TableHead>
                   <TableBody>
                     {(rowsPerPage > 0
-                      ? sort(filter(rows)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage):sort(filter(rows))).map((row) => (
+                      ? sort(filter(rows)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage):sort(filter(rows))).map((row, idx) => (
+                        width < 700 ? 
+                        <>
+                          <StyledTableRow key={row.player_id}>
+                            <StyledTableCell align="center">
+                              <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'text-violet-700' : row.MMR >= 7500 ? 'text-cyan-200' : row.MMR >= 6000 ? 'text-cyan-600' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                  <div className='cursor-pointer hover:underline'>
+                                  <Link href={"/player/" + row['Player Name']}>
+                                    {parseInt(row.Rank)}
+                                  </Link>
+                                  </div>
+                              </div>
+                            </StyledTableCell>
+                            
+                            <StyledTableCell align="center">
+                              <ReactCountryFlag countryCode={row.Country} style={{width: '2rem', height: '2rem'}} svg />
+                            </StyledTableCell>
 
+                            <StyledTableCell align="center">
+                              <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'text-violet-700' : row.MMR >= 7500 ? 'text-cyan-200' : row.MMR >= 6000 ? 'text-cyan-600' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                  <div className='cursor-pointer hover:underline'>
+                                  <Link href={"/player/" + row['Player Name']}>
+                                    {row['Player Name']}
+                                  </Link>
+                                  </div>
+                              </div>
+                            </StyledTableCell>
+                            
+                            <StyledTableCell align="center">
+                              <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'text-violet-700' : row.MMR >= 7500 ? 'text-cyan-200' : row.MMR >= 6000 ? 'text-cyan-600' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                              {row.MMR}
+                              </div>
+                            </StyledTableCell>
+                          </StyledTableRow>
+                          </> :
                       <StyledTableRow key={row.player_id}>
 
                         <StyledTableCell align="center">
@@ -312,16 +356,16 @@ export default function Leaderboard({ rows }) {
                           </div>
                         </StyledTableCell>
 
+
                         <StyledTableCell align="center">
                           <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'text-violet-700' : row.MMR >= 7500 ? 'text-cyan-200' : row.MMR >= 6000 ? 'text-cyan-600' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                             {row['Peak MMR']}
                           </div>
                         </StyledTableCell>
-                        
                         <StyledTableCell align="center">{(row['Win Rate']* 100).toFixed(2)}%</StyledTableCell>
 
                         <StyledTableCell align="center">{row['Win/Loss (Last 10)']}</StyledTableCell>
-
+                      
                         <StyledTableCell align="center">
                           <div className={row['Gain/Loss (Last 10)'] > 0 ? 'text-green-500': 'text-red-500'}>
                             {row['Gain/Loss (Last 10)']}
@@ -346,15 +390,15 @@ export default function Leaderboard({ rows }) {
                       </StyledTableRow>
                     ))}
                     {emptyRows > 0 && (
-                      <TableRow style={{height: 53 * emptyRows }}>
-                          <TableCell colSpan={6} />
+                      <TableRow style={{height: 53 * emptyRows}}>
+                          <StyledTableCell colSpan={6} />
                       </TableRow>
                     )}
                   </TableBody>
                   <TableFooter>
                       <StyledTableRow>
                           <TablePagination
-                          rowsPerPageOptions={[10, 25, {label: 'All', value: -1}]}
+                          rowsPerPageOptions={[10, 25, 50, {label: 'All', value: -1}]}
                           colSpan={columns.length}
                           count={rows.length}
                           rowsPerPage={rowsPerPage}
@@ -368,6 +412,7 @@ export default function Leaderboard({ rows }) {
                           onPageChange={handleChangePage}
                           onRowsPerPageChange={handleChangeRowsPerPage}
                           ActionsComponent={TablePaginationActions}
+                          sx= {{bgcolor: '#a5a5ac'}}
                           />
                       </StyledTableRow>
                   </TableFooter>
