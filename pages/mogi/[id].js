@@ -32,14 +32,16 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 18,
     fontWeight: 750,
-    backgroundColor: theme.palette.text.primary,
-    color: 'white'
+    color: theme.palette.text.primary
   },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(even)': {
+    backgroundColor: theme.palette.background.paper
+  },
   '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.text.secondary
+    backgroundColor: theme.palette.text.divider
   },
   // hide last border
   '&:last-child td, &:last-child th': {
