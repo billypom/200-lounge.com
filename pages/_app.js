@@ -111,7 +111,7 @@ export default function ToggleColorMode({ Component, pageProps }) {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline enableColorScheme/>
-        {/* <Navbar/> */}
+        <Navbar/>
         <Component {...pageProps} />
       </ThemeProvider>
     </ColorModeContext.Provider>

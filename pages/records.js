@@ -32,8 +32,14 @@ export async function getServerSideProps() {
     let stuff = await new Promise((resolve, reject) => {
       connection.query(
         `select tier_format, mogi_id, score, players FROM
-          (select pm.mogi_id, GROUP_CONCAT(DISTINCT t.tier_name, m.mogi_format) as tier_format, pm.place, round(sum(pm.score)) as score, GROUP_CONCAT(p.player_name) as players from player p JOIN player_mogi pm ON p.player_id = pm.player_id JOIN mogi m ON pm.mogi_id = m.mogi_id JOIN tier t ON t.tier_id = m.tier_id WHERE pm.place < 5 group by pm.mogi_id, pm.place, t.tier_name) as n
-          where tier_format = ? order by score desc LIMIT 5`, [expected_names[i]], (error, stuff) => {
+        (select pm.mogi_id, GROUP_CONCAT(DISTINCT t.tier_name, m.mogi_format) as tier_format, pm.place, round(sum(pm.score)) as score, round(avg(pm.mmr_change)) as mmr_change, GROUP_CONCAT(p.player_name) as players 
+        from player p 
+        JOIN player_mogi pm ON p.player_id = pm.player_id 
+        JOIN mogi m ON pm.mogi_id = m.mogi_id 
+        JOIN tier t ON t.tier_id = m.tier_id 
+        WHERE pm.place < 5 
+        group by pm.mogi_id, pm.place, pm.mmr_change, t.tier_name) as n
+        where tier_format = ? order by score desc LIMIT 5`, [expected_names[i]], (error, stuff) => {
         if (error) reject(error);
         else resolve(stuff);
       }
