@@ -2,6 +2,8 @@
 
 Leaderboard for MK8DX 200cc Lounge.
 
-Access the player api via `200-lounge.com/api/player/[name]`
+Access player details via `200-lounge.com/player/[name]`
 
-Access the mogi api via `200-lounge.com/api/mogi/[id]` (id = Table ID in results channels)
+Access mogii details via `200-lounge.com/api/mogi/[id]` (id = Table ID in discord results channels)
+
+Access the player api via `200-lounge.com/api/player/[name]`

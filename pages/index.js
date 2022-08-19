@@ -144,9 +144,31 @@ export async function getServerSideProps() {
   );
   // Parse mysql output into json table
   rows = JSON.parse(JSON.stringify(rows).replace(/\:null/gi, "\:\"\""))
+  // return props as object ALWAYS
+  if (rows.length === 0) {
+    rows = await new Promise((resolve, reject) => {
+      connection.query(
+        `SELECT
+        0 as "Rank",
+        0 as "Country", 
+        0 as "Player Name", 
+        0 as "MMR", 
+        0 as "Peak MMR",
+        0 as "Win Rate",
+        0 as "Win/Loss (Last 10)",
+        0 as "Gain/Loss (Last 10)",
+        0 as "Events Played",
+        0 as "Largest Gain",
+        0 as "Largest Loss"`, (error, rows) => {
+        if (error) reject(error)
+        else resolve(rows)}
+        );
+      }
+    )
+  rows = JSON.parse(JSON.stringify(rows).replace(/\:null/gi, "\:\"\""))
+  }
   // End connection to server
   connection.end();
-  // return props as object ALWAYS
   return {
     props: { rows }
   }
