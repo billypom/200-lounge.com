@@ -235,16 +235,29 @@ export async function getServerSideProps(context) {
   });
   rank = JSON.parse(JSON.stringify(rank))
 
+  // score stuff
+  let score_stuff = await new Promise((resolve, reject) => {
+    connection.query(
+      `SELECT MAX(score) as "Top Score", ROUND(AVG(score),2) as "Avg Score" FROM player_mogi WHERE player_id = ?`, [results[0].player_id], (error, score_stuff) => {
+        if (error) reject(error);
+        else resolve(score_stuff);
+      }
+    );
+  });
+  score_stuff = JSON.parse(JSON.stringify(score_stuff))
+
+  
+
   // End connection to server
   connection.end();
   // return props as object ALWAYS
   return {
-    props: { results, rows, lg, ll, pa, rank }
+    props: { results, rows, lg, ll, pa, rank, score_stuff }
   }
 }
 
 
-export default function Player({ results, rows, lg, ll, pa, rank }) {
+export default function Player({ results, rows, lg, ll, pa, rank, score_stuff }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(50);
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -272,7 +285,7 @@ export default function Player({ results, rows, lg, ll, pa, rank }) {
            <div className={results[0].rank_name === "Grandmaster" ? 'text-red-800' : results[0].rank_name === "Master" ? 'text-violet-700' : results[0].rank_name === "Diamond" ? 'text-cyan-200' : results[0].rank_name === "Platinum" ? 'text-cyan-600' : results[0].rank_name === "Gold" ? 'text-yellow-500' : results[0].rank_name === "Silver" ? 'text-gray-400' : results[0].rank_name === "Bronze" ? 'text-orange-400' : results[0].rank_name === "Iron" ? 'text-stone-500' : 'text-white'}><ReactCountryFlag countryCode={results[0]["Country"]} style={{width: '4rem', height: '4rem'}} svg /> {results[0]["Player Name"]} - {results[0].rank_name}</div>
           
         </h1>
-        <div className='flex flex-row flex-wrap max-w-xl m-auto justify-center'>
+        <div className='flex flex-row flex-wrap max-w-4xl m-auto justify-center'>
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>Rank</h2>
             <div className='text-white'>{rank[0]["Rank"]}</div>
@@ -304,6 +317,16 @@ export default function Player({ results, rows, lg, ll, pa, rank }) {
           </div>
 
           <div className={styles.player_page_stats}>
+            <h2 className='text-xl font-bold'>Avg Score</h2>
+            <div className='text-white'>{score_stuff[0]["Avg Score"]}</div>
+          </div>
+
+          <div className={styles.player_page_stats}>
+            <h2 className='text-xl font-bold'>Top Score</h2>
+            <div className='text-white'>{score_stuff[0]["Top Score"]}</div>
+          </div>
+
+          <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>Events Played</h2>
             <div className='text-white'>{results[0]["Events Played"]}</div>
           </div>
@@ -315,7 +338,7 @@ export default function Player({ results, rows, lg, ll, pa, rank }) {
 
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>Largest Loss</h2>
-            <div className='cursor-pointer hover:underline text-cyan-300'><Link href={"/mogi/" + lg[0].mogi_id}>{results[0]["Largest Loss"]}</Link></div>
+            <div className='cursor-pointer hover:underline text-cyan-300'><Link href={"/mogi/" + ll[0].mogi_id}>{results[0]["Largest Loss"]}</Link></div>
           </div>
 
           <div className={styles.player_page_stats}>
