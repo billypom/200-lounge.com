@@ -174,13 +174,9 @@ export async function getServerSideProps(context) {
     );
   }
   );
-  // Parse mysql output into json table
   results = JSON.parse(JSON.stringify(results))
-  // console.log(results)
 
-
-
-
+  // mogi history
   let rows = await new Promise((resolve, reject) => {
     connection.query(
       `SELECT pm.mogi_id, pm.mmr_change, pm.new_mmr, CONCAT(if(t.tier_name="sq","Squad Queue",CONCAT("Tier-",t.tier_name))," ", if(m.mogi_format=1,"FFA",CONCAT(m.mogi_format,"v",m.mogi_format))) as title, UNIX_TIMESTAMP(m.create_date) as create_date
@@ -196,9 +192,7 @@ export async function getServerSideProps(context) {
   });
   rows = JSON.parse(JSON.stringify(rows))
 
-
-
-
+  // largest gain
   let lg = await new Promise((resolve, reject) => {
     connection.query(
       `SELECT mogi_id FROM player_mogi WHERE player_id = ? AND mmr_change = ?`, [results[0].player_id, results[0]["Largest Gain"]], (error, lg) => {
@@ -209,10 +203,7 @@ export async function getServerSideProps(context) {
   });
   lg = JSON.parse(JSON.stringify(lg))
 
-
-
-
-
+  // largest loss
   let ll = await new Promise((resolve, reject) => {
     connection.query(
       `SELECT mogi_id FROM player_mogi WHERE player_id = ? AND mmr_change = ?`, [results[0].player_id, results[0]["Largest Loss"]], (error, ll) => {
@@ -223,16 +214,27 @@ export async function getServerSideProps(context) {
   });
   ll = JSON.parse(JSON.stringify(ll))
 
+  // partner avg
+  let pa = await new Promise((resolve, reject) => {
+    connection.query(
+      `SELECT ROUND(AVG(score),2) as pa FROM (SELECT player_id, mogi_id, place, score FROM player_mogi WHERE player_id <> ? AND (mogi_id, place) IN (SELECT mogi_id, place FROM player_mogi WHERE player_id = ?)) as table2;`, [results[0].player_id, results[0].player_id], (error, pa) => {
+        if (error) reject(error);
+        else resolve(pa);
+      }
+    );
+  });
+  pa = JSON.parse(JSON.stringify(pa))
+
   // End connection to server
   connection.end();
   // return props as object ALWAYS
   return {
-    props: { results, rows, lg, ll }
+    props: { results, rows, lg, ll, pa }
   }
 }
 
 
-export default function Player({ results, rows, lg, ll }) {
+export default function Player({ results, rows, lg, ll, pa }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(50);
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -262,48 +264,53 @@ export default function Player({ results, rows, lg, ll }) {
         </h1>
         <div className='flex flex-row flex-wrap max-w-xl m-auto justify-center'>
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>rank</h2>
+            <h2 className='text-xl font-bold'>Rank</h2>
             <div className='text-white'>{results[0]["Rank"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>mmr</h2>
+            <h2 className='text-xl font-bold'>MMR</h2>
             <div className={results[0]["MMR"] >= 11000 ? 'text-red-800' : results[0]["MMR"] >= 9000 ? 'text-violet-700' : results[0]["MMR"] >= 7500 ? 'text-cyan-200' : results[0]["MMR"] >= 6000 ? 'text-cyan-600' : results[0]["MMR"] >= 4500 ? 'text-yellow-500' : results[0]["MMR"] >= 3000 ? 'text-gray-400' : results[0]["MMR"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["MMR"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>peak mmr</h2>
+            <h2 className='text-xl font-bold'>Peak MMR</h2>
             <div className={results[0]["Peak MMR"] >= 11000 ? 'text-red-800' : results[0]["Peak MMR"] >= 9000 ? 'text-violet-700' : results[0]["Peak MMR"] >= 7500 ? 'text-cyan-200' : results[0]["Peak MMR"] >= 6000 ? 'text-cyan-600' : results[0]["Peak MMR"] >= 4500 ? 'text-yellow-500' : results[0]["Peak MMR"] >= 3000 ? 'text-gray-400' : results[0]["Peak MMR"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["Peak MMR"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>win rate</h2>
+            <h2 className='text-xl font-bold'>Win Rate</h2>
             <div className='text-white'>{results[0]["Win Rate"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>win/loss (last 10)</h2>
+            <h2 className='text-xl font-bold'>Win/Loss (Last 10)</h2>
             <div className='text-white'>{results[0]["Win/Loss (Last 10)"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>+/- (last 10)</h2>
+            <h2 className='text-xl font-bold'>+/- (Last 10)</h2>
             <div className='text-white'>{results[0]["Gain/Loss (Last 10)"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>events played</h2>
+            <h2 className='text-xl font-bold'>Events Played</h2>
             <div className='text-white'>{results[0]["Events Played"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>largest gain</h2>
+            <h2 className='text-xl font-bold'>Largest Gain</h2>
             <div className='cursor-pointer hover:underline text-cyan-300'><Link href={"/mogi/" + lg[0].mogi_id}>{results[0]["Largest Gain"]}</Link></div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>largest loss</h2>
+            <h2 className='text-xl font-bold'>Largest Loss</h2>
             <div className='cursor-pointer hover:underline text-cyan-300'><Link href={"/mogi/" + lg[0].mogi_id}>{results[0]["Largest Loss"]}</Link></div>
+          </div>
+
+          <div className={styles.player_page_stats}>
+            <h2 className='text-xl font-bold'>Partner Average</h2>
+            <div className='text-white'>{pa[0]["pa"]}</div>
           </div>
 
         </div>
