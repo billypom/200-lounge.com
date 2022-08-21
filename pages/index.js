@@ -235,8 +235,6 @@ const useMediaQuery = (width) => {
 
 
 export default function Leaderboard({ rows }) {
-  console.log('AAAAAAAAAAAAAA')
-  console.log(rows)
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(50);
   // Avoid a layout jump when reaching the last page with empty rows.

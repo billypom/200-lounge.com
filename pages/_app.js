@@ -34,7 +34,6 @@ function Navbar(){
                   Rules
               </ul>
           </a>
-            <YourApp className='align-middle'/>
       </header>
       
       </>
