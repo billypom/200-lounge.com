@@ -145,7 +145,6 @@ export async function getServerSideProps(context) {
   let results = await new Promise((resolve, reject) => {
     connection.query(
       `SELECT p.player_id, 
-      RANK() OVER ( ORDER BY p.mmr DESC ) as "Rank",
       p.country_code as "Country", 
       p.player_name as "Player Name", 
       p.mmr as "MMR", 
@@ -225,16 +224,27 @@ export async function getServerSideProps(context) {
   });
   pa = JSON.parse(JSON.stringify(pa))
 
+  // partner avg
+  let rank = await new Promise((resolve, reject) => {
+    connection.query(
+      `SELECT COUNT(player_id) as "Rank" FROM player WHERE mmr >= ?`, [results[0]["MMR"]], (error, rank) => {
+        if (error) reject(error);
+        else resolve(rank);
+      }
+    );
+  });
+  rank = JSON.parse(JSON.stringify(rank))
+
   // End connection to server
   connection.end();
   // return props as object ALWAYS
   return {
-    props: { results, rows, lg, ll, pa }
+    props: { results, rows, lg, ll, pa, rank }
   }
 }
 
 
-export default function Player({ results, rows, lg, ll, pa }) {
+export default function Player({ results, rows, lg, ll, pa, rank }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(50);
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -265,7 +275,7 @@ export default function Player({ results, rows, lg, ll, pa }) {
         <div className='flex flex-row flex-wrap max-w-xl m-auto justify-center'>
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>Rank</h2>
-            <div className='text-white'>{results[0]["Rank"]}</div>
+            <div className='text-white'>{rank[0]["Rank"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
