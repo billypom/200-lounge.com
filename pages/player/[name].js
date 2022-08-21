@@ -227,7 +227,7 @@ export async function getServerSideProps(context) {
   // partner avg
   let rank = await new Promise((resolve, reject) => {
     connection.query(
-      `SELECT COUNT(player_id) as "Rank" FROM player WHERE mmr >= ?`, [results[0]["MMR"]], (error, rank) => {
+      `SELECT COUNT(player_id) as "Rank" FROM player WHERE mmr >= ? AND mmr NOT NULL`, [results[0]["MMR"]], (error, rank) => {
         if (error) reject(error);
         else resolve(rank);
       }
