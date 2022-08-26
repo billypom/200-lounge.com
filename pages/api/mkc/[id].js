@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 
   let results = await new Promise((resolve, reject) => {
     connection.query(
-      `SELECT mkc_id, player_id, player_name, country_code FROM player WHERE mkc_id = ?;`, [mkc], (error, results) => {
+      `SELECT mkc_id, player_id, player_name, country_code, unban_date FROM player WHERE mkc_id = ?;`, [mkc], (error, results) => {
         if (error) reject(error);
         else resolve(results);
       }
