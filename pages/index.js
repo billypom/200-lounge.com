@@ -117,9 +117,9 @@ export async function getServerSideProps() {
     connection.query(
       `SELECT p.player_id, 
       RANK() OVER ( ORDER BY p.mmr DESC ) as "Rank",
-      p.country_code as "Country", 
       p.player_name as "Player Name", 
       p.mmr as "MMR", 
+      p.country_code as "Country", 
       p.peak_mmr as "Peak MMR", 
       (wintable.wins/pm.events_played) as "Win Rate",
       CONCAT(tenpm.wins, "-", tenpm.losses) as "Win/Loss (Last 10)",
@@ -149,10 +149,10 @@ export async function getServerSideProps() {
     rows = await new Promise((resolve, reject) => {
       connection.query(
         `SELECT
-        0 as "Rank",
-        0 as "Country", 
+        0 as "Rank", 
         0 as "Player Name", 
         0 as "MMR", 
+        0 as "Country",
         0 as "Peak MMR",
         0 as "Win Rate",
         0 as "Win/Loss (Last 10)",
@@ -319,7 +319,7 @@ export default function Leaderboard({ rows }) {
                   <TableHead>
                     <TableRow >
                       {
-                        columns.map((column, idx) => ( column === "player_id" ? <></> : isMobile && idx > 4 ? <></> :
+                        columns.map((column, idx) => ( column === "player_id" ? <></> : isMobile && idx > 3 ? <></> :
                           <StyledTableCell>
                             <div 
                               className={styles.leaderboard_text} 
@@ -353,9 +353,9 @@ export default function Leaderboard({ rows }) {
                               </div>
                             </StyledTableCell>
                             
-                            {/* <StyledTableCell align="center">
+                            <StyledTableCell align="center">
                               <ReactCountryFlag countryCode={row.Country} style={{width: '2rem', height: '2rem'}} svg />
-                            </StyledTableCell> */}
+                            </StyledTableCell>
 
                             <StyledTableCell align="center">
                               <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'text-violet-700' : row.MMR >= 7500 ? 'text-cyan-200' : row.MMR >= 6000 ? 'text-cyan-600' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
