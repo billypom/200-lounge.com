@@ -353,9 +353,9 @@ export default function Leaderboard({ rows }) {
                               </div>
                             </StyledTableCell>
                             
-                            <StyledTableCell align="center">
+                            {/* <StyledTableCell align="center">
                               <ReactCountryFlag countryCode={row.Country} style={{width: '2rem', height: '2rem'}} svg />
-                            </StyledTableCell>
+                            </StyledTableCell> */}
 
                             <StyledTableCell align="center">
                               <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'text-violet-700' : row.MMR >= 7500 ? 'text-cyan-200' : row.MMR >= 6000 ? 'text-cyan-600' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
