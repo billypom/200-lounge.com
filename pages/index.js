@@ -454,7 +454,7 @@ export default function Leaderboard({ rows }) {
                           page={page}
                           SelectProps={{
                               inputProps: {
-                                  'aria-label': 'rows per page',
+                                  'aria-label': 'rows',
                               },
                               native: true,
                           }}
