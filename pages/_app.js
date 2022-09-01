@@ -12,7 +12,6 @@ import styles from '../styles/Home.module.css'
 
 function Navbar(){
   return (
-    <>
       <header className={styles.navbar}>
           <Link href="/">
               <ul className={styles.navitem}>
@@ -35,8 +34,6 @@ function Navbar(){
               </ul>
           </a>
       </header>
-      
-      </>
   )
 }
 
@@ -110,7 +107,7 @@ export default function ToggleColorMode({ Component, pageProps }) {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline enableColorScheme/>
-        <Navbar/>
+        <Navbar />
         <Component {...pageProps} />
       </ThemeProvider>
     </ColorModeContext.Provider>
