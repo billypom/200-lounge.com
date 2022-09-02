@@ -319,7 +319,7 @@ export default function Leaderboard({ rows }) {
                   <TableHead>
                     <TableRow >
                       {
-                        columns.map((column, idx) => ( column === "player_id" ? <></> : isMobile && idx === 3 || idx > 4 ? <></> :
+                        columns.map((column, idx) => ( column === "player_id" ? <></> : isMobile && idx === 3 || isMobile && idx > 4 ? <></> :
                           <StyledTableCell>
                             <div 
                               className={styles.leaderboard_text} 
