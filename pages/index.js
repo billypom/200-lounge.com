@@ -117,9 +117,9 @@ export async function getServerSideProps() {
     connection.query(
       `SELECT p.player_id, 
       RANK() OVER ( ORDER BY p.mmr DESC ) as "Rank",
+      p.country_code as "Country", 
       p.player_name as "Player Name", 
       p.mmr as "MMR", 
-      p.country_code as "Country", 
       p.peak_mmr as "Peak MMR", 
       (wintable.wins/pm.events_played) as "Win Rate",
       CONCAT(tenpm.wins, "-", tenpm.losses) as "Win/Loss (Last 10)",
@@ -149,10 +149,10 @@ export async function getServerSideProps() {
     rows = await new Promise((resolve, reject) => {
       connection.query(
         `SELECT
-        0 as "Rank", 
+        0 as "Rank",
+        0 as "Country", 
         0 as "Player Name", 
         0 as "MMR", 
-        0 as "Country",
         0 as "Peak MMR",
         0 as "Win Rate",
         0 as "Win/Loss (Last 10)",
@@ -373,6 +373,11 @@ export default function Leaderboard({ rows }) {
                               </div>
                             </StyledTableCell>
                           </StyledTableRow> :
+
+
+
+
+
                       <StyledTableRow key={row.player_id}>
 
                         <StyledTableCell align="center">
