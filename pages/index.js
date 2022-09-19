@@ -122,16 +122,11 @@ export async function getServerSideProps() {
       p.mmr as "MMR", 
       p.peak_mmr as "Peak MMR", 
       (wintable.wins/pm.events_played) as "Win Rate",
-      CONCAT(tenpm.wins, "-", tenpm.losses) as "Win/Loss (Last 10)",
-      tenpm.last_ten_change as "Gain/Loss (Last 10)",
       pm.events_played as "Events Played",
       pm.largest_gain as "Largest Gain",
       pm.largest_loss as "Largest Loss"
       FROM player as p 
-      JOIN (SELECT ten.player_id, SUM(CASE WHEN ten.mmr_change > 0 THEN 1 ELSE 0 END) as wins, SUM(CASE WHEN ten.mmr_change <= 0 THEN 1 ELSE 0 END) as losses, SUM(mmr_change) as last_ten_change
-        FROM (SELECT player_id, mmr_change FROM (SELECT mogi_id FROM mogi ORDER BY create_date DESC LIMIT 10) as m JOIN player_mogi ON m.mogi_id = player_mogi.mogi_id) as ten
-        GROUP BY player_id) as tenpm
-      ON p.player_id = tenpm.player_id
+      
       JOIN (SELECT player_id, count(*) as events_played, MAX(mmr_change) as largest_gain, MIN(mmr_change) as largest_loss FROM player_mogi GROUP BY player_id) as pm
       ON p.player_id = pm.player_id
         JOIN (SELECT player_id, sum(if(mmr_change>0,1,0)) as wins FROM player_mogi GROUP BY player_id) as wintable
@@ -142,6 +137,17 @@ export async function getServerSideProps() {
     );
   }
   );
+  
+  // CONCAT(tenpm.wins, "-", tenpm.losses) as "Win/Loss (Last 10)",
+  //     tenpm.last_ten_change as "Gain/Loss (Last 10)",
+
+  // JOIN (SELECT ten.player_id, SUM(CASE WHEN ten.mmr_change > 0 THEN 1 ELSE 0 END) as wins, SUM(CASE WHEN ten.mmr_change <= 0 THEN 1 ELSE 0 END) as losses, SUM(mmr_change) as last_ten_change
+  //       FROM (SELECT player_id, mmr_change FROM (SELECT mogi_id FROM mogi ORDER BY create_date DESC LIMIT 10) as m JOIN player_mogi ON m.mogi_id = player_mogi.mogi_id) as ten
+  //       GROUP BY player_id) as tenpm
+  //     ON p.player_id = tenpm.player_id
+
+
+
   // Parse mysql output into json table
   rows = JSON.parse(JSON.stringify(rows).replace(/\:null/gi, "\:\"\""))
   // return props as object ALWAYS
@@ -417,14 +423,14 @@ export default function Leaderboard({ rows }) {
                           </div>
                         </StyledTableCell>
                         <StyledTableCell align="center">{(row['Win Rate']* 100).toFixed(2)}%</StyledTableCell>
-
+{/* 
                         <StyledTableCell align="center">{row['Win/Loss (Last 10)']}</StyledTableCell>
                       
                         <StyledTableCell align="center">
                           <div className={row['Gain/Loss (Last 10)'] > 0 ? 'text-green-500': 'text-red-500'}>
                             {row['Gain/Loss (Last 10)']}
                           </div>
-                        </StyledTableCell>
+                        </StyledTableCell> */}
 
                         <StyledTableCell align="center">
                             {row['Events Played']}

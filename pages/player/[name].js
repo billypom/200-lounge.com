@@ -158,14 +158,15 @@ export async function getServerSideProps(context) {
       r.rank_name
       FROM player as p 
       JOIN ranks as r ON r.rank_id = p.rank_id 
-      JOIN (SELECT ten.player_id, SUM(CASE WHEN ten.mmr_change > 0 THEN 1 ELSE 0 END) as wins, SUM(CASE WHEN ten.mmr_change <= 0 THEN 1 ELSE 0 END) as losses, SUM(mmr_change) as last_ten_change
-        FROM (SELECT player_id, mmr_change FROM (SELECT mogi_id, create_date FROM mogi) as m JOIN player_mogi ON m.mogi_id = player_mogi.mogi_id WHERE player_id = ? ORDER BY m.create_date LIMIT 10) as ten) as tenpm
+      JOIN (SELECT ten.player_id, SUM(CASE WHEN ten.mmr_change > 0 THEN 1 ELSE 0 END) as wins, SUM(CASE WHEN ten.mmr_change <= 0 THEN 1 ELSE 0 END) as losses, SUM(ten.mmr_change) as last_ten_change
+		    FROM (SELECT pm.player_id, pm.mmr_change, m.create_date FROM (SELECT mogi_id, create_date FROM mogi ORDER BY create_date DESC) as m JOIN player_mogi pm ON m.mogi_id = pm.mogi_id JOIN player ON pm.player_id = player.player_id WHERE player.player_name = ? ORDER BY m.create_date DESC LIMIT 10) as ten
+		    GROUP BY ten.player_id) as tenpm
       ON p.player_id = tenpm.player_id
       JOIN (SELECT player_id, count(*) as events_played, MAX(mmr_change) as largest_gain, MIN(mmr_change) as largest_loss FROM player_mogi GROUP BY player_id) as pm
       ON p.player_id = pm.player_id
         JOIN (SELECT player_id, sum(if(mmr_change>0,1,0)) as wins FROM player_mogi GROUP BY player_id) as wintable
       ON wintable.player_id = p.player_id
-      WHERE p.player_name= ?`, [player], (error, results) => {
+      WHERE p.player_name= ?`, [player, player], (error, results) => {
         if (error) reject(error);
         else resolve(results);
       }
@@ -302,7 +303,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff })
 
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>Win Rate</h2>
-            <div className='text-white'>{results[0]["Win Rate"]}</div>
+            <div className='text-white'>{results[0]["Win Rate"]}%</div>
           </div>
 
           <div className={styles.player_page_stats}>
