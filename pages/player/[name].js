@@ -159,7 +159,7 @@ export async function getServerSideProps(context) {
       FROM player as p 
       JOIN ranks as r ON r.rank_id = p.rank_id 
       JOIN (SELECT ten.player_id, SUM(CASE WHEN ten.mmr_change > 0 THEN 1 ELSE 0 END) as wins, SUM(CASE WHEN ten.mmr_change <= 0 THEN 1 ELSE 0 END) as losses, SUM(mmr_change) as last_ten_change
-        FROM (SELECT player_id, mmr_change FROM (SELECT mogi_id FROM mogi ORDER BY create_date DESC LIMIT 10) as m JOIN player_mogi ON m.mogi_id = player_mogi.mogi_id) as ten
+        FROM (SELECT player_id, mmr_change FROM (SELECT mogi_id FROM mogi ORDER BY create_date DESC) as m JOIN player_mogi ON m.mogi_id = player_mogi.mogi_id) as ten
         GROUP BY player_id) as tenpm
       ON p.player_id = tenpm.player_id
       JOIN (SELECT player_id, count(*) as events_played, MAX(mmr_change) as largest_gain, MIN(mmr_change) as largest_loss FROM player_mogi GROUP BY player_id) as pm
