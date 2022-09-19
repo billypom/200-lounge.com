@@ -159,14 +159,13 @@ export async function getServerSideProps(context) {
       FROM player as p 
       JOIN ranks as r ON r.rank_id = p.rank_id 
       JOIN (SELECT ten.player_id, SUM(CASE WHEN ten.mmr_change > 0 THEN 1 ELSE 0 END) as wins, SUM(CASE WHEN ten.mmr_change <= 0 THEN 1 ELSE 0 END) as losses, SUM(mmr_change) as last_ten_change
-      FROM (SELECT player_id, mmr_change FROM (SELECT mogi_id, create_date FROM mogi) as m JOIN player_mogi ON m.mogi_id = player_mogi.mogi_id where player_id = ? ORDER BY m.create_date LIMIT 10) as ten
-      WHERE ten.player_id = ?) as tenpm
+        FROM (SELECT player_id, mmr_change FROM (SELECT mogi_id, create_date FROM mogi) as m JOIN player_mogi ON m.mogi_id = player_mogi.mogi_id WHERE player_id = ? ORDER BY m.create_date LIMIT 10) as ten) as tenpm
       ON p.player_id = tenpm.player_id
       JOIN (SELECT player_id, count(*) as events_played, MAX(mmr_change) as largest_gain, MIN(mmr_change) as largest_loss FROM player_mogi GROUP BY player_id) as pm
       ON p.player_id = pm.player_id
         JOIN (SELECT player_id, sum(if(mmr_change>0,1,0)) as wins FROM player_mogi GROUP BY player_id) as wintable
       ON wintable.player_id = p.player_id
-      WHERE p.player_name= ?`, [player, player, player], (error, results) => {
+      WHERE p.player_name= ?`, [player], (error, results) => {
         if (error) reject(error);
         else resolve(results);
       }
