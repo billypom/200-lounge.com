@@ -213,10 +213,21 @@ export async function getServerSideProps(context) {
   });
   ll = JSON.parse(JSON.stringify(ll))
 
-  // partner avg
+  // // partner avg
+  // let pa = await new Promise((resolve, reject) => {
+  //   connection.query(
+  //     `SELECT ROUND(AVG(score),2) as pa FROM (SELECT player_id, mogi_id, place, score FROM player_mogi WHERE player_id <> ? AND (mogi_id, place) IN (SELECT mogi_id, place FROM player_mogi WHERE player_id = ?)) as table2;`, [results[0].player_id, results[0].player_id], (error, pa) => {
+  //       if (error) reject(error);
+  //       else resolve(pa);
+  //     }
+  //   );
+  // });
+  // pa = JSON.parse(JSON.stringify(pa))
+
+  // partner avg2
   let pa = await new Promise((resolve, reject) => {
     connection.query(
-      `SELECT ROUND(AVG(score),2) as pa FROM (SELECT player_id, mogi_id, place, score FROM player_mogi WHERE player_id <> ? AND (mogi_id, place) IN (SELECT mogi_id, place FROM player_mogi WHERE player_id = ?)) as table2;`, [results[0].player_id, results[0].player_id], (error, pa) => {
+      `SELECT AVG(score) FROM (SELECT pm.player_id, pm.mogi_id, pm.place, pm.score FROM player_mogi as pm INNER JOIN (SELECT pm.mogi_id, pm.place FROM player_mogi as pm JOIN mogi as m on pm.mogi_id = m.mogi_id WHERE pm.player_id = ? ORDER BY m.create_date DESC) as pm2 ON pm2.mogi_id = pm.mogi_id WHERE player_id <> ?) as a;`, [results[0].player_id, results[0].player_id], (error, pa) => {
         if (error) reject(error);
         else resolve(pa);
       }
@@ -224,7 +235,7 @@ export async function getServerSideProps(context) {
   });
   pa = JSON.parse(JSON.stringify(pa))
 
-  // partner avg
+  // # rank
   let rank = await new Promise((resolve, reject) => {
     connection.query(
       `SELECT COUNT(player_id) as "Rank" FROM player WHERE mmr >= ?`, [results[0]["MMR"]], (error, rank) => {
