@@ -145,16 +145,16 @@ export async function getServerSideProps(context) {
   let results = await new Promise((resolve, reject) => {
     connection.query(
       `SELECT p.player_id, 
-      p.country_code as "Country", 
-      p.player_name as "Player Name", 
-      p.mmr as "MMR", 
-      p.peak_mmr as "Peak MMR", 
-        ROUND((wintable.wins/pm.events_played)*100,2) as "Win Rate",
-      CONCAT(tenpm.wins, "-", tenpm.losses) as "Win/Loss (Last 10)",
-      tenpm.last_ten_change as "Gain/Loss (Last 10)",
-      pm.events_played as "Events Played",
-      pm.largest_gain as "Largest Gain",
-      pm.largest_loss as "Largest Loss",
+      p.country_code as "country", 
+      p.player_name as "player name", 
+      p.mmr as "mmr", 
+      p.peak_mmr as "peak mmr", 
+        ROUND((wintable.wins/pm.events_played)*100,2) as "win rate",
+      CONCAT(tenpm.wins, "-", tenpm.losses) as "win/loss (last 10)",
+      tenpm.last_ten_change as "gain/loss (last 10)",
+      pm.events_played as "events played",
+      pm.largest_gain as "largest gain",
+      pm.largest_loss as "largest loss",
       r.rank_name
       FROM player as p 
       JOIN ranks as r ON r.rank_id = p.rank_id 
@@ -178,7 +178,7 @@ export async function getServerSideProps(context) {
   // mogi history
   let rows = await new Promise((resolve, reject) => {
     connection.query(
-      `SELECT pm.mogi_id, pm.mmr_change, pm.new_mmr, CONCAT(if(t.tier_name="sq","Squad Queue",CONCAT("Tier-",t.tier_name))," ", if(m.mogi_format=1,"FFA",CONCAT(m.mogi_format,"v",m.mogi_format))) as title, UNIX_TIMESTAMP(m.create_date) as create_date
+      `SELECT pm.mogi_id, pm.mmr_change, pm.new_mmr, CONCAT(if(t.tier_name="sq","squad queue",CONCAT("tier-",t.tier_name))," ", if(m.mogi_format=1,"FFA",CONCAT(m.mogi_format,"v",m.mogi_format))) as title, UNIX_TIMESTAMP(m.create_date) as create_date
       FROM player_mogi pm 
       JOIN mogi m ON pm.mogi_id = m.mogi_id 
       JOIN tier t on m.tier_id = t.tier_id
@@ -238,7 +238,7 @@ export async function getServerSideProps(context) {
   // # rank
   let rank = await new Promise((resolve, reject) => {
     connection.query(
-      `SELECT COUNT(player_id) as "Rank" FROM player WHERE mmr >= ?`, [results[0]["MMR"]], (error, rank) => {
+      `SELECT COUNT(player_id) as "rank" FROM player WHERE mmr >= ?`, [results[0]["MMR"]], (error, rank) => {
         if (error) reject(error);
         else resolve(rank);
       }
@@ -249,7 +249,7 @@ export async function getServerSideProps(context) {
   // score stuff
   let score_stuff = await new Promise((resolve, reject) => {
     connection.query(
-      `SELECT MAX(score) as "Top Score", ROUND(AVG(score),2) as "Avg Score" FROM player_mogi WHERE player_id = ?`, [results[0].player_id], (error, score_stuff) => {
+      `SELECT MAX(score) as "top score", ROUND(AVG(score),2) as "Avg Score" FROM player_mogi WHERE player_id = ?`, [results[0].player_id], (error, score_stuff) => {
         if (error) reject(error);
         else resolve(score_stuff);
       }
@@ -293,67 +293,67 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff })
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-           <div className={results[0].rank_name === "Grandmaster" ? 'text-red-800' : results[0].rank_name === "Master" ? 'text-violet-700' : results[0].rank_name === "Diamond" ? 'text-cyan-200' : results[0].rank_name === "Platinum" ? 'text-cyan-600' : results[0].rank_name === "Gold" ? 'text-yellow-500' : results[0].rank_name === "Silver" ? 'text-gray-400' : results[0].rank_name === "Bronze" ? 'text-orange-400' : results[0].rank_name === "Iron" ? 'text-stone-500' : 'text-white'}><ReactCountryFlag countryCode={results[0]["Country"]} style={{width: '4rem', height: '4rem'}} svg /> {results[0]["Player Name"]} - {results[0].rank_name}</div>
+           <div className={results[0].rank_name === "Grandmaster" ? 'text-red-800' : results[0].rank_name === "Master" ? 'text-violet-700' : results[0].rank_name === "Diamond" ? 'text-cyan-200' : results[0].rank_name === "Platinum" ? 'text-cyan-600' : results[0].rank_name === "Gold" ? 'text-yellow-500' : results[0].rank_name === "Silver" ? 'text-gray-400' : results[0].rank_name === "Bronze" ? 'text-orange-400' : results[0].rank_name === "Iron" ? 'text-stone-500' : 'text-white'}><ReactCountryFlag countryCode={results[0]["country"]} style={{width: '4rem', height: '4rem'}} svg /> {results[0]["player name"]} - {results[0].rank_name}</div>
           
         </h1>
         <div className='flex flex-row flex-wrap max-w-4xl m-auto justify-center'>
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>Rank</h2>
-            <div className='text-white'>{rank[0]["Rank"]}</div>
+            <div className='text-white'>{rank[0]["rank"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>MMR</h2>
-            <div className={results[0]["MMR"] >= 11000 ? 'text-red-800' : results[0]["MMR"] >= 9000 ? 'text-violet-700' : results[0]["MMR"] >= 7500 ? 'text-cyan-200' : results[0]["MMR"] >= 6000 ? 'text-cyan-600' : results[0]["MMR"] >= 4500 ? 'text-yellow-500' : results[0]["MMR"] >= 3000 ? 'text-gray-400' : results[0]["MMR"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["MMR"]}</div>
+            <h2 className='text-xl font-bold'>mmr</h2>
+            <div className={results[0]["mmr"] >= 11000 ? 'text-red-800' : results[0]["mmr"] >= 9000 ? 'text-violet-700' : results[0]["mmr"] >= 7500 ? 'text-cyan-200' : results[0]["mmr"] >= 6000 ? 'text-cyan-600' : results[0]["mmr"] >= 4500 ? 'text-yellow-500' : results[0]["mmr"] >= 3000 ? 'text-gray-400' : results[0]["mmr"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["mmr"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>Peak MMR</h2>
-            <div className={results[0]["Peak MMR"] >= 11000 ? 'text-red-800' : results[0]["Peak MMR"] >= 9000 ? 'text-violet-700' : results[0]["Peak MMR"] >= 7500 ? 'text-cyan-200' : results[0]["Peak MMR"] >= 6000 ? 'text-cyan-600' : results[0]["Peak MMR"] >= 4500 ? 'text-yellow-500' : results[0]["Peak MMR"] >= 3000 ? 'text-gray-400' : results[0]["Peak MMR"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["Peak MMR"]}</div>
+            <h2 className='text-xl font-bold'>peak mmr</h2>
+            <div className={results[0]["peak mmr"] >= 11000 ? 'text-red-800' : results[0]["peak mmr"] >= 9000 ? 'text-violet-700' : results[0]["peak mmr"] >= 7500 ? 'text-cyan-200' : results[0]["peak mmr"] >= 6000 ? 'text-cyan-600' : results[0]["peak mmr"] >= 4500 ? 'text-yellow-500' : results[0]["peak mmr"] >= 3000 ? 'text-gray-400' : results[0]["peak mmr"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["peak mmr"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>Win Rate</h2>
-            <div className='text-white'>{results[0]["Win Rate"]}%</div>
+            <h2 className='text-xl font-bold'>win rate</h2>
+            <div className='text-white'>{results[0]["win rate"]}%</div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>Win/Loss (Last 10)</h2>
-            <div className='text-white'>{results[0]["Win/Loss (Last 10)"]}</div>
+            <h2 className='text-xl font-bold'>win/loss (last 10)</h2>
+            <div className='text-white'>{results[0]["win/loss (last 10)"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>+/- (Last 10)</h2>
-            <div className='text-white'>{results[0]["Gain/Loss (Last 10)"]}</div>
+            <h2 className='text-xl font-bold'>+/- (last 10)</h2>
+            <div className='text-white'>{results[0]["gain/loss (last 10)"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>Avg Score</h2>
+            <h2 className='text-xl font-bold'>avg score</h2>
             <div className='text-white'>{score_stuff[0]["Avg Score"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>Top Score</h2>
-            <div className='text-white'>{score_stuff[0]["Top Score"]}</div>
+            <h2 className='text-xl font-bold'>top score</h2>
+            <div className='text-white'>{score_stuff[0]["top score"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>Events Played</h2>
-            <div className='text-white'>{results[0]["Events Played"]}</div>
+            <h2 className='text-xl font-bold'>events played</h2>
+            <div className='text-white'>{results[0]["events played"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>Largest Gain</h2>
-            <div className='cursor-pointer hover:underline text-cyan-300'><Link href={"/mogi/" + lg[0].mogi_id}>{results[0]["Largest Gain"]}</Link></div>
+            <h2 className='text-xl font-bold'>largest gain</h2>
+            <div className='cursor-pointer hover:underline text-cyan-300'><Link href={"/mogi/" + lg[0].mogi_id}>{results[0]["largest gain"]}</Link></div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>Largest Loss</h2>
-            <div className='cursor-pointer hover:underline text-cyan-300'><Link href={"/mogi/" + ll[0].mogi_id}>{results[0]["Largest Loss"]}</Link></div>
+            <h2 className='text-xl font-bold'>largest loss</h2>
+            <div className='cursor-pointer hover:underline text-cyan-300'><Link href={"/mogi/" + ll[0].mogi_id}>{results[0]["largest loss"]}</Link></div>
           </div>
 
           <div className={styles.player_page_stats}>
-            <h2 className='text-xl font-bold'>Partner Average</h2>
+            <h2 className='text-xl font-bold'>partner average</h2>
             <div className='text-white'>{pa[0]["pa"]}</div>
           </div>
 

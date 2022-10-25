@@ -155,17 +155,17 @@ export async function getServerSideProps() {
     rows = await new Promise((resolve, reject) => {
       connection.query(
         `SELECT
-        0 as "Rank",
-        0 as "Country", 
-        0 as "Player Name", 
-        0 as "MMR", 
-        0 as "Peak MMR",
-        0 as "Win Rate",
-        0 as "Win/Loss (Last 10)",
-        0 as "Gain/Loss (Last 10)",
-        0 as "Events Played",
-        0 as "Largest Gain",
-        0 as "Largest Loss"`, (error, rows) => {
+        0 as "rank",
+        0 as "country", 
+        0 as "player name", 
+        0 as "mmr", 
+        0 as "peak mmr",
+        0 as "win rate",
+        0 as "win/loss (Last 10)",
+        0 as "gain/loss (Last 10)",
+        0 as "events played",
+        0 as "largest gain",
+        0 as "largest loss"`, (error, rows) => {
         if (error) reject(error)
         else resolve(rows)}
         );
@@ -325,7 +325,7 @@ export default function Leaderboard({ rows }) {
                   <TableHead>
                     <TableRow >
                       {
-                        columns.map((column, idx) => ( column === "player_id" ? <></> : isMobile && column === "Country" || isMobile && idx > 4 ? <></> :
+                        columns.map((column, idx) => ( column === "player_id" ? <></> : isMobile && column === "country" || isMobile && idx > 4 ? <></> :
                           <StyledTableCell>
                             <div 
                               className={styles.leaderboard_text} 
@@ -352,7 +352,7 @@ export default function Leaderboard({ rows }) {
                             <StyledTableCell align="center">
                               <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'text-violet-700' : row.MMR >= 7500 ? 'text-cyan-200' : row.MMR >= 6000 ? 'text-cyan-600' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                   <div className='cursor-pointer hover:underline'>
-                                  <Link href={"/player/" + row['Player Name']}>
+                                  <Link href={"/player/" + row['player name']}>
                                     {parseInt(row.Rank)}
                                   </Link>
                                   </div>
@@ -367,7 +367,7 @@ export default function Leaderboard({ rows }) {
                               <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'text-violet-700' : row.MMR >= 7500 ? 'text-cyan-200' : row.MMR >= 6000 ? 'text-cyan-600' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                   <div className='cursor-pointer hover:underline'>
                                   <Link href={"/player/" + row['Player Name']}>
-                                    {row['Player Name']}
+                                    {row['player name']}
                                   </Link>
                                   </div>
                               </div>
@@ -389,7 +389,7 @@ export default function Leaderboard({ rows }) {
                         <StyledTableCell align="center">
                           <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'text-violet-700' : row.MMR >= 7500 ? 'text-cyan-200' : row.MMR >= 6000 ? 'text-cyan-600' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                               <div className='cursor-pointer hover:underline'>
-                              <Link href={"/player/" + row['Player Name']}>
+                              <Link href={"/player/" + row['player name']}>
                                 {parseInt(row.Rank)}
                               </Link>
                               </div>
@@ -403,8 +403,8 @@ export default function Leaderboard({ rows }) {
                         <StyledTableCell align="center">
                           <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'text-violet-700' : row.MMR >= 7500 ? 'text-cyan-200' : row.MMR >= 6000 ? 'text-cyan-600' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                               <div className='cursor-pointer hover:underline'>
-                              <Link href={"/player/" + row['Player Name']}>
-                                {row['Player Name']}
+                              <Link href={"/player/" + row['player name']}>
+                                {row['player name']}
                               </Link>
                               </div>
                           </div>
@@ -419,7 +419,7 @@ export default function Leaderboard({ rows }) {
 
                         <StyledTableCell align="center">
                           <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'text-violet-700' : row.MMR >= 7500 ? 'text-cyan-200' : row.MMR >= 6000 ? 'text-cyan-600' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
-                            {row['Peak MMR']}
+                            {row['peak mmr']}
                           </div>
                         </StyledTableCell>
                         <StyledTableCell align="center">{(row['Win Rate']* 100).toFixed(2)}%</StyledTableCell>
@@ -433,18 +433,18 @@ export default function Leaderboard({ rows }) {
                         </StyledTableCell> */}
 
                         <StyledTableCell align="center">
-                            {row['Events Played']}
+                            {row['events played']}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
                           <div className={row['Largest Gain'] > 0 ? 'text-green-500': 'text-red-500'}>
-                            {row['Largest Gain']}
+                            {row['largest gain']}
                           </div>
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
                           <div className={row['Largest Loss'] > 0 ? 'text-green-500': 'text-red-500'}>
-                            {row['Largest Loss']}
+                            {row['largest loss']}
                           </div>
                         </StyledTableCell>
                       </StyledTableRow>
