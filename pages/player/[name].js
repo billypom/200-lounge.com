@@ -249,7 +249,7 @@ export async function getServerSideProps(context) {
   // score stuff
   let score_stuff = await new Promise((resolve, reject) => {
     connection.query(
-      `SELECT MAX(score) as "top score", ROUND(AVG(score),2) as "Avg Score" FROM player_mogi WHERE player_id = ?`, [results[0].player_id], (error, score_stuff) => {
+      `SELECT MAX(score) as "top score", ROUND(AVG(score),2) as "avg score" FROM player_mogi WHERE player_id = ?`, [results[0].player_id], (error, score_stuff) => {
         if (error) reject(error);
         else resolve(score_stuff);
       }
