@@ -194,7 +194,7 @@ export async function getServerSideProps(context) {
   // largest gain
   let lg = await new Promise((resolve, reject) => {
     connection.query(
-      `SELECT mogi_id FROM player_mogi WHERE player_id = ? AND mmr_change = ?`, [results[0].player_id, results[0]["Largest Gain"]], (error, lg) => {
+      `SELECT mogi_id FROM player_mogi WHERE player_id = ? AND mmr_change = ?`, [results[0].player_id, results[0]["largest gain"]], (error, lg) => {
         if (error) reject(error);
         else resolve(lg);
       }
@@ -205,7 +205,7 @@ export async function getServerSideProps(context) {
   // largest loss
   let ll = await new Promise((resolve, reject) => {
     connection.query(
-      `SELECT mogi_id FROM player_mogi WHERE player_id = ? AND mmr_change = ?`, [results[0].player_id, results[0]["Largest Loss"]], (error, ll) => {
+      `SELECT mogi_id FROM player_mogi WHERE player_id = ? AND mmr_change = ?`, [results[0].player_id, results[0]["largest loss"]], (error, ll) => {
         if (error) reject(error);
         else resolve(ll);
       }
@@ -238,7 +238,7 @@ export async function getServerSideProps(context) {
   // # rank
   let rank = await new Promise((resolve, reject) => {
     connection.query(
-      `SELECT COUNT(player_id) as "rank" FROM player WHERE mmr >= ?`, [results[0]["MMR"]], (error, rank) => {
+      `SELECT COUNT(player_id) as "rank" FROM player WHERE mmr >= ?`, [results[0]["mmr"]], (error, rank) => {
         if (error) reject(error);
         else resolve(rank);
       }
@@ -329,7 +329,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff })
 
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>avg score</h2>
-            <div className='text-white'>{score_stuff[0]["Avg Score"]}</div>
+            <div className='text-white'>{score_stuff[0]["avg score"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
