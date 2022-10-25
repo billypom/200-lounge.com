@@ -353,14 +353,14 @@ export default function Leaderboard({ rows }) {
                               <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                   <div className='cursor-pointer hover:underline'>
                                   <Link href={"/player/" + row['player name']}>
-                                    {parseInt(row.Rank)}
+                                    {parseInt(row.rank)}
                                   </Link>
                                   </div>
                               </div>
                             </StyledTableCell>
                             
                             {/* <StyledTableCell align="center">
-                              <ReactCountryFlag countryCode={row.Country} style={{width: '2rem', height: '2rem'}} svg />
+                              <ReactCountryFlag countryCode={row.country} style={{width: '2rem', height: '2rem'}} svg />
                             </StyledTableCell> */}
 
                             <StyledTableCell align="center">
@@ -397,7 +397,7 @@ export default function Leaderboard({ rows }) {
                         </StyledTableCell>
                         
                         <StyledTableCell align="center">
-                          <ReactCountryFlag countryCode={row.Country} style={{width: '2rem', height: '2rem'}} svg />
+                          <ReactCountryFlag countryCode={row.country} style={{width: '2rem', height: '2rem'}} svg />
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
