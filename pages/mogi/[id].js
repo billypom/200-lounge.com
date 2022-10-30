@@ -12,7 +12,7 @@ import mysql from 'mysql2'
 import styles from '../../styles/Home.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
-
+import TileGrid from '../../components/TileGrid'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -22,20 +22,29 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 18,
     fontWeight: 750,
-    color: theme.palette.text.primary
+    // color: theme.palette.text.primary
+    color: '#e8e6fc',
   },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(even)': {
-    backgroundColor: theme.palette.background.paper
+    // backgroundColor: theme.palette.background.paper
+    backgroundColor: '#16151a',
   },
   '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.text.divider
+    // backgroundColor: theme.palette.text.divider
+    backgroundColor: '#050505',
   },
   // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
+  },
+  [`&.${tableRowClasses.footer}`]: {
+    fontSize: 18,
+    fontWeight: 750,
+    // color: theme.palette.text.primary
+    color: '#e8e6fc',
   },
 }));
 
@@ -111,10 +120,11 @@ export default function Mogi({ results, pm }) {
       </Head>
 
       <main className={styles.main}>
+        <TileGrid />
         <h1 className={styles.title}>
           mogi
         </h1>
-        <div className='max-w-2xl pt-5'>
+        <div className='max-w-2xl pt-5 z-10'>
           <div><Image src={results[0].table_url} alt='mogi results image' width='860' height='520'></Image></div>
           <div className="m-auto p-3">
               <TableContainer component={Paper} className={styles.leaderboard_style}>

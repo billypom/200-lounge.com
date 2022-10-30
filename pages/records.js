@@ -105,16 +105,20 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(even)': {
     // backgroundColor: theme.palette.background.paper
     backgroundColor: '#16151a',
-    color: '#e8e6fc'
   },
   '&:nth-of-type(odd)': {
     // backgroundColor: theme.palette.text.divider
     backgroundColor: '#050505',
-    color: '#e8e6fc'
   },
   // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
+  },
+  [`&.${tableRowClasses.footer}`]: {
+    fontSize: 18,
+    fontWeight: 750,
+    // color: theme.palette.text.primary
+    color: '#e8e6fc',
   },
 }));
 

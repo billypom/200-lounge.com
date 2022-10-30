@@ -23,6 +23,7 @@ import mysql from 'mysql2'
 import styles from '../../styles/Home.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
+import TileGrid from '../../components/TileGrid'
 
 
 
@@ -97,20 +98,29 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 18,
     fontWeight: 750,
-    color: theme.palette.text.primary
+    // color: theme.palette.text.primary
+    color: '#e8e6fc',
   },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(even)': {
-    backgroundColor: theme.palette.background.paper
+    // backgroundColor: theme.palette.background.paper
+    backgroundColor: '#16151a',
   },
   '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.text.divider
+    // backgroundColor: theme.palette.text.divider
+    backgroundColor: '#050505',
   },
   // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
+  },
+  [`&.${tableRowClasses.footer}`]: {
+    fontSize: 18,
+    fontWeight: 750,
+    // color: theme.palette.text.primary
+    color: '#e8e6fc',
   },
 }));
 
@@ -257,7 +267,7 @@ export async function getServerSideProps(context) {
   });
   score_stuff = JSON.parse(JSON.stringify(score_stuff))
 
-  grid_color = 'a'
+  let grid_color = 'a'
 
   // End connection to server
   connection.end();
@@ -292,11 +302,12 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, g
       </Head>
 
       <main className={styles.main}>
+        <TileGrid />
         <h1 className={styles.title}>
            <div className={results[0].rank_name === "Grandmaster" ? 'text-red-800' : results[0].rank_name === "Master" ? 'text-violet-700' : results[0].rank_name === "Diamond" ? 'text-cyan-200' : results[0].rank_name === "Platinum" ? 'text-cyan-600' : results[0].rank_name === "Gold" ? 'text-yellow-500' : results[0].rank_name === "Silver" ? 'text-gray-400' : results[0].rank_name === "Bronze" ? 'text-orange-400' : results[0].rank_name === "Iron" ? 'text-stone-500' : 'text-white'}><ReactCountryFlag countryCode={results[0]["country"]} style={{width: '4rem', height: '4rem'}} svg /> {results[0]["player name"]} - {results[0].rank_name}</div>
           
         </h1>
-        <div className='flex flex-row flex-wrap max-w-4xl m-auto justify-center'>
+        <div className='flex flex-row flex-wrap max-w-4xl m-auto justify-center z-10'>
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>Rank</h2>
             <div className='text-white'>{rank[0]["rank"]}</div>
@@ -358,7 +369,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, g
           </div>
 
         </div>
-        <div className="m-auto p-1">
+        <div className="m-auto p-1 z-10">
               <TableContainer component={Paper} className={styles.leaderboard_style}>
                 <Table stickyHeader aria-label="customized table">
                   <TableHead>
@@ -432,6 +443,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, g
                           count={rows.length}
                           rowsPerPage={rowsPerPage}
                           page={page}
+                          sx={{bgcolor: '#A3A3C3'}}
                           SelectProps={{
                               inputProps: {
                                   'aria-label': 'rows per page',
