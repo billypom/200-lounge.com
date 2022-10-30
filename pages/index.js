@@ -311,7 +311,7 @@ export default function Leaderboard({ rows }) {
         <link rel="icon" href="/200.png" />
       </Head>
       <main className={styles.main}>
-        <TileGrid />
+        {/* <TileGrid /> */}
           <h1 className={styles.title}>
             200cc Lounge
           </h1>

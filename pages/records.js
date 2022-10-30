@@ -140,7 +140,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
         <link rel="icon" href="/200.png" />
       </Head>
       <main className={styles.main}>
-        <TileGrid />
+        {/* <TileGrid /> */}
         <h1 className={styles.title}>
           records
         </h1>

@@ -302,7 +302,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, g
       </Head>
 
       <main className={styles.main}>
-        <TileGrid />
+        {/* <TileGrid /> */}
         <h1 className={styles.title}>
            <div className={results[0].rank_name === "Grandmaster" ? 'text-red-800' : results[0].rank_name === "Master" ? 'text-violet-700' : results[0].rank_name === "Diamond" ? 'text-cyan-200' : results[0].rank_name === "Platinum" ? 'text-cyan-600' : results[0].rank_name === "Gold" ? 'text-yellow-500' : results[0].rank_name === "Silver" ? 'text-gray-400' : results[0].rank_name === "Bronze" ? 'text-orange-400' : results[0].rank_name === "Iron" ? 'text-stone-500' : 'text-white'}><ReactCountryFlag countryCode={results[0]["country"]} style={{width: '4rem', height: '4rem'}} svg /> {results[0]["player name"]} - {results[0].rank_name}</div>
           

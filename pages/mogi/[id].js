@@ -120,7 +120,7 @@ export default function Mogi({ results, pm }) {
       </Head>
 
       <main className={styles.main}>
-        <TileGrid />
+        {/* <TileGrid /> */}
         <h1 className={styles.title}>
           mogi
         </h1>
