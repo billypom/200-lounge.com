@@ -11,6 +11,7 @@ import Head from 'next/head'
 import mysql from 'mysql2'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
+import TileGrid from '../components/TileGrid'
 
 
 
@@ -86,6 +87,7 @@ export async function getServerSideProps() {
 
 
 
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#1d185f',
@@ -94,16 +96,21 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 18,
     fontWeight: 750,
-    color: theme.palette.text.primary
+    // color: theme.palette.text.primary
+    color: '#e8e6fc',
   },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(even)': {
-    backgroundColor: theme.palette.background.paper
+    // backgroundColor: theme.palette.background.paper
+    backgroundColor: '#16151a',
+    color: '#e8e6fc'
   },
   '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.text.divider
+    // backgroundColor: theme.palette.text.divider
+    backgroundColor: '#050505',
+    color: '#e8e6fc'
   },
   // hide last border
   '&:last-child td, &:last-child th': {
@@ -129,11 +136,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
         <link rel="icon" href="/200.png" />
       </Head>
       <main className={styles.main}>
+        <TileGrid />
         <h1 className={styles.title}>
           records
         </h1>
 
-        <div className="flex flex-col text-center">
+        <div className="flex flex-col text-center z-10">
           <h2 className={styles.tier_title}>tier-all</h2>
           <div className="flex flex-row flex-wrap">
             <div className={styles.records_table}>

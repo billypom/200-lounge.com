@@ -1,3 +1,39 @@
+
+/* 
+Tiles Background
+*/
+.tiles {
+  height: 100vh;
+  width: 100vw;
+
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  z-index: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.tile:before {
+  background-color: rgb(8, 9, 11);
+  content: "";
+  position: absolute;
+  inset: 0.5px;
+}
+
+.tile {
+  /* outline: 1px solid white; */
+  /* background-color: rgb(8, 9, 11); */
+  position: relative;
+}
+
+
+
+
+
+
+
 .player_page_stats {
   padding: 1rem;
   margin: 1rem;
@@ -11,12 +47,14 @@
   display: flex;
   flex: 1;
   flex-wrap: wrap;
-  background-color: rgb(51, 57, 71);
+  background-color: rgb(26, 29, 36);
   justify-content: center;
   min-width: 100%;
   top: 0;
   background-size: 100%;
   font-size: xx-large;
+  z-index: 1;
+  position: sticky;
 }
 
 .navitem {
@@ -84,6 +122,7 @@
 .container {
   padding: 0 2rem;
   margin: auto;
+  /* position: relative; */
 }
 
 @media (max-width: 1000px) {
@@ -100,6 +139,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: white;
+  /* z-index: 1; */
 }
 
 .footer {
@@ -143,6 +184,7 @@
   line-height: 1.15;
   font-size: 4rem;
   font-weight: bold;
+  z-index: 1;
 }
 
 .title,

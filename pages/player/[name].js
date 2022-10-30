@@ -257,18 +257,18 @@ export async function getServerSideProps(context) {
   });
   score_stuff = JSON.parse(JSON.stringify(score_stuff))
 
-  
+  grid_color = 'a'
 
   // End connection to server
   connection.end();
   // return props as object ALWAYS
   return {
-    props: { results, rows, lg, ll, pa, rank, score_stuff }
+    props: { results, rows, lg, ll, pa, rank, score_stuff, grid_color }
   }
 }
 
 
-export default function Player({ results, rows, lg, ll, pa, rank, score_stuff }) {
+export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, grid_color }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(50);
   // Avoid a layout jump when reaching the last page with empty rows.

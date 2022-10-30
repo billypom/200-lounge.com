@@ -7,6 +7,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
 import Navbar from '../components/Navbar'
+import TileGrid from '../components/TileGrid'
 
 // const theme = createTheme({
 //   palette: {
@@ -17,54 +18,55 @@ import Navbar from '../components/Navbar'
 // });
 
 
-const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+// const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 
-function YourApp() {
+// function YourApp() {
 
-  const theme = useTheme();
-  const colorMode = React.useContext(ColorModeContext);
-  return (
-    <>
-      <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
-        {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-      </IconButton>
-      {/* {theme.palette.mode} mode */}
-    </>
-  );
-}
+//   const theme = useTheme();
+//   const colorMode = React.useContext(ColorModeContext);
+//   return (
+//     <>
+//       <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+//         {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+//       </IconButton>
+//       {/* {theme.palette.mode} mode */}
+//     </>
+//   );
+// }
 
-export default function ToggleColorMode({ Component, pageProps }) {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+export default function App({ Component, pageProps }) {
+  // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
-  const [mode, setMode] = React.useState(prefersDarkMode ? 'dark' : 'dark');
-  const colorMode = React.useMemo(
-    () => ({
-      toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-      },
-    }),
-    [],
-  );
+  // const [mode, setMode] = React.useState(prefersDarkMode ? 'dark' : 'dark');
+  // const colorMode = React.useMemo(
+  //   () => ({
+  //     toggleColorMode: () => {
+  //       setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+  //     },
+  //   }),
+  //   [],
+  // );
 
-  const theme = React.useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode,
-        },
-      }),
-    [mode],
-  );
+  // const theme = React.useMemo(
+  //   () =>
+  //     createTheme({
+  //       palette: {
+  //         mode,
+  //       },
+  //     }),
+  //   [mode],
+  // );
 
   return (<>
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline enableColorScheme/>
+    {/* <ColorModeContext.Provider value={colorMode}> */}
+      {/* <ThemeProvider theme={theme}> */}
+        {/* <CssBaseline enableColorScheme/> */}
         <Navbar />
+        {/* <TileGrid /> */}
         <Component {...pageProps} />
-      </ThemeProvider>
-    </ColorModeContext.Provider>
+      {/* </ThemeProvider> */}
+    {/* </ColorModeContext.Provider> */}
   </>)
 }
 

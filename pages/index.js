@@ -6,12 +6,14 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow, { tableRowClasses } from '@mui/material/TableRow';
+import TableFooter from '@mui/material/TableFooter';
+import TablePagination from '@mui/material/TablePagination';
+
 import Paper from '@mui/material/Paper';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import TableFooter from '@mui/material/TableFooter';
-import TablePagination from '@mui/material/TablePagination';
+
 import IconButton from '@mui/material/IconButton';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
@@ -24,80 +26,7 @@ import styles from '../styles/Home.module.css'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid'
 import ReactCountryFlag from "react-country-flag"
 import Link from 'next/link'
-
-
-
-
-function TablePaginationActions(props) {
-    const theme = useTheme();
-    const { count, page, rowsPerPage, onPageChange } = props;
-  
-    const handleFirstPageButtonClick = (event) => {
-      onPageChange(event, 0);
-    };
-  
-    const handleBackButtonClick = (event) => {
-      onPageChange(event, page - 1);
-    };
-  
-    const handleNextButtonClick = (event) => {
-      onPageChange(event, page + 1);
-    };
-  
-    const handleLastPageButtonClick = (event) => {
-      onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-    };
-  
-    return (
-      <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-        <IconButton
-          onClick={handleFirstPageButtonClick}
-          disabled={page === 0}
-          aria-label="first page"
-        >
-          {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-        </IconButton>
-        <IconButton
-          onClick={handleBackButtonClick}
-          disabled={page === 0}
-          aria-label="previous page"
-        >
-          {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-        </IconButton>
-        <IconButton
-          onClick={handleNextButtonClick}
-          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-          aria-label="next page"
-        >
-          {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-        </IconButton>
-        <IconButton
-          onClick={handleLastPageButtonClick}
-          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-          aria-label="last page"
-        >
-          {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-        </IconButton>
-      </Box>
-    );
-  }
-  
-  TablePaginationActions.propTypes = {
-    count: PropTypes.number.isRequired,
-    onPageChange: PropTypes.func.isRequired,
-    page: PropTypes.number.isRequired,
-    rowsPerPage: PropTypes.number.isRequired,
-  };
-
-
-
-
-
-
-
-
-
-
+import TileGrid from '../components/TileGrid'
 
 export async function getServerSideProps() {
   const connection = mysql.createConnection(
@@ -146,8 +75,6 @@ export async function getServerSideProps() {
   //       GROUP BY player_id) as tenpm
   //     ON p.player_id = tenpm.player_id
 
-
-
   // Parse mysql output into json table
   rows = JSON.parse(JSON.stringify(rows).replace(/\:null/gi, "\:\"\""))
   // return props as object ALWAYS
@@ -183,6 +110,85 @@ export async function getServerSideProps() {
 
 
 
+
+
+
+
+
+
+
+
+function TablePaginationActions(props) {
+  const theme = useTheme();
+  const { count, page, rowsPerPage, onPageChange } = props;
+
+  const handleFirstPageButtonClick = (event) => {
+    onPageChange(event, 0);
+  };
+
+  const handleBackButtonClick = (event) => {
+    onPageChange(event, page - 1);
+  };
+
+  const handleNextButtonClick = (event) => {
+    onPageChange(event, page + 1);
+  };
+
+  const handleLastPageButtonClick = (event) => {
+    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+  };
+
+  return (
+    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+      <IconButton
+        onClick={handleFirstPageButtonClick}
+        disabled={page === 0}
+        aria-label="first page"
+      >
+        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+      </IconButton>
+      <IconButton
+        onClick={handleBackButtonClick}
+        disabled={page === 0}
+        aria-label="previous page"
+      >
+        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+      </IconButton>
+      <IconButton
+        onClick={handleNextButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="next page"
+      >
+        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+      </IconButton>
+      <IconButton
+        onClick={handleLastPageButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="last page"
+      >
+        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+      </IconButton>
+    </Box>
+  );
+}
+
+TablePaginationActions.propTypes = {
+  count: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
+  rowsPerPage: PropTypes.number.isRequired,
+};
+
+
+
+
+
+
+
+
+
+
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#1d185f',
@@ -191,22 +197,37 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 18,
     fontWeight: 750,
-    color: theme.palette.text.primary
+    // color: theme.palette.text.primary
+    color: '#e8e6fc',
   },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(even)': {
-    backgroundColor: theme.palette.background.paper
+    // backgroundColor: theme.palette.background.paper
+    backgroundColor: '#16151a',
   },
   '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.text.divider
+    // backgroundColor: theme.palette.text.divider
+    backgroundColor: '#050505',
   },
   // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
   },
+  [`&.${tableRowClasses.footer}`]: {
+    fontSize: 18,
+    fontWeight: 750,
+    // color: theme.palette.text.primary
+    color: '#e8e6fc',
+  },
 }));
+
+
+
+
+
+
 
 
 
@@ -235,6 +256,9 @@ const useMediaQuery = (width) => {
 
   return targetReached;
 };
+
+
+
 
 
 
@@ -277,24 +301,7 @@ export default function Leaderboard({ rows }) {
       );
   }
 
-
-  // const [width, setWidth]   = useState(typeof window === 'undefined' ? 0 : window.innerWidth);
-  // const [height, setHeight] = useState(typeof window === 'undefined' ? 0 : window.innerHeight);
-  // const updateDimensions = () => {
-  //     if (typeof window !== 'undefined') {
-  //     setWidth(window.innerWidth);
-  //     setHeight(window.innerHeight);
-  //     }
-  // }
-  // useEffect(() => {
-  //     window.addEventListener("resize", updateDimensions);
-  //     return () => window.removeEventListener("resize", updateDimensions);
-  // }, [updateDimensions]);
-
-
-
   const isMobile = useMediaQuery(768)
-
 
   return (
     <div className={styles.container}>
@@ -304,158 +311,159 @@ export default function Leaderboard({ rows }) {
         <link rel="icon" href="/200.png" />
       </Head>
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          200cc Lounge
-        </h1>
-        <h1 className={styles.title}>
-          Leaderboard
-        </h1>
-        
-        <div className="flex flex-col p-3 gap-2">
-          <input 
-            className="border border-gray-400 text-white placeholder:text-gray justify-start m-auto max-w-100 p-2" 
-            type="text" 
-            placeholder="(search)" 
-            value={query} 
-            onChange={(e) => setQuery(e.target.value)}/>
-        </div>
-        <div className="m-auto p-1">
-              <TableContainer component={Paper} className={styles.leaderboard_style}>
-                <Table stickyHeader aria-label="customized table">
-                  <TableHead>
-                    <TableRow >
-                      {
-                        columns.map((column, idx) => ( column === "player_id" ? <></> : isMobile && column === "country" || isMobile && idx > 4 ? <></> :
-                          <StyledTableCell>
-                            <div 
-                              className={styles.leaderboard_text} 
-                              onClick={() => 
-                                setSortedBy((prev) => ({column: column, asc: !prev.asc}))}>
-                                  <div>{column}</div>
-                                  <div>{sortedBy.column === column &&
-                                    (sortedBy.asc 
-                                      ? <ChevronUpIcon className="w-5 h-5"/>
-                                      :<ChevronDownIcon className="w-5 h-5"/>
-                                    )}
+        <TileGrid />
+          <h1 className={styles.title}>
+            200cc Lounge
+          </h1>
+          <h1 className={styles.title}>
+            Leaderboard
+          </h1>
+          
+          <div className="flex flex-col p-3 gap-2 z-10">
+            <input 
+              className="border border-gray-400 text-white placeholder:text-gray justify-start m-auto max-w-100 p-2" 
+              type="text" 
+              placeholder="(search)" 
+              value={query} 
+              onChange={(e) => setQuery(e.target.value)}/>
+          </div>
+          <div className="m-auto p-1 z-10">
+                <TableContainer className={styles.leaderboard_style}>
+                  <Table stickyHeader aria-label="customized table" sx={{ color: '#FAF0F0' }}>
+                    <TableHead>
+                      <TableRow >
+                        {
+                          columns.map((column, idx) => ( column === "player_id" ? <></> : isMobile && column === "country" || isMobile && idx > 4 ? <></> :
+                            <StyledTableCell>
+                              <div 
+                                className={styles.leaderboard_text} 
+                                onClick={() => 
+                                  setSortedBy((prev) => ({column: column, asc: !prev.asc}))}>
+                                    <div>{column}</div>
+                                    <div>{sortedBy.column === column &&
+                                      (sortedBy.asc 
+                                        ? <ChevronUpIcon className="w-5 h-5"/>
+                                        :<ChevronDownIcon className="w-5 h-5"/>
+                                      )}
+                                  </div>
+                              </div>
+                            </StyledTableCell>
+                          ))
+                        }
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {(rowsPerPage > 0
+                        ? sort(filter(rows)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage):sort(filter(rows))).map((row, idx) => (
+                          isMobile ? 
+                            <StyledTableRow key={row.player_id}>
+                              <StyledTableCell align="center">
+                                <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                    <div className='cursor-pointer hover:underline'>
+                                    <Link href={"/player/" + row['player name']}>
+                                      {parseInt(row.rank)}
+                                    </Link>
+                                    </div>
+                                </div>
+                              </StyledTableCell>
+                              
+                              {/* <StyledTableCell align="center">
+                                <ReactCountryFlag countryCode={row.country} style={{width: '2rem', height: '2rem'}} svg />
+                              </StyledTableCell> */}
+
+                              <StyledTableCell align="center">
+                                <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                    <div className='cursor-pointer hover:underline'>
+                                    <Link href={"/player/" + row['player name']}>
+                                      {row['player name']}
+                                    </Link>
+                                    </div>
+                                </div>
+                              </StyledTableCell>
+                              
+                              <StyledTableCell align="center">
+                                <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                {row.mmr}
+                                </div>
+                              </StyledTableCell>
+                            </StyledTableRow> :
+
+
+
+
+
+                        <StyledTableRow key={row.player_id}>
+
+                          <StyledTableCell align="center">
+                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                <div className='cursor-pointer hover:underline'>
+                                <Link href={"/player/" + row['player name']}>
+                                  {parseInt(row.rank)}
+                                </Link>
                                 </div>
                             </div>
                           </StyledTableCell>
-                        ))
-                      }
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {(rowsPerPage > 0
-                      ? sort(filter(rows)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage):sort(filter(rows))).map((row, idx) => (
-                        isMobile ? 
-                          <StyledTableRow key={row.player_id}>
-                            <StyledTableCell align="center">
-                              <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
-                                  <div className='cursor-pointer hover:underline'>
-                                  <Link href={"/player/" + row['player name']}>
-                                    {parseInt(row.rank)}
-                                  </Link>
-                                  </div>
-                              </div>
-                            </StyledTableCell>
-                            
-                            {/* <StyledTableCell align="center">
-                              <ReactCountryFlag countryCode={row.country} style={{width: '2rem', height: '2rem'}} svg />
-                            </StyledTableCell> */}
+                          
+                          <StyledTableCell align="center">
+                            <ReactCountryFlag countryCode={row.country} style={{width: '2rem', height: '2rem'}} svg />
+                          </StyledTableCell>
 
-                            <StyledTableCell align="center">
-                              <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
-                                  <div className='cursor-pointer hover:underline'>
-                                  <Link href={"/player/" + row['player name']}>
-                                    {row['player name']}
-                                  </Link>
-                                  </div>
-                              </div>
-                            </StyledTableCell>
-                            
-                            <StyledTableCell align="center">
-                              <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
-                              {row.mmr}
-                              </div>
-                            </StyledTableCell>
-                          </StyledTableRow> :
+                          <StyledTableCell align="center">
+                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                <div className='cursor-pointer hover:underline'>
+                                <Link href={"/player/" + row['player name']}>
+                                  {row['player name']}
+                                </Link>
+                                </div>
+                            </div>
+                          </StyledTableCell>
+                          
+                          <StyledTableCell align="center">
+                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                            {row.mmr}
+                            </div>
+                          </StyledTableCell>
 
 
-
-
-
-                      <StyledTableRow key={row.player_id}>
-
-                        <StyledTableCell align="center">
-                          <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
-                              <div className='cursor-pointer hover:underline'>
-                              <Link href={"/player/" + row['player name']}>
-                                {parseInt(row.rank)}
-                              </Link>
-                              </div>
-                          </div>
-                        </StyledTableCell>
+                          <StyledTableCell align="center">
+                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                              {row['peak mmr']}
+                            </div>
+                          </StyledTableCell>
+                          <StyledTableCell align="center">{(row['win rate']* 100).toFixed(2)}%</StyledTableCell>
+  {/* 
+                          <StyledTableCell align="center">{row['Win/Loss (Last 10)']}</StyledTableCell>
                         
-                        <StyledTableCell align="center">
-                          <ReactCountryFlag countryCode={row.country} style={{width: '2rem', height: '2rem'}} svg />
-                        </StyledTableCell>
+                          <StyledTableCell align="center">
+                            <div className={row['Gain/Loss (Last 10)'] > 0 ? 'text-green-500': 'text-red-500'}>
+                              {row['Gain/Loss (Last 10)']}
+                            </div>
+                          </StyledTableCell> */}
 
-                        <StyledTableCell align="center">
-                          <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
-                              <div className='cursor-pointer hover:underline'>
-                              <Link href={"/player/" + row['player name']}>
-                                {row['player name']}
-                              </Link>
-                              </div>
-                          </div>
-                        </StyledTableCell>
-                        
-                        <StyledTableCell align="center">
-                          <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
-                          {row.mmr}
-                          </div>
-                        </StyledTableCell>
+                          <StyledTableCell align="center">
+                              {row['events played']}
+                          </StyledTableCell>
 
+                          <StyledTableCell align="center">
+                            <div className={row['largest gain'] > 0 ? 'text-green-500': 'text-red-500'}>
+                              {row['largest gain']}
+                            </div>
+                          </StyledTableCell>
 
-                        <StyledTableCell align="center">
-                          <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
-                            {row['peak mmr']}
-                          </div>
-                        </StyledTableCell>
-                        <StyledTableCell align="center">{(row['win rate']* 100).toFixed(2)}%</StyledTableCell>
-{/* 
-                        <StyledTableCell align="center">{row['Win/Loss (Last 10)']}</StyledTableCell>
-                      
-                        <StyledTableCell align="center">
-                          <div className={row['Gain/Loss (Last 10)'] > 0 ? 'text-green-500': 'text-red-500'}>
-                            {row['Gain/Loss (Last 10)']}
-                          </div>
-                        </StyledTableCell> */}
-
-                        <StyledTableCell align="center">
-                            {row['events played']}
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                          <div className={row['largest gain'] > 0 ? 'text-green-500': 'text-red-500'}>
-                            {row['largest gain']}
-                          </div>
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                          <div className={row['largest loss'] > 0 ? 'text-green-500': 'text-red-500'}>
-                            {row['largest loss']}
-                          </div>
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    ))}
-                    {emptyRows > 0 && (
-                      <TableRow style={{height: 53 * emptyRows}}>
-                          <StyledTableCell colSpan={6} />
-                      </TableRow>
-                    )}
-                  </TableBody>
-                  <TableFooter>
+                          <StyledTableCell align="center">
+                            <div className={row['largest loss'] > 0 ? 'text-green-500': 'text-red-500'}>
+                              {row['largest loss']}
+                            </div>
+                          </StyledTableCell>
+                        </StyledTableRow>
+                      ))}
+                      {emptyRows > 0 && (
+                        <TableRow style={{height: 53 * emptyRows}}>
+                            <StyledTableCell colSpan={6} />
+                        </TableRow>
+                      )}
+                    </TableBody>
+                    <TableFooter>
                       <StyledTableRow>
                           <TablePagination
                           rowsPerPageOptions={[10, 25, 50, {label: 'All', value: -1}]}
@@ -463,21 +471,22 @@ export default function Leaderboard({ rows }) {
                           count={rows.length}
                           rowsPerPage={rowsPerPage}
                           page={page}
+                          sx={{bgcolor: '#A3A3C3'}}
                           SelectProps={{
                               inputProps: {
                                   'aria-label': 'rows',
                               },
-                              native: true,
+                              native: true
                           }}
                           onPageChange={handleChangePage}
                           onRowsPerPageChange={handleChangeRowsPerPage}
                           ActionsComponent={TablePaginationActions}
                           />
                       </StyledTableRow>
-                  </TableFooter>
-                </Table>
-              </TableContainer>
-            </div>
+                    </TableFooter>
+                  </Table>
+                </TableContainer>
+              </div>
           </main>
         </div>
   );
