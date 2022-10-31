@@ -70,22 +70,22 @@ export default function Navbar(){
             <div className={styles.navdropdown}>
                 <Link href="/">
                     <ul className={styles.navitem} onClick={() => setOpen(!open)}>
-                        {". . . . . . . "}leaderboard
+                        leaderboard
                     </ul>
                 </Link>
                 <Link href="/records">
                     <ul className={styles.navitem} onClick={() => setOpen(!open)}>
-                        {". . . . . . . . . . . "}records
+                        records
                     </ul>
                 </Link>
                 <a href="https://discord.gg/uR3rRzsjhk">
                     <ul className={styles.navitem} onClick={() => setOpen(!open)}>
-                        {". . . . . . . . . . . "}discord
+                        discord
                     </ul>
                 </a>
                 <a href="https://www.mariokartcentral.com/forums/index.php?threads/s4-mk8dx-200cc-lounge-rules-updated-may-1-2022.7129/">
                     <ul className={styles.navitem} onClick={() => setOpen(!open)}>
-                        {". . . . . . . . . . . . . "}rules
+                        rules
                     </ul>
                 </a>
             </div> 
