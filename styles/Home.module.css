@@ -373,12 +373,12 @@ Tiles Background
     margin: auto;
   }
   
-  @keyframes navitem_ani {
-    from {transform: translate(110%);}
-    to {transform: translate(0%);}
+  @keyframes navburger_ani {
+    from {transform: translate(110vw);}
+    to {transform: translate(0vw);}
   }
   .navdropdown {
-    animation-name: navitem_ani;
+    animation-name: navburger_ani;
     animation-duration: 0.5s;
     animation-timing-function: cubic-bezier(.26, .13, .24, 1.2);
     animation-fill-mode: forwards;
