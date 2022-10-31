@@ -2,7 +2,6 @@ import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import {useEffect, useState } from 'react'
 import Image from 'next/image'
-import { CSSTransition } from 'react-transition-group'
 
 
 export default function Navbar(){
@@ -40,7 +39,7 @@ export default function Navbar(){
                 <div className={styles.navitemwrapper2}>
                     {isMobile ? <>
                     <div className={styles.navitem3}>
-                        <Image src='/icons8-menu.svg' width='30px' height='30px' onClick={() => setOpen(!open)} />
+                        <Image src='/icons8-menu.svg' alt='navigation' width='30px' height='30px' onClick={() => setOpen(!open)} />
                     </div>
 
                     </> : <>

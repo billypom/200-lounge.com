@@ -238,11 +238,11 @@ Tiles Background
   font-weight: bold;
 }
 
-.container {
-  /* padding: 0 2rem; */
-  /* margin: auto; */
-  /* position: relative; */
-}
+/* .container {
+  padding: 0 2rem;
+  margin: auto;
+  position: relative;
+} */
 
 .main {
   min-height: 100vh;
