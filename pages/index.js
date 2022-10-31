@@ -252,7 +252,7 @@ const useMediaQuery = (width) => {
     }
 
     return () => media.removeListener(updateTarget);
-  });
+  }, [width, updateTarget]);
 
   return targetReached;
 };
