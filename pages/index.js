@@ -1,32 +1,30 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow, { tableRowClasses } from '@mui/material/TableRow';
-import TableFooter from '@mui/material/TableFooter';
-import TablePagination from '@mui/material/TablePagination';
+import * as React from 'react'
+import { styled } from '@mui/material/styles'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell, { tableCellClasses } from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow, { tableRowClasses } from '@mui/material/TableRow'
+import TableFooter from '@mui/material/TableFooter'
+import TablePagination from '@mui/material/TablePagination'
 
-import Paper from '@mui/material/Paper';
-import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+import PropTypes from 'prop-types'
+import { useTheme } from '@mui/material/styles'
+import Box from '@mui/material/Box'
 
-import IconButton from '@mui/material/IconButton';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
-import { useState, useEffect, useCallback } from 'react';
+import IconButton from '@mui/material/IconButton'
+import FirstPageIcon from '@mui/icons-material/FirstPage'
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
+import LastPageIcon from '@mui/icons-material/LastPage'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import Head from 'next/head'
 import mysql from 'mysql2'
 import styles from '../styles/Home.module.css'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid'
 import ReactCountryFlag from "react-country-flag"
 import Link from 'next/link'
-import TileGrid from '../components/TileGrid'
 
 export async function getServerSideProps() {
   const connection = mysql.createConnection(
@@ -112,11 +110,8 @@ export async function getServerSideProps() {
 
 
 
-
-
-
-
-
+export default function Leaderboard({ rows }) {
+  
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -124,49 +119,53 @@ function TablePaginationActions(props) {
 
   const handleFirstPageButtonClick = (event) => {
     onPageChange(event, 0);
+    executeScroll()
   };
 
   const handleBackButtonClick = (event) => {
     onPageChange(event, page - 1);
+    executeScroll()
   };
 
   const handleNextButtonClick = (event) => {
     onPageChange(event, page + 1);
+    executeScroll()
   };
 
   const handleLastPageButtonClick = (event) => {
     onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+    executeScroll()
   };
 
   return (
-    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+    <Box sx={{ flexShrink: 0, ml: 2.5, /*backgroundColor: '#ff0000'*/ }}>
       <IconButton
         onClick={handleFirstPageButtonClick}
         disabled={page === 0}
         aria-label="first page"
       >
-        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+        {theme.direction === 'rtl' ? <LastPageIcon style={{ fill: '#ffffff' }}/> : <FirstPageIcon style={{ fill: '#ffffff' }}/>}
       </IconButton>
       <IconButton
         onClick={handleBackButtonClick}
         disabled={page === 0}
         aria-label="previous page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+        {theme.direction === 'rtl' ? <KeyboardArrowRight style={{ fill: '#ffffff' }}/> : <KeyboardArrowLeft style={{ fill: '#ffffff' }}/>}
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+        {theme.direction === 'rtl' ? <KeyboardArrowLeft style={{ fill: '#ffffff' }}/> : <KeyboardArrowRight style={{ fill: '#ffffff' }}/>}
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
-        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+        {theme.direction === 'rtl' ? <FirstPageIcon style={{ fill: '#ffffff' }}/> : <LastPageIcon style={{ fill: '#ffffff' }}/>}
       </IconButton>
     </Box>
   );
@@ -192,13 +191,14 @@ TablePaginationActions.propTypes = {
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#1d185f',
-    fontSize: 20,
+    fontSize: 24,
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 750,
     // color: theme.palette.text.primary
     color: '#e8e6fc',
+    padding: "20px 0px 20px 0px"
   },
 }));
 
@@ -216,7 +216,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
   [`&.${tableRowClasses.footer}`]: {
-    fontSize: 18,
+    fontSize: 13,
     fontWeight: 750,
     // color: theme.palette.text.primary
     color: '#e8e6fc',
@@ -252,7 +252,7 @@ const useMediaQuery = (width) => {
     }
 
     return () => media.removeListener(updateTarget);
-  }, []);
+  });
 
   return targetReached;
 };
@@ -260,11 +260,7 @@ const useMediaQuery = (width) => {
 
 
 
-
-
-
-
-export default function Leaderboard({ rows }) {
+ //--------------------------------------------------------------------------- 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(50);
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -301,40 +297,46 @@ export default function Leaderboard({ rows }) {
       );
   }
 
-  const isMobile = useMediaQuery(768)
+  const isMobile = useMediaQuery(1000)
+
+
+  const tableHeader = useRef(null)
+  const executeScroll = () => tableHeader.current.scrollIntoView()
+
 
   return (
     <div className={styles.container}>
+      {/* <TileGrid /> */}
       <Head>
         <title>200 Lounge | Leaderboard</title>
         <meta name="description" content="MK8DX 200cc Lounge Leaderboard" />
         <link rel="icon" href="/200.png" />
       </Head>
       <main className={styles.main}>
-        {/* <TileGrid /> */}
+        <div className={styles.content_edges}>
           <h1 className={styles.title}>
-            200cc Lounge
+            leaderboard 
           </h1>
-          <h1 className={styles.title}>
-            Leaderboard
-          </h1>
-          
-          <div className="flex flex-col p-3 gap-2 z-10">
+          <div className="flex-col flex pb-3 pl-1 gap-2 z-10 text-2xl">
             <input 
-              className="border border-gray-400 text-white placeholder:text-gray justify-start m-auto max-w-100 p-2" 
+              className="border border-gray-400 text-black placeholder:text-gray p-2 max-w-lg" 
               type="text" 
               placeholder="(search)" 
               value={query} 
               onChange={(e) => setQuery(e.target.value)}/>
           </div>
+          {/* search bar */}
+          
+          {/* leaderboard, table */}
           <div className="m-auto p-1 z-10">
-                <TableContainer className={styles.leaderboard_style}>
+                <TableContainer>
                   <Table stickyHeader aria-label="customized table" sx={{ color: '#FAF0F0' }}>
-                    <TableHead>
+                    {/* header */}
+                    <TableHead ref={tableHeader}>
                       <TableRow >
                         {
                           columns.map((column, idx) => ( column === "player_id" ? <></> : isMobile && column === "country" || isMobile && idx > 4 ? <></> :
-                            <StyledTableCell>
+                            <StyledTableCell align="center">
                               <div 
                                 className={styles.leaderboard_text} 
                                 onClick={() => 
@@ -352,14 +354,16 @@ export default function Leaderboard({ rows }) {
                         }
                       </TableRow>
                     </TableHead>
+                    {/* data */}
                     <TableBody>
+                      {/* each record gets these divs */}
                       {(rowsPerPage > 0
                         ? sort(filter(rows)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage):sort(filter(rows))).map((row, idx) => (
                           isMobile ? 
                             <StyledTableRow key={row.player_id}>
                               <StyledTableCell align="center">
                                 <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
-                                    <div className='cursor-pointer hover:underline'>
+                                    <div className={'cursor-pointer hover:underline'}>
                                     <Link href={"/player/" + row['player name']}>
                                       {parseInt(row.rank)}
                                     </Link>
@@ -463,15 +467,16 @@ export default function Leaderboard({ rows }) {
                         </TableRow>
                       )}
                     </TableBody>
+                    {/* footer */}
                     <TableFooter>
                       <StyledTableRow>
                           <TablePagination
-                          rowsPerPageOptions={[10, 25, 50, {label: 'All', value: -1}]}
+                          rowsPerPageOptions={[10, 25, 50, {label: 'All', value: -1, bgcolor: '#000000'}]}
                           colSpan={columns.length}
                           count={rows.length}
                           rowsPerPage={rowsPerPage}
                           page={page}
-                          sx={{bgcolor: '#A3A3C3'}}
+                          sx={{bgcolor: '#0d1d30', color: '#ffffff'}}
                           SelectProps={{
                               inputProps: {
                                   'aria-label': 'rows',
@@ -487,6 +492,7 @@ export default function Leaderboard({ rows }) {
                   </Table>
                 </TableContainer>
               </div>
+            </div>
           </main>
         </div>
   );

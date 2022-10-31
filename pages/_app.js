@@ -1,11 +1,11 @@
 import '../styles/globals.css'
 import * as React from 'react';
-import IconButton from '@mui/material/IconButton';
-import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import CssBaseline from '@mui/material/CssBaseline';
+// import IconButton from '@mui/material/IconButton';
+// import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
+// import Brightness4Icon from '@mui/icons-material/Brightness4';
+// import Brightness7Icon from '@mui/icons-material/Brightness7';
+// import useMediaQuery from '@mui/material/useMediaQuery';
+// import CssBaseline from '@mui/material/CssBaseline';
 import Navbar from '../components/Navbar'
 import TileGrid from '../components/TileGrid'
 
@@ -63,7 +63,7 @@ export default function App({ Component, pageProps }) {
       {/* <ThemeProvider theme={theme}> */}
         {/* <CssBaseline enableColorScheme/> */}
         <Navbar />
-        {/* <TileGrid /> */}
+        <TileGrid />
         <Component {...pageProps} />
       {/* </ThemeProvider> */}
     {/* </ColorModeContext.Provider> */}

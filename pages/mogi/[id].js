@@ -12,7 +12,6 @@ import mysql from 'mysql2'
 import styles from '../../styles/Home.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
-import TileGrid from '../../components/TileGrid'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -120,11 +119,12 @@ export default function Mogi({ results, pm }) {
       </Head>
 
       <main className={styles.main}>
+      <div className={styles.content_edges}>
         {/* <TileGrid /> */}
         <h1 className={styles.title}>
           mogi
         </h1>
-        <div className='max-w-2xl pt-5 z-10'>
+        <div className='max-w-2xl pt-5 z-10 m-auto'>
           <div><Image src={results[0].table_url} alt='mogi results image' width='860' height='520'></Image></div>
           <div className="m-auto p-3">
               <TableContainer component={Paper} className={styles.leaderboard_style}>
@@ -192,6 +192,7 @@ export default function Mogi({ results, pm }) {
                 </Table>
               </TableContainer>
             </div>
+        </div>
         </div>
       </main>
     </div>

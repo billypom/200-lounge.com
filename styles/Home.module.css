@@ -31,7 +31,14 @@ Tiles Background
 
 
 
-
+.content_edges {
+  z-index: 1;
+  max-width: 1200px;
+  margin: auto;
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* max-width: 900px; */
+}
 
 
 .player_page_stats {
@@ -41,6 +48,33 @@ Tiles Background
   border-radius: 1.5rem;
   border-width: 2px;
   border-style: solid;
+  background-color: #050606;
+  font-size: 1.5rem;
+}
+
+.navdropdown {
+  color: #eaeaea;
+  font-size: 2rem;
+  z-index: 11;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  border: #eaeaea solid;
+  border-width: 2px;
+  width: 20rem;
+  top: 60px;
+  right: 5px;
+  overflow: hidden;
+  background-color: #26262d;
+}
+
+
+.navbar_wrapper {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .navbar {
@@ -48,35 +82,118 @@ Tiles Background
   flex: 1;
   flex-wrap: wrap;
   background-color: rgb(26, 29, 36);
-  justify-content: center;
+  /* background-color: rgb(255, 195, 14); */
+  /* justify-content: center; */
   min-width: 100%;
   top: 0;
   background-size: 100%;
   font-size: xx-large;
-  z-index: 1;
+  z-index: 2;
   position: sticky;
+  justify-content: space-between;
 }
 
-.navitem {
-  padding-right: 1rem;
-  padding-left: 1rem;
+.navitemwrapper2 {
+  display: flex;
+  /* flex: 1; */
+  flex-wrap: wrap;
   color: white;
 }
 
-.navitem:hover,
-.navitem:focus,
-.navitem:active {
+.navitemwrapper {
+  display: flex;
+  /* flex: 1; */
+  flex-wrap: wrap;
+}
+
+/* hamburger menu */
+.navitem3 { 
+  padding-right: 1rem;
+  /* padding-left: 1rem; */
+  /* padding-top: 0.5rem; */
+  padding-bottom: -1rem;
+  color: white;
+}
+
+.navitem3:hover,
+.navitem3:focus,
+.navitem3:active {
   border-color: #eaeaea;
   color: #67e8f9;
   cursor: pointer;
 }
 
+/* normal nav items */
+.navitem {
+  padding-right: 1rem;
+  padding-left: 1rem;
+  /* padding-top: 0.5rem; */
+  color: white;
+  /* display: flex; */
+  /* flex: 1; */
+  /* flex-wrap: wrap; */
+  /* justify-content: flex-end; */
+}
+
+.navitem:hover,
+.navitem:focus {
+  border-color: #eaeaea;
+  color: #67e8f9;
+  cursor: pointer;
+}
+
+.navitem:active {
+  color:#52bbc8;
+}
+
+/* 200cc lounge title in navbar */
+.navitem2 {
+  padding-right: 1rem;
+  padding-left: 1rem;
+  padding-bottom: 0.5rem;
+  color: white;
+  font-family: 'Hey Gorgeous';
+  font-size: 20px;
+  padding-top: 0.6rem;
+  /* justify-content: flex-start; */
+  /* display: flex; */
+  /* flex: 1; */
+  /* flex-wrap: wrap; */
+}
+
+@keyframes tier_title_ani {
+  from {transform: translate(0%);}
+  to {transform: translate(100%);}
+
+}
+
 .tier_title {
+  font-family: 'Hey Gorgeous';
   margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
+  line-height: 1.35;
+  font-size: 3rem;
   font-weight: bold;
-  padding-top: 4rem;
+  padding: 2rem;
+  margin: 4rem;
+  /* border: 2px solid; */
+  border-radius: 40px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.tier_title_background {
+  padding: 2rem;
+  border: 10px hidden;
+  border-radius: 40px;
+  /* a = alpha */
+  background-color: rgba(26, 60, 102, 0.5);
+  background-image: radial-gradient(#C1E7FF 5%, transparent 11%),
+  radial-gradient(#687D8A 5%, transparent 11%);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+  background-repeat: repeat;
+  animation: tier_title_ani 4s linear infinite;
+  /* animation-timing-function: cubic-bezier(.26, .13, .24, 1.2); */
+  /* animation-fill-mode: forwards; */
 }
 
 .records_table {
@@ -106,7 +223,7 @@ Tiles Background
 }
 
 .leaderboard_style {
-  align-items: left;
+  align-items: center;
 }
 
 .leaderboard_text {
@@ -114,22 +231,17 @@ Tiles Background
   cursor: pointer;
   display: flex;
   flex: 1;
-  align-items: center;
   justify-content: center;
+  /* align-items: center; */
+  /* margin:auto; */
+  /* width: 20%; */
   font-weight: bold;
 }
 
 .container {
-  padding: 0 2rem;
-  margin: auto;
+  /* padding: 0 2rem; */
+  /* margin: auto; */
   /* position: relative; */
-}
-
-@media (max-width: 1000px) {
-  .container {
-    padding: 0 0;
-    margin: auto;
-  }
 }
 
 .main {
@@ -137,9 +249,10 @@ Tiles Background
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
+  margin: auto;
+  /* justify-content: center; */
+  /* align-items: center; */
+  color: white; /* title color (and children) */
   /* z-index: 1; */
 }
 
@@ -212,7 +325,7 @@ Tiles Background
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 400px;
 }
 
 .card {
@@ -255,8 +368,20 @@ Tiles Background
     width: 100%;
     flex-direction: column;
   }
-  .title {
-    font-size: 3.5rem;
+  .container {
+    padding: 0 2rem;
+    margin: auto;
+  }
+  
+  @keyframes navitem_ani {
+    from {transform: translate(110%);}
+    to {transform: translate(0%);}
+  }
+  .navdropdown {
+    animation-name: navitem_ani;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(.26, .13, .24, 1.2);
+    animation-fill-mode: forwards;
   }
 }
 

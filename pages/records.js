@@ -11,7 +11,6 @@ import Head from 'next/head'
 import mysql from 'mysql2'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
-import TileGrid from '../components/TileGrid'
 
 
 
@@ -145,8 +144,10 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
           records
         </h1>
 
-        <div className="flex flex-col text-center z-10">
-          <h2 className={styles.tier_title}>tier-all</h2>
+        <div className="flex flex-col text-center z-10 items-center">
+            <h2 className={styles.tier_title}>
+              {/* <div className={styles.tier_title_background}></div> */}
+              tier all</h2>
           <div className="flex flex-row flex-wrap">
             <div className={styles.records_table}>
               <h3 className="text-3xl font-bold p-2">FFA</h3>
@@ -402,7 +403,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
 
 
-          <h2 className={styles.tier_title}>tier-a</h2>
+          <h2 className={styles.tier_title}>tier a</h2>
           <div className="flex flex-row flex-wrap">
             <div className={styles.records_table}>
               <h3 className="text-3xl font-bold p-2">FFA</h3>
@@ -658,7 +659,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
 
 
-          <h2 className={styles.tier_title}>tier-b</h2>
+          <h2 className={styles.tier_title}>tier b</h2>
           <div className="flex flex-row flex-wrap">
             <div className={styles.records_table}>
               <h3 className="text-3xl font-bold p-2">FFA</h3>
@@ -920,7 +921,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
 
 
-          <h2 className={styles.tier_title}>tier-c</h2>
+          <h2 className={styles.tier_title}>tier c</h2>
           <div className="flex flex-row flex-wrap">
             <div className={styles.records_table}>
               <h3 className="text-3xl font-bold p-2">FFA</h3>
@@ -1182,7 +1183,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
           <h2 className={styles.tier_title}>squad queue</h2>
           <div className="flex flex-row flex-wrap">
-            <div className={styles.records_table}>
+            {/* <div className={styles.records_table}>
               <h3 className="text-3xl font-bold p-2">FFA</h3>
               <TableContainer component={Paper}>
                 <Table stickyHeader aria-label="customized table">
@@ -1224,7 +1225,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   </TableBody>
                 </Table>
               </TableContainer>
-            </div>
+            </div> */}
             <div className={styles.records_table}>
               <h3 className="text-3xl font-bold p-2">2v2</h3>
               <TableContainer component={Paper}>

@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow, { tableRowClasses } from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import TableFooter from '@mui/material/TableFooter';
+import TablePagination from '@mui/material/TablePagination';
+
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import TableFooter from '@mui/material/TableFooter';
-import TablePagination from '@mui/material/TablePagination';
 import IconButton from '@mui/material/IconButton';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
@@ -22,8 +23,6 @@ import Head from 'next/head'
 import mysql from 'mysql2'
 import styles from '../../styles/Home.module.css'
 import Link from 'next/link'
-import Image from 'next/image'
-import TileGrid from '../../components/TileGrid'
 
 
 
@@ -48,34 +47,34 @@ function TablePaginationActions(props) {
   };
 
   return (
-    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+    <Box sx={{ flexShrink: 0, ml: 2.5, /*backgroundColor: '#ff0000'*/ }}>
       <IconButton
         onClick={handleFirstPageButtonClick}
         disabled={page === 0}
         aria-label="first page"
       >
-        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+        {theme.direction === 'rtl' ? <LastPageIcon style={{ fill: '#ffffff' }}/> : <FirstPageIcon style={{ fill: '#ffffff' }}/>}
       </IconButton>
       <IconButton
         onClick={handleBackButtonClick}
         disabled={page === 0}
         aria-label="previous page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+        {theme.direction === 'rtl' ? <KeyboardArrowRight style={{ fill: '#ffffff' }}/> : <KeyboardArrowLeft style={{ fill: '#ffffff' }}/>}
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+        {theme.direction === 'rtl' ? <KeyboardArrowLeft style={{ fill: '#ffffff' }}/> : <KeyboardArrowRight style={{ fill: '#ffffff' }}/>}
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
-        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+        {theme.direction === 'rtl' ? <FirstPageIcon style={{ fill: '#ffffff' }}/> : <LastPageIcon style={{ fill: '#ffffff' }}/>}
       </IconButton>
     </Box>
   );
@@ -370,7 +369,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, g
 
         </div>
         <div className="m-auto p-1 z-10">
-              <TableContainer component={Paper} className={styles.leaderboard_style}>
+              <TableContainer className={styles.leaderboard_style}>
                 <Table stickyHeader aria-label="customized table">
                   <TableHead>
                     <TableRow>
@@ -443,7 +442,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, g
                           count={rows.length}
                           rowsPerPage={rowsPerPage}
                           page={page}
-                          sx={{bgcolor: '#A3A3C3'}}
+                          sx={{bgcolor: '#0d1d30', color: '#ffffff'}}
                           SelectProps={{
                               inputProps: {
                                   'aria-label': 'rows per page',
