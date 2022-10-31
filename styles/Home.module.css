@@ -135,13 +135,8 @@ Tiles Background
 .navitem {
   padding-right: 1rem;
   padding-left: 1rem;
-  /* padding-top: 0.5rem; */
   color: white;
-  /* padding-left: 6rem; */
-  /* display: flex; */
-  /* flex: 1; */
-  /* flex-wrap: wrap; */
-  /* justify-content: flex-end; */
+  transition: transform 500ms;
 }
 
 .navitem:hover,
@@ -149,6 +144,11 @@ Tiles Background
   border-color: #eaeaea;
   color: #67e8f9;
   cursor: pointer;
+  transition: transform 100ms;
+  transform:translateY(3px)
+  /* transition: cubic-bezier(0.6, -0.28, 0.735, 0.045); */
+  /* transform: translateY(5px); */
+  /* transform: scale(2, 2); */
 }
 
 .navitem:active {

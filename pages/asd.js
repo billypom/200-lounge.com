@@ -1,18 +1,6 @@
 import styles from '../styles/Home.module.css'
 import Head from 'next/head'
 import TileGrid from '../components/TileGrid'
-import { useRef, useState, useEffect } from 'react'
-
-  /* 
-  Tiles Background! ~( ^ o^)_
-  */
-  
-  // let tiles_columns = Math.floor(width / 50),
-  // tiles_rows = Math.floor(height / 50)
-  // console.log('tiles columns:', tiles_columns)
-  // console.log('tiles rows:', tiles_rows)
-
-  // function takes in index
 
 export default function asd({ rows }) {
   return (
