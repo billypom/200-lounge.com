@@ -62,11 +62,12 @@ Tiles Background
   align-items: flex-end;
   border: #eaeaea solid;
   border-width: 2px;
+  border-radius: 20px;
   width: 20rem;
   top: 60px;
   right: 5px;
   overflow: hidden;
-  background-color: #26262d;
+  background-color: rgba(8, 15, 34, 0.9)
 }
 
 
@@ -374,8 +375,10 @@ Tiles Background
   }
   
   @keyframes navburger_ani {
-    from {transform: translate(110vw);}
-    to {transform: translate(0vw);}
+    from {transform: translatey(5vh);
+    opacity: 0;}
+    to {transform: translatey(0vh);
+    opacity: 1;}
   }
   .navdropdown {
     animation-name: navburger_ani;
