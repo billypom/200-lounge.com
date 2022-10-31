@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 export default function Navbar(){
     const [width, setWidth] = useState(typeof window === 'undefined' ? 0 : window.innerWidth)
-    const [isMobile, setIsMobile] = useState(true)
+    const [isMobile, setIsMobile] = useState(false)
 
     const [open, setOpen] = useState(false)
 
@@ -16,7 +16,7 @@ export default function Navbar(){
             setIsMobile(width > 1000 ? false : true)
             if (!isMobile) {
                 // close the hamburger menu if we are no longer mobile
-                setOpen(width > 1000 ? false : false)
+                setOpen(false)
             }
         }
         handleResize()
