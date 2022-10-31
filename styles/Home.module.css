@@ -55,19 +55,20 @@ Tiles Background
 .navdropdown {
   color: #eaeaea;
   font-size: 2rem;
-  z-index: 11;
+  z-index: 21;
   position: absolute;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  border: #eaeaea solid;
-  border-width: 2px;
-  border-radius: 20px;
-  width: 20rem;
+  /* border: #eaeaea solid; */
+  /* border-width: 2px; */
+  border-radius: 40px;
+  /* width: 900; */
+  /* position: fixed; */
   top: 60px;
   right: 5px;
   overflow: hidden;
-  background-color: rgba(8, 15, 34, 0.9)
+  background-color: rgba(7, 18, 18, 0.95)
 }
 
 
@@ -82,24 +83,18 @@ Tiles Background
   display: flex;
   flex: 1;
   flex-wrap: wrap;
-  background-color: rgb(26, 29, 36);
+  background-color: rgba(7, 18, 18, 0.95);
   /* background-color: rgb(255, 195, 14); */
   /* justify-content: center; */
   min-width: 100%;
   top: 0;
-  background-size: 100%;
   font-size: xx-large;
   z-index: 2;
   position: sticky;
   justify-content: space-between;
+  align-items:center;
 }
 
-.navitemwrapper2 {
-  display: flex;
-  /* flex: 1; */
-  flex-wrap: wrap;
-  color: white;
-}
 
 .navitemwrapper {
   display: flex;
@@ -107,13 +102,25 @@ Tiles Background
   flex-wrap: wrap;
 }
 
+.navitemwrapper2 {
+  display: flex;
+  flex-wrap: wrap;
+  color: white;
+  position: relative;
+  z-index: 40;
+}
+
 /* hamburger menu */
 .navitem3 { 
   padding-right: 1rem;
   /* padding-left: 1rem; */
   /* padding-top: 0.5rem; */
-  padding-bottom: -1rem;
   color: white;
+  /* padding-top: 2rem; */
+  z-index: 35;
+  /* position: fixed; */
+  top: 0px;
+  right: 0;
 }
 
 .navitem3:hover,
@@ -130,6 +137,7 @@ Tiles Background
   padding-left: 1rem;
   /* padding-top: 0.5rem; */
   color: white;
+  /* padding-left: 6rem; */
   /* display: flex; */
   /* flex: 1; */
   /* flex-wrap: wrap; */
@@ -161,6 +169,39 @@ Tiles Background
   /* flex: 1; */
   /* flex-wrap: wrap; */
 }
+
+
+.navitemmobile {
+  padding-right: 1rem;
+  padding-left: 1rem;
+  /* padding-top: 0.5rem; */
+  color: white;
+  /* padding-left: 6rem; */
+  /* display: flex; */
+  /* flex: 1; */
+  /* flex-wrap: wrap; */
+  /* justify-content: flex-end; */
+}
+
+.navitemmobile:hover,
+.navitemmobile:focus {
+  border-color: #eaeaea;
+  color: #67e8f9;
+  cursor: pointer;
+}
+
+.navitemmobile:active {
+  color:#52bbc8;
+}
+
+
+
+
+
+
+
+
+
 
 @keyframes tier_title_ani {
   from {transform: translate(0%);}
@@ -383,6 +424,14 @@ Tiles Background
   .navdropdown {
     animation-name: navburger_ani;
     animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(.26, .13, .24, 1.2);
+    animation-fill-mode: forwards;
+  }
+
+  .navdropdown::after {
+    animation-name: navburger_ani;
+    animation-duration: 0.5s;
+    animation-direction: reverse;
     animation-timing-function: cubic-bezier(.26, .13, .24, 1.2);
     animation-fill-mode: forwards;
   }
