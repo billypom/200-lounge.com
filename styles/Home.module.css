@@ -369,6 +369,10 @@ Tiles Background
     width: 100%;
     flex-direction: column;
   }
+  .container {
+    padding: 1rem;
+    /* margin: auto; */
+  }
   
   @keyframes navburger_ani {
     from {transform: translatey(5vh);
