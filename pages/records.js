@@ -37,7 +37,6 @@ export async function getServerSideProps() {
         JOIN player_mogi pm ON p.player_id = pm.player_id 
         JOIN mogi m ON pm.mogi_id = m.mogi_id 
         JOIN tier t ON t.tier_id = m.tier_id 
-        WHERE pm.place < 5 
         group by pm.mogi_id, pm.place, pm.mmr_change, t.tier_name) as n
         where tier_format = ? order by score desc LIMIT 5`, [expected_names[i]], (error, stuff) => {
         if (error) reject(error);
