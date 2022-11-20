@@ -158,7 +158,7 @@ export async function getServerSideProps(context) {
       p.player_name as "player name", 
       p.mmr as "mmr", 
       p.peak_mmr as "peak mmr", 
-        ROUND((wintable.wins/pm.events_played)*100,2) as "win rate",
+      ROUND((wintable.wins/pm.events_played)*100,2) as "win rate",
       CONCAT(tenpm.wins, "-", tenpm.losses) as "win/loss (last 10)",
       tenpm.last_ten_change as "gain/loss (last 10)",
       pm.events_played as "events played",

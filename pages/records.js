@@ -49,6 +49,29 @@ export async function getServerSideProps() {
     // stuff["title"] = "tier-" + expected_names[i].slice(0, -1)
     results.push(stuff)
   }
+
+  // today's top score
+  // all time top score
+  // # of mogis today
+
+  
+  // select p.player_name, p.mmr from player p join player_mogi
+  // where player_mogi.score = (select max(pm.score) from player_mogi pm join mogi m on pm.mogi_id = m.mogi_id where m.create_date = CURDATE());
+
+  // select p.player_name, p.mmr from player p join player_mogi
+  // where player_mogi.score = (select max(pm.score) from player_mogi pm join mogi m on pm.mogi_id = m.mogi_id where m.create_date = '2022-11-15');
+
+
+  // select 
+  // select pm.player_id, pm.score from player_mogi pm join mogi m on pm.mogi_id = m.mogi_id where m.create_date > '2022-11-16';
+
+
+
+  // let todays_top_scorer = await new Promise((resolve, reject) => {
+  //   connection.query(
+  //     ``
+  //   )
+  // })
   connection.end();
   const all1 = results[0]
   const all2 = results[1]
