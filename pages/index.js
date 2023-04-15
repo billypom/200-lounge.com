@@ -26,13 +26,35 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid'
 import ReactCountryFlag from "react-country-flag"
 import Link from 'next/link'
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  // const { params } = context
+  // Testing seasonal data fetching via query param
+  let season = process.env.current_season
+  if (context?.query?.season) {
+    season = context.query.season
+  }
+  let season_db = process.env.db_database
+
+
+  // Check if season is a number
+  // Check if season is equal to current season, environment variable
+  // else change the database for different season stats
+
+
+
+  // let season_db = ""
+  if (season == 5) {
+    season_db = process.env.s5_db_database
+  }
+  else {
+    season_db = process.env.s6_db_database
+  }
   const connection = mysql.createConnection(
     {
       host: process.env.db_host,
       user: process.env.db_username,
       password: process.env.db_password,
-      database: process.env.db_database,
+      database: season_db,
       insecureAuth: true,
       supportBigNumbers: true,
     }
