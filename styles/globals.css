@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --g1: rgb(50, 116, 85);
-  --g2: rgb(74, 13, 115);
-  --g3: rgb(50, 116, 85);
+  --g1: rgb(56, 30, 72);
+  --g2: rgb(74, 18, 18);
+  --g3: rgb(61, 37, 88);
 }
 
 @keyframes background-pan {
