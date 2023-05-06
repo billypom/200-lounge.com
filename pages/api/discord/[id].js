@@ -33,7 +33,7 @@ export default async function handler(req, res) {
       FROM player as p 
       JOIN ranks as r ON r.rank_id = p.rank_id 
       JOIN (SELECT ten.player_id, SUM(CASE WHEN ten.mmr_change > 0 THEN 1 ELSE 0 END) as wins, SUM(CASE WHEN ten.mmr_change <= 0 THEN 1 ELSE 0 END) as losses, SUM(ten.mmr_change) as last_ten_change
-		    FROM (SELECT pm.player_id, pm.mmr_change, m.create_date FROM (SELECT mogi_id, create_date FROM mogi ORDER BY create_date DESC) as m JOIN player_mogi pm ON m.mogi_id = pm.mogi_id JOIN player ON pm.player_id = player.player_id WHERE player.player_name = ? ORDER BY m.create_date DESC LIMIT 10) as ten
+		    FROM (SELECT pm.player_id, pm.mmr_change, m.create_date FROM (SELECT mogi_id, create_date FROM mogi ORDER BY create_date DESC) as m JOIN player_mogi pm ON m.mogi_id = pm.mogi_id JOIN player ON pm.player_id = player.player_id WHERE player.player_id = ? ORDER BY m.create_date DESC LIMIT 10) as ten
 		    GROUP BY ten.player_id) as tenpm
       ON p.player_id = tenpm.player_id
       JOIN (SELECT player_id, count(*) as events_played, MAX(mmr_change) as largest_gain, MIN(mmr_change) as largest_loss FROM player_mogi GROUP BY player_id) as pm
