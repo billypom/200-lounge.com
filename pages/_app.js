@@ -7,66 +7,24 @@ import * as React from 'react';
 // import useMediaQuery from '@mui/material/useMediaQuery';
 // import CssBaseline from '@mui/material/CssBaseline';
 import Navbar from '../components/Navbar'
+import SeasonPicker from '../components/SeasonPicker'
 import TileGrid from '../components/TileGrid'
+import { useState } from 'react';
+import { ThemeContext } from '@emotion/react';
 
-// const theme = createTheme({
-//   palette: {
-//     headerbg: {
-
-//     }
-//   },
-// });
-
-
-// const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
-
-
-// function YourApp() {
-
-//   const theme = useTheme();
-//   const colorMode = React.useContext(ColorModeContext);
-//   return (
-//     <>
-//       <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
-//         {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-//       </IconButton>
-//       {/* {theme.palette.mode} mode */}
-//     </>
-//   );
-// }
+export const globalSeason = React.createContext()
 
 export default function App({ Component, pageProps }) {
-  // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
-  // const [mode, setMode] = React.useState(prefersDarkMode ? 'dark' : 'dark');
-  // const colorMode = React.useMemo(
-  //   () => ({
-  //     toggleColorMode: () => {
-  //       setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-  //     },
-  //   }),
-  //   [],
-  // );
-
-  // const theme = React.useMemo(
-  //   () =>
-  //     createTheme({
-  //       palette: {
-  //         mode,
-  //       },
-  //     }),
-  //   [mode],
-  // );
+  const [currentSeason, setCurrentSeason] = useState(5)
 
   return (<>
-    {/* <ColorModeContext.Provider value={colorMode}> */}
-      {/* <ThemeProvider theme={theme}> */}
-        {/* <CssBaseline enableColorScheme/> */}
-        <Navbar />
-        <TileGrid />
-        <Component {...pageProps} />
-      {/* </ThemeProvider> */}
-    {/* </ColorModeContext.Provider> */}
+    <ThemeContext.Provider value={currentSeason}>
+      <Navbar currentSeason={currentSeason}/>
+      <SeasonPicker currentSeason={currentSeason} setCurrentSeason={setCurrentSeason} />
+      <TileGrid />
+      <Component {...pageProps} />
+    </ThemeContext.Provider>
   </>)
 }
 

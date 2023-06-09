@@ -58,6 +58,24 @@ a {
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'ShinGoProBold';
+  src: url('../fonts/ATTFShinGoProBold.woff2') format('woff2'),
+      url('../fonts/ATTFShinGoProBold.woff') format('woff');
+  /* font-weight: normal; */
+  /* font-style: normal; */
+  /* font-display: swap; */
+}
+
+@font-face {
+  font-family: 'ShinGoProUltra';
+  src: url('../fonts/ATTFShinGoProUltra.woff2') format('woff2'),
+      url('../fonts/ATTFShinGoProUltra.woff') format('woff');
+  /* font-weight: normal; */
+  /* font-style: normal; */
+  /* font-display: swap; */
+}
+
 /* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

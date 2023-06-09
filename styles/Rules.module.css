@@ -1,0 +1,71 @@
+.container {
+  padding: 0 4rem;
+  margin: auto;
+  position: relative;
+}
+
+.main {
+    min-height: 100vh;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    /* justify-content: center; */
+    /* align-items: center; */
+    color: white;
+    /* title color (and children) */
+    /* z-index: 1; */
+}
+
+.title a {
+    color: #67e8f9;
+    text-decoration: none;
+}
+
+.title a:hover,
+.title a:focus,
+.title a:active {
+    text-decoration: underline;
+}
+
+
+.title {
+    margin: 0;
+    line-height: 1.15;
+    font-size: 4rem;
+    font-weight: bold;
+    z-index: 1;
+}
+
+.title,
+.description {
+    text-align: center;
+}
+
+
+
+
+.section {
+    font-size: 3rem;
+}
+
+.details {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+}
+
+.details a:hover,
+.details a:focus,
+.details a:active {
+    text-decoration: underline;
+}
+.details a {
+    color: #67e8f9;
+    text-decoration: none;
+}
+
+
+.details b {
+    color: #f9ae67;
+    text-decoration: none;
+}

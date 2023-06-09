@@ -1,10 +1,10 @@
 import Link from 'next/link'
-import styles from '../styles/Home.module.css'
-import {useEffect, useState } from 'react'
+import styles from '../styles/Navbar.module.css'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 
-export default function Navbar(){
+export default function Navbar(props) {
     const [width, setWidth] = useState(typeof window === 'undefined' ? 0 : window.innerWidth)
     const [isMobile, setIsMobile] = useState(false)
 
@@ -20,36 +20,38 @@ export default function Navbar(){
             }
         }
         handleResize()
-        console.log('i resized')
-        console.log('is mobile: ', isMobile)
+        // console.log('i resized')
+        // console.log('is mobile: ', isMobile)
         window.addEventListener("resize", handleResize)
         return () => window.removeEventListener("resize", handleResize)
-      },)
+    },)
+
 
 
     return (<>
-            <header className={styles.navbar}>
-                <div className={styles.navitemwrapper}>
+        {/* <header className={styles.navbar}> */}
+        <header className={styles.navbar}>
+            <div className={styles.navitemwrapper}>
                 <ul>
-                    <div className={styles.navitem2}>
-                        200cc Lounge
+                    <div className={styles.navitem}>
+                        200cc lounge
                     </div>
                 </ul>
-                </div>
-                <div className={styles.navitemwrapper2}>
-                    {isMobile ? <>
+            </div>
+            <div className={styles.navitemwrapper2}>
+                {isMobile ? <>
                     <div className={styles.navitem3}>
                         <Image src='/icons8-menu.svg' alt='navigation' width='30px' height='30px' onClick={() => setOpen(!open)} />
                     </div>
 
-                    </> : <>
+                </> : <>
 
-                    <Link href="/">
+                    <Link href={props.currentSeason == 6 ? "/" : "/s5"}>
                         <ul className={styles.navitem}>
                             leaderboard
                         </ul>
                     </Link>
-                    <Link href="/records">
+                    <Link href={props.currentSeason == 6 ? "/records" : "/s5/records"}>
                         <ul className={styles.navitem}>
                             records
                         </ul>
@@ -59,14 +61,14 @@ export default function Navbar(){
                             discord
                         </ul>
                     </a>
-                    <a href="https://www.mariokartcentral.com/forums/index.php?threads/s4-mk8dx-200cc-lounge-rules-updated-may-1-2022.7129/">
+                    <Link href='/rules'>
                         <ul className={styles.navitem}>
                             rules
                         </ul>
-                    </a></>}
-                </div>
-            </header>
-            {open ? 
+                    </Link></>}
+            </div>
+        </header>
+        {open ?
             <div className={styles.navdropdown}>
                 <Link href="/">
                     <ul className={styles.navitemmobile} onClick={() => setOpen(!open)}>
@@ -83,14 +85,14 @@ export default function Navbar(){
                         discord
                     </ul>
                 </a>
-                <a href="https://www.mariokartcentral.com/forums/index.php?threads/s4-mk8dx-200cc-lounge-rules-updated-may-1-2022.7129/">
+                <Link href='/rules'>
                     <ul className={styles.navitemmobile} onClick={() => setOpen(!open)}>
                         rules
                     </ul>
-                </a>
-            </div> 
+                </Link>
+            </div>
             : <></>}
-        </>
-            
+    </>
+
     )
 }

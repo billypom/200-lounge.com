@@ -1,0 +1,235 @@
+.navbar_wrapper {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.navdropdown {
+    color: #eaeaea;
+    font-size: 2rem;
+    z-index: 21;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* border: #eaeaea solid; */
+    /* border-width: 2px; */
+    border-radius: 40px;
+    /* width: 900; */
+    /* position: fixed; */
+    top: 60px;
+    right: 5px;
+    overflow: hidden;
+    background-color: rgba(7, 18, 18, 0.95)
+}
+
+.navdropdown2 {
+    color: #eaeaea;
+    font-size: 2rem;
+    z-index: 21;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* border: #eaeaea solid; */
+    /* border-width: 2px; */
+    border-radius: 40px;
+    /* width: 900; */
+    /* position: fixed; */
+    top: 120px;
+    right: 5px;
+    overflow: hidden;
+    background-color: rgba(7, 18, 18, 0.95)
+}
+
+
+
+
+.navbar {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    background-color: rgba(7, 18, 18, 0.95);
+    /* background-color: rgb(255, 195, 14); */
+    /* justify-content: center; */
+    min-width: 100%;
+    top: 0;
+    font-size: xx-large;
+    z-index: 2;
+    position: sticky;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.navitemwrapper {
+    display: flex;
+    /* flex: 1; */
+    flex-wrap: wrap;
+}
+
+.navitemwrapper2 {
+    display: flex;
+    flex-wrap: wrap;
+    color: white;
+    position: relative;
+    z-index: 40;
+}
+
+
+
+
+
+
+
+
+/* hamburger menu */
+.navitem3 {
+    padding-right: 1rem;
+    /* padding-left: 1rem; */
+    /* padding-top: 0.5rem; */
+    color: white;
+    /* padding-top: 2rem; */
+    z-index: 35;
+    /* position: fixed; */
+    top: 0px;
+    right: 0;
+    font-family: 'ShinGoProBold';
+}
+
+.navitem3:hover,
+.navitem3:focus,
+.navitem3:active {
+    border-color: #eaeaea;
+    color: #67e8f9;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+/* normal nav items */
+.navitem {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    color: white;
+    transition: transform 500ms;
+    /* font-family: 'ShinGoProBold'; */
+    /* font-size: 1.5rem; */
+}
+
+.navitem:hover,
+.navitem:focus {
+    border-color: #eaeaea;
+    color: #67e8f9;
+    cursor: pointer;
+    transition: transform 100ms;
+    transform: translateY(3px)
+        /* transition: cubic-bezier(0.6, -0.28, 0.735, 0.045); */
+        /* transform: translateY(5px); */
+        /* transform: scale(2, 2); */
+}
+
+.navitem:active {
+    color: #52bbc8;
+}
+
+
+
+
+
+
+
+
+
+
+
+.navitemactive {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    color: #67e8f9;
+    transition: transform 500ms;
+    /* font-family: 'ShinGoProBold'; */
+    /* font-size: 1.5rem; */
+}
+
+.navitemactive:hover,
+.navitemactive:focus {
+    border-color: #eaeaea;
+    color: #67e8f9;
+    cursor: pointer;
+    transition: transform 100ms;
+    transform: translateY(3px)
+        /* transition: cubic-bezier(0.6, -0.28, 0.735, 0.045); */
+        /* transform: translateY(5px); */
+        /* transform: scale(2, 2); */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 200cc lounge title in navbar */
+.navitem2 {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-bottom: 0.5rem;
+    color: white;
+    font-family: 'Hey Gorgeous';
+    font-size: 20px;
+    padding-top: 0.6rem;
+    /* justify-content: flex-start; */
+    /* display: flex; */
+    /* flex: 1; */
+    /* flex-wrap: wrap; */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.navitemmobile {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    /* padding-top: 0.5rem; */
+    color: white;
+    /* padding-left: 6rem; */
+    /* display: flex; */
+    /* flex: 1; */
+    /* flex-wrap: wrap; */
+    /* justify-content: flex-end; */
+}
+
+.navitemmobile:hover,
+.navitemmobile:focus {
+    border-color: #eaeaea;
+    color: #67e8f9;
+    cursor: pointer;
+}
+
+.navitemmobile:active {
+    color: #52bbc8;
+}

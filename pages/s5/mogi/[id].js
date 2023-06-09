@@ -9,7 +9,7 @@ import TableRow, { tableRowClasses } from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Head from 'next/head'
 import mysql from 'mysql2'
-import styles from '../../styles/Home.module.css'
+import styles from '../../../styles/Home.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -56,7 +56,7 @@ export async function getServerSideProps(context) {
       host: process.env.db_host,
       user: process.env.db_username,
       password: process.env.db_password,
-      database: process.env.db_database,
+      database: process.env.s5_db_database,
       insecureAuth: true,
       supportBigNumbers: true,
     }

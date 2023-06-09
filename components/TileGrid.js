@@ -46,7 +46,7 @@ export default function TileGrid() {
     }
     setIsSSR(false)
     handleResize()
-    console.log('i resized')
+    // console.log('i resized')
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
   }, [tiles_columns, tiles_rows]) 
