@@ -331,11 +331,11 @@ export default function Rules() {
                     </div>
 
                     <div className={styles.details}>
-                    If 3 or more players from at least 2 different teams disconnect, the race will not count and the room must be reopened.​
+                    If 3 or more players from at least 2 different teams disconnect, the race will not count and the room must be reopened.​ The affected players must provide video evidence of their disconnects.
                     </div>
 
                     <div className={styles.details}>
-                    If a race does not finish due to lag, the race will not be counted and the room will be reopened.​
+                    If a race does not finish due to lag, the race will not be counted and the room will be reopened.​ The host should provide video evidence of the disconnect.
                     </div>
 
                     <div className={styles.details}>
