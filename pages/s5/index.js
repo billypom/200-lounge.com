@@ -403,7 +403,7 @@ export default function Leaderboard({ rows }) {
                           <StyledTableCell align="center">
                             <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                               <div className={'cursor-pointer hover:underline'}>
-                                <Link href={"/player/" + row['player name']}>
+                                <Link href={"/s5/player/" + row['player name']}>
                                   {parseInt(row.rank)}
                                 </Link>
                               </div>
@@ -417,7 +417,7 @@ export default function Leaderboard({ rows }) {
                           <StyledTableCell align="center">
                             <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                               <div className='cursor-pointer hover:underline'>
-                                <Link href={"/player/" + row['player name']}>
+                                <Link href={"/s5/player/" + row['player name']}>
                                   {row['player name']}
                                 </Link>
                               </div>
@@ -440,7 +440,7 @@ export default function Leaderboard({ rows }) {
                           <StyledTableCell align="center">
                             <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                               <div className='cursor-pointer hover:underline'>
-                                <Link href={"/player/" + row['player name']}>
+                                <Link href={"/s5/player/" + row['player name']}>
                                   {parseInt(row.rank)}
                                 </Link>
                               </div>
@@ -454,7 +454,7 @@ export default function Leaderboard({ rows }) {
                           <StyledTableCell align="center">
                             <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                               <div className='cursor-pointer hover:underline'>
-                                <Link href={"/player/" + row['player name']}>
+                                <Link href={"/s5/player/" + row['player name']}>
                                   {row['player name']}
                                 </Link>
                               </div>

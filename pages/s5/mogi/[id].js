@@ -156,7 +156,7 @@ export default function Mogi({ results, pm }) {
                         <StyledTableCell align="center">
                           <div className={p.prev_mmr >= 11000 ? 'text-red-800' : p.prev_mmr >= 9000 ? 'text-violet-700' : p.prev_mmr >= 7500 ? 'text-cyan-200' : p.prev_mmr >= 6000 ? 'text-cyan-600' : p.prev_mmr >= 4500 ? 'text-yellow-500' : p.prev_mmr >= 3000 ? 'text-gray-400' : p.prev_mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                             <div className='cursor-pointer hover:underline'>
-                              <Link href={"/player/" + p.player_name}>
+                              <Link href={"/s5/player/" + p.player_name}>
                                 {p.player_name}
                               </Link>
                             </div>

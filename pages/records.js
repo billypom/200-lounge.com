@@ -12,8 +12,6 @@ import mysql from 'mysql2'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 
-
-
 export async function getServerSideProps() {
   const connection = mysql.createConnection(
     {
@@ -27,7 +25,7 @@ export async function getServerSideProps() {
   )
   connection.connect();
   const results = []
-  const expected_names = ["all1", "all2", "all3", "all4", "all6", "a1", "a2", "a3", "a4", "a6", "b1", "b2", "b3", "b4", "b6", "c1", "c2", "c3", "c4", "c6", "sq2", "sq3", "sq4", "sq6"]
+  const expected_names = ["all1", "all2", "all3", "all4", "a1", "a2", "a3", "a4", "b1", "b2", "b3", "b4", "c1", "c2", "c3", "c4", "sq2", "sq3", "sq4", "sq6"]
   for (var i = 0; i < expected_names.length; i++) {
     // Band-aid fix for players in FFA who happen to have the same score & MMR change
     // FFA formats
@@ -102,31 +100,31 @@ export async function getServerSideProps() {
   const all2 = results[1]
   const all3 = results[2]
   const all4 = results[3]
-  const all6 = results[4]
-  const a1 = results[5]
-  const a2 = results[6]
-  const a3 = results[7]
-  const a4 = results[8]
-  const a6 = results[9]
-  const b1 = results[10]
-  const b2 = results[11]
-  const b3 = results[12]
-  const b4 = results[13]
-  const b6 = results[14]
-  const c1 = results[15]
-  const c2 = results[16]
-  const c3 = results[17]
-  const c4 = results[18]
-  const c6 = results[19]
-  const sq2 = results[20]
-  const sq3 = results[21]
-  const sq4 = results[22]
-  const sq6 = results[23]
+
+  const a1 = results[4]
+  const a2 = results[5]
+  const a3 = results[6]
+  const a4 = results[7]
+  
+  const b1 = results[8]
+  const b2 = results[9]
+  const b3 = results[10]
+  const b4 = results[11]
+  
+  const c1 = results[12]
+  const c2 = results[13]
+  const c3 = results[14]
+  const c4 = results[15]
+  
+  const sq2 = results[16]
+  const sq3 = results[17]
+  const sq4 = results[18]
+  const sq6 = results[19]
 
 
   // console.log(results)
   return {
-    props: { all1, all2, all3, all4, all6, a1, a2, a3, a4, a6, b1, b2, b3, b4, b6, c1, c2, c3, c4, c6, sq2, sq3, sq4, sq6 }
+    props: { all1, all2, all3, all4,a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, sq2, sq3, sq4, sq6 }
   }
 }
 
@@ -176,7 +174,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 
-export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, a4, a6, b1, b2, b3, b4, b6, c1, c2, c3, c4, c6, sq2, sq3, sq4, sq6 }) {
+export default function Leaderboard({ all1, all2, all3, all4, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, sq2, sq3, sq4, sq6 }) {
   // console.log('hello')
   return (
     <div className={styles.container}>
@@ -383,53 +381,6 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                         </StyledTableCell>
                       </StyledTableRow>
 
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </div>
-            <div className={styles.records_table}>
-              <h3 className="text-3xl font-bold p-2">6v6</h3>
-              <TableContainer component={Paper}>
-                <Table stickyHeader aria-label="customized table">
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
-                          🏆
-                        </div>
-                      </StyledTableCell>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
-                          players
-                        </div>
-                      </StyledTableCell>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
-                          🏁
-                        </div>
-                      </StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {all6.map((row, idx) => (
-                      <StyledTableRow key={row.mogi_id}>
-                        <StyledTableCell align="center">
-                          <div className="text-4xl">
-                            {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
-                          </div>
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                          {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
-                          ))}
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
-                        </StyledTableCell>
-                      </StyledTableRow>
                     ))}
                   </TableBody>
                 </Table>
@@ -644,53 +595,6 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                 </Table>
               </TableContainer>
             </div>
-            <div className={styles.records_table}>
-              <h3 className="text-3xl font-bold p-2">6v6</h3>
-              <TableContainer component={Paper}>
-                <Table stickyHeader aria-label="customized table">
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
-                          🏆
-                        </div>
-                      </StyledTableCell>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
-                          players
-                        </div>
-                      </StyledTableCell>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
-                          🏁
-                        </div>
-                      </StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {a6.map((row, idx) => (
-                      <StyledTableRow key={row.mogi_id}>
-                        <StyledTableCell align="center">
-                          <div className="text-4xl">
-                            {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
-                          </div>
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                          {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
-                          ))}
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </div>
           </div>
 
 
@@ -895,53 +799,6 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                         </StyledTableCell>
                       </StyledTableRow>
 
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </div>
-            <div className={styles.records_table}>
-              <h3 className="text-3xl font-bold p-2">6v6</h3>
-              <TableContainer component={Paper}>
-                <Table stickyHeader aria-label="customized table">
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
-                          🏆
-                        </div>
-                      </StyledTableCell>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
-                          players
-                        </div>
-                      </StyledTableCell>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
-                          🏁
-                        </div>
-                      </StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {b6.map((row, idx) => (
-                      <StyledTableRow key={row.mogi_id}>
-                        <StyledTableCell align="center">
-                          <div className="text-4xl">
-                            {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
-                          </div>
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                          {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
-                          ))}
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
-                        </StyledTableCell>
-                      </StyledTableRow>
                     ))}
                   </TableBody>
                 </Table>
@@ -1162,53 +1019,6 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                 </Table>
               </TableContainer>
             </div>
-            <div className={styles.records_table}>
-              <h3 className="text-3xl font-bold p-2">6v6</h3>
-              <TableContainer component={Paper}>
-                <Table stickyHeader aria-label="customized table">
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
-                          🏆
-                        </div>
-                      </StyledTableCell>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
-                          players
-                        </div>
-                      </StyledTableCell>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
-                          🏁
-                        </div>
-                      </StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {c6.map((row, idx) => (
-                      <StyledTableRow key={row.mogi_id}>
-                        <StyledTableCell align="center">
-                          <div className="text-4xl">
-                            {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : idx === 3 ? "4th" : "5th"}
-                          </div>
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                          {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
-                          ))}
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id }>{row.score}</Link></div>
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </div>
           </div>
 
 
@@ -1230,49 +1040,6 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
           <h2 className={styles.tier_title}>squad queue</h2>
           <div className="flex flex-row flex-wrap">
-            {/* <div className={styles.records_table}>
-              <h3 className="text-3xl font-bold p-2">FFA</h3>
-              <TableContainer component={Paper}>
-                <Table stickyHeader aria-label="customized table">
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
-                          🏆
-                        </div>
-                      </StyledTableCell>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
-                          players
-                        </div>
-                      </StyledTableCell>
-                      <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
-                          🏁
-                        </div>
-                      </StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {sq2.map((row, idx) => (
-                      <StyledTableRow key={row.mogi_id}>
-                        <StyledTableCell align="center">
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                          
-                        </StyledTableCell>
-                      </StyledTableRow>
-
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </div> */}
             <div className={styles.records_table}>
               <h3 className="text-3xl font-bold p-2">2v2</h3>
               <TableContainer component={Paper}>

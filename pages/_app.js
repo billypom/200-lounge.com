@@ -12,19 +12,19 @@ import TileGrid from '../components/TileGrid'
 import { useState } from 'react';
 import { ThemeContext } from '@emotion/react';
 
-export const globalSeason = React.createContext()
+// export const globalSeason = React.createContext()
 
 export default function App({ Component, pageProps }) {
 
-  const [currentSeason, setCurrentSeason] = useState(5)
+  const [currentSeason, setCurrentSeason] = useState(6)
 
   return (<>
-    <ThemeContext.Provider value={currentSeason}>
+    {/* <ThemeContext.Provider value={currentSeason}> */}
       <Navbar currentSeason={currentSeason}/>
       <SeasonPicker currentSeason={currentSeason} setCurrentSeason={setCurrentSeason} />
       <TileGrid />
       <Component {...pageProps} />
-    </ThemeContext.Provider>
+    {/* </ThemeContext.Provider> */}
   </>)
 }
 

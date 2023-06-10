@@ -53,7 +53,8 @@
 .list {
     text-align: left;
     max-width: 36rem;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(8, 8, 8, 0.7);
+    font-size: 1.05rem;
 }
 
 
@@ -72,9 +73,10 @@
 
 
 .details {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(8, 8, 8, 0.6);
     padding: 1rem;
     max-width: 64rem;
+    font-size: 1.1rem;
 }
 
 .details a:hover,

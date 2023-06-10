@@ -394,12 +394,12 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, g
 
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>largest gain</h2>
-            <div className='cursor-pointer hover:underline text-cyan-300'><Link href={"/mogi/" + lg[0].mogi_id}>{results[0]["largest gain"]}</Link></div>
+            <div className='cursor-pointer hover:underline text-cyan-300'><Link href={"/s5/mogi/" + lg[0].mogi_id}>{results[0]["largest gain"]}</Link></div>
           </div>
 
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>largest loss</h2>
-            <div className='cursor-pointer hover:underline text-cyan-300'><Link href={"/mogi/" + ll[0].mogi_id}>{results[0]["largest loss"]}</Link></div>
+            <div className='cursor-pointer hover:underline text-cyan-300'><Link href={"/s5/mogi/" + ll[0].mogi_id}>{results[0]["largest loss"]}</Link></div>
           </div>
 
           <div className={styles.player_page_stats}>
@@ -442,7 +442,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, g
                       <StyledTableRow key={row.mogi_id}>
 
                         <StyledTableCell align="center">
-                          <Link href={"/mogi/" + row.mogi_id}>
+                          <Link href={"/s5/mogi/" + row.mogi_id}>
                             <div className='cursor-pointer hover:underline text-cyan-300'>
                               {row.title}
                             </div>

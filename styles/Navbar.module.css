@@ -155,6 +155,8 @@
     padding-left: 1rem;
     color: #67e8f9;
     transition: transform 500ms;
+    pointer-events: none; /* when a season is chosen, disable ability to click button again
+    /* or else we navigate to /s5/s5/s5/s5/s5 */
     /* font-family: 'ShinGoProBold'; */
     /* font-size: 1.5rem; */
 }
@@ -163,7 +165,8 @@
 .navitemactive:focus {
     border-color: #eaeaea;
     color: #67e8f9;
-    cursor: pointer;
+    /* cursor: pointer; */
+    pointer-events: none;
     transition: transform 100ms;
     transform: translateY(3px)
         /* transition: cubic-bezier(0.6, -0.28, 0.735, 0.045); */

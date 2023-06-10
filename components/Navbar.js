@@ -46,12 +46,12 @@ export default function Navbar(props) {
 
                 </> : <>
 
-                    <Link href={props.currentSeason == 6 ? "/" : "/s5"}>
+                    <Link href={props.currentSeason == 6 ? "/" : `/s${props.currentSeason}`}>
                         <ul className={styles.navitem}>
                             leaderboard
                         </ul>
                     </Link>
-                    <Link href={props.currentSeason == 6 ? "/records" : "/s5/records"}>
+                    <Link href={props.currentSeason == 6 ? "/records" : `/s${props.currentSeason}/records`}>
                         <ul className={styles.navitem}>
                             records
                         </ul>

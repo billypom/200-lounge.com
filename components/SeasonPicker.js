@@ -10,14 +10,35 @@ export default function SeasonPicker(props) {
     const [isMobile, setIsMobile] = useState(false)
     const [open, setOpen] = useState(false)
 
-    
+    //  Get current path, season agnostic
     const router = useRouter()
-    let currentPageName = router.pathname.split("/")
-    if (currentPageName.length == 0) {
-        currentPageName = ''
-    } else {
-        currentPageName = currentPageName[currentPageName.length - 1]
+    let routePath = router.asPath.split('/')
+    let currentPageName = ''
+    console.log(routePath)
+
+    for (var i = 0; i < routePath.length; i++) {
+        if (routePath[i] == '') {
+            console.log(`${i} | i was blank`)
+            continue
+            
+        } else if (routePath[i].length == 2){
+            console.log(`${i} | i was 2`)
+            continue
+        } else {
+            currentPageName += `/${routePath[i]}`
+        }
     }
+    let seasonPickerIgnoredList = ['', '/rules']
+    if (seasonPickerIgnoredList.includes(currentPageName)) {
+        currentPageName = '/'
+    }
+    // if (currentPageName == '') {
+    //     currentPageName = '/'
+    // }
+    // if (currentPageName == '/rules') {
+    //     currentPageName = '/'
+    // }
+    // console.log(currentPageName)
 
     useEffect(() => {
         function handleResize() {
@@ -47,7 +68,7 @@ export default function SeasonPicker(props) {
                     </div>
 
                 </> : <>
-                    <Link href={`/s5/${currentPageName}`}>
+                    <Link href={`/s5${currentPageName}`}>
                         <button
                             className={props.currentSeason == 5 ? styles.navitemactive : styles.navitem}
                             onClick={() => props.setCurrentSeason(5)}
@@ -56,7 +77,7 @@ export default function SeasonPicker(props) {
                         </button>
                     </Link>
                     {/* <Link href={'/' + currentPageName}> */}
-                    <Link href={`/${currentPageName}`}>
+                    <Link href={`${currentPageName}`}>
                         <button
                             className={props.currentSeason == 6 ? styles.navitemactive : styles.navitem}
                             onClick={() => props.setCurrentSeason(6)}
@@ -69,7 +90,7 @@ export default function SeasonPicker(props) {
         </header>
         {open ?
             <div className={styles.navdropdown2}>
-                <Link href={`/s5/${currentPageName}`}>
+                <Link href={`/s5${currentPageName}`}>
                         <button
                             className={props.currentSeason == 5 ? styles.navitemactive : styles.navitem}
                             onClick={() => props.setCurrentSeason(5)}
@@ -78,7 +99,7 @@ export default function SeasonPicker(props) {
                         </button>
                     </Link>
                     {/* <Link href={'/' + currentPageName}> */}
-                    <Link href={`/${currentPageName}`}>
+                    <Link href={`${currentPageName}`}>
                         <button
                             className={props.currentSeason == 6 ? styles.navitemactive : styles.navitem}
                             onClick={() => props.setCurrentSeason(6)}
