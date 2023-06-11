@@ -54,11 +54,11 @@ export async function getServerSideProps() {
         SELECT ROUND(AVG(score),2) as pa 
         FROM (
           -- Get all scores where we are NOT the current player, and we are on the same team (same place)
-          SELECT pm.player_id, pm.mogi_id, pm.place, pm.score 
+          SELECT pm.player_id, pm.mogi_id, pm.place, pm.score, pm.mmr_change 
           FROM player_mogi as pm 
           INNER JOIN (
             -- Get every mogi and placement that the current player participated in
-            SELECT pm2.mogi_id, pm2.place 
+            SELECT pm2.mogi_id, pm2.place, pm2.mmr_change 
             FROM player_mogi as pm2 
             JOIN mogi as m on pm2.mogi_id = m.mogi_id 
             WHERE pm2.player_id = p.player_id
@@ -66,6 +66,7 @@ export async function getServerSideProps() {
           as pm2 
           ON pm2.mogi_id = pm.mogi_id 
           AND pm2.place = pm.place 
+          AND pm2.mmr_change = pm.mmr_change
           WHERE player_id <> p.player_id) 
         as a
       ) "partner avg",
