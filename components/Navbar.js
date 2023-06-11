@@ -33,9 +33,11 @@ export default function Navbar(props) {
         <header className={styles.navbar}>
             <div className={styles.navitemwrapper}>
                 <ul>
-                    <div className={styles.navitem}>
-                        200cc lounge
-                    </div>
+                    <Link href={props.currentSeason == 6 ? "/" : `/s${props.currentSeason}`}>
+                        <div className={styles.navitem}>
+                            200cc lounge
+                        </div>
+                    </Link>
                 </ul>
             </div>
             <div className={styles.navitemwrapper2}>
