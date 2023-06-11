@@ -126,7 +126,7 @@ export async function getServerSideProps(context) {
   // partner avg2
   let pa = await new Promise((resolve, reject) => {
     connection.query(
-      `SELECT ROUND(AVG(score),2) as pa FROM (SELECT pm.player_id, pm.mogi_id, pm.place, pm.score FROM player_mogi as pm INNER JOIN (SELECT pm.mogi_id, pm.place FROM player_mogi as pm JOIN mogi as m on pm.mogi_id = m.mogi_id WHERE pm.player_id = ? ORDER BY m.create_date DESC) as pm2 ON pm2.mogi_id = pm.mogi_id AND pm2.place = pm.place WHERE player_id <> ?) as a;`, [results[0].player_id, results[0].player_id], (error, pa) => {
+      `SELECT ROUND(AVG(score),2) as pa FROM (SELECT pm.player_id, pm.mogi_id, pm.place, pm.score, pm.mmr_change FROM player_mogi as pm INNER JOIN (SELECT pm.mogi_id, pm.place, pm.mmr_change FROM player_mogi as pm JOIN mogi as m on pm.mogi_id = m.mogi_id WHERE pm.player_id = ? ORDER BY m.create_date DESC) as pm2 ON pm2.mogi_id = pm.mogi_id AND pm2.place = pm.place AND pm.mmr_change = pm2.mmr_change WHERE player_id <> ?) as a;`, [results[0].player_id, results[0].player_id], (error, pa) => {
         if (error) reject(error);
         else resolve(pa);
       }
