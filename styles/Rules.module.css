@@ -60,6 +60,9 @@
     border-radius: 10%;
     margin: 1rem;
     padding: 1rem;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
