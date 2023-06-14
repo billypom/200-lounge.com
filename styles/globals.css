@@ -10,7 +10,7 @@
   /* --linkColor: #0000EE; */
   --linkColor: #3b82f6;
   --navbarLinkColor: #3b82f6;
-  --navbarBgColor: rgba(86, 96, 96, 0.95);
+  --navbarBgColor: rgba(86, 86, 96, 0.95);
   --textColor: rgba(7, 18, 18, 1);
 }
 
@@ -21,7 +21,7 @@
     --g3: rgb(22, 29, 82);
     /* --linkColor: #67e8f9; */
     /* --navbarLinkColor: #3b82f6; */
-    --navbarBgColor: rgba(7, 18, 18, 0.95);
+    --navbarBgColor: rgba(15, 15, 17, 0.96);
     --textColor: rgba(247, 247, 247, 1);
   }
 }
