@@ -1,4 +1,4 @@
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Tiles.module.css'
 import { useRef, useState, useEffect } from 'react'
 
   /* 
@@ -26,7 +26,7 @@ export default function TileGrid() {
   // how many squares
   const [quantity, setQuantity] = useState(typeof window === 'undefined' ? 0 : tiles_columns * tiles_columns)
   // squares are divs :)
-  const [divs, setDivs] = useState(typeof window === 'undefined' ? Array.from({length: 1}, (_, index) => {return <div key={index} className={styles.tile}></div>}) : Array.from({length: quantity}, (_, index) => {return <div key={index} className={styles.tile}></div>}))
+  const [divs, setDivs] = useState(typeof window === 'undefined' ? Array.from({length: 1}, (_, index) => {return <div key={index} className={`${styles.tile} dark:before:bg-zinc-900 before:bg-slate-100`}></div>}) : Array.from({length: quantity}, (_, index) => {return <div key={index} className={`${styles.tile} dark:before:bg-zinc-900 before:bg-slate-100`}></div>}))
   // console.log(divs)
 
   // Handle viewport resize
@@ -39,7 +39,7 @@ export default function TileGrid() {
           setTiles_Columns(Math.floor(window.innerWidth/50))
           setTiles_Rows(Math.floor(window.innerHeight/50))
           setQuantity(Math.floor(window.innerWidth/50) * Math.floor(window.innerHeight/50))
-          setDivs(Array.from({length: (Math.floor(window.innerWidth/50) * Math.floor(window.innerHeight/50))}, (_, index) => {return <div key={index} className={styles.tile}></div>}))
+          setDivs(Array.from({length: (Math.floor(window.innerWidth/50) * Math.floor(window.innerHeight/50))}, (_, index) => {return <div key={index} className={`${styles.tile} dark:before:bg-zinc-900 before:bg-slate-100`}></div>}))
           tiles.current.style.setProperty('--columns', tiles_columns)
           tiles.current.style.setProperty('--rows', tiles_rows)
       // }

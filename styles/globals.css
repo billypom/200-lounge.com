@@ -3,9 +3,27 @@
 @tailwind utilities;
 
 :root {
-  --g1: rgb(56, 30, 72);
-  --g2: rgb(74, 18, 18);
-  --g3: rgb(61, 37, 88);
+  --g1: rgb(137, 218, 211);
+  --g2: rgb(216, 213, 162);
+  --g3: rgb(137, 218, 211);
+  /* --linkColor: #52bbc8; */
+  /* --linkColor: #0000EE; */
+  --linkColor: #3b82f6;
+  --navbarLinkColor: #3b82f6;
+  --navbarBgColor: rgba(86, 96, 96, 0.95);
+  --textColor: rgba(7, 18, 18, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --g1: rgb(22, 29, 82);
+    --g2: rgb(38, 34, 34);
+    --g3: rgb(22, 29, 82);
+    /* --linkColor: #67e8f9; */
+    /* --navbarLinkColor: #3b82f6; */
+    --navbarBgColor: rgba(7, 18, 18, 0.95);
+    --textColor: rgba(247, 247, 247, 1);
+  }
 }
 
 @keyframes background-pan {

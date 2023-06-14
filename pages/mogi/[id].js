@@ -21,19 +21,19 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 18,
     fontWeight: 750,
-    // color: theme.palette.text.primary
-    color: '#e8e6fc',
+    color: theme.palette.text.primary
+    // color: '#e8e6fc',
   },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(even)': {
-    // backgroundColor: theme.palette.background.paper
-    backgroundColor: '#16151a',
+    backgroundColor: theme.palette.action.hover
+    // backgroundColor: '#16151a',
   },
   '&:nth-of-type(odd)': {
-    // backgroundColor: theme.palette.text.divider
-    backgroundColor: '#050505',
+    backgroundColor: theme.palette.action.disabledBackground
+    // backgroundColor: '#050505',
   },
   // hide last border
   '&:last-child td, &:last-child th': {
@@ -154,7 +154,7 @@ export default function Mogi({ results, pm }) {
                       <StyledTableRow key={p.player_id}>
 
                         <StyledTableCell align="center">
-                          <div className={p.prev_mmr >= 11000 ? 'text-red-800' : p.prev_mmr >= 9000 ? 'text-violet-700' : p.prev_mmr >= 7500 ? 'text-cyan-200' : p.prev_mmr >= 6000 ? 'text-cyan-600' : p.prev_mmr >= 4500 ? 'text-yellow-500' : p.prev_mmr >= 3000 ? 'text-gray-400' : p.prev_mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                          <div className={p.prev_mmr >= 11000 ? 'text-red-800' : p.prev_mmr >= 9000 ? 'text-violet-700' : p.prev_mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : p.prev_mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : p.prev_mmr >= 4500 ? 'text-yellow-500' : p.prev_mmr >= 3000 ? 'text-gray-400' : p.prev_mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                             <div className='cursor-pointer hover:underline'>
                               <Link href={"/player/" + p.player_name}>
                                 {p.player_name}
@@ -164,7 +164,7 @@ export default function Mogi({ results, pm }) {
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className={p.prev_mmr >= 11000 ? 'text-red-800' : p.prev_mmr >= 9000 ? 'text-violet-700' : p.prev_mmr >= 7500 ? 'text-cyan-200' : p.prev_mmr >= 6000 ? 'text-cyan-600' : p.prev_mmr >= 4500 ? 'text-yellow-500' : p.prev_mmr >= 3000 ? 'text-gray-400' : p.prev_mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                          <div className={p.prev_mmr >= 11000 ? 'text-red-800' : p.prev_mmr >= 9000 ? 'text-violet-700' : p.prev_mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : p.prev_mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : p.prev_mmr >= 4500 ? 'text-yellow-500' : p.prev_mmr >= 3000 ? 'text-gray-400' : p.prev_mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                           {p.prev_mmr}
                           </div>
                         </StyledTableCell>
@@ -176,7 +176,7 @@ export default function Mogi({ results, pm }) {
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className={p.new_mmr >= 11000 ? 'text-red-800' : p.new_mmr >= 9000 ? 'text-violet-700' : p.new_mmr >= 7500 ? 'text-cyan-200' : p.new_mmr >= 6000 ? 'text-cyan-600' : p.new_mmr >= 4500 ? 'text-yellow-500' : p.new_mmr >= 3000 ? 'text-gray-400' : p.new_mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                          <div className={p.new_mmr >= 11000 ? 'text-red-800' : p.new_mmr >= 9000 ? 'text-violet-700' : p.new_mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : p.new_mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : p.new_mmr >= 4500 ? 'text-yellow-500' : p.new_mmr >= 3000 ? 'text-gray-400' : p.new_mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                           {p.new_mmr}
                           </div>
                         </StyledTableCell>

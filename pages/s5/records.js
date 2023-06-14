@@ -142,19 +142,19 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 18,
     fontWeight: 750,
-    // color: theme.palette.text.primary
-    color: '#e8e6fc',
+    color: theme.palette.text.primary
+    // color: '#e8e6fc',
   },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(even)': {
-    // backgroundColor: theme.palette.background.paper
-    backgroundColor: '#16151a',
+    backgroundColor: theme.palette.action.hover
+    // backgroundColor: '#16151a',
   },
   '&:nth-of-type(odd)': {
-    // backgroundColor: theme.palette.text.divider
-    backgroundColor: '#050505',
+    backgroundColor: theme.palette.action.disabledBackground
+    // backgroundColor: '#050505',
   },
   // hide last border
   '&:last-child td, &:last-child th': {
@@ -192,7 +192,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
         </h1>
 
         <div className="flex flex-col text-center z-10 items-center">
-            <h2 className={styles.tier_title}>
+            <h2 className={`${`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`} dark:bg-zinc-800/75 bg-neutral-200/75`}>
               {/* <div className={styles.tier_title_background}></div> */}
               tier all</h2>
           <div className="flex flex-row flex-wrap">
@@ -203,17 +203,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -230,12 +230,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }><div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div></Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }><div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div></Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -251,17 +251,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -278,12 +278,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -299,17 +299,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -326,12 +326,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -347,17 +347,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -374,12 +374,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -395,17 +395,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -422,12 +422,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
@@ -450,7 +450,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
 
 
-          <h2 className={styles.tier_title}>tier a</h2>
+          <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>tier a</h2>
           <div className="flex flex-row flex-wrap">
             <div className={styles.records_table}>
               <h3 className="text-3xl font-bold p-2">FFA</h3>
@@ -459,17 +459,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -486,12 +486,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -507,17 +507,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -534,12 +534,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -555,17 +555,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -582,12 +582,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -603,17 +603,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -630,12 +630,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -651,17 +651,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -678,12 +678,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
@@ -706,7 +706,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
 
 
-          <h2 className={styles.tier_title}>tier b</h2>
+          <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>tier b</h2>
           <div className="flex flex-row flex-wrap">
             <div className={styles.records_table}>
               <h3 className="text-3xl font-bold p-2">FFA</h3>
@@ -715,17 +715,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -742,12 +742,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -763,17 +763,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -790,12 +790,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -811,17 +811,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -838,12 +838,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -859,17 +859,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -886,12 +886,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -907,17 +907,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -934,12 +934,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
@@ -968,7 +968,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
 
 
-          <h2 className={styles.tier_title}>tier c</h2>
+          <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>tier c</h2>
           <div className="flex flex-row flex-wrap">
             <div className={styles.records_table}>
               <h3 className="text-3xl font-bold p-2">FFA</h3>
@@ -977,17 +977,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -1004,12 +1004,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -1025,17 +1025,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -1052,12 +1052,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -1073,17 +1073,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -1100,12 +1100,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -1121,17 +1121,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -1148,12 +1148,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -1169,17 +1169,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -1196,12 +1196,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}
@@ -1228,7 +1228,7 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
 
 
-          <h2 className={styles.tier_title}>squad queue</h2>
+          <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>squad queue</h2>
           <div className="flex flex-row flex-wrap">
             {/* <div className={styles.records_table}>
               <h3 className="text-3xl font-bold p-2">FFA</h3>
@@ -1237,17 +1237,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -1280,17 +1280,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -1307,12 +1307,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -1328,17 +1328,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -1355,12 +1355,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -1376,17 +1376,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -1403,12 +1403,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -1424,17 +1424,17 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
                   <TableHead>
                     <TableRow>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏆
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           players
                         </div>
                       </StyledTableCell>
                       <StyledTableCell className={styles.tableheader}>
-                        <div className={styles.cool_column}>
+                        <div className={styles.records_column}>
                           🏁
                         </div>
                       </StyledTableCell>
@@ -1451,12 +1451,12 @@ export default function Leaderboard({ all1, all2, all3, all4, all6, a1, a2, a3, 
 
                         <StyledTableCell align="center">
                           {row.players.split(",").map((player) => (
-                            <div key={player} className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
+                            <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/player/" + player}>{player}</Link></div>
                           ))}
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                          <div className="text-cyan-300 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
+                          <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/s5/mogi/" + row.mogi_id }>{row.score}</Link></div>
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}

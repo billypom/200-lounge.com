@@ -1,0 +1,28 @@
+/* 
+Tiles Background
+*/
+.tiles {
+    height: 100vh;
+    width: 100vw;
+  
+    display: grid;
+    grid-template-columns: repeat(var(--columns), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
+    z-index: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  .tile:before {
+    /* background-color: rgb(8, 9, 11); */
+    content: "";
+    position: absolute;
+    inset: 0.5px;
+  }
+  
+  .tile {
+    /* outline: 1px solid white; */
+    /* background-color: rgb(8, 9, 11); */
+    position: relative;
+  }

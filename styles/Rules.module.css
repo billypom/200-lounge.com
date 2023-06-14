@@ -10,11 +10,6 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    /* justify-content: center; */
-    /* align-items: center; */
-    color: white;
-    /* title color (and children) */
-    /* z-index: 1; */
 }
 
 
@@ -23,7 +18,7 @@
 
 
 .title a {
-    color: #67e8f9;
+    color: var(--linkColor);
     text-decoration: none;
 }
 
@@ -53,7 +48,7 @@
 .list {
     text-align: left;
     max-width: 36rem;
-    background-color: rgba(8, 8, 8, 0.7);
+    /* background-color: rgba(8, 8, 8, 0.7); */
     font-size: 1.05rem;
 }
 
@@ -61,7 +56,10 @@
 
 .section {
     font-size: 3rem;
-    padding-top: 5rem;
+    /* padding-top: 5rem; */
+    border-radius: 10%;
+    margin: 1rem;
+    padding: 1rem;
 }
 
 
@@ -73,7 +71,6 @@
 
 
 .details {
-    background-color: rgba(8, 8, 8, 0.6);
     padding: 1rem;
     max-width: 64rem;
     font-size: 1.1rem;
@@ -85,7 +82,7 @@
     text-decoration: underline;
 }
 .details a {
-    color: #67e8f9;
+    color: var(--linkColor);
     text-decoration: none;
     word-wrap: break-word;
     overflow: hidden;
@@ -94,12 +91,12 @@
 
 
 .details b {
-    color: #97fe97;
+    color: #6bb96b;
     text-decoration: none;
 }
 
 .details penalty {
-    color: #ff7373;
+    color: #bb5151;
     text-decoration: none;
 }
 
@@ -110,7 +107,10 @@
 
 @media (max-width: 1000px) {
     .details {
-        max-width: 20rem;
+        max-width: 19rem;
+    }
+    .list {
+        max-width: 19rem;
     }
   }
 

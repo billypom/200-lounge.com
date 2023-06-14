@@ -9,6 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow, { tableRowClasses } from '@mui/material/TableRow';
 import TableFooter from '@mui/material/TableFooter';
 import TablePagination from '@mui/material/TablePagination';
+import Paper from '@mui/material/Paper';
 
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
@@ -266,29 +267,30 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 18,
     fontWeight: 750,
-    // color: theme.palette.text.primary
-    color: '#e8e6fc',
+    color: theme.palette.text.primary,
+    // color: '#e8e6fc',
+    // padding: "20px 0px 20px 0px"
   },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(even)': {
-    // backgroundColor: theme.palette.background.paper
-    backgroundColor: '#16151a',
+    backgroundColor: theme.palette.action.hover,
+    // backgroundColor: '#16151a',
   },
   '&:nth-of-type(odd)': {
-    // backgroundColor: theme.palette.text.divider
-    backgroundColor: '#050505',
+    backgroundColor: theme.palette.action.disabledBackground,
+    // backgroundColor: '#050505',
   },
   // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
   },
   [`&.${tableRowClasses.footer}`]: {
-    fontSize: 18,
+    fontSize: 13,
     fontWeight: 750,
-    // color: theme.palette.text.primary
-    color: '#e8e6fc',
+    color: theme.palette.text.primary,
+    // color: '#e8e6fc',
   },
 }));
 
@@ -344,72 +346,72 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, g
       <main className={styles.main}>
         {/* <TileGrid /> */}
         <h1 className={styles.title}>
-           <div className={results[0].rank_name === "Grandmaster" ? 'text-red-800' : results[0].rank_name === "Master" ? 'text-violet-700' : results[0].rank_name === "Diamond" ? 'text-cyan-200' : results[0].rank_name === "Platinum" ? 'text-cyan-600' : results[0].rank_name === "Gold" ? 'text-yellow-500' : results[0].rank_name === "Silver" ? 'text-gray-400' : results[0].rank_name === "Bronze" ? 'text-orange-400' : results[0].rank_name === "Iron" ? 'text-stone-500' : 'text-white'}><ReactCountryFlag countryCode={results[0]["country"]} style={{width: '4rem', height: '4rem'}} svg /> {results[0]["player name"]} - {results[0].rank_name}</div>
+           <div className={results[0].rank_name === "Grandmaster" ? 'text-red-800' : results[0].rank_name === "Master" ? 'text-violet-700' : results[0].rank_name === "Diamond" ? 'dark:text-cyan-200 text-cyan-500' : results[0].rank_name === "Platinum" ? 'dark:text-cyan-600 text-cyan-900' : results[0].rank_name === "Gold" ? 'text-yellow-500' : results[0].rank_name === "Silver" ? 'text-gray-400' : results[0].rank_name === "Bronze" ? 'text-orange-400' : results[0].rank_name === "Iron" ? 'text-stone-500' : 'text-white'}><ReactCountryFlag countryCode={results[0]["country"]} style={{width: '4rem', height: '4rem'}} svg /> {results[0]["player name"]} - {results[0].rank_name}</div>
         </h1>
         <div className='flex flex-row flex-wrap max-w-4xl m-auto justify-center z-10'>
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>Rank</h2>
-            <div className='text-white'>{rank[0]["rank"]}</div>
+            <div>{rank[0]["rank"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>mmr</h2>
-            <div className={results[0]["mmr"] >= 11000 ? 'text-red-800' : results[0]["mmr"] >= 9000 ? 'text-violet-700' : results[0]["mmr"] >= 7500 ? 'text-cyan-200' : results[0]["mmr"] >= 6000 ? 'text-cyan-600' : results[0]["mmr"] >= 4500 ? 'text-yellow-500' : results[0]["mmr"] >= 3000 ? 'text-gray-400' : results[0]["mmr"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["mmr"]}</div>
+            <div className={results[0]["mmr"] >= 11000 ? 'text-red-800' : results[0]["mmr"] >= 9000 ? 'text-violet-700' : results[0]["mmr"] >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : results[0]["mmr"] >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : results[0]["mmr"] >= 4500 ? 'text-yellow-500' : results[0]["mmr"] >= 3000 ? 'text-gray-400' : results[0]["mmr"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["mmr"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>peak mmr</h2>
-            <div className={results[0]["peak mmr"] >= 11000 ? 'text-red-800' : results[0]["peak mmr"] >= 9000 ? 'text-violet-700' : results[0]["peak mmr"] >= 7500 ? 'text-cyan-200' : results[0]["peak mmr"] >= 6000 ? 'text-cyan-600' : results[0]["peak mmr"] >= 4500 ? 'text-yellow-500' : results[0]["peak mmr"] >= 3000 ? 'text-gray-400' : results[0]["peak mmr"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["peak mmr"]}</div>
+            <div className={results[0]["peak mmr"] >= 11000 ? 'text-red-800' : results[0]["peak mmr"] >= 9000 ? 'text-violet-700' : results[0]["peak mmr"] >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : results[0]["peak mmr"] >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : results[0]["peak mmr"] >= 4500 ? 'text-yellow-500' : results[0]["peak mmr"] >= 3000 ? 'text-gray-400' : results[0]["peak mmr"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["peak mmr"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>win rate</h2>
-            <div className='text-white'>{results[0]["win rate"]}%</div>
+            <div>{results[0]["win rate"]}%</div>
           </div>
 
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>win/loss (last 10)</h2>
-            <div className='text-white'>{results[0]["win/loss (last 10)"]}</div>
+            <div>{results[0]["win/loss (last 10)"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>+/- (last 10)</h2>
-            <div className='text-white'>{results[0]["gain/loss (last 10)"]}</div>
+            <div>{results[0]["gain/loss (last 10)"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>avg score</h2>
-            <div className='text-white'>{score_stuff[0]["avg score"]}</div>
+            <div>{score_stuff[0]["avg score"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>top score</h2>
-            <div className='text-white'>{score_stuff[0]["top score"]}</div>
+            <div>{score_stuff[0]["top score"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>events played</h2>
-            <div className='text-white'>{results[0]["events played"]}</div>
+            <div>{results[0]["events played"]}</div>
           </div>
 
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>largest gain</h2>
-            <div className='cursor-pointer hover:underline text-cyan-300'><Link href={"/mogi/" + lg[0].mogi_id}>{results[0]["largest gain"]}</Link></div>
+            <div className='cursor-pointer hover:underline dark:text-cyan-300 text-blue-500'><Link href={"/mogi/" + lg[0].mogi_id}>{results[0]["largest gain"]}</Link></div>
           </div>
 
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>largest loss</h2>
-            <div className='cursor-pointer hover:underline text-cyan-300'><Link href={"/mogi/" + ll[0].mogi_id}>{results[0]["largest loss"]}</Link></div>
+            <div className='cursor-pointer hover:underline dark:text-cyan-300 text-blue-500'><Link href={"/mogi/" + ll[0].mogi_id}>{results[0]["largest loss"]}</Link></div>
           </div>
 
           <div className={styles.player_page_stats}>
             <h2 className='text-xl font-bold'>partner average</h2>
-            <div className='text-white'>{pa[0]["pa"]}</div>
+            <div>{pa[0]["pa"]}</div>
           </div>
 
         </div>
         <div className="m-auto p-1 z-10">
-              <TableContainer className={styles.leaderboard_style}>
+              <TableContainer component={Paper} className={styles.leaderboard_style}>
                 <Table stickyHeader aria-label="customized table">
                   <TableHead>
                     <TableRow>
@@ -443,14 +445,14 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, g
 
                         <StyledTableCell align="center">
                           <Link href={"/mogi/" + row.mogi_id}>
-                            <div className='cursor-pointer hover:underline text-cyan-300'>
+                            <div className='cursor-pointer hover:underline text-blue-500'>
                               {row.title}
                             </div>
                           </Link>
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                            <div className='text-white'>
+                            <div className=''>
                               {(new Date(row.create_date * 1000)).toLocaleString()}
                             </div>
                         </StyledTableCell>
@@ -462,7 +464,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, g
                         </StyledTableCell>
 
                         <StyledTableCell align="center">
-                            <div className={row.new_mmr >= 11000 ? 'text-red-800' : row.new_mmr >= 9000 ? 'text-violet-700' : row.new_mmr >= 7500 ? 'text-cyan-200' : row.new_mmr >= 6000 ? 'text-cyan-600' : row.new_mmr >= 4500 ? 'text-yellow-500' : row.new_mmr >= 3000 ? 'text-gray-400' : row.new_mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                            <div className={row.new_mmr >= 11000 ? 'text-red-800' : row.new_mmr >= 9000 ? 'text-violet-700' : row.new_mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.new_mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.new_mmr >= 4500 ? 'text-yellow-500' : row.new_mmr >= 3000 ? 'text-gray-400' : row.new_mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                               {row.new_mmr}
                             </div>
                         </StyledTableCell>

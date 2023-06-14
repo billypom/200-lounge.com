@@ -2,7 +2,6 @@ import Link from 'next/link'
 import styles from '../styles/Navbar.module.css'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 
 
 export default function SeasonPicker(props) {
@@ -14,15 +13,12 @@ export default function SeasonPicker(props) {
     const router = useRouter()
     let routePath = router.asPath.split('/')
     let currentPageName = ''
-    console.log(routePath)
 
     for (var i = 0; i < routePath.length; i++) {
         if (routePath[i] == '') {
-            console.log(`${i} | i was blank`)
             continue
             
         } else if (routePath[i].length == 2){
-            console.log(`${i} | i was 2`)
             continue
         } else {
             currentPageName += `/${routePath[i]}`

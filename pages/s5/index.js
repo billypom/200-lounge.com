@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead'
 import TableRow, { tableRowClasses } from '@mui/material/TableRow'
 import TableFooter from '@mui/material/TableFooter'
 import TablePagination from '@mui/material/TablePagination'
+import Paper from '@mui/material/Paper';
 
 import PropTypes from 'prop-types'
 import { useTheme } from '@mui/material/styles'
@@ -109,7 +110,7 @@ export async function getServerSideProps() {
         0 as "gain/loss (Last 10)",
         0 as "events played",
         0 as "partner avg",
-        0 as "avg score"
+        0 as "avg score",
         0 as "largest gain",
         0 as "largest loss"`, (error, rows) => {
         if (error) reject(error)
@@ -214,25 +215,25 @@ export default function Leaderboard({ rows }) {
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: '#1d185f',
-      fontSize: 24,
+      fontSize: 20,
     },
     [`&.${tableCellClasses.body}`]: {
-      fontSize: 20,
+      fontSize: 18,
       fontWeight: 750,
-      // color: theme.palette.text.primary
-      color: '#e8e6fc',
-      padding: "20px 0px 20px 0px"
+      color: theme.palette.text.primary,
+      // color: '#e8e6fc',
+      // padding: "20px 0px 20px 0px"
     },
   }));
 
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(even)': {
-      // backgroundColor: theme.palette.background.paper
-      backgroundColor: '#16151a',
+      backgroundColor: theme.palette.action.hover,
+      // backgroundColor: '#16151a',
     },
     '&:nth-of-type(odd)': {
-      // backgroundColor: theme.palette.text.divider
-      backgroundColor: '#050505',
+      backgroundColor: theme.palette.action.disabledBackground,
+      // backgroundColor: '#050505',
     },
     // hide last border
     '&:last-child td, &:last-child th': {
@@ -241,8 +242,8 @@ export default function Leaderboard({ rows }) {
     [`&.${tableRowClasses.footer}`]: {
       fontSize: 13,
       fontWeight: 750,
-      // color: theme.palette.text.primary
-      color: '#e8e6fc',
+      color: theme.palette.text.primary,
+      // color: '#e8e6fc',
     },
   }));
 
@@ -368,8 +369,8 @@ export default function Leaderboard({ rows }) {
 
           {/* leaderboard, table */}
           <div className="m-auto p-1 z-10">
-            <TableContainer>
-              <Table stickyHeader aria-label="customized table" sx={{ color: '#FAF0F0' }}>
+            <TableContainer component={Paper}>
+              <Table stickyHeader aria-label="customized table">
                 {/* header */}
                 <TableHead ref={tableHeader}>
                   <TableRow >
@@ -401,7 +402,7 @@ export default function Leaderboard({ rows }) {
                       isMobile ?
                         <StyledTableRow key={row.player_id}>
                           <StyledTableCell align="center">
-                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                               <div className={'cursor-pointer hover:underline'}>
                                 <Link href={"/s5/player/" + row['player name']}>
                                   {parseInt(row.rank)}
@@ -415,7 +416,7 @@ export default function Leaderboard({ rows }) {
                               </StyledTableCell> */}
 
                           <StyledTableCell align="center">
-                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                               <div className='cursor-pointer hover:underline'>
                                 <Link href={"/s5/player/" + row['player name']}>
                                   {row['player name']}
@@ -425,7 +426,7 @@ export default function Leaderboard({ rows }) {
                           </StyledTableCell>
 
                           <StyledTableCell align="center">
-                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                               {row.mmr}
                             </div>
                           </StyledTableCell>
@@ -438,7 +439,7 @@ export default function Leaderboard({ rows }) {
                         <StyledTableRow key={row.player_id}>
 
                           <StyledTableCell align="center">
-                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                               <div className='cursor-pointer hover:underline'>
                                 <Link href={"/s5/player/" + row['player name']}>
                                   {parseInt(row.rank)}
@@ -452,7 +453,7 @@ export default function Leaderboard({ rows }) {
                           </StyledTableCell>
 
                           <StyledTableCell align="center">
-                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                               <div className='cursor-pointer hover:underline'>
                                 <Link href={"/s5/player/" + row['player name']}>
                                   {row['player name']}
@@ -462,14 +463,14 @@ export default function Leaderboard({ rows }) {
                           </StyledTableCell>
 
                           <StyledTableCell align="center">
-                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                               {row.mmr}
                             </div>
                           </StyledTableCell>
 
 
                           <StyledTableCell align="center">
-                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'text-cyan-200' : row.mmr >= 6000 ? 'text-cyan-600' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                               {row['peak mmr']}
                             </div>
                           </StyledTableCell>

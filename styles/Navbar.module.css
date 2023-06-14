@@ -6,7 +6,8 @@
 }
 
 .navdropdown {
-    color: #eaeaea;
+    color: #0e0e0e;
+    background-color: var(--navbarBgColor);
     font-size: 2rem;
     z-index: 21;
     position: absolute;
@@ -21,36 +22,39 @@
     top: 60px;
     right: 5px;
     overflow: hidden;
-    background-color: rgba(7, 18, 18, 0.95)
 }
 
 .navdropdown2 {
-    color: #eaeaea;
+    color: #0e0e0e;
+    background-color: rgba(89, 98, 98, 0.95);
     font-size: 2rem;
     z-index: 21;
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    /* border: #eaeaea solid; */
-    /* border-width: 2px; */
-    border-radius: 40px;
-    /* width: 900; */
-    /* position: fixed; */
+    border-radius: 25px;
     top: 120px;
     right: 5px;
     overflow: hidden;
-    background-color: rgba(7, 18, 18, 0.95)
 }
 
-
+@media (prefers-color-scheme: dark) {
+    .navdropdown .navdropdown2 {
+        background-color: rgba(7, 18, 18, 0.95);
+        color: #eaeaea;
+    }
+    .navbar {
+        background-color: rgba(7, 18, 18, 0.95);
+    }
+}
 
 
 .navbar {
     display: flex;
     flex: 1;
     flex-wrap: wrap;
-    background-color: rgba(7, 18, 18, 0.95);
+    background-color: var(--navbarBgColor);
     /* background-color: rgb(255, 195, 14); */
     /* justify-content: center; */
     min-width: 100%;
@@ -72,21 +76,15 @@
 .navitemwrapper2 {
     display: flex;
     flex-wrap: wrap;
-    color: white;
+    /* color: white; */
     position: relative;
     z-index: 40;
 }
 
-
-
-
-
-
-
-
 /* hamburger menu */
 .navitem3 {
     padding-right: 1rem;
+    color: var(--textColor);
     /* padding-left: 1rem; */
     /* padding-top: 0.5rem; */
     color: white;
@@ -102,7 +100,7 @@
 .navitem3:focus,
 .navitem3:active {
     border-color: #eaeaea;
-    color: #67e8f9;
+    color: var(--navbarLinkColor);
     cursor: pointer;
 }
 
@@ -127,7 +125,7 @@
 .navitem:hover,
 .navitem:focus {
     border-color: #eaeaea;
-    color: #67e8f9;
+    color: var(--navbarLinkColor);
     cursor: pointer;
     transition: transform 100ms;
     transform: translateY(3px)
@@ -137,7 +135,7 @@
 }
 
 .navitem:active {
-    color: #52bbc8;
+    color: var(--navbarLinkColor);
 }
 
 
@@ -153,7 +151,7 @@
 .navitemactive {
     padding-right: 1rem;
     padding-left: 1rem;
-    color: #67e8f9;
+    color: var(--navbarLinkColor);
     transition: transform 500ms;
     pointer-events: none; /* when a season is chosen, disable ability to click button again
     /* or else we navigate to /s5/s5/s5/s5/s5 */
@@ -164,7 +162,7 @@
 .navitemactive:hover,
 .navitemactive:focus {
     border-color: #eaeaea;
-    color: #67e8f9;
+    color: var(--navbarLinkColor);
     /* cursor: pointer; */
     pointer-events: none;
     transition: transform 100ms;
@@ -229,10 +227,10 @@
 .navitemmobile:hover,
 .navitemmobile:focus {
     border-color: #eaeaea;
-    color: #67e8f9;
+    color: var(--navbarLinkColor);
     cursor: pointer;
 }
 
 .navitemmobile:active {
-    color: #52bbc8;
+    color: var(--navbarLinkColor);
 }
