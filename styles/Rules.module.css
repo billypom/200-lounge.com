@@ -87,6 +87,9 @@
 .details a {
     color: #67e8f9;
     text-decoration: none;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
@@ -105,6 +108,11 @@
 
 
 
+@media (max-width: 1000px) {
+    .details {
+        max-width: 20rem;
+    }
+  }
 
 
 

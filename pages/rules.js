@@ -40,18 +40,19 @@ export default function Rules() {
                         JOINING THE LOUNGE
                     </h2>
                     <div className={styles.details}>
-                        <div>
-                            Upon joining the server, users must send either their MKCentral forum account or MKCentral registry account using the <b>/verify</b> command in our <a href="https://discord.gg/uR3rRzsjhk">Discord server</a>. For help posting the forum account, a full tutorial on how to do it can be found in the Members section of the <a href="https://discord.gg/uR3rRzsjhk">Discord server</a>. 
-                        </div>
-                        <div>
-                            For help making a registry account, refer to <a href="https://www.mariokartcentral.com/wp/mkcentral-registry-guide/">this guide.</a>
-                        </div>
-                        <div>
-                            Forum example: <a href="https://www.mariokartcentral.com/forums/index.php?members/brandon.94/​">https://www.mariokartcentral.com/forums/index.php?members/brandon.94/</a>
-                        </div>
-                        <div>
-                            Registry example: <a href="https://www.mariokartcentral.com/mkc/registry/players/171">https://www.mariokartcentral.com/mkc/registry/players/171</a>
-                        </div>
+                        Upon joining the server, users must send either their MKCentral forum account or MKCentral registry account using the <b>/verify</b> command in our <a href="https://discord.gg/uR3rRzsjhk">Discord server</a>.
+                    </div>
+                    <div className={styles.details}>
+                        For help posting the forum account, a full tutorial on how to do it can be found in the Members section of the <a href="https://discord.gg/uR3rRzsjhk">Discord server</a>.
+                    </div>
+                    <div className={styles.details}>
+                        For help making a registry account, refer to <a href="https://www.mariokartcentral.com/wp/mkcentral-registry-guide/">this guide.</a>
+                    </div>
+                    <div className={styles.details}>
+                        Forum example: <a href="https://www.mariokartcentral.com/forums/index.php?members/brandon.94/​">https://www.mariokartcentral.com/forums/index.php?members/brandon.94/</a>
+                    </div>
+                    <div className={styles.details}>
+                        Registry example: <a href="https://www.mariokartcentral.com/mkc/registry/players/171">https://www.mariokartcentral.com/mkc/registry/players/171</a>
                     </div>
 
                     <div className={styles.details}>
@@ -95,25 +96,25 @@ export default function Rules() {
                             <p className='text-stone-500 inline-block'>Iron: 0-1499</p> (Placement: 1000)
                         </ul>
                         <ul>
-                        <p className='text-orange-400 inline-block'>Bronze: 1500-2999</p> (Placement: 2250)
+                            <p className='text-orange-400 inline-block'>Bronze: 1500-2999</p> (Placement: 2250)
                         </ul>
                         <ul>
-                        <p className='text-gray-400 inline-block'>Silver: 3000-4499</p> (Placement: 3750)
+                            <p className='text-gray-400 inline-block'>Silver: 3000-4499</p> (Placement: 3750)
                         </ul>
                         <ul>
-                        <p className='text-yellow-500 inline-block'>Gold: 4500-5999</p> (Placement: 5250)
+                            <p className='text-yellow-500 inline-block'>Gold: 4500-5999</p> (Placement: 5250)
                         </ul>
                         <ul>
-                        <p className='text-cyan-600 inline-block'>Platinum: 6000-7499</p> (Promotion-based)
+                            <p className='text-cyan-600 inline-block'>Platinum: 6000-7499</p> (Promotion-based)
                         </ul>
                         <ul>
-                        <p className='text-cyan-200 inline-block'>Diamond: 7000-8999</p> (Promotion-based)
+                            <p className='text-cyan-200 inline-block'>Diamond: 7000-8999</p> (Promotion-based)
                         </ul>
                         <ul>
-                        <p className='text-violet-700 inline-block'>Master: 9000-11000</p> (Promotion-based)
+                            <p className='text-violet-700 inline-block'>Master: 9000-11000</p> (Promotion-based)
                         </ul>
                         <ul>
-                        <p className='text-red-800 inline-block'>Grandmaster: 11000+</p> (Promotion-based)
+                            <p className='text-red-800 inline-block'>Grandmaster: 11000+</p> (Promotion-based)
                         </ul>
                     </div>
 
@@ -126,31 +127,31 @@ export default function Rules() {
                             Tier C
                         </ul>
                         <ul>
-                        <p className='text-stone-500 inline-block'>Iron: 12-59</p>
+                            <p className='text-stone-500 inline-block'>Iron: 12-59</p>
                         </ul>
                         <ul>
-                        <p className='text-orange-400 inline-block'>Bronze: 60-89</p>
+                            <p className='text-orange-400 inline-block'>Bronze: 60-89</p>
                         </ul>
                         <ul>
-                        <p className='text-gray-400 inline-block'>Silver: 90-119</p>
+                            <p className='text-gray-400 inline-block'>Silver: 90-119</p>
                         </ul>
                         <ul>
-                        <p className='text-yellow-500 inline-block'>Gold: 120+</p>
+                            <p className='text-yellow-500 inline-block'>Gold: 120+</p>
                         </ul>
                         <ul className='text-lg underline pt-5'>
                             Tier All
                         </ul>
                         <ul>
-                        <p className='text-stone-500 inline-block'>Iron: 12-49</p>
+                            <p className='text-stone-500 inline-block'>Iron: 12-49</p>
                         </ul>
                         <ul>
-                        <p className='text-orange-400 inline-block'>Bronze: 50-79</p>
+                            <p className='text-orange-400 inline-block'>Bronze: 50-79</p>
                         </ul>
                         <ul>
-                        <p className='text-gray-400 inline-block'>Silver: 80-109</p>
+                            <p className='text-gray-400 inline-block'>Silver: 80-109</p>
                         </ul>
                         <ul>
-                        <p className='text-yellow-500 inline-block'>Gold: 110+</p>
+                            <p className='text-yellow-500 inline-block'>Gold: 110+</p>
                         </ul>
 
                     </div>
@@ -267,63 +268,63 @@ export default function Rules() {
                     </div>
                     <div className={styles.list}>
                         <ul>
-                            - Must be placed on the table instead of the person they subbed.​
+                            - Must be placed on the table instead of the person they subbed.
                         </ul>
                         <ul>
-                            - Do not lose MMR on a losing team.​
+                            - Do not lose MMR on a losing team.
                         </ul>
                         <ul>
-                            - Only gain MMR on the winning team if they play 4 or more races in said event.​
+                            - Only gain MMR on the winning team if they play 4 or more races in said event.
                         </ul>
                     </div>
 
                     <div className={styles.details}>
-                        Players who repick a course in an FFA will receive a -10 penalty.​
+                        Players who repick a course in an FFA will receive a -10 penalty.
                     </div>
 
                     <div className={styles.details}>
-                        Players who repick a course in team events will receive a -50 MMR penalty.​
+                        Players who repick a course in team events will receive a -50 MMR penalty.
                     </div>
                     <div className={styles.list}>
                         <ul>
-                            - If a course is repicked more than once (not including random), the player(s) choosing the track will receive a <penalty>strike</penalty> and a <penalty>-100 MMR</penalty> penalty for each time they pick the track. This applies to everyone who attempts to repick, even if the track is not chosen.​
+                            - If a course is repicked more than once (not including random), the player(s) choosing the track will receive a <penalty>strike</penalty> and a <penalty>-100 MMR</penalty> penalty for each time they pick the track. This applies to everyone who attempts to repick, even if the track is not chosen.
                         </ul>
                     </div>
 
                     <div className={styles.details}>
-                    Players who have an incorrect tag for more than 2 races will receive a -25 MMR penalty.​
+                        Players who have an incorrect tag for more than 2 races will receive a -25 MMR penalty.
                     </div>
 
                     <div className={styles.details}>
-                    Players who leave an event for any reason:​
+                        Players who leave an event for any reason:
                     </div>
 
                     <div className={styles.list}>
                         <ul>
-                        - Do not gain MMR on a winning team.​
+                            - Do not gain MMR on a winning team.
                         </ul>
                         <ul>
-                        - Receive one <penalty>strike and a -100 MMR</penalty> penalty. There are no exceptions to this rule.​
+                            - Receive one <penalty>strike and a -100 MMR</penalty> penalty. There are no exceptions to this rule.
                         </ul>
                         <ul>
-                        - Lose any MMR their team lost in addition to the strike.​
+                            - Lose any MMR their team lost in addition to the strike.
                         </ul>
                     </div>
 
                     <div className={styles.details}>
-                    Teams missing a player for at least 4 races will get ⅔ MMR loss. Teams missing a player for at least 6 races will get ½ MMR loss. The missing player will still lose MMR and receive a <penalty>-100 MMR strike</penalty>. Teams missing a player for more than 6 races will receive an MMR loss proportionate to the number of races the missing player is absent from. For instance, if a player is missing for 10 races, the team will receive 2/10 loss. The missing player will still lose MMR and will receive an additional <penalty>-100 MMR + strike</penalty> penalty.​
+                        Teams missing a player for at least 4 races will get ⅔ MMR loss. Teams missing a player for at least 6 races will get ½ MMR loss. The missing player will still lose MMR and receive a <penalty>-100 MMR strike</penalty>. Teams missing a player for more than 6 races will receive an MMR loss proportionate to the number of races the missing player is absent from. For instance, if a player is missing for 10 races, the team will receive 2/10 loss. The missing player will still lose MMR and will receive an additional <penalty>-100 MMR + strike</penalty> penalty.
                     </div>
 
                     <div className={styles.details}>
-                    If any players happen to be intentionally throwing, teaming, or lap-trolling and there is convincing proof, staff has the right to bestow a <penalty>-100 MMR penalty and a strike</penalty> on the individual in question.​
+                        If any players happen to be intentionally throwing, teaming, or lap-trolling and there is convincing proof, staff has the right to bestow a <penalty>-100 MMR penalty and a strike</penalty> on the individual in question.
                     </div>
 
                     <div className={styles.details}>
-                    Hosts that start the room with less than 12 players, close the room for no reason, or otherwise cause unnecessary disruptions will receive <penalty>-50 and a strike</penalty>, and may be prohibited from hosting in the future. In a mogi, hosts must take a 30-second clip to prove that it was unintentional (streaming archive is also allowed). Typing !hostban in any channel will show the list of host-banned players.​
+                        Hosts that start the room with less than 12 players, close the room for no reason, or otherwise cause unnecessary disruptions will receive <penalty>-50 and a strike</penalty>, and may be prohibited from hosting in the future. In a mogi, hosts must take a 30-second clip to prove that it was unintentional (streaming archive is also allowed). Typing !hostban in any channel will show the list of host-banned players.
                     </div>
 
                     <div className={styles.details}>
-                    In order for an event to count, 12 full races must be completed. If 12 races are not completed, the event will not count.​
+                        In order for an event to count, 12 full races must be completed. If 12 races are not completed, the event will not count.
                     </div>
 
                     <div className={styles.section}>
@@ -331,23 +332,23 @@ export default function Rules() {
                     </div>
 
                     <div className={styles.details}>
-                    If 3 or more players from at least 2 different teams disconnect, the race will not count and the room must be reopened.​ The affected players must provide video evidence of their disconnects.
+                        If 3 or more players from at least 2 different teams disconnect, the race will not count and the room must be reopened.​ The affected players must provide video evidence of their disconnects.
                     </div>
 
                     <div className={styles.details}>
-                    If a race does not finish due to lag, the race will not be counted and the room will be reopened.​ The host should provide video evidence of the disconnect.
+                        If a race does not finish due to lag, the race will not be counted and the room will be reopened.​ The host should provide video evidence of the disconnect.
                     </div>
 
                     <div className={styles.details}>
-                    If item roulette is prominent for most of a race, the race will not count and the room must be reopened.​
+                        If item roulette is prominent for most of a race, the race will not count and the room must be reopened.
                     </div>
 
                     <div className={styles.details}>
-                    If no races can be finished for an extended amount of time due to lag, the event can be canceled with no players losing MMR.​
+                        If no races can be finished for an extended amount of time due to lag, the event can be canceled with no players losing MMR.
                     </div>
 
                     <div className={styles.details}>
-                    If this happens to occur during an event, please attempt to capture video proof of the individual who may be causing the lag in the room. If the proof is convincing, and if the majority of the room agrees on who is causing the lag, staff have the right to punish the individual for a certain amount of time, or warn them to fix their connection before playing again.​
+                        If this happens to occur during an event, please attempt to capture video proof of the individual who may be causing the lag in the room. If the proof is convincing, and if the majority of the room agrees on who is causing the lag, staff have the right to punish the individual for a certain amount of time, or warn them to fix their connection before playing again.
                     </div>
 
                     <div className={styles.section}>
@@ -355,7 +356,7 @@ export default function Rules() {
                     </div>
 
                     <div className={styles.details}>
-                        Players who receive MMR penalties for quitting matches, lap-trolling, joining the room late, or teaming will also receive a strike. Strikes expire after 30 days. Players have a limit of three strikes.​
+                        Players who receive MMR penalties for quitting matches, lap-trolling, joining the room late, or teaming will also receive a strike. Strikes expire after 30 days. Players have a limit of three strikes.
                     </div>
 
                     <div className={styles.details}>
@@ -371,11 +372,11 @@ export default function Rules() {
                     </div>
 
                     <div className={styles.details}>
-                        Any penalties that occurred during the match must also be stated by the reporter posting the table.​
+                        Any penalties that occurred during the match must also be stated by the reporter posting the table.
                     </div>
 
                     <div className={styles.details}>
-                        Room hosts are responsible for taking screenshots of results. If an event fails to have a screenshot or table posted within 24 hours, the host of the room will receive <penalty>-100 and a strike</penalty>.​
+                        Room hosts are responsible for taking screenshots of results. If an event fails to have a screenshot or table posted within 24 hours, the host of the room will receive <penalty>-100 and a strike</penalty>.
                     </div>
 
                     <div className={styles.details}>
@@ -387,7 +388,7 @@ export default function Rules() {
                     </div>
 
                     <div className={styles.details}>
-                    Squad Queue is a different way of playing lounge that allows players to play with predetermined teammates.​
+                        Squad Queue is a different way of playing lounge that allows players to play with predetermined teammates.
                     </div>
 
                     <div className={styles.details}>
@@ -395,23 +396,23 @@ export default function Rules() {
                     </div>
 
                     <div className={styles.details}>
-                    Subs are allowed in Squad Queue events; however, the sub&apos;s MMR must keep their team&apos;s average MMR within the range of the room. In other words, if a team would be in a different room if their team MMR was different, then the sub is not allowed.​
+                        Subs are allowed in Squad Queue events; however, the sub&apos;s MMR must keep their team&apos;s average MMR within the range of the room. In other words, if a team would be in a different room if their team MMR was different, then the sub is not allowed.
                     </div>
 
                     <div className={styles.details}>
-                    If a team gets a sub which would put their average MMR in a different room, the whole team will receive <penalty>-50 and a strike</penalty> at minimum. If the team wins more than 50 MMR, the penalty will be increased to match the amount of MMR they would have gained.​
+                        If a team gets a sub which would put their average MMR in a different room, the whole team will receive <penalty>-50 and a strike</penalty> at minimum. If the team wins more than 50 MMR, the penalty will be increased to match the amount of MMR they would have gained.
                     </div>
 
                     <div className={styles.details}>
-                    If the host has been decided after opening time, the host has to wait 2 minutes to open the room. Players need to be in the room in 5 minutes. After 10 minutes, the host can start Mogi even if there are not 12 players in the room.​
+                        If the host has been decided after opening time, the host has to wait 2 minutes to open the room. Players need to be in the room in 5 minutes. After 10 minutes, the host can start Mogi even if there are not 12 players in the room.
                     </div>
 
                     <div className={styles.section}>
-                    CONCLUSION
+                        CONCLUSION
                     </div>
 
                     <div className={styles.details}>
-                    That is all that we are expecting each and every one of you to follow. We hope you enjoy your community and lounge experience and follow the rules and guidelines accordingly.​
+                        That is all that we are expecting each and every one of you to follow. We hope you enjoy your community and lounge experience and follow the rules and guidelines accordingly.
                     </div>
                 </div>
             </main>
