@@ -209,7 +209,7 @@ export default function Leaderboard(props) {
                 placeholder="(search)"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)} />
-        </div>
+        </div><br></br>
         {/* search bar */}
 
         {/* leaderboard, table */}
