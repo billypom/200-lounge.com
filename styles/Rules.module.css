@@ -28,7 +28,6 @@
     text-decoration: underline;
 }
 
-
 .title {
     margin: 0;
     line-height: 1.15;
@@ -48,6 +47,7 @@
 .list {
     text-align: left;
     max-width: 36rem;
+    padding: 1rem;
     /* background-color: rgba(8, 8, 8, 0.7); */
     font-size: 1.05rem;
 }
@@ -102,8 +102,6 @@
     color: #bb5151;
     text-decoration: none;
 }
-
-
 
 
 

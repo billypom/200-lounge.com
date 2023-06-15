@@ -1,0 +1,9 @@
+  /*  */
+  .table_header_text {
+    color: #fafafa;
+    cursor: pointer;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    font-weight: bold;
+  }

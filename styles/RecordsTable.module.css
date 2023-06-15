@@ -1,0 +1,26 @@
+.records_table {
+    padding: 1rem;
+    margin: auto;
+    /* this good */
+    margin-top: 0;
+    /* this good */
+    max-width: 100%;
+    /* combination of all three gives me whaat i want */
+  }
+  
+  
+  .tableheader {
+    font-weight: 800;
+    font-size: large;
+  }
+  
+  .records_column {
+    color: #fafafa;
+    cursor: pointer;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: xx-large
+  }

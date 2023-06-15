@@ -12,6 +12,7 @@
   --navbarLinkColor: #3b82f6;
   --navbarBgColor: rgba(86, 86, 96, 0.95);
   --textColor: rgba(7, 18, 18, 1);
+  --tableHeaderBgColor: #1d185f;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -62,11 +63,6 @@ a {
   box-sizing: border-box;
 }
 
-/* @font-face {
-  font-family: heygorgeous;
-  src: local('heygorgeous'), url(../fonts/heygorgeous.ttf) format(truetype);
-} */
-
 @font-face {
   font-family: 'Hey Gorgeous';
   src: url('../fonts/HeyGorgeous.woff2') format('woff2'),
@@ -80,36 +76,10 @@ a {
   font-family: 'ShinGoProBold';
   src: url('../fonts/ATTFShinGoProBold.woff2') format('woff2'),
       url('../fonts/ATTFShinGoProBold.woff') format('woff');
-  /* font-weight: normal; */
-  /* font-style: normal; */
-  /* font-display: swap; */
 }
 
 @font-face {
   font-family: 'ShinGoProUltra';
   src: url('../fonts/ATTFShinGoProUltra.woff2') format('woff2'),
       url('../fonts/ATTFShinGoProUltra.woff') format('woff');
-  /* font-weight: normal; */
-  /* font-style: normal; */
-  /* font-display: swap; */
 }
-
-/* @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: rgb(16, 16, 16);
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  html {
-    color-scheme: light;
-  }
-  body {
-    color: black;
-    background: rgb(243, 243, 243);
-  }
-} */

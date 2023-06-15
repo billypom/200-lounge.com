@@ -1,10 +1,5 @@
-import * as React from 'react';
-
 import Head from 'next/head'
-import Link from 'next/link'
 import styles from '../styles/Rules.module.css'
-
-
 
 export default function Rules() {
     return (
@@ -21,12 +16,7 @@ export default function Rules() {
                 </h1>
 
                 <div className="flex flex-col text-center z-10 items-center">
-                    {/* <h2 className={styles.tier_title}>tier all</h2> */}
-                    {/* <div className="flex flex-row flex-wrap"> */}
-                    {/* <div className={styles.records_table}> */}
-                    {/* <h3 className="text-3xl font-bold p-2">Rules</h3>   */}
-                    {/* </div> */}
-                    {/* </div> */}
+
                     <h2 className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                         WHAT IS 200 LOUNGE?
                     </h2>
@@ -64,6 +54,10 @@ export default function Rules() {
                     <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                         Making an alternate account to join lounge will result in a heavy penalty in lounge and MKCentral. MKCentral Staff will find out if an alternate account is made, so it is highly recommended to not do so.
                     </div>
+
+
+
+
 
 
 
@@ -179,6 +173,22 @@ export default function Rules() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <div className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                         STARTING AN EVENT
                     </div>
@@ -237,6 +247,24 @@ export default function Rules() {
                     <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                         Once a host has been decided, the host must wait 2 minutes after posting their friend code to accept friend requests before opening the room. If the room is opened early, the late penalty comes into effect after 7 minutes of the friend code being posted. Should players request the room to be reopened if opened early, the host must do so or else receive <penalty>1 strike.</penalty>
                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     <div className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                         MATCH RULES
@@ -327,6 +355,39 @@ export default function Rules() {
                         In order for an event to count, 12 full races must be completed. If 12 races are not completed, the event will not count.
                     </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <div className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                         DISCONNECTIONS
                     </div>
@@ -351,6 +412,19 @@ export default function Rules() {
                         If this happens to occur during an event, please attempt to capture video proof of the individual who may be causing the lag in the room. If the proof is convincing, and if the majority of the room agrees on who is causing the lag, staff have the right to punish the individual for a certain amount of time, or warn them to fix their connection before playing again.
                     </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <div className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                         STRIKE SYSTEM
                     </div>
@@ -362,6 +436,23 @@ export default function Rules() {
                     <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                         Players who reach 3 strikes will be banned from Lounge for 1 week. Each time the strike limit is reached, the ban will increase by an additional week.
                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     <div className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                         RESULTS
@@ -382,6 +473,21 @@ export default function Rules() {
                     <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                         Only certain people will be given access to the results channels in order to prevent spam. If you want to become a reporter, look in the <a href="https://discord.gg/uR3rRzsjhk">#self-roles</a> channel in the Discord server
                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     <div className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                         SQUAD QUEUE
@@ -406,6 +512,19 @@ export default function Rules() {
                     <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                         If the host has been decided after opening time, the host has to wait 2 minutes to open the room. Players need to be in the room in 5 minutes. After 10 minutes, the host can start Mogi even if there are not 12 players in the room.
                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     <div className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                         CONCLUSION

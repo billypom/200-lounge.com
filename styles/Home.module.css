@@ -97,26 +97,16 @@
   max-width: 400px;
 }
 
-.card {
-  margin: 1rem;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
-}
-
-
-
 .content_edges {
   z-index: 1;
   max-width: 1200px;
   margin: auto;
 }
 
+
+.leaderboard_style {
+  align-items: center;
+}
 
 
 
@@ -153,48 +143,6 @@
   animation-timing-function: cubic-bezier(.26, .13, .24, 1.2);
   animation-fill-mode: forwards;
 } */
-
-.records_table {
-  padding: 1rem;
-  margin: auto;
-  /* this good */
-  margin-top: 0;
-  /* this good */
-  max-width: 100%;
-  /* combination of all three gives me whaat i want */
-}
-
-
-.tableheader {
-  /* color:#fafafa; */
-  font-weight: 800;
-  font-size: large;
-  /* background-color: #1d185f; */
-}
-
-.records_column {
-  color: #fafafa;
-  cursor: pointer;
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: xx-large
-}
-
-.leaderboard_style {
-  align-items: center;
-}
-
-.leaderboard_text {
-  color: #fafafa;
-  cursor: pointer;
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  font-weight: bold;
-}
 
 /* .container {
   padding: 0 2rem;
