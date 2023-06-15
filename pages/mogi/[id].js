@@ -74,7 +74,7 @@ export default function Mogi({ results, pm }) {
 
       <main className={styles.main}>
           {/* <TileGrid /> */}
-          <div className='flex flex-row flex-wrap max-w-4xl m-auto justify-center z-10'>
+          <div className='flex flex-row flex-wrap w-full p-4 m-auto justify-center z-10'>
             <h1 className={styles.title}>
               mogi
             </h1>
