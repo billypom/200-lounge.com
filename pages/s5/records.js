@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head'
 import mysql from 'mysql2'
-import styles from '../../styles/Records.module.css'
+import styles from '../../styles/Home.module.css'
 import RecordsTable from '../../components/RecordsTable';
 
 
