@@ -1,17 +1,8 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow, { tableRowClasses } from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import Head from 'next/head'
 import mysql from 'mysql2'
-import Link from 'next/link'
-import styles from '../../styles/Records.module.css'
-import RecordsTable from '../components/RecordsTable';
+import styles from '../../../styles/Records.module.css'
+import RecordsTable from '../../components/RecordsTable';
 
 
 
@@ -134,40 +125,6 @@ export async function getServerSideProps() {
 
 
 
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#1d185f',
-    fontSize: 20,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 18,
-    fontWeight: 750,
-    color: theme.palette.text.primary
-    // color: '#e8e6fc',
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(even)': {
-    backgroundColor: theme.palette.action.hover
-    // backgroundColor: '#16151a',
-  },
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.disabledBackground
-    // backgroundColor: '#050505',
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-  [`&.${tableRowClasses.footer}`]: {
-    fontSize: 18,
-    fontWeight: 750,
-    // color: theme.palette.text.primary
-    color: '#e8e6fc',
-  },
-}));
 
 
 
