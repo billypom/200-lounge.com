@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import styles from '../styles/Leaderboard.module.css'
+import styles from '../styles/Table.module.css'
 import { useRef, useState } from 'react'
 
 // not sure? makes it work
@@ -33,8 +33,8 @@ import { useTheme } from '@mui/material/styles'
 
 
 export default function Leaderboard(props) {
-    const rows = props.rows
-    const current_season = props.current_season
+    let rows = props.rows
+    const current_season = props.season
     const isMobile = props.isMobile
     const theme = useTheme();
 
@@ -220,7 +220,7 @@ export default function Leaderboard(props) {
                     <TableHead ref={tableHeader}>
                         <TableRow >
                             {
-                                columns.map((column, idx) => (column === "player_id" ? '' : isMobile && column === "country" || isMobile && idx > 4 ? '' :
+                                columns.map((column, idx) => (column === "player_id" ? <></> : isMobile && column === "country" || isMobile && idx > 4 ? <></> :
                                     <StyledTableCell align="center">
                                         <div
                                             className={styles.table_header_text}
@@ -246,9 +246,9 @@ export default function Leaderboard(props) {
                                 isMobile ?
                                     <StyledTableRow key={row.player_id}>
                                         <StyledTableCell align="center" key={`${idx}${row.player_id}`}>
-                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                                 <div className={'cursor-pointer hover:underline'}>
-                                                    <Link href={current_season == 6 ? "/player/" + row['player name'] : `/s${current_season}/player/${row['player_name']}`}>
+                                                    <Link href={current_season == 6 ? "/player/" + row['player name'] : `/s${current_season}/player/${row['player name']}`}>
                                                         {parseInt(row.rank)}
                                                     </Link>
                                                 </div>
@@ -260,9 +260,9 @@ export default function Leaderboard(props) {
                               </StyledTableCell> */}
 
                                         <StyledTableCell align="center">
-                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                                 <div className='cursor-pointer hover:underline'>
-                                                    <Link href={current_season == 6 ? "/player/" + row['player name'] : `/s${current_season}/player/${row['player_name']}`}>
+                                                    <Link href={current_season == 6 ? "/player/" + row['player name'] : `/s${current_season}/player/${row['player name']}`}>
                                                         {row['player name']}
                                                     </Link>
                                                 </div>
@@ -270,7 +270,7 @@ export default function Leaderboard(props) {
                                         </StyledTableCell>
 
                                         <StyledTableCell align="center">
-                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                                 {row.mmr}
                                             </div>
                                         </StyledTableCell>
@@ -283,9 +283,9 @@ export default function Leaderboard(props) {
                                     <StyledTableRow key={row.player_id}>
 
                                         <StyledTableCell align="center">
-                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                                 <div className='cursor-pointer hover:underline'>
-                                                    <Link href={current_season == 6 ? "/player/" + row['player name'] : `/s${current_season}/player/${row['player_name']}`}>
+                                                    <Link href={current_season == 6 ? "/player/" + row['player name'] : `/s${current_season}/player/${row['player name']}`}>
                                                         {parseInt(row.rank)}
                                                     </Link>
                                                 </div>
@@ -297,9 +297,9 @@ export default function Leaderboard(props) {
                                         </StyledTableCell>
 
                                         <StyledTableCell align="center">
-                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                                 <div className='cursor-pointer hover:underline'>
-                                                    <Link href={current_season == 6 ? "/player/" + row['player name'] : `/s${current_season}/player/${row['player_name']}`}>
+                                                    <Link href={current_season == 6 ? "/player/" + row['player name'] : `/s${current_season}/player/${row['player name']}`}>
                                                         {row['player name']}
                                                     </Link>
                                                 </div>
@@ -307,14 +307,14 @@ export default function Leaderboard(props) {
                                         </StyledTableCell>
 
                                         <StyledTableCell align="center">
-                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                                 {row.mmr}
                                             </div>
                                         </StyledTableCell>
 
 
                                         <StyledTableCell align="center">
-                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'text-violet-700' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                                 {row['peak mmr']}
                                             </div>
                                         </StyledTableCell>

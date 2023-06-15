@@ -36,6 +36,16 @@ export default function SeasonPicker(props) {
     // }
     // console.log(currentPageName)
 
+
+
+    // Closes the menus after choice for mobile devices
+    function handleMobileSeasonChoice(seasonChoice){
+        props.setCurrentSeason(seasonChoice)
+        setOpen(!open)
+    }
+
+
+    // Resize listener
     useEffect(() => {
         function handleResize() {
             setWidth(typeof window === 'undefined' ? 0 : window.innerWidth)
@@ -46,8 +56,6 @@ export default function SeasonPicker(props) {
             }
         }
         handleResize()
-        // console.log('i resized')
-        // console.log('is mobile: ', isMobile)
         window.addEventListener("resize", handleResize)
         return () => window.removeEventListener("resize", handleResize)
     },)
@@ -63,7 +71,9 @@ export default function SeasonPicker(props) {
                         {/* <Image src='/icons8-menu.svg' alt='navigation' width='30px' height='30px' onClick={() => setOpen(!open)} /> */}
                     </div>
 
-                </> : <>
+                </> : 
+                // Normal web season picker
+                <>
                     <Link href={`/s5${currentPageName}`}>
                         <button
                             className={props.currentSeason == 5 ? styles.navitemactive : styles.navitem}
@@ -84,13 +94,13 @@ export default function SeasonPicker(props) {
                 </>}
             </div>
         </header>
+        {/* Mobile season picker is OPEN */}
         {open ?
             <div className={styles.navdropdown2}>
                 <Link href={`/s5${currentPageName}`}>
                         <button
                             className={props.currentSeason == 5 ? styles.navitemactive : styles.navitem}
-                            onClick={() => props.setCurrentSeason(5)}
-                        >
+                            onClick={() => handleMobileSeasonChoice(5)}>
                             season 5
                         </button>
                     </Link>
@@ -98,8 +108,7 @@ export default function SeasonPicker(props) {
                     <Link href={`${currentPageName}`}>
                         <button
                             className={props.currentSeason == 6 ? styles.navitemactive : styles.navitem}
-                            onClick={() => props.setCurrentSeason(6)}
-                        >
+                            onClick={() => handleMobileSeasonChoice(6)}>
                             season 6
                         </button>
                     </Link>

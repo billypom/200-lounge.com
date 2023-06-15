@@ -155,7 +155,7 @@ export default function Home({ rows, current_season }) {
           <h1 className={styles.title}>
             leaderboard
           </h1>
-          <Leaderboard rows={rows} current_season={current_season} isMobile={isMobile} />
+          <Leaderboard rows={rows} season={current_season} isMobile={isMobile} />
         </div>
       </main>
     </div>

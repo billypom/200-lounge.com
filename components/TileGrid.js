@@ -13,7 +13,6 @@ import { useRef, useState, useEffect } from 'react'
   // function takes in index
 
 export default function TileGrid() {
-  // console.log(typeof window)
   const tiles = useRef()
   // Get size of viewport
   const [isSSR, setIsSSR] = useState(true);

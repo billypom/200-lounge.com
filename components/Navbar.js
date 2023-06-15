@@ -20,8 +20,6 @@ export default function Navbar(props) {
             }
         }
         handleResize()
-        // console.log('i resized')
-        // console.log('is mobile: ', isMobile)
         window.addEventListener("resize", handleResize)
         return () => window.removeEventListener("resize", handleResize)
     },)

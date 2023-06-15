@@ -1,29 +1,11 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
-
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow, { tableRowClasses } from '@mui/material/TableRow';
-import TableFooter from '@mui/material/TableFooter';
-import TablePagination from '@mui/material/TablePagination';
-import Paper from '@mui/material/Paper';
-
-import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
 import ReactCountryFlag from "react-country-flag"
 import Head from 'next/head'
 import mysql from 'mysql2'
 import styles from '../../styles/Home.module.css'
 import Link from 'next/link'
+
+import MogiHistory from '../../components/MogiHistory';
 
 
 
@@ -67,9 +49,9 @@ export async function getServerSideProps(context) {
         JOIN (SELECT player_id, sum(if(mmr_change>0,1,0)) as wins FROM player_mogi GROUP BY player_id) as wintable
       ON wintable.player_id = p.player_id
       WHERE p.player_name= ?`, [player, player], (error, results) => {
-        if (error) reject(error);
-        else resolve(results);
-      }
+      if (error) reject(error);
+      else resolve(results);
+    }
     );
   }
   );
@@ -84,9 +66,9 @@ export async function getServerSideProps(context) {
       JOIN tier t on m.tier_id = t.tier_id
       WHERE pm.player_id = ?
       ORDER BY m.create_date DESC`, [results[0].player_id], (error, rows) => {
-        if (error) reject(error);
-        else resolve(rows);
-      }
+      if (error) reject(error);
+      else resolve(rows);
+    }
     );
   });
   rows = JSON.parse(JSON.stringify(rows))
@@ -170,169 +152,8 @@ export async function getServerSideProps(context) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function TablePaginationActions(props) {
-  const theme = useTheme();
-  const { count, page, rowsPerPage, onPageChange } = props;
-
-  const handleFirstPageButtonClick = (event) => {
-    onPageChange(event, 0);
-  };
-
-  const handleBackButtonClick = (event) => {
-    onPageChange(event, page - 1);
-  };
-
-  const handleNextButtonClick = (event) => {
-    onPageChange(event, page + 1);
-  };
-
-  const handleLastPageButtonClick = (event) => {
-    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-  };
-
-  return (
-    <Box sx={{ flexShrink: 0, ml: 2.5, /*backgroundColor: '#ff0000'*/ }}>
-      <IconButton
-        onClick={handleFirstPageButtonClick}
-        disabled={page === 0}
-        aria-label="first page"
-      >
-        {theme.direction === 'rtl' ? <LastPageIcon style={{ fill: '#ffffff' }}/> : <FirstPageIcon style={{ fill: '#ffffff' }}/>}
-      </IconButton>
-      <IconButton
-        onClick={handleBackButtonClick}
-        disabled={page === 0}
-        aria-label="previous page"
-      >
-        {theme.direction === 'rtl' ? <KeyboardArrowRight style={{ fill: '#ffffff' }}/> : <KeyboardArrowLeft style={{ fill: '#ffffff' }}/>}
-      </IconButton>
-      <IconButton
-        onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
-      >
-        {theme.direction === 'rtl' ? <KeyboardArrowLeft style={{ fill: '#ffffff' }}/> : <KeyboardArrowRight style={{ fill: '#ffffff' }}/>}
-      </IconButton>
-      <IconButton
-        onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page"
-      >
-        {theme.direction === 'rtl' ? <FirstPageIcon style={{ fill: '#ffffff' }}/> : <LastPageIcon style={{ fill: '#ffffff' }}/>}
-      </IconButton>
-    </Box>
-  );
-}
-
-TablePaginationActions.propTypes = {
-  count: PropTypes.number.isRequired,
-  onPageChange: PropTypes.func.isRequired,
-  page: PropTypes.number.isRequired,
-  rowsPerPage: PropTypes.number.isRequired,
-};
-
-
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: '#1d185f',
-    fontSize: 20,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 18,
-    fontWeight: 750,
-    color: theme.palette.text.primary,
-    // color: '#e8e6fc',
-    // padding: "20px 0px 20px 0px"
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(even)': {
-    backgroundColor: theme.palette.action.hover,
-    // backgroundColor: '#16151a',
-  },
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.disabledBackground,
-    // backgroundColor: '#050505',
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-  [`&.${tableRowClasses.footer}`]: {
-    fontSize: 13,
-    fontWeight: 750,
-    color: theme.palette.text.primary,
-    // color: '#e8e6fc',
-  },
-}));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, grid_color }) {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(50);
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+
 
 
   return (
@@ -346,7 +167,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, g
       <main className={styles.main}>
         {/* <TileGrid /> */}
         <h1 className={styles.title}>
-           <div className={results[0].rank_name === "Grandmaster" ? 'text-red-800' : results[0].rank_name === "Master" ? 'text-violet-700' : results[0].rank_name === "Diamond" ? 'dark:text-cyan-200 text-cyan-500' : results[0].rank_name === "Platinum" ? 'dark:text-cyan-600 text-cyan-900' : results[0].rank_name === "Gold" ? 'text-yellow-500' : results[0].rank_name === "Silver" ? 'text-gray-400' : results[0].rank_name === "Bronze" ? 'text-orange-400' : results[0].rank_name === "Iron" ? 'text-stone-500' : 'text-white'}><ReactCountryFlag countryCode={results[0]["country"]} style={{width: '4rem', height: '4rem'}} svg /> {results[0]["player name"]} - {results[0].rank_name}</div>
+          <div className={results[0].rank_name === "Grandmaster" ? 'text-red-800' : results[0].rank_name === "Master" ? 'text-violet-700' : results[0].rank_name === "Diamond" ? 'dark:text-cyan-200 text-cyan-500' : results[0].rank_name === "Platinum" ? 'dark:text-cyan-600 text-cyan-900' : results[0].rank_name === "Gold" ? 'text-yellow-500' : results[0].rank_name === "Silver" ? 'text-gray-400' : results[0].rank_name === "Bronze" ? 'text-orange-400' : results[0].rank_name === "Iron" ? 'text-stone-500' : 'text-white'}><ReactCountryFlag countryCode={results[0]["country"]} style={{ width: '4rem', height: '4rem' }} svg /> {results[0]["player name"]} - {results[0].rank_name}</div>
         </h1>
         <div className='flex flex-row flex-wrap max-w-4xl m-auto justify-center z-10'>
           <div className={styles.player_page_stats}>
@@ -411,95 +232,8 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, g
 
         </div>
         <div className="m-auto p-1 z-10">
-              <TableContainer component={Paper} className={styles.leaderboard_style}>
-                <Table stickyHeader aria-label="customized table">
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell>
-                        <div className={styles.leaderboard_text}>
-                          event
-                        </div>
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        <div className={styles.leaderboard_text}>
-                          time
-                        </div>
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        <div className={styles.leaderboard_text}>
-                          +/-
-                        </div>
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        <div className={styles.leaderboard_text}>
-                          mmr
-                        </div>
-                      </StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {(rowsPerPage > 0
-                      ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage):rows).map((row) => (
-
-                      <StyledTableRow key={row.mogi_id}>
-
-                        <StyledTableCell align="center">
-                          <Link href={"/mogi/" + row.mogi_id}>
-                            <div className='cursor-pointer hover:underline text-blue-500'>
-                              {row.title}
-                            </div>
-                          </Link>
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                            <div className=''>
-                              {(new Date(row.create_date * 1000)).toLocaleString()}
-                            </div>
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                            <div className={row.mmr_change > 0 ? 'text-green-500': 'text-red-500'}>
-                              {row.mmr_change}
-                            </div>
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                            <div className={row.new_mmr >= 11000 ? 'text-red-800' : row.new_mmr >= 9000 ? 'text-violet-700' : row.new_mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.new_mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.new_mmr >= 4500 ? 'text-yellow-500' : row.new_mmr >= 3000 ? 'text-gray-400' : row.new_mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
-                              {row.new_mmr}
-                            </div>
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    ))}
-                    {emptyRows > 0 && (
-                      <TableRow style={{height: 53 * emptyRows }}>
-                          <TableCell colSpan={6} />
-                      </TableRow>
-                    )}
-                  </TableBody>
-                  <TableFooter>
-                      <StyledTableRow>
-                          <TablePagination
-                          rowsPerPageOptions={[10, 25, {label: 'All', value: -1}]}
-                          colSpan={rows[0].length}
-                          count={rows.length}
-                          rowsPerPage={rowsPerPage}
-                          page={page}
-                          sx={{bgcolor: '#0d1d30', color: '#ffffff'}}
-                          SelectProps={{
-                              inputProps: {
-                                  'aria-label': 'rows per page',
-                              },
-                              native: true,
-                          }}
-                          onPageChange={handleChangePage}
-                          onRowsPerPageChange={handleChangeRowsPerPage}
-                          ActionsComponent={TablePaginationActions}
-                          />
-                      </StyledTableRow>
-                  </TableFooter>
-                </Table>
-              </TableContainer>
-            </div>
+          <MogiHistory rows={rows} />
+        </div>
       </main>
     </div>
   )

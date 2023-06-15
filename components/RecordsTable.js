@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import styles from '../styles/RecordsTable.module.css'
+import styles from '../styles/Table.module.css'
 
 import { styled } from '@mui/material/styles';
 
@@ -46,8 +46,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 
 export default function RecordsTable(props) {
-
-    console.log(props.data)
 
     return (<>
         <div className={styles.records_table}>
