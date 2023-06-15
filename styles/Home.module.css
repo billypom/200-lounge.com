@@ -12,14 +12,15 @@
 }
 
 .player_page_stats {
-  padding: 1rem;
-  margin: 1rem;
   border: #050606;
-  border-radius: 1.5rem;
+  background-color: #eaeaea;
+
+  padding: 0.4rem;
+  margin: 0.3rem;
+  border-radius: 0.5rem;
   border-width: 2px;
   border-style: solid;
-  background-color: #eaeaea;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 
@@ -189,13 +190,13 @@
   }
 
   .player_page_stats {
-    border: #7d7d7d;
+    border: #323232;
     background-color: #181818;
-    padding: 1rem;
-    margin: 1rem;
-    border-radius: 1.5rem;
+    padding: 0.4rem;
+    margin: 0.3rem;
+    border-radius: 0.5rem;
     border-width: 2px;
     border-style: solid;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 }
