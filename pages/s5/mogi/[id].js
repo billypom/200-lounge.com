@@ -76,7 +76,6 @@ export default function Mogi({ results, pm }) {
       </Head>
 
       <main className={styles.main}>
-      <div className={styles.content_edges}>
         {/* <TileGrid /> */}
         <h1 className={styles.title}>
           mogi
@@ -86,7 +85,6 @@ export default function Mogi({ results, pm }) {
           <div className="m-auto">
               <MMRTable rows={pm} season={5} />
             </div>
-        </div>
         </div>
       </main>
     </div>

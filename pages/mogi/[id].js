@@ -42,9 +42,9 @@ export async function getServerSideProps(context) {
       JOIN player as p ON p.player_id = pm.player_id
       WHERE pm.mogi_id = ?
       ORDER BY pm.place ASC`, [mogi_id], (error, pm) => {
-        if (error) reject(error);
-        else resolve(pm);
-      }
+      if (error) reject(error);
+      else resolve(pm);
+    }
     );
   }
   );
@@ -73,19 +73,17 @@ export default function Mogi({ results, pm }) {
       </Head>
 
       <main className={styles.main}>
-      <div className={styles.content_edges}>
-        {/* <TileGrid /> */}
-        <div className='flex flex-row flex-wrap max-w-4xl m-auto justify-center z-10'>
-        <h1 className={styles.title}>
-          mogi
-        </h1>
-        {/* <div className='max-w-2xl pt-5 z-10 m-auto justify-center'> */}
-          <div><Image src={results[0].table_url} alt='mogi results image' width='860' height='520'></Image></div>
-          <div className="m-auto">
+          {/* <TileGrid /> */}
+          <div className='flex flex-row flex-wrap max-w-4xl m-auto justify-center z-10'>
+            <h1 className={styles.title}>
+              mogi
+            </h1>
+            {/* <div className='max-w-2xl pt-5 z-10 m-auto justify-center'> */}
+            <div><Image src={results[0].table_url} alt='mogi results image' width='860' height='520'></Image></div>
+            <div className="m-auto">
               <MMRTable rows={pm} />
             </div>
-        </div>
-        </div>
+          </div>
       </main>
     </div>
   )
