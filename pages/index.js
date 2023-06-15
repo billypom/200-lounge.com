@@ -151,7 +151,7 @@ export default function Home({ rows, current_season }) {
         <link rel="icon" href="/200.png" />
       </Head>
       <main className={styles.main}>
-        <div className='flex flex-row flex-wrap max-w-4xl m-auto justify-center z-10'>
+        <div className='flex flex-row flex-wrap w-full p-4 m-auto justify-center z-10'>
           <h1 className={styles.title}>
             leaderboard
           </h1>
