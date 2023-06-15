@@ -76,10 +76,11 @@ export default function Mogi({ results, pm, current_season }) {
       <main className={styles.main}>
       <div className={styles.content_edges}>
         {/* <TileGrid /> */}
+        <div className='flex flex-row flex-wrap max-w-4xl m-auto justify-center z-10'>
         <h1 className={styles.title}>
           mogi
         </h1>
-        <div className='max-w-2xl pt-5 z-10 m-auto justify-center'>
+        {/* <div className='max-w-2xl pt-5 z-10 m-auto justify-center'> */}
           <div><Image src={results[0].table_url} alt='mogi results image' width='860' height='520'></Image></div>
           <div className="m-auto">
               <MMRTable rows={pm} season={current_season} />
