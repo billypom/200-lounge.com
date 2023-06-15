@@ -55,16 +55,15 @@ export async function getServerSideProps(context) {
 
 
   // End connection to server
-  const current_season = process.env.current_season
   connection.end();
   // return props as object ALWAYS
   return {
-    props: { results, pm, current_season }
+    props: { results, pm }
   }
 }
 
 
-export default function Mogi({ results, pm, current_season }) {
+export default function Mogi({ results, pm }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -83,7 +82,7 @@ export default function Mogi({ results, pm, current_season }) {
         {/* <div className='max-w-2xl pt-5 z-10 m-auto justify-center'> */}
           <div><Image src={results[0].table_url} alt='mogi results image' width='860' height='520'></Image></div>
           <div className="m-auto">
-              <MMRTable rows={pm} season={current_season} />
+              <MMRTable rows={pm} />
             </div>
         </div>
         </div>

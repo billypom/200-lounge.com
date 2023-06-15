@@ -149,7 +149,7 @@ export default function Home({ rows }) {
         <link rel="icon" href="/200.png" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.content_edges}>
+        <div className='flex flex-row flex-wrap max-w-4xl m-auto justify-center z-10'>
           <h1 className={styles.title}>
             leaderboard
           </h1>
