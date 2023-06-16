@@ -26,7 +26,7 @@
 
 .navdropdown2 {
     color: #0e0e0e;
-    background-color: rgba(89, 98, 98, 0.95);
+    background-color: var(--navbarBgColor);
     font-size: 2rem;
     z-index: 21;
     position: absolute;
