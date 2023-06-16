@@ -23,6 +23,22 @@
   font-size: 1.2rem;
 }
 
+@media (prefers-color-scheme: dark) {
+  .main {
+    color: white;
+  }
+
+  .player_page_stats {
+    border: #323232;
+    background-color: #181818;
+    padding: 0.4rem;
+    margin: 0.3rem;
+    border-radius: 0.5rem;
+    border-width: 2px;
+    border-style: solid;
+    font-size: 1.1rem;
+  }
+}
 
 
 .footer {
@@ -184,19 +200,3 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .main {
-    color: white;
-  }
-
-  .player_page_stats {
-    border: #323232;
-    background-color: #181818;
-    padding: 0.4rem;
-    margin: 0.3rem;
-    border-radius: 0.5rem;
-    border-width: 2px;
-    border-style: solid;
-    font-size: 1.1rem;
-  }
-}
