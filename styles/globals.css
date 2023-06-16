@@ -52,6 +52,8 @@ body {
   );
   background-size: 200%;
   overflow-x: hidden;
+  min-height: 100vh;
+  min-height: --webkit-fill-available;
 }
 
 a {

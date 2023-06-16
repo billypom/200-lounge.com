@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import styles from '../styles/Table.module.css'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 // not sure? makes it work
 import PropTypes from 'prop-types'
@@ -192,6 +192,37 @@ export default function Leaderboard(props) {
         );
     }
 
+    // Sticky header on scroll ?
+    const tableHeaderRef = useRef()
+    let [headerYScrolled, setHeaderYScrolled] = useState(false)
+    useEffect(() => {
+        const options = { passive: true }; // options must match add/remove event
+        const scroll = (event) => {
+         const { pageYOffset, scrollY } = window;
+         console.log('yOffset', pageYOffset, 'scrollY', scrollY)
+         let tableHeaderY = tableHeaderRef.current.offsetTop
+         console.log('table y', tableHeaderY)
+
+        if (scrollY >= tableHeaderY) {
+            console.log('trueeeeee')
+            setHeaderYScrolled(true)
+        } else {
+            console.log('falseeeeee')
+            setHeaderYScrolled(false)
+        }
+        console.log('state header scroll', headerYScrolled)
+
+
+        };
+        document.addEventListener("scroll", scroll, options);
+        // remove event on unmount to prevent a memory leak
+        () => document.removeEventListener("scroll", scroll, options);
+       }, [headerYScrolled]);
+
+
+
+
+
 
 
 
@@ -202,7 +233,7 @@ export default function Leaderboard(props) {
 
     return (<>
 
-        <div className="flex-col flex pb-3 pl-1 gap-2 z-10 text-2xl">
+        <div className="pb-3 gap-2 z-10 text-2xl">
             <input
                 className="border border-gray-400 text-black placeholder:text-gray p-2 max-w-lg"
                 type="text"
@@ -214,10 +245,10 @@ export default function Leaderboard(props) {
 
         {/* leaderboard, table */}
         <div className="m-auto p-1 z-10">
-            <TableContainer component={Paper}>
-                <Table stickyHeader aria-label="customized table">
+            <TableContainer component={Paper} >
+                <Table stickyHeader aria-label="customized table" ref={tableHeaderRef}>
                     {/* header */}
-                    <TableHead ref={tableHeader}>
+                    <TableHead ref={tableHeader} className={headerYScrolled ? styles.sticky_header : styles.nothing_header }>
                         <TableRow >
                             {
                                 columns.map((column, idx) => (column === "player_id" ? <></> : isMobile && column === "country" || isMobile && idx > 4 ? <></> :

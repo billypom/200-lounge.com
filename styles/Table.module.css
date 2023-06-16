@@ -39,3 +39,13 @@
       font-weight: bold;
       font-size: xx-large
   }
+
+
+  .sticky_header {
+    top: 0;
+    position: sticky;
+  }
+
+  .nothing_header {
+    position:relative
+  }

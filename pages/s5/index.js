@@ -152,7 +152,7 @@ export default function Home({ rows }) {
           <h1 className={styles.title}>
             leaderboard
           </h1>
-          <div className='flex flex-col flex-wrap w-full p-4 m-auto justify-center items-center z-10'>
+          <div className='flex flex-col w-full m-auto justify-center items-center text-center z-10'>
           <Leaderboard rows={rows} season={5} isMobile={isMobile} />
         </div>
       </main>
