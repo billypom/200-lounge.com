@@ -161,7 +161,10 @@ export default function Records({ all1, all2, all3, all4, a1, a2, a3, a4, b1, b2
           records
         </h1>
 
+        
+
         <div className="flex flex-col text-center z-10 items-center">
+        <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>daily stats</h2>
           <div className='flex flex-row flex-wrap w-full justify-center'>
             {today_top_score[0] ?
               <div className={styles.player_page_stats}>
@@ -179,7 +182,7 @@ export default function Records({ all1, all2, all3, all4, a1, a2, a3, a4, b1, b2
 
             {today_mogi_count[0] ?
               <div className={styles.player_page_stats}>
-                <h2 className='text-xl font-bold'>Mogis Played Today:</h2>
+                <h2 className='text-xl font-bold'>Mogis Today:</h2>
                 <div>{today_mogi_count[0].count}</div>
               </div> : <></>}
           </div>
