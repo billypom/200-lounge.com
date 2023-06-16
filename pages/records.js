@@ -165,8 +165,8 @@ export default function Records({ all1, all2, all3, all4, a1, a2, a3, a4, b1, b2
           <div className='flex flex-row flex-wrap w-full justify-center'>
             {today_top_score[0] ?
               <div className={styles.player_page_stats}>
-                <h2 className='text-xl font-bold'>Today&apos;s Top Score:</h2>
-                <div className='flex flex-row flex-wrap justify-center'>
+                <h2 className='text-md font-bold'>Today&apos;s Top Score:</h2>
+                <div className='flex flex-row flex-wrap justify-center font-normal'>
                   <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
                     <Link href={`/player/${today_top_score[0].player_name}`}>{today_top_score[0].player_name}</Link>
                   </div>
