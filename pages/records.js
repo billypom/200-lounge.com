@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link';
 import mysql from 'mysql2'
 import styles from '../styles/Home.module.css'
 import RecordsTable from '../components/RecordsTable';
@@ -66,10 +67,36 @@ export async function getServerSideProps() {
   }
 
   // today's top score
-  // all time top score
-  // # of mogis today
 
-  
+  let stuff = await new Promise((resolve, reject) => {
+    connection.query(
+      `SELECT p.player_name, m.mogi_id, pm.score, m.create_date
+      FROM player_mogi pm
+      JOIN mogi m
+      ON m.mogi_id = pm.mogi_id
+      JOIN player p
+      ON p.player_id = pm.player_id
+      WHERE m.create_date >= curdate()
+      ORDER BY score DESC, create_date DESC
+      limit 1;`, [], (error, stuff) => {
+      if (error) reject(error)
+      else resolve(stuff)
+    })
+  })
+  const today_top_score = JSON.parse(JSON.stringify(stuff).replace(/\:null/gi, "\:\"\""))
+
+  // # of mogis today
+  stuff = await new Promise((resolve, reject) => {
+    connection.query(
+      `select count(*) as "count" from mogi where create_date >= curdate();`, [], (error, stuff) => {
+        if (error) reject(error)
+        else resolve(stuff)
+      }
+    )
+  })
+  const today_mogi_count = JSON.parse(JSON.stringify(stuff).replace(/\:null/gi, "\:\"\""))
+
+
   // select p.player_name, p.mmr from player p join player_mogi
   // where player_mogi.score = (select max(pm.score) from player_mogi pm join mogi m on pm.mogi_id = m.mogi_id where m.create_date = CURDATE());
 
@@ -97,17 +124,17 @@ export async function getServerSideProps() {
   const a2 = results[5]
   const a3 = results[6]
   const a4 = results[7]
-  
+
   const b1 = results[8]
   const b2 = results[9]
   const b3 = results[10]
   const b4 = results[11]
-  
+
   const c1 = results[12]
   const c2 = results[13]
   const c3 = results[14]
   const c4 = results[15]
-  
+
   const sq2 = results[16]
   const sq3 = results[17]
   const sq4 = results[18]
@@ -116,12 +143,12 @@ export async function getServerSideProps() {
 
   // console.log(results)
   return {
-    props: { all1, all2, all3, all4, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, sq2, sq3, sq4, sq6 }
+    props: { all1, all2, all3, all4, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, sq2, sq3, sq4, sq6, today_top_score, today_mogi_count }
   }
 }
 
 
-export default function Records({ all1, all2, all3, all4, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, sq2, sq3, sq4, sq6 }) {
+export default function Records({ all1, all2, all3, all4, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, sq2, sq3, sq4, sq6, today_top_score, today_mogi_count }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -135,8 +162,31 @@ export default function Records({ all1, all2, all3, all4, a1, a2, a3, a4, b1, b2
         </h1>
 
         <div className="flex flex-col text-center z-10 items-center">
-            <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>tier all</h2>
-              {/* <div className={styles.tier_title_background}></div> */}
+          <div className='flex flex-row flex-wrap w-full justify-center'>
+            {today_top_score[0] ?
+              <div className={styles.player_page_stats}>
+                <h2 className='text-xl font-bold'>Today&apos;s Top Score:</h2>
+                <div className='flex flex-row flex-wrap justify-center'>
+                  <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
+                    <Link href={`/player/${today_top_score[0].player_name}`}>{today_top_score[0].player_name}</Link>
+                  </div>
+                  <div className='px-2'>{' '}-{' '}</div>
+                  <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
+                    <Link href={`/mogi/${today_top_score[0].mogi_id}`}>{today_top_score[0].score}</Link>
+                  </div>
+                </div>
+              </div> : <></>}
+
+            {today_mogi_count[0] ?
+              <div className={styles.player_page_stats}>
+                <h2 className='text-xl font-bold'>Mogis Played Today:</h2>
+                <div>{today_mogi_count[0].count}</div>
+              </div> : <></>}
+          </div>
+
+
+          <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>tier all</h2>
+          {/* <div className={styles.tier_title_background}></div> */}
           <div className="flex flex-row flex-wrap">
             <RecordsTable data={all1} title='FFA'></RecordsTable>
             <RecordsTable data={all2} title='2v2'></RecordsTable>
@@ -159,7 +209,7 @@ export default function Records({ all1, all2, all3, all4, a1, a2, a3, a4, b1, b2
             <RecordsTable data={b3} title='3v3'></RecordsTable>
             <RecordsTable data={b4} title='4v4'></RecordsTable>
           </div>
-            
+
           <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>tier c</h2>
           <div className="flex flex-row flex-wrap">
             <RecordsTable data={c1} title='FFA'></RecordsTable>
