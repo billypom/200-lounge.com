@@ -467,7 +467,7 @@ export default function Rules() {
                     </div>
 
                     <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
-                        Room hosts are responsible for taking screenshots of results. If an event fails to have a screenshot or table posted within 24 hours, the host of the room will receive <penalty>-100 and a strike</penalty>.
+                        Room hosts are responsible for taking screenshots of results. If an event fails to have a screenshot or table created within 30 minutes of the last race, the host of the room will receive <penalty>-100 and a strike</penalty>.
                     </div>
 
                     <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
