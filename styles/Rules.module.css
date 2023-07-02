@@ -46,7 +46,7 @@
 
 .list {
     text-align: left;
-    max-width: 36rem;
+    /* max-width: 36rem; */
     padding: 1rem;
     /* background-color: rgba(8, 8, 8, 0.7); */
     font-size: 1.05rem;
@@ -57,12 +57,14 @@
 .section {
     font-size: 2.5rem;
     /* padding-top: 5rem; */
-    border-radius: 10%;
-    margin: 1rem;
+    /* border-radius: 10%; */
+    /* margin: 1rem; */
     padding: 1rem;
-    word-wrap: break-word;
+    /* word-wrap: break-word; */
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: center;
+    border-bottom: 1px solid rgb(255,255,255);
 }
 
 
@@ -75,8 +77,10 @@
 
 .details {
     padding: 1rem;
+    /* margin: 1rem; */
     max-width: 64rem;
     font-size: 1.1rem;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 .details a:hover,
@@ -87,15 +91,20 @@
 .details a {
     color: var(--linkColor);
     text-decoration: none;
-    word-wrap: break-word;
+    /* word-wrap: break-word; */
     overflow: hidden;
     text-overflow: ellipsis;
+    font-weight: 500;
 }
 
 
 .details b {
     color: #6bb96b;
     text-decoration: none;
+}
+
+.details c {
+    color: var(--linkColor);
 }
 
 .details penalty {
@@ -107,11 +116,11 @@
 
 
 @media (max-width: 1000px) {
-    .details {
-        max-width: 19rem;
-    }
+    /* .details { */
+        /* max-width: 19rem; */
+    /* } */
     .list {
-        max-width: 19rem;
+        /* max-width: 19rem; */
     }
   }
 
