@@ -416,40 +416,9 @@ export default function Rules() {
 
 
 
-
                     <div className='text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75 m-1 border border-solid rounded-lg'>
                         <div className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
-                            STRIKE SYSTEM
-                        </div>
-                        <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
-                            <ul className='m-4'>
-                                1. Players who receive MMR penalties for quitting matches, lap-trolling, joining the room late, or teaming will also receive a strike. Strikes expire after 30 days. Players have a limit of three strikes.
-                            </ul>
-                            <ul className='m-4'>
-                                2. Players who reach 3 strikes will be banned from Lounge for 1 week. Each time the strike limit is reached, the ban will increase by an additional week.
-                            </ul>
-                        </div>
-                    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <div className='text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75 m-1 border border-solid rounded-lg'>
-                        <div className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
-                            RESULTS
+                            VII. RESULTS
                         </div>
 
                         <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
@@ -476,6 +445,20 @@ export default function Rules() {
 
                     </div>
 
+                    <div className='text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75 m-1 border border-solid rounded-lg'>
+                        <div className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
+                            VIII. STRIKE SYSTEM
+                        </div>
+                        <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
+                            <ul className='m-4'>
+                                1. Players who receive MMR penalties for quitting matches, lap-trolling, joining the room late, or teaming will also receive a strike. Strikes expire after 30 days. Players have a limit of three strikes.
+                            </ul>
+                            <ul className='m-4'>
+                                2. Players who reach 3 strikes will be banned from Lounge for 1 week. Each time the strike limit is reached, the ban will increase by an additional week.
+                            </ul>
+                        </div>
+                    </div>
+
 
 
 
@@ -492,7 +475,7 @@ export default function Rules() {
 
                     <div className='text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75 m-1 border border-solid rounded-lg'>
                     <div className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
-                        SQUAD QUEUE
+                        IX. SQUAD QUEUE
                     </div>
                     <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                     <ul className='m-4'>
