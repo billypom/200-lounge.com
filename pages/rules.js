@@ -330,7 +330,7 @@ export default function Rules() {
                             </ul>
 
                             <ul className='m-4'>
-                                8. Courses repicked more than once will incur a <penalty>strike</penalty> and a <penalty>-100 MMR</penalty> penalty for each time they pick the track. This applies to everyone who attempts to repick, even if the track is not chosen.
+                                8. Courses repicked more than once will incur <penalty>1 strike</penalty> and a <penalty>-100 MMR</penalty> penalty for each repick chosen.
                             </ul>
 
                             <ul className='m-4'>
