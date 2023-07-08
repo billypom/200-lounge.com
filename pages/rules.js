@@ -283,7 +283,7 @@ export default function Rules() {
 
 
 
-                    <div className='text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75 m-1 border border-solid rounded-lg'>
+                    <div className='text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75 border border-solid rounded-lg'>
                         
                             <div className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                                 VI. MATCH RULES
@@ -384,7 +384,7 @@ export default function Rules() {
 
 
                             <div className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
-                                DISCONNECTIONS
+                                DISCONNECTS
                             </div>
                             <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
 
