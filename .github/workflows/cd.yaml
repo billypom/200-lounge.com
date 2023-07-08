@@ -9,7 +9,7 @@ jobs:
     - name: build & redeploy
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: sh deploy_200-lounge.sh
+        command: sh deploy_200_lounge.sh
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         port: ${{ secrets.PORT }}
