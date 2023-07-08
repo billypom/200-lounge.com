@@ -12,7 +12,7 @@ export default function Rules() {
             <main className={styles.main}>
                 {/* <TileGrid /> */}
                 <h1 className={`${styles.title} text-zinc-900 dark:text-white`}>
-                    rules & about 
+                    rules & about
                 </h1>
 
                 <div className="flex flex-col z-10 items-center">
