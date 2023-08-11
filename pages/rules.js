@@ -106,7 +106,7 @@ export default function Rules() {
                                 <p className='dark:text-cyan-600 text-cyan-900 inline-block'>Platinum: 6000-7499</p> (Promotion-based)
                             </ul>
                             <ul>
-                                <p className='dark:text-cyan-200 text-cyan-500 inline-block'>Diamond: 7000-8999</p> (Promotion-based)
+                                <p className='dark:text-cyan-200 text-cyan-500 inline-block'>Diamond: 7500-8999</p> (Promotion-based)
                             </ul>
                             <ul>
                                 <p className='text-violet-700 inline-block'>Master: 9000-11000</p> (Promotion-based)
