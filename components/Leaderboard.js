@@ -271,6 +271,7 @@ export default function Leaderboard(props) {
                     </TableHead>
                     {/* data */}
                     <TableBody>
+                        
                         {/* each record gets these divs */}
                         {(rowsPerPage > 0
                             ? sort(filter(rows)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : sort(filter(rows))).map((row, idx) => (
@@ -289,7 +290,7 @@ export default function Leaderboard(props) {
                                         {/* <StyledTableCell align="center">
                                 <ReactCountryFlag countryCode={row.country} style={{width: '2rem', height: '2rem'}} svg />
                               </StyledTableCell> */}
-
+                                        {console.log(row)}
                                         <StyledTableCell align="center">
                                             <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                                 <div className='cursor-pointer hover:underline'>
@@ -345,7 +346,7 @@ export default function Leaderboard(props) {
 
 
                                         <StyledTableCell align="center">
-                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                            <div className={row['peak mmr'] >= 11000 ? 'text-red-800' : row['peak mmr'] >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row['peak mmr'] >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row['peak mmr'] >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row['peak mmr'] >= 4500 ? 'text-yellow-500' : row['peak mmr'] >= 3000 ? 'text-gray-400' : row['peak mmr'] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                                 {row['peak mmr']}
                                             </div>
                                         </StyledTableCell>
