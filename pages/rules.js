@@ -302,7 +302,7 @@ export default function Rules() {
                             </ul>
 
                             <ul className='m-4'>
-                                4. Players who leave an event for any reason:
+                                4. Players who leave an event after the poll has started:
                             </ul>
 
                             <ul className='m-4 ml-10'>
