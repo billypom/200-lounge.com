@@ -302,7 +302,21 @@ export default function Rules() {
                             </ul>
 
                             <ul className='m-4'>
-                                4. Players who sub in a match that has already started:
+                                4. Players who leave an event for any reason:
+                            </ul>
+
+                            <ul className='m-4 ml-10'>
+                                A. Do not gain MMR on a winning team.
+                            </ul>
+                            <ul className='m-4 ml-10'>
+                                B. Receive <penalty>1 strike</penalty> and a <penalty>-100 MMR</penalty> penalty.
+                            </ul>
+                            <ul className='m-4 ml-10'>
+                                C. Lose any MMR their team lost in addition to the strike.
+                            </ul>
+
+                            <ul className='m-4'>
+                                5. Players who sub in a match that has already started:
                             </ul>
 
                             <ul className='m-4 ml-10'>
@@ -317,38 +331,32 @@ export default function Rules() {
                                 C. Only gain MMR on the winning team if they play 4 or more races in said event.
                             </ul>
 
-                            <ul className='m-4'>
-                                5. Players are not allowed to type <b>/c</b> while already participating in a mogi. Players who violate this rule will receive <penalty>-50 MMR and a strike.</penalty>
-                            </ul>
-
-                            <ul className='m-4'>
-                                6. Course repicks in an FFA will receive a <penalty>-10 score penalty</penalty>.
-                            </ul>
-
-                            <ul className='m-4'>
-                                7. Course repicks in team events will receive a <penalty>-50 MMR penalty</penalty>.
-                            </ul>
-
-                            <ul className='m-4'>
-                                8. Courses repicked more than once will incur <penalty>1 strike</penalty> and a <penalty>-100 MMR</penalty> penalty for each repick chosen.
-                            </ul>
-
-                            <ul className='m-4'>
-                                9. Players who have an incorrect tag for more than 2 races will receive a <penalty>-25 MMR penalty</penalty>.
-                            </ul>
-
-                            <ul className='m-4'>
-                                10. Players who leave an event for any reason:
+                            <ul className='m-4 ml-10'>
+                                D. In a situation where placing a sub on a table results in -MMR and placing the dropped player on the table results in +MMR, the player who played more races should be listed on the table.
                             </ul>
 
                             <ul className='m-4 ml-10'>
-                                A. Do not gain MMR on a winning team.
+                                E. In the same situation above, if both players played exactly 6 races, the sub should be listed on the table.
                             </ul>
-                            <ul className='m-4 ml-10'>
-                                B. Receive <penalty>1 strike</penalty> and a <penalty>-100 MMR</penalty> penalty.
+
+                            <ul className='m-4'>
+                                6. Players are not allowed to type <b>/c</b> while already participating in a mogi. Players who violate this rule will receive <penalty>-50 MMR and a strike.</penalty>
                             </ul>
-                            <ul className='m-4 ml-10'>
-                                C. Lose any MMR their team lost in addition to the strike.
+
+                            <ul className='m-4'>
+                                7. Course repicks in an FFA will receive a <penalty>-10 score penalty</penalty>.
+                            </ul>
+
+                            <ul className='m-4'>
+                                8. Course repicks in team events will receive a <penalty>-50 MMR penalty</penalty>.
+                            </ul>
+
+                            <ul className='m-4'>
+                                9. Courses repicked more than once will incur <penalty>1 strike</penalty> and a <penalty>-100 MMR</penalty> penalty for each repick chosen.
+                            </ul>
+
+                            <ul className='m-4'>
+                                10. Players who have an incorrect tag for more than 2 races will receive a <penalty>-25 MMR penalty</penalty>.
                             </ul>
 
                             <ul className='m-4'>
@@ -451,10 +459,10 @@ export default function Rules() {
                         </div>
                         <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                             <ul className='m-4'>
-                                1. Players who receive MMR penalties for quitting matches, lap-trolling, joining the room late, or teaming will also receive a strike. Strikes expire after 30 days. Players have a limit of three strikes.
+                                1. Players who receive MMR penalties for quitting matches, lap-trolling, joining the room late, or teaming will receive a strike. Strikes expire after 30 days. Players have a limit of three strikes.
                             </ul>
                             <ul className='m-4'>
-                                2. Players who reach 3 strikes will be banned from Lounge for 1 week. Each time the strike limit is reached, the ban will increase by an additional week.
+                                2. Players who reach the 3 strike limit will be banned from Lounge for 1 week. Each time the strike limit is reached, the ban will increase by an additional week.
                             </ul>
                         </div>
                     </div>
