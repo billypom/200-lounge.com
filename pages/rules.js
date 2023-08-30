@@ -230,36 +230,7 @@ export default function Rules() {
                                 8. Lounge events take place in Friend Rooms. Once the teams have been randomized, a host will need to provide their <c>Friend Code</c>.
                             </ul>
 
-                            <ul className='m-4'>
-                                9. If there is no host for a mogi 20 minutes after the poll ends, the entire lineup will receive <penalty>-50 and a strike</penalty>.
-                            </ul>
-
-                            <ul className='m-4'>
-                                10. Hosts must wait 2 minutes after posting their friend code before opening the room to accept friend requests. Other players may request the room to be reopened, if the room was opened early. Refusal will incur <penalty>1 strike</penalty> to the host.
-                            </ul>
-
-                            <ul className='m-4'>
-                                11. Players who drop for any reason after the poll has been started will receive a <penalty>-100 MMR and a strike.</penalty>
-                            </ul>
-
-                            <ul className='m-4'>
-                                12. If a player is unable to sub when needed or does not respond within 5 minutes, they will receive a <penalty>-50 penalty and a strike</penalty>.
-                            </ul>
-
-                            <ul className='m-4'>
-                                13. Players who ignore the order of sub priority will receive <penalty>-50 MMR and a strike</penalty>.
-                            </ul>
-
-
-
-
-
-
-
-
-                            <ul className='m-4'>
-                                12. After 8 races have passed in the current mogi, users not currently playing are allowed to start a new mogi by typing <b>/esn</b> (esn = end start new).
-                            </ul>
+                            
 
 
 
@@ -384,8 +355,30 @@ export default function Rules() {
                             </ul>
 
                             <ul className='m-4'>
-                                16. In order for an event to count, 12 full races must be completed. If 12 races are not completed, the event will not count.
+                                16. 12 full races must be completed. If 12 races are not completed, the event will not count.
                             </ul>
+
+                            <ul className='m-4'>
+                                17. If there is no host for a mogi 20 minutes after the poll ends, the entire lineup will receive <penalty>-50 and a strike</penalty>.
+                            </ul>
+
+                            <ul className='m-4'>
+                                18. Hosts must wait 2 minutes after posting their friend code before opening the room to accept friend requests. Other players may request the room to be reopened, if the room was opened early. Refusal will incur <penalty>1 strike</penalty> to the host.
+                            </ul>
+
+
+                            <ul className='m-4'>
+                                19. If a player is unable to sub when needed or does not respond within 5 minutes, they will receive a <penalty>-50 penalty and a strike</penalty>.
+                            </ul>
+
+                            <ul className='m-4'>
+                                20. Players who ignore the order of sub priority will receive <penalty>-50 MMR and a strike</penalty>.
+                            </ul>
+
+                            <ul className='m-4'>
+                                21. After 8 races have passed in the current mogi, users not currently playing are allowed to start a new mogi by typing <b>/esn</b> (esn = end start new).
+                            </ul>
+
                             </div>
 
 
@@ -397,23 +390,28 @@ export default function Rules() {
                             <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
 
                             <ul className='m-4'>
-                                17. If 3 or more players from at least 2 different teams disconnect, the race will not count and the room must be reopened.​ The affected players must provide video evidence of their disconnects.
+                                22. In the event that a player disconnects before the first race of a mogi starts (by the end of Lakitu Countdown), the room must be restarted regardless of video proof submissions. This rule only applies once, if a player disconnects before the first race a second time the room should continue without closing. 
+                                A player should provide video proof (switch clip, stream, error history etc.) of their disconnection if requested; otherwise they will receive <penalty>-50 MMR</penalty> and a <penalty>strike</penalty>. If the host does not restart, the first race will not count and an additional 13th race will need to be played at the end.
                             </ul>
 
                             <ul className='m-4'>
-                                18. If a race does not finish due to lag, the race will not be counted and the room will be reopened.​ The host should provide video evidence of the disconnect.
+                                23. If 3 or more players from at least 2 different teams disconnect, the race will not count and the room must be reopened.​ The affected players must provide video evidence of their disconnects.
                             </ul>
 
                             <ul className='m-4'>
-                                19. If item roulette is prominent for most of a race, the race will not count and the room must be reopened.
+                                24. If a race does not finish due to lag, the race will not be counted and the room will be reopened.​ The host should provide video evidence of the disconnect.
                             </ul>
 
                             <ul className='m-4'>
-                                20. If no races can be finished for an extended amount of time due to lag, the event can be canceled with no players losing MMR.
+                                25. If item roulette is prominent for most of a race, the race will not count and the room must be reopened.
                             </ul>
 
                             <ul className='m-4'>
-                                21. If this happens to occur during an event, please attempt to capture video proof of the individual who may be causing the lag in the room. If the proof is convincing, and if the majority of the room agrees on who is causing the lag, staff have the right to punish the individual for a certain amount of time, or warn them to fix their connection before playing again.
+                                26. If no races can be finished for an extended amount of time due to lag, the event can be canceled with no players losing MMR.
+                            </ul>
+
+                            <ul className='m-4'>
+                                27. If this happens to occur during an event, please attempt to capture video proof of the individual who may be causing the lag in the room. If the proof is convincing, and if the majority of the room agrees on who is causing the lag, staff have the right to punish the individual for a certain amount of time, or warn them to fix their connection before playing again.
                             </ul>
 
                         </div>
