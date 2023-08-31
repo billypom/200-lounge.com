@@ -332,14 +332,10 @@ export default function Rules() {
 
                             <ul className='m-4'>
                                 11. Teams missing a player for at least 4 races will get ⅔ MMR loss.
-
-
                             </ul>
 
                             <ul className='m-4'>
                                 12. Teams missing a player for at least 6 races will get ½ MMR loss.
-
-
                             </ul>
 
                             <ul className='m-4'>
@@ -377,6 +373,10 @@ export default function Rules() {
 
                             <ul className='m-4'>
                                 21. After 8 races have passed in the current mogi, users not currently playing are allowed to start a new mogi by typing <b>/esn</b> (esn = end start new).
+                            </ul>
+
+                            <ul className='m-4'>
+                                22. Players must use their Lounge Nickname (or a shortened version if more than 10 characters) in FFA format events. Refusal after the first 2 races will result in <penalty>-50 MMR</penalty>.
                             </ul>
 
                             </div>
