@@ -390,28 +390,28 @@ export default function Rules() {
                             <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
 
                             <ul className='m-4'>
-                                22. In the event that a player disconnects before the first race of a mogi starts (by the end of Lakitu Countdown), the room must be restarted regardless of video proof submissions. This rule only applies once, if a player disconnects before the first race a second time the room should continue without closing. 
+                                23. In the event that a player disconnects before the first race of a mogi starts (by the end of Lakitu Countdown), the room must be restarted regardless of video proof submissions. This rule only applies once, if a player disconnects before the first race a second time the room should continue without closing. 
                                 A player should provide video proof (switch clip, stream, error history etc.) of their disconnection if requested; otherwise they will receive <penalty>-50 MMR</penalty> and a <penalty>strike</penalty>. If the host does not restart, the first race will not count and an additional 13th race will need to be played at the end.
                             </ul>
 
                             <ul className='m-4'>
-                                23. If 3 or more players from at least 2 different teams disconnect, the race will not count and the room must be reopened.​ The affected players must provide video evidence of their disconnects.
+                                24. If 3 or more players from at least 2 different teams disconnect, the race will not count and the room must be reopened.​ The affected players must provide video evidence of their disconnects.
                             </ul>
 
                             <ul className='m-4'>
-                                24. If a race does not finish due to lag, the race will not be counted and the room will be reopened.​ The host should provide video evidence of the disconnect.
+                                25. If a race does not finish due to lag, the race will not be counted and the room will be reopened.​ The host should provide video evidence of the disconnect.
                             </ul>
 
                             <ul className='m-4'>
-                                25. If item roulette is prominent for most of a race, the race will not count and the room must be reopened.
+                                26. If item roulette is prominent for most of a race, the race will not count and the room must be reopened.
                             </ul>
 
                             <ul className='m-4'>
-                                26. If no races can be finished for an extended amount of time due to lag, the event can be canceled with no players losing MMR.
+                                27. If no races can be finished for an extended amount of time due to lag, the event can be canceled with no players losing MMR.
                             </ul>
 
                             <ul className='m-4'>
-                                27. If this happens to occur during an event, please attempt to capture video proof of the individual who may be causing the lag in the room. If the proof is convincing, and if the majority of the room agrees on who is causing the lag, staff have the right to punish the individual for a certain amount of time, or warn them to fix their connection before playing again.
+                                28. If this happens to occur during an event, please attempt to capture video proof of the individual who may be causing the lag in the room. If the proof is convincing, and if the majority of the room agrees on who is causing the lag, staff have the right to punish the individual for a certain amount of time, or warn them to fix their connection before playing again.
                             </ul>
 
                         </div>
