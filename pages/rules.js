@@ -135,7 +135,7 @@ export default function Rules() {
                                 8. Once 12 players have joined the Friend Room, the host should start the room with these settings:
                             </ul>
                             <ul className='m-4 ml-10'>
-                                <d className='font-bold'>Class:</d> 150cc
+                                <d className='font-bold'>Class:</d> 200cc
                             </ul>
                             <ul className='m-4 ml-10'>
                                 <d className='font-bold'>Teams:</d> No Teams
