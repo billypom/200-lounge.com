@@ -25,6 +25,12 @@
     --navbarBgColor: rgba(15, 15, 17, 0.96);
     --textColor: rgba(247, 247, 247, 1);
   }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    background: var(--navbarBgColor);
+  }
 }
 
 @keyframes background-pan {
@@ -54,6 +60,7 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   min-height: --webkit-fill-available;
+  color-scheme: dark;
 }
 
 a {
