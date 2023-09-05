@@ -1,14 +1,14 @@
 import Link from 'next/link'
 import styles from '../styles/Navbar.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 
 
 export default function Navbar(props) {
     const [width, setWidth] = useState(typeof window === 'undefined' ? 0 : window.innerWidth)
     const [isMobile, setIsMobile] = useState(false)
-
     const [open, setOpen] = useState(false)
+    const ref = useRef(null)
 
     useEffect(() => {
         function handleResize() {
@@ -24,6 +24,17 @@ export default function Navbar(props) {
         return () => window.removeEventListener("resize", handleResize)
     },)
 
+    useEffect(() => {
+        function handleOutsideClick(event) {
+            if (!ref.current?.contains(event.target)) {
+                setOpen(false)
+              }
+        }
+        // handleOutsideClick()
+        window.addEventListener("mousedown", handleOutsideClick)
+        return () => window.removeEventListener("mousedown", handleOutsideClick)
+    }, [ref])
+
 
 
     return (<>
@@ -38,7 +49,7 @@ export default function Navbar(props) {
                     </Link>
                 </ul>
             </div>
-            <div className={styles.navitemwrapper2}>
+            <div className={styles.navitemwrapper2} ref={ref}>
                 {isMobile ? <>
                     <div className={styles.navitem3}>
                         <Image src='/icons8-menu.svg' alt='navigation' width='30px' height='30px' onClick={() => setOpen(!open)} />

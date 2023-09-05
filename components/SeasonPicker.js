@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import styles from '../styles/Navbar.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 
 
@@ -8,7 +8,7 @@ export default function SeasonPicker(props) {
     const [width, setWidth] = useState(typeof window === 'undefined' ? 0 : window.innerWidth)
     const [isMobile, setIsMobile] = useState(false)
     const [open, setOpen] = useState(false)
-
+    const ref = useRef(null)
     //  Get current path, season agnostic
     const router = useRouter()
     let routePath = router.asPath.split('/')
@@ -60,11 +60,22 @@ export default function SeasonPicker(props) {
         return () => window.removeEventListener("resize", handleResize)
     },)
 
+    useEffect(() => {
+        function handleOutsideClick(event) {
+            if (!ref.current?.contains(event.target)) {
+                setOpen(false)
+              }
+        }
+        // handleOutsideClick()
+        window.addEventListener("mousedown", handleOutsideClick)
+        return () => window.removeEventListener("mousedown", handleOutsideClick)
+    }, [ref])
+
     return (<>
         <header className={styles.navbar}>
             <div className={styles.navitemwrapper}>
             </div>
-            <div className={styles.navitemwrapper2}>
+            <div className={styles.navitemwrapper2} ref={ref}>
                 {isMobile ? <>
                     <div className={styles.navitem3} onClick={() => setOpen(!open)}>
                         S{props.currentSeason}
