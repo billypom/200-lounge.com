@@ -215,25 +215,38 @@ export default function Rules() {
                             </ul>
 
                             <ul className='m-4'>
-                                5. Once 12 players have gathered, voting will be used to decide on the format. To vote, type the number that matches the format you want to vote for. The bot will not process votes outside of the original 12 players.
+                                5. Once 12 players have gathered, <b>MogiBot</b> will start a poll to vote for a format.
                             </ul>
 
                             <ul className='m-4'>
-                                6. After the voting phase, teams will be randomly assigned between these formats: FFA, 2v2, 3v3, 4v4.
+                                6. After the voting phase, teams will be randomly assigned.
                             </ul>
 
                             <ul className='m-4'>
-                                7. If <c>MogiBot</c> is offline, players may randomize teams through other means (RandomBot, random.org). The list which appears first will be the official teams. Players who force another list will receive <penalty>-50 MMR and a strike</penalty>.
+                                7. Lounge events take place in Friend Rooms. Once the teams have been randomized, a host will need to provide their <c>Friend Code</c>.
                             </ul>
 
                             <ul className='m-4'>
-                                8. Lounge events take place in Friend Rooms. Once the teams have been randomized, a host will need to provide their <c>Friend Code</c>.
+                                8. Once 12 players have joined the Friend Room, the host should start the room with these settings:
                             </ul>
-
-                            
-
-
-
+                            <ul className='m-4 ml-10'>
+                                <div className='font-bold'>Class:</div> 150cc
+                            </ul>
+                            <ul className='m-4 ml-10'>
+                                <div className='font-bold'>Teams:</div> No Teams
+                            </ul>
+                            <ul className='m-4 ml-10'>
+                                <div className='font-bold'>Items:</div> Normal Items
+                            </ul>
+                            <ul className='m-4 ml-10'>
+                                <div className='font-bold'>COM:</div> Hard COM
+                            </ul>
+                            <ul className='m-4 ml-10'>
+                                <div className='font-bold'>COM Vehicles:</div> All Vehicles
+                            </ul>
+                            <ul className='m-4 ml-10'>
+                                <div className='font-bold'>Race Count:</div> 12 Races
+                            </ul>
                         </div>
                     </div>
 
