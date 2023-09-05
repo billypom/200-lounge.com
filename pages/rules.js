@@ -82,9 +82,84 @@ export default function Rules() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div className='text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75 m-1 border border-solid rounded-lg'>
+                        <div className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
+                            IV. JOINING AN EVENT
+                        </div>
+
+
+                        <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
+                            <ul className='m-4'>
+                                1. Go to the <c>#tier</c> channels under the Lounge section of the Discord server
+                            </ul>
+                            <ul className='m-4'>
+                                2. Use the <b>/start</b> command to start the mogi.
+                            </ul>
+                            <ul className='m-4'>
+                                3. Use the <b>/can</b> command to join the mogi
+                            </ul>
+                            <ul className='m-4'>
+                                4. The first twelve players to say <b>/can</b> or <b>/c</b> will play.
+                                Any players later than 12th on the list will be subs, given priority by their order on the list.
+                            </ul>
+
+                            <ul className='m-4'>
+                                5. Once 12 players have gathered, <c>MogiBot</c> will start a poll to vote for a format.
+                            </ul>
+
+                            <ul className='m-4'>
+                                6. After the voting phase, teams will be randomly assigned.
+                            </ul>
+
+                            <ul className='m-4'>
+                                7. Lounge events take place in Friend Rooms. Once the teams have been randomized, a host will need to provide their <c>Friend Code</c>.
+                            </ul>
+
+                            <ul className='m-4'>
+                                8. Once 12 players have joined the Friend Room, the host should start the room with these settings:
+                            </ul>
+                            <ul className='m-4 ml-10'>
+                                <d className='font-bold'>Class:</d> 150cc
+                            </ul>
+                            <ul className='m-4 ml-10'>
+                                <d className='font-bold'>Teams:</d> No Teams
+                            </ul>
+                            <ul className='m-4 ml-10'>
+                                <d className='font-bold'>Items:</d> Normal Items
+                            </ul>
+                            <ul className='m-4 ml-10'>
+                                <d className='font-bold'>COM:</d> Hard COM
+                            </ul>
+                            <ul className='m-4 ml-10'>
+                                <d className='font-bold'>COM Vehicles:</d> All Vehicles
+                            </ul>
+                            <ul className='m-4 ml-10'>
+                                <d className='font-bold'>Race Count:</d> 12 Races
+                            </ul>
+                        </div>
+                    </div>
+
+
+
                     <div className='text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75 m-1 border border-solid rounded-lg'>
                         <h2 className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
-                            IV. RANKING SYSTEM
+                            V. RANKING SYSTEM
                         </h2>
                         <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
                             Once your account is verified, you will be able to play your first match which will place you into one of the following ranks:
@@ -175,83 +250,6 @@ export default function Rules() {
                             </ul>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <div className='text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75 m-1 border border-solid rounded-lg'>
-                        <div className={`${styles.section} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
-                            V. JOINING AN EVENT
-                        </div>
-
-
-                        <div className={`${styles.details} text-zinc-900 dark:text-white bg-neutral-200/75 dark:bg-zinc-800/75`}>
-                            <ul className='m-4'>
-                                1. Go to the <c>#tier</c> channels under the Lounge section of the Discord server
-                            </ul>
-                            <ul className='m-4'>
-                                2. Use the <b>/start</b> command to start the mogi.
-                            </ul>
-                            <ul className='m-4'>
-                                3. Use the <b>/can</b> command to join the mogi
-                            </ul>
-                            <ul className='m-4'>
-                                4. The first twelve players to say <b>/can</b> or <b>/c</b> will play.
-                                Any players later than 12th on the list will be subs, given priority by their order on the list.
-                            </ul>
-
-                            <ul className='m-4'>
-                                5. Once 12 players have gathered, <b>MogiBot</b> will start a poll to vote for a format.
-                            </ul>
-
-                            <ul className='m-4'>
-                                6. After the voting phase, teams will be randomly assigned.
-                            </ul>
-
-                            <ul className='m-4'>
-                                7. Lounge events take place in Friend Rooms. Once the teams have been randomized, a host will need to provide their <c>Friend Code</c>.
-                            </ul>
-
-                            <ul className='m-4'>
-                                8. Once 12 players have joined the Friend Room, the host should start the room with these settings:
-                            </ul>
-                            <ul className='m-4 ml-10'>
-                                <div className='font-bold'>Class:</div> 150cc
-                            </ul>
-                            <ul className='m-4 ml-10'>
-                                <div className='font-bold'>Teams:</div> No Teams
-                            </ul>
-                            <ul className='m-4 ml-10'>
-                                <div className='font-bold'>Items:</div> Normal Items
-                            </ul>
-                            <ul className='m-4 ml-10'>
-                                <div className='font-bold'>COM:</div> Hard COM
-                            </ul>
-                            <ul className='m-4 ml-10'>
-                                <div className='font-bold'>COM Vehicles:</div> All Vehicles
-                            </ul>
-                            <ul className='m-4 ml-10'>
-                                <div className='font-bold'>Race Count:</div> 12 Races
-                            </ul>
-                        </div>
-                    </div>
-
-
-
 
 
 
