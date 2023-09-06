@@ -77,7 +77,7 @@ export default function SeasonPicker(props) {
             </div>
             <div className={styles.navitemwrapper2}>
                 {isMobile ? <>
-                    <div className={styles.navitem3} onClick={() => setOpen(!open)} ref={ref}>
+                    <div className={styles.navitem3} onClick={() => setOpen(!open)} >
                         S{props.currentSeason}
                         {/* <Image src='/icons8-menu.svg' alt='navigation' width='30px' height='30px' onClick={() => setOpen(!open)} /> */}
                     </div>
@@ -107,7 +107,7 @@ export default function SeasonPicker(props) {
         </header>
         {/* Mobile season picker is OPEN */}
         {open ?
-            <div className={styles.navdropdown2}>
+            <div className={styles.navdropdown2} ref={ref}>
                 <Link href={`/s5${currentPageName}`}>
                         <button
                             className={props.currentSeason == 5 ? styles.navitemactive : styles.navitem}

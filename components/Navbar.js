@@ -27,6 +27,8 @@ export default function Navbar(props) {
     useEffect(() => {
         function handleOutsideClick(event) {
             if (!ref.current?.contains(event.target)) {
+                console.log('i clicked outside')
+                console.log(ref)
                 setOpen(false)
               }
         }
@@ -52,7 +54,7 @@ export default function Navbar(props) {
             <div className={styles.navitemwrapper2}>
                 {isMobile ? <>
                     <div className={styles.navitem3}>
-                        <Image src='/icons8-menu.svg' alt='navigation' width='30px' height='30px' onClick={() => setOpen(!open)} ref={ref} />
+                        <Image src='/icons8-menu.svg' alt='navigation' width='30px' height='30px' onClick={() => setOpen(!open)} />
                     </div>
 
                 </> : <>
@@ -84,7 +86,7 @@ export default function Navbar(props) {
             </div>
         </header>
         {open ?
-            <div className={styles.navdropdown}>
+            <div className={styles.navdropdown} ref={ref}>
                 <Link href="/">
                     <ul className={styles.navitemmobile} onClick={() => setOpen(!open)}>
                         leaderboard
