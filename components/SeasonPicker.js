@@ -9,6 +9,8 @@ export default function SeasonPicker(props) {
     const [isMobile, setIsMobile] = useState(false)
     const [open, setOpen] = useState(false)
     const ref = useRef(null)
+    const buttonRef = useRef(null)
+
     //  Get current path, season agnostic
     const router = useRouter()
     let routePath = router.asPath.split('/')
@@ -62,6 +64,9 @@ export default function SeasonPicker(props) {
 
     useEffect(() => {
         function handleOutsideClick(event) {
+            if (buttonRef.current?.contains(event.target)) {
+                return
+            }
             if (!ref.current?.contains(event.target)) {
                 setOpen(false)
               }
@@ -77,7 +82,7 @@ export default function SeasonPicker(props) {
             </div>
             <div className={styles.navitemwrapper2}>
                 {isMobile ? <>
-                    <div className={styles.navitem3} onClick={() => setOpen(!open)} >
+                    <div className={styles.navitem3} onClick={() => setOpen(!open)} ref={buttonRef} >
                         S{props.currentSeason}
                         {/* <Image src='/icons8-menu.svg' alt='navigation' width='30px' height='30px' onClick={() => setOpen(!open)} /> */}
                     </div>

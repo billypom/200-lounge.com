@@ -9,6 +9,7 @@ export default function Navbar(props) {
     const [isMobile, setIsMobile] = useState(false)
     const [open, setOpen] = useState(false)
     const ref = useRef(null)
+    const buttonRef = useRef(null)
 
     useEffect(() => {
         function handleResize() {
@@ -26,6 +27,9 @@ export default function Navbar(props) {
 
     useEffect(() => {
         function handleOutsideClick(event) {
+            if (buttonRef.current?.contains(event.target)) {
+                return
+            }
             if (!ref.current?.contains(event.target)) {
                 console.log('i clicked outside')
                 console.log(ref)
@@ -51,7 +55,7 @@ export default function Navbar(props) {
                     </Link>
                 </ul>
             </div>
-            <div className={styles.navitemwrapper2}>
+            <div className={styles.navitemwrapper2} ref={buttonRef}>
                 {isMobile ? <>
                     <div className={styles.navitem3}>
                         <Image src='/icons8-menu.svg' alt='navigation' width='30px' height='30px' onClick={() => setOpen(!open)} />
