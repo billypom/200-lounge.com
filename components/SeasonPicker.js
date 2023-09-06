@@ -39,9 +39,8 @@ export default function SeasonPicker(props) {
 
 
     // Closes the menus after choice for mobile devices
-    function handleMobileSeasonChoice(e, seasonChoice){
+    function handleMobileSeasonChoice(seasonChoice){
         props.setCurrentSeason(seasonChoice)
-        e.stopPropogation()
         setOpen(!open)
     }
 
@@ -76,9 +75,9 @@ export default function SeasonPicker(props) {
         <header className={styles.navbar}>
             <div className={styles.navitemwrapper}>
             </div>
-            <div className={styles.navitemwrapper2} ref={ref}>
+            <div className={styles.navitemwrapper2}>
                 {isMobile ? <>
-                    <div className={styles.navitem3} onClick={() => setOpen(!open)}>
+                    <div className={styles.navitem3} onClick={() => setOpen(!open)} ref={ref}>
                         S{props.currentSeason}
                         {/* <Image src='/icons8-menu.svg' alt='navigation' width='30px' height='30px' onClick={() => setOpen(!open)} /> */}
                     </div>
@@ -112,7 +111,7 @@ export default function SeasonPicker(props) {
                 <Link href={`/s5${currentPageName}`}>
                         <button
                             className={props.currentSeason == 5 ? styles.navitemactive : styles.navitem}
-                            onClick={(e) => handleMobileSeasonChoice(e, 5)}>
+                            onClick={() => handleMobileSeasonChoice(5)}>
                             season 5
                         </button>
                     </Link>
@@ -120,7 +119,7 @@ export default function SeasonPicker(props) {
                     <Link href={`${currentPageName}`}>
                         <button
                             className={props.currentSeason == 6 ? styles.navitemactive : styles.navitem}
-                            onClick={(e) => handleMobileSeasonChoice(e, 6)}>
+                            onClick={() => handleMobileSeasonChoice(6)}>
                             season 6
                         </button>
                     </Link>

@@ -49,34 +49,34 @@ export default function Navbar(props) {
                     </Link>
                 </ul>
             </div>
-            <div className={styles.navitemwrapper2} ref={ref}>
+            <div className={styles.navitemwrapper2}>
                 {isMobile ? <>
                     <div className={styles.navitem3}>
-                        <Image src='/icons8-menu.svg' alt='navigation' width='30px' height='30px' onClick={() => setOpen(!open)} />
+                        <Image src='/icons8-menu.svg' alt='navigation' width='30px' height='30px' onClick={() => setOpen(!open)} ref={ref} />
                     </div>
 
                 </> : <>
 
-                    <Link href={props.currentSeason == 6 ? "/" : `/s${props.currentSeason}`}
-                        onClick={(e) => e.stopPropogation()}>
+                    <Link href={props.currentSeason == 6 ? "/" : `/s${props.currentSeason}`}>
+                        {/* onClick={(e) => e.stopPropogation()} */}
                         <ul className={styles.navitem}>
                             leaderboard
                         </ul>
                     </Link>
-                    <Link href={props.currentSeason == 6 ? "/records" : `/s${props.currentSeason}/records`}
-                        onClick={(e) => e.stopPropogation()}>
+                    <Link href={props.currentSeason == 6 ? "/records" : `/s${props.currentSeason}/records`}>
+                        {/* onClick={(e) => e.stopPropogation()}> */}
                         <ul className={styles.navitem}>
                             records
                         </ul>
                     </Link>
-                    <a href="https://discord.gg/uR3rRzsjhk"
-                        onClick={(e) => e.stopPropogation()}>
+                    <a href="https://discord.gg/uR3rRzsjhk">
+                        {/* onClick={(e) => e.stopPropogation()}> */}
                         <ul className={styles.navitem}>
                             discord
                         </ul>
                     </a>
-                    <Link href='/rules'
-                        onClick={(e) => e.stopPropogation()}>
+                    <Link href='/rules'>
+                        {/* onClick={(e) => e.stopPropogation()} */}
                         <ul className={styles.navitem}>
                             rules
                         </ul>
