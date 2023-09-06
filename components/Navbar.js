@@ -57,22 +57,26 @@ export default function Navbar(props) {
 
                 </> : <>
 
-                    <Link href={props.currentSeason == 6 ? "/" : `/s${props.currentSeason}`}>
+                    <Link href={props.currentSeason == 6 ? "/" : `/s${props.currentSeason}`}
+                        onClick={(e) => e.stopPropogation()}>
                         <ul className={styles.navitem}>
                             leaderboard
                         </ul>
                     </Link>
-                    <Link href={props.currentSeason == 6 ? "/records" : `/s${props.currentSeason}/records`}>
+                    <Link href={props.currentSeason == 6 ? "/records" : `/s${props.currentSeason}/records`}
+                        onClick={(e) => e.stopPropogation()}>
                         <ul className={styles.navitem}>
                             records
                         </ul>
                     </Link>
-                    <a href="https://discord.gg/uR3rRzsjhk">
+                    <a href="https://discord.gg/uR3rRzsjhk"
+                        onClick={(e) => e.stopPropogation()}>
                         <ul className={styles.navitem}>
                             discord
                         </ul>
                     </a>
-                    <Link href='/rules'>
+                    <Link href='/rules'
+                        onClick={(e) => e.stopPropogation()}>
                         <ul className={styles.navitem}>
                             rules
                         </ul>

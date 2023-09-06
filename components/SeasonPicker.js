@@ -39,8 +39,9 @@ export default function SeasonPicker(props) {
 
 
     // Closes the menus after choice for mobile devices
-    function handleMobileSeasonChoice(seasonChoice){
+    function handleMobileSeasonChoice(e, seasonChoice){
         props.setCurrentSeason(seasonChoice)
+        e.stopPropogation()
         setOpen(!open)
     }
 
@@ -111,7 +112,7 @@ export default function SeasonPicker(props) {
                 <Link href={`/s5${currentPageName}`}>
                         <button
                             className={props.currentSeason == 5 ? styles.navitemactive : styles.navitem}
-                            onClick={() => handleMobileSeasonChoice(5)}>
+                            onClick={(e) => handleMobileSeasonChoice(e, 5)}>
                             season 5
                         </button>
                     </Link>
@@ -119,7 +120,7 @@ export default function SeasonPicker(props) {
                     <Link href={`${currentPageName}`}>
                         <button
                             className={props.currentSeason == 6 ? styles.navitemactive : styles.navitem}
-                            onClick={() => handleMobileSeasonChoice(6)}>
+                            onClick={(e) => handleMobileSeasonChoice(e, 6)}>
                             season 6
                         </button>
                     </Link>
