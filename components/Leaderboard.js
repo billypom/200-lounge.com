@@ -252,7 +252,7 @@ export default function Leaderboard(props) {
                         <TableRow key={"header"}>
                             {
                                 columns.map((column, idx) => (column === "player_id" ? <></> : isMobile && column === "country" || isMobile && idx > 4 ? <></> :
-                                    <StyledTableCell align="center">
+                                    <StyledTableCell key={column} align="center">
                                         <div
                                             className={styles.table_header_text}
                                             onClick={() => setSortedBy((prev) => ({ column: column, asc: !prev.asc }))}>

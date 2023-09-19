@@ -4,10 +4,16 @@ import Head from 'next/head'
 import mysql from 'mysql2'
 import styles from '../../styles/Home.module.css'
 import Link from 'next/link'
+import dynamic from "next/dynamic";
+
+import { Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 
 import MogiHistory from '../../components/MogiHistory';
 
-
+const LineChart = dynamic(() => import('recharts').then(mod => mod.LineChart), {
+  ssr: false,
+  loading: () => <p>Loading...</p>
+});
 
 export async function getServerSideProps(context) {
   const player = context.query.name
@@ -60,7 +66,7 @@ export async function getServerSideProps(context) {
   // mogi history
   let rows = await new Promise((resolve, reject) => {
     connection.query(
-      `SELECT pm.mogi_id, pm.mmr_change, pm.new_mmr, CONCAT(if(t.tier_name="sq","squad queue",CONCAT("tier-",t.tier_name))," ", if(m.mogi_format=1,"FFA",CONCAT(m.mogi_format,"v",m.mogi_format))) as title, UNIX_TIMESTAMP(m.create_date) as create_date
+      `SELECT pm.mogi_id, pm.mmr_change, pm.new_mmr, CONCAT(if(t.tier_name="sq","squad queue",CONCAT("tier-",t.tier_name))," ", if(m.mogi_format=1,"FFA",CONCAT(m.mogi_format,"v",m.mogi_format))) as title, UNIX_TIMESTAMP(m.create_date) as create_date, pm.score
       FROM player_mogi pm 
       JOIN mogi m ON pm.mogi_id = m.mogi_id 
       JOIN tier t on m.tier_id = t.tier_id
@@ -154,7 +160,24 @@ export async function getServerSideProps(context) {
 
 export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, grid_color }) {
 
+  // Convert your rows to a format suitable for the LineChart
+  const mmrHistory = rows.map(row => ({
+    date: new Date(row.create_date * 1000).toLocaleDateString(),
+    mmr: row.new_mmr
+  })).reverse()
 
+  const scoreHistory = rows.map(row => ({
+    date: new Date(row.create_date * 1000).toLocaleDateString(),
+    score: row.score
+  })).reverse()
+
+
+  // Get min & max values for history
+  const mmrMin = Math.min(...mmrHistory.map(item => item.mmr));
+  const mmrMax = Math.max(...mmrHistory.map(item => item.mmr));
+
+  const scoreMin = Math.min(...scoreHistory.map(item => item.score));
+  const scoreMax = Math.max(...scoreHistory.map(item => item.score));
 
   return (
     <div className={styles.container}>
@@ -232,6 +255,50 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, g
             </div>
 
           </div>
+
+
+
+
+          {mmrHistory ?
+            <>
+              <div className='text-2xl pt-10'>
+                MMR History
+              </div>
+              <div className='m-auto p-1 z-10'>
+                <LineChart width={500} height={300} data={mmrHistory}>
+                  <XAxis dataKey="date" />
+                  <YAxis domain={[mmrMin, mmrMax]} />
+                  <Tooltip />
+                  <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+                  <Line type="monotone" dataKey="mmr" stroke="#8884d8" />
+                </LineChart>
+              </div>
+            </>
+            : <></>}
+
+          {scoreHistory ? <>
+            <div className='text-2xl'>
+              Score History
+            </div>
+            <div className='m-auto p-1 z-10'>
+              <LineChart width={500} height={300} data={scoreHistory}>
+                <XAxis dataKey="date" />
+                <YAxis domain={[scoreMin, scoreMax]} />
+                <Tooltip />
+                <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+                <Line type="monotone" dataKey="score" stroke="#8884d8" />
+              </LineChart>
+            </div>
+          </>
+            : <></>}
+
+
+
+
+          <div className='text-2xl'>
+            Mogi History
+          </div>
+
           <div className="m-auto p-1 z-10">
             <MogiHistory rows={rows} />
           </div>
