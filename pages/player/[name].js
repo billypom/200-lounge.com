@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import ReactCountryFlag from "react-country-flag"
 import Head from 'next/head'
 import mysql from 'mysql2'
@@ -202,13 +202,13 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
   const mmrMin = Math.min(...mmrHistory.map(item => item.mmr));
   const mmrMax = Math.max(...mmrHistory.map(item => item.mmr));
 
-  const scoreMin = Math.min(...scoreHistory.map(item => item.score));
-  const scoreMax = Math.max(...scoreHistory.map(item => item.score));
+  // const scoreMin = Math.min(...scoreHistory.map(item => item.score));
+  // const scoreMax = Math.max(...scoreHistory.map(item => item.score));
 
-  const partnerScoreMin = Math.min(...partnerScoreHistory.map(item => item.score));
-  const partnerScoreMax = Math.max(...partnerScoreHistory.map(item => item.score));
+  // const partnerScoreMin = Math.min(...partnerScoreHistory.map(item => item.score));
+  // const partnerScoreMax = Math.max(...partnerScoreHistory.map(item => item.score));
 
-  const chartAspectRatio = 1
+  // const chartAspectRatio = 1
 
 
 
@@ -384,7 +384,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
               <div className='m-auto z-10 h-72'>
                 <LineChart width={isMobile ? 300 : 500} height={isMobile ? 250 : 300} data={filteredScoreHistory} onClick={handleChartClick}>
                   <XAxis dataKey="date" />
-                  <YAxis domain={[scoreMin, scoreMax]} />
+                  <YAxis domain={[0, 180]} />
                   <Tooltip />
                   <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                   <Line type="monotone" dataKey="score" stroke="#8884d8" dot={<CustomDot />} />
@@ -401,7 +401,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
               <div className='m-auto z-10 h-72'>
                 <LineChart width={isMobile ? 300 : 500} height={isMobile ? 250 : 300} data={filteredPartnerScoreHistory} onClick={handleChartClick}>
                   <XAxis dataKey="date" />
-                  <YAxis domain={[partnerScoreMin, partnerScoreMax]} />
+                  <YAxis domain={[0, 180]} />
                   <Tooltip />
                   <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                   <Line type="monotone" dataKey="score" stroke="#8884d8" dot={<CustomDot />} />
