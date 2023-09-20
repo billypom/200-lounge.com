@@ -164,6 +164,18 @@ export async function getServerSideProps(context) {
 
 export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, partner_score_history, grid_color }) {
 
+  // Mobile handling things
+  const [width, setWidth] = useState(typeof window === 'undefined' ? 0 : window.innerWidth)
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    function handleResize() {
+      setWidth(typeof window === 'undefined' ? 0 : window.innerWidth)
+      setIsMobile(width > 1000 ? false : true)
+    }
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  },)
 
 
   // Convert your rows to a format suitable for the LineChart
@@ -250,7 +262,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
       setFilteredPartnerScoreHistory(partnerScoreHistory)
     }
   }, [startDate, endDate])
-  
+
 
 
 
@@ -349,12 +361,12 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
           <div className='flex flex-row flex-wrap justify-center m-auto'>
 
             {mmrHistory ?
-              <div className='flex flex-col'>
+              <div className='flex flex-col p-2'>
                 <div className='text-2xl'>
                   MMR History
                 </div>
-                <div className='m-auto p-1 z-10 h-72'>
-                  <LineChart width={400} height={250} data={filteredMmrHistory} onClick={handleChartClick}>
+                <div className='m-auto z-10 h-72'>
+                  <LineChart width={isMobile ? 300 : 500} height={isMobile ? 250 : 300} data={filteredMmrHistory} onClick={handleChartClick}>
                     <XAxis dataKey="date" />
                     <YAxis domain={[mmrMin, mmrMax]} />
                     <Tooltip />
@@ -365,12 +377,12 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
               </div>
               : <></>}
 
-            {scoreHistory ? <div className='flex flex-col'>
+            {scoreHistory ? <div className='flex flex-col p-2'>
               <div className='text-2xl'>
                 Score History
               </div>
-              <div className='m-auto p-1 z-10 h-72'>
-                <LineChart width={400} height={250} data={filteredScoreHistory} onClick={handleChartClick}>
+              <div className='m-auto z-10 h-72'>
+                <LineChart width={isMobile ? 300 : 500} height={isMobile ? 250 : 300} data={filteredScoreHistory} onClick={handleChartClick}>
                   <XAxis dataKey="date" />
                   <YAxis domain={[scoreMin, scoreMax]} />
                   <Tooltip />
@@ -382,12 +394,12 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
               : <></>}
 
 
-            {partnerScoreHistory ? <div className='flex flex-col'>
+            {partnerScoreHistory ? <div className='flex flex-col p-2'>
               <div className='text-2xl'>
                 Partner Score History
               </div>
-              <div className='m-auto p-1 z-10 h-72'>
-                <LineChart width={400} height={250} data={filteredPartnerScoreHistory} onClick={handleChartClick}>
+              <div className='m-auto z-10 h-72'>
+                <LineChart width={isMobile ? 300 : 500} height={isMobile ? 250 : 300} data={filteredPartnerScoreHistory} onClick={handleChartClick}>
                   <XAxis dataKey="date" />
                   <YAxis domain={[partnerScoreMin, partnerScoreMax]} />
                   <Tooltip />
