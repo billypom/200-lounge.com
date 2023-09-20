@@ -1,15 +1,18 @@
 import * as React from 'react';
+import { useState, useEffect, useRef } from 'react'
 import ReactCountryFlag from "react-country-flag"
 import Head from 'next/head'
 import mysql from 'mysql2'
 import styles from '../../styles/Home.module.css'
 import Link from 'next/link'
-import dynamic from "next/dynamic";
+import dynamic from "next/dynamic"
 
-import { Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
+
+import { Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 
 import MogiHistory from '../../components/MogiHistory';
 
+// server/client rendering fix for line charts - recharts only? idk
 const LineChart = dynamic(() => import('recharts').then(mod => mod.LineChart), {
   ssr: false,
   loading: () => <p>Loading...</p>
@@ -101,17 +104,6 @@ export async function getServerSideProps(context) {
   });
   ll = JSON.parse(JSON.stringify(ll))
 
-  // // partner avg
-  // let pa = await new Promise((resolve, reject) => {
-  //   connection.query(
-  //     `SELECT ROUND(AVG(score),2) as pa FROM (SELECT player_id, mogi_id, place, score FROM player_mogi WHERE player_id <> ? AND (mogi_id, place) IN (SELECT mogi_id, place FROM player_mogi WHERE player_id = ?)) as table2;`, [results[0].player_id, results[0].player_id], (error, pa) => {
-  //       if (error) reject(error);
-  //       else resolve(pa);
-  //     }
-  //   );
-  // });
-  // pa = JSON.parse(JSON.stringify(pa))
-
   // partner avg2
   let pa = await new Promise((resolve, reject) => {
     connection.query(
@@ -122,6 +114,17 @@ export async function getServerSideProps(context) {
     );
   });
   pa = JSON.parse(JSON.stringify(pa))
+
+
+  let partner_score_history = await new Promise((resolve, reject) => {
+    connection.query(
+      `SELECT pm.mogi_id, pm.score, UNIX_TIMESTAMP(pm2.create_date) as create_date FROM player_mogi as pm INNER JOIN (SELECT pm.mogi_id, pm.place, pm.mmr_change, m.create_date FROM player_mogi as pm JOIN mogi as m on pm.mogi_id = m.mogi_id WHERE pm.player_id = ? ORDER BY m.create_date DESC) as pm2 ON pm2.mogi_id = pm.mogi_id  AND pm2.place = pm.place AND pm.mmr_change = pm2.mmr_change WHERE player_id <> ?`, [results[0].player_id, results[0].player_id], (error, partner_score_history) => {
+        if (error) reject(error)
+        else resolve(partner_score_history)
+      }
+    )
+  })
+  partner_score_history = JSON.parse(JSON.stringify(partner_score_history))
 
   // # rank
   let rank = await new Promise((resolve, reject) => {
@@ -151,25 +154,36 @@ export async function getServerSideProps(context) {
   connection.end();
   // return props as object ALWAYS
   return {
-    props: { results, rows, lg, ll, pa, rank, score_stuff, grid_color }
+    props: { results, rows, lg, ll, pa, rank, score_stuff, partner_score_history, grid_color }
   }
 }
 
 
 
 
-export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, grid_color }) {
+
+export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, partner_score_history, grid_color }) {
+
+
 
   // Convert your rows to a format suitable for the LineChart
   const mmrHistory = rows.map(row => ({
+    mogi_id: row.mogi_id,
     date: new Date(row.create_date * 1000).toLocaleDateString(),
     mmr: row.new_mmr
   })).reverse()
 
   const scoreHistory = rows.map(row => ({
+    mogi_id: row.mogi_id,
     date: new Date(row.create_date * 1000).toLocaleDateString(),
     score: row.score
   })).reverse()
+
+  const partnerScoreHistory = partner_score_history.map(row => ({
+    mogi_id: row.mogi_id,
+    date: new Date(row.create_date * 1000).toLocaleDateString(),
+    score: row.score
+  }))
 
 
   // Get min & max values for history
@@ -178,6 +192,68 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, g
 
   const scoreMin = Math.min(...scoreHistory.map(item => item.score));
   const scoreMax = Math.max(...scoreHistory.map(item => item.score));
+
+  const partnerScoreMin = Math.min(...partnerScoreHistory.map(item => item.score));
+  const partnerScoreMax = Math.max(...partnerScoreHistory.map(item => item.score));
+
+  const chartAspectRatio = 1
+
+
+
+  // Custom dot on line chart
+  function CustomDot(props) {
+    const { cx, cy, payload } = props;
+    return (
+      <circle cx={cx} cy={cy} r={2} fill="#8884d8" stroke="none" style={{ cursor: 'pointer' }} />
+    )
+  }
+
+  // Link to mogi per chart datapoint
+  const handleChartClick = (data) => {
+    if (data && data.activePayload && data.activePayload[0]) {
+      const clickedData = data.activePayload[0].payload;
+      // Navigate using the mogi_id from the clickedData
+      window.location.href = `/mogi/${clickedData.mogi_id}`;
+    }
+  };
+
+
+
+  // Filtering state for the date range
+  const currentDate = new Date().toISOString().split('T')[0];
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState(currentDate)
+  const [filteredMmrHistory, setFilteredMmrHistory] = useState(mmrHistory)
+  const [filteredScoreHistory, setFilteredScoreHistory] = useState(scoreHistory)
+  const [filteredPartnerScoreHistory, setFilteredPartnerScoreHistory] = useState(partnerScoreHistory)
+
+  // Watch for changes in startDate, endDate, and mmrHistory, and update filtered data accordingly
+  useEffect(() => {
+    if (startDate && endDate) {
+      setFilteredMmrHistory(mmrHistory.filter(item => {
+        const itemDate = new Date(item.date)
+        return itemDate >= new Date(startDate) && itemDate <= new Date(endDate)
+      }))
+
+      setFilteredScoreHistory(scoreHistory.filter(item => {
+        const itemDate = new Date(item.date)
+        return itemDate >= new Date(startDate) && itemDate <= new Date(endDate)
+      }))
+
+      setFilteredPartnerScoreHistory(partnerScoreHistory.filter(item => {
+        const itemDate = new Date(item.date)
+        return itemDate >= new Date(startDate) && itemDate <= new Date(endDate)
+      }))
+    } else {
+      setFilteredMmrHistory(mmrHistory)
+      setFilteredScoreHistory(scoreHistory)
+      setFilteredPartnerScoreHistory(partnerScoreHistory)
+    }
+  }, [startDate, endDate])
+  
+
+
+
 
   return (
     <div className={styles.container}>
@@ -256,41 +332,72 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, g
 
           </div>
 
+          {/* Chart data date picker */}
+          <div className='m-2 p-2 flex flex-row'>
+            <div className='m-2'>
+              Start Date:
+              <input className='m-2' type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+            </div>
+            <div className='m-2'>
+              End Date:
+              <input className='m-2' type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+            </div>
+          </div>
 
 
 
-          {mmrHistory ?
-            <>
-              <div className='text-2xl pt-10'>
-                MMR History
+          <div className='flex flex-row flex-wrap justify-center m-auto'>
+
+            {mmrHistory ?
+              <div className='flex flex-col'>
+                <div className='text-2xl'>
+                  MMR History
+                </div>
+                <div className='m-auto p-1 z-10 h-72'>
+                  <LineChart width={400} height={250} data={filteredMmrHistory} onClick={handleChartClick}>
+                    <XAxis dataKey="date" />
+                    <YAxis domain={[mmrMin, mmrMax]} />
+                    <Tooltip />
+                    <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+                    <Line type="monotone" dataKey="mmr" stroke="#8884d8" dot={<CustomDot />} />
+                  </LineChart>
+                </div>
               </div>
-              <div className='m-auto p-1 z-10'>
-                <LineChart width={500} height={300} data={mmrHistory}>
+              : <></>}
+
+            {scoreHistory ? <div className='flex flex-col'>
+              <div className='text-2xl'>
+                Score History
+              </div>
+              <div className='m-auto p-1 z-10 h-72'>
+                <LineChart width={400} height={250} data={filteredScoreHistory} onClick={handleChartClick}>
                   <XAxis dataKey="date" />
-                  <YAxis domain={[mmrMin, mmrMax]} />
+                  <YAxis domain={[scoreMin, scoreMax]} />
                   <Tooltip />
                   <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                  <Line type="monotone" dataKey="mmr" stroke="#8884d8" />
+                  <Line type="monotone" dataKey="score" stroke="#8884d8" dot={<CustomDot />} />
                 </LineChart>
               </div>
-            </>
-            : <></>}
+            </div>
+              : <></>}
 
-          {scoreHistory ? <>
-            <div className='text-2xl'>
-              Score History
+
+            {partnerScoreHistory ? <div className='flex flex-col'>
+              <div className='text-2xl'>
+                Partner Score History
+              </div>
+              <div className='m-auto p-1 z-10 h-72'>
+                <LineChart width={400} height={250} data={filteredPartnerScoreHistory} onClick={handleChartClick}>
+                  <XAxis dataKey="date" />
+                  <YAxis domain={[partnerScoreMin, partnerScoreMax]} />
+                  <Tooltip />
+                  <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+                  <Line type="monotone" dataKey="score" stroke="#8884d8" dot={<CustomDot />} />
+                </LineChart>
+              </div>
             </div>
-            <div className='m-auto p-1 z-10'>
-              <LineChart width={500} height={300} data={scoreHistory}>
-                <XAxis dataKey="date" />
-                <YAxis domain={[scoreMin, scoreMax]} />
-                <Tooltip />
-                <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                <Line type="monotone" dataKey="score" stroke="#8884d8" />
-              </LineChart>
-            </div>
-          </>
-            : <></>}
+              : <></>}
+          </div>
 
 
 

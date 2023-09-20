@@ -31,8 +31,6 @@ export default function Navbar(props) {
                 return
             }
             if (!ref.current?.contains(event.target)) {
-                console.log('i clicked outside')
-                console.log(ref)
                 setOpen(false)
               }
         }

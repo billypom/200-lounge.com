@@ -100,11 +100,20 @@ export async function getServerSideProps() {
     rows = JSON.parse(JSON.stringify(rows).replace(/\:null/gi, "\:\"\""))
   }
 
+  let countries = await new Promise((resolve, reject) => {
+    connection.query('select distinct country_code from player order by country_code ASC;', (error, countries) => {
+      if (error) reject(error)
+      else resolve(countries)
+    })
+  })
+  countries = JSON.parse(JSON.stringify(countries))
+
+
   // End connection to server
   connection.end();
   let current_season = process.env.current_season
   return {
-    props: { rows, current_season }
+    props: { rows, current_season, countries }
   }
 }
 
@@ -112,7 +121,7 @@ export async function getServerSideProps() {
 
 
 
-export default function Home({ rows, current_season }) {
+export default function Home({ rows, current_season, countries }) {
 
   const useMediaQuery = (width) => {
     const [targetReached, setTargetReached] = useState(false);
@@ -151,11 +160,11 @@ export default function Home({ rows, current_season }) {
         <link rel="icon" href="/200.png" />
       </Head>
       <main className={styles.main}>
-          <h1 className={styles.title}>
-            leaderboard
-          </h1>
-          <div className='flex flex-col w-full m-auto justify-center items-center text-center z-10'>
-          <Leaderboard rows={rows} season={current_season} isMobile={isMobile} />
+        <h1 className={styles.title}>
+          leaderboard
+        </h1>
+        <div className='flex flex-col w-full m-auto justify-center items-center text-center z-10'>
+          <Leaderboard rows={rows} season={current_season} isMobile={isMobile} countries={countries} />
         </div>
       </main>
     </div>

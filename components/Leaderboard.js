@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import styles from '../styles/Table.module.css'
-import { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 
 // not sure? makes it work
 import PropTypes from 'prop-types'
@@ -31,12 +31,23 @@ import ReactCountryFlag from "react-country-flag"
 // theme is required? i guess
 import { useTheme } from '@mui/material/styles'
 
+// Country code to country names
+import countries from 'i18n-iso-countries';
+import { getName, registerLocale } from 'i18n-iso-countries';
+countries.registerLocale(require("i18n-iso-countries/langs/en.json")); // for English
+
+
 
 export default function Leaderboard(props) {
     let rows = props.rows
     const current_season = props.season
     const isMobile = props.isMobile
+    const countries = props.countries
     const theme = useTheme();
+
+    function getCountryName(country_code) {
+        return getName(country_code, 'en'); // 'en' for English
+    }
 
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -157,7 +168,23 @@ export default function Leaderboard(props) {
         column: columns[1],
         asc: false,
     });
+    // Search bar state
     const [query, setQuery] = useState("")
+    // Events played filter state
+    const [minEventsPlayedFilter, setMinEventsPlayedFilter] = useState('')
+    const [maxEventsPlayedFilter, setMaxEventsPlayedFilter] = useState('')
+    // Countries filter state
+    const [selectedCountry, setSelectedCountry] = useState("")
+    // MMR filters
+    const [minMMRFilter, setMinMMRFilter] = useState('')
+    const [maxMMRFilter, setMaxMMRFilter] = useState('')
+
+
+
+
+
+
+
     // bubble sort the data
     function sort(rows) {
         const { column, asc } = sortedBy;
@@ -185,11 +212,34 @@ export default function Leaderboard(props) {
             return 0;
         });
     }
+
+
+    // function filter(rows) {
+    //     return rows.filter((row) =>
+    //         columns.some(
+    //             (column) => row[column] ? row[column].toString().toLowerCase().indexOf(query.toLowerCase()) > -1 : "")
+    //     );
+    // }
+
+
     function filter(rows) {
-        return rows.filter((row) =>
-            columns.some(
-                (column) => row[column] ? row[column].toString().toLowerCase().indexOf(query.toLowerCase()) > -1 : "")
-        );
+        return rows.filter(row => {
+            // Filtering based on the query across all columns
+            const matchesQuery = columns.some(column =>
+                row[column] ? row[column].toString().toLowerCase().includes(query.toLowerCase()) : false
+            )
+            // Filtering based on events played
+            const matchesMinEventFilter = minEventsPlayedFilter ? row['events played'] >= parseInt(minEventsPlayedFilter) : true
+            const matchesMaxEventFilter = maxEventsPlayedFilter ? row['events played'] <= parseInt(maxEventsPlayedFilter) : true
+            // MMR filter
+            const matchesMinMMRFilter = minMMRFilter ? row['MMR'] >= parseInt(minMMRFilter) : true
+            const matchesMaxMMRFilter = maxMMRFilter ? row['MMR'] <= parseInt(maxMMRFilter) : true
+            // Filtering based on selected country
+            const matchesCountry = selectedCountry ? row['country'] === selectedCountry : true // Adjust this line if the country code is stored differently in your rows.
+
+            return matchesQuery && matchesMinEventFilter && matchesMaxEventFilter && matchesCountry && matchesMinMMRFilter && matchesMaxMMRFilter
+
+        })
     }
 
     // Sticky header on scroll ?
@@ -198,26 +248,26 @@ export default function Leaderboard(props) {
     useEffect(() => {
         const options = { passive: true }; // options must match add/remove event
         const scroll = (event) => {
-         const { pageYOffset, scrollY } = window;
-        //  console.log('yOffset', pageYOffset, 'scrollY', scrollY)
-         let tableHeaderY = tableHeaderRef.current.offsetTop
-        //  console.log('table y', tableHeaderY)
+            const { pageYOffset, scrollY } = window;
+            //  console.log('yOffset', pageYOffset, 'scrollY', scrollY)
+            let tableHeaderY = tableHeaderRef.current.offsetTop
+            //  console.log('table y', tableHeaderY)
 
-        if (scrollY >= tableHeaderY) {
-            // console.log('trueeeeee')
-            setHeaderYScrolled(true)
-        } else {
-            // console.log('falseeeeee')
-            setHeaderYScrolled(false)
-        }
-        // console.log('state header scroll', headerYScrolled)
+            if (scrollY >= tableHeaderY) {
+                // console.log('trueeeeee')
+                setHeaderYScrolled(true)
+            } else {
+                // console.log('falseeeeee')
+                setHeaderYScrolled(false)
+            }
+            // console.log('state header scroll', headerYScrolled)
 
 
         };
         document.addEventListener("scroll", scroll, options);
         // remove event on unmount to prevent a memory leak
         () => document.removeEventListener("scroll", scroll, options);
-       }, [headerYScrolled]);
+    }, [headerYScrolled]);
 
 
 
@@ -229,29 +279,107 @@ export default function Leaderboard(props) {
     const tableHeader = useRef(null)
     const executeScroll = () => tableHeader.current.scrollIntoView()
 
+    // Turn countries into a workable list
+    const availableCountries = countries.map(row => ({
+        country_code: row.country_code
+    }))
+
+    // Get country flags
+    function getFlagEmoji(countryCode) {
+        const offset = 127397
+        return [...countryCode].map(char => String.fromCodePoint(char.charCodeAt(0) + offset)).join('')
+    }
+
 
 
     return (<>
 
-        <div className="pb-3 gap-2 z-10 text-2xl">
-            <input
-                className="border border-gray-400 text-black placeholder:text-gray p-2 max-w-lg"
-                type="text"
-                placeholder="(search)"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)} />
+        <div className='flex flex-row flex-wrap justify-center'>
+            {/* search bar */}
+            <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
+                <input
+                    className="border border-gray-400 text-black dark:text-amber-50 placeholder:text-gray p-2 w-64"
+                    type="text"
+                    placeholder="player"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)} />
+            </div>
+
+            {/* countries picker */}
+            <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1 box-content">
+                <select
+                    id="country"
+                    name="country"
+                    value={selectedCountry}
+                    className='border border-gray-400 text-black dark:text-amber-50 placeholder:text-gray p-2 w-64'
+                    onChange={(e) => setSelectedCountry(e.target.value)}
+                >
+                    <option value="">all countries</option>
+                    {availableCountries.map((country, index) => (
+                        <option key={index} value={country.country_code}>
+                            {getFlagEmoji(country.country_code)} {getCountryName(country.country_code)}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
+
         </div>
-        {/* search bar */}
+
+
+        <div className='flex flex-row flex-wrap justify-center'>
+        <div className='flex flex-row flex-wrap justify-center'>
+            {/* # of events filters */}
+            <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
+                <input
+                    className="border border-gray-400 text-black dark:text-amber-50 placeholder:text-gray p-2 w-32"
+                    type="number"
+                    placeholder="min events"
+                    value={minEventsPlayedFilter}
+                    onChange={(e) => setMinEventsPlayedFilter(e.target.value)} />
+            </div>
+            <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
+                <input
+                    className="border border-gray-400 text-black dark:text-amber-50 placeholder:text-gray p-2 w-32"
+                    type="number"
+                    placeholder="max events"
+                    value={maxEventsPlayedFilter}
+                    onChange={(e) => setMaxEventsPlayedFilter(e.target.value)} />
+            </div>
+        </div>
+
+
+        <div className='flex flex-row flex-wrap justify-center'>
+            {/* MMR filters */}
+            <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
+                <input
+                    className="border border-gray-400 text-black dark:text-amber-50 placeholder:text-gray p-2 w-32"
+                    type="number"
+                    placeholder="min mmr"
+                    value={minMMRFilter}
+                    onChange={(e) => setMinMMRFilter(e.target.value)} />
+            </div>
+            <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
+                <input
+                    className="border border-gray-400 text-black dark:text-amber-50 placeholder:text-gray p-2 w-32"
+                    type="number"
+                    placeholder="max mmr"
+                    value={maxMMRFilter}
+                    onChange={(e) => setMaxMMRFilter(e.target.value)} />
+            </div>
+        </div>
+        </div>
 
         {/* leaderboard, table */}
         <div className="m-auto p-1 z-10">
             <TableContainer component={Paper} >
                 <Table stickyHeader aria-label="customized table" ref={tableHeaderRef}>
                     {/* header */}
-                    <TableHead ref={tableHeader} className={headerYScrolled ? styles.sticky_header : styles.nothing_header }>
-                        <TableRow key={"header"}>
+                    <TableHead ref={tableHeader} className={headerYScrolled ? styles.sticky_header : styles.nothing_header}>
+                        <TableRow>
+                            {/* React.Fragment used instead of <> so that each column gets a key. No more error :3 */}
                             {
-                                columns.map((column, idx) => (column === "player_id" ? <></> : isMobile && column === "country" || isMobile && idx > 4 ? <></> :
+                                columns.map((column, idx) => (column === "player_id" ? <React.Fragment key={column}></React.Fragment> : isMobile && column === "country" || isMobile && idx > 4 ? <React.Fragment key={column}></React.Fragment> :
                                     <StyledTableCell key={column} align="center">
                                         <div
                                             className={styles.table_header_text}
@@ -271,7 +399,7 @@ export default function Leaderboard(props) {
                     </TableHead>
                     {/* data */}
                     <TableBody>
-                        
+
                         {/* each record gets these divs */}
                         {(rowsPerPage > 0
                             ? sort(filter(rows)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : sort(filter(rows))).map((row, idx) => (
