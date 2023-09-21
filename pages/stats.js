@@ -71,7 +71,7 @@ export async function getServerSideProps() {
 
     // Count of all players
     stuff = await new Promise((resolve, reject) => {
-        connection.query('SELECT count(*) FROM player;', [], (error, stuff) => {
+        connection.query('SELECT count(*) as count FROM player;', [], (error, stuff) => {
             if (error) reject(error)
             else resolve(stuff)
         })
