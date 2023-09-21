@@ -133,6 +133,17 @@ export async function getServerSideProps() {
     })
     const mogi_day_of_week_data = JSON.parse(JSON.stringify(stuff))
 
+    // Tier usages
+    stuff = await new Promise((resolve, reject) => {
+        connection.query("select t.tier_name, count(mogi_id) as mogi_count from mogi m join tier t on m.tier_id = t.tier_id group by t.tier_id;", [], (error, stuff) => {
+            if (error) reject(error)
+            else resolve(stuff)
+        })
+    })
+    const mogi_count_by_tier = JSON.parse(JSON.stringify(stuff))
+
+
+
 
 
 
@@ -143,12 +154,17 @@ export async function getServerSideProps() {
     connection.end();
 
     return {
-        props: { today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data }
+        props: { today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data, mogi_count_by_tier }
     }
 }
 
 
-export default function Stats({ today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data }) {
+
+
+
+
+
+export default function Stats({ today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data, mogi_count_by_tier }) {
 
     // Mobile handling things
     const [width, setWidth] = useState(typeof window === 'undefined' ? 0 : window.innerWidth)
@@ -188,6 +204,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
     }))
 
 
+    // Mogi day of week/hour data
     const mogi_frequency_data = mogi_day_of_week_data.map(row => ({
         day_of_week: row.day_of_week,
         hour_of_day: row.hour_of_day,
@@ -213,7 +230,12 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
 
 
 
-
+    // Mogi by tier data
+    const tier_colors = ['#9339bd', '#bd397b', '#39bd7d', '#39b6bd', '#bd7b39']
+    const mogi_tier_data = mogi_count_by_tier.map(row => ({
+        mogi_count: row.mogi_count,
+        name: row.tier_name, // Using the word "name" specifically with recharts will make that the legend?
+    }))
 
 
 
@@ -293,7 +315,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
 
                     <div className='pb-2'>
                         <BarChart
-                            width={isMobile ? 300 : 750} height={isMobile ? 250 : 400}
+                            width={isMobile ? 375 : 750} height={isMobile ? 300 : 400}
                             data={mappedRankData}
                             margin={{ top: 5, right: 30, left: 20, bottom: 48 }}
                         >
@@ -313,14 +335,14 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                     </div>
 
                     <div className='flex flex-row flex-wrap justify-center'>
-                        <div className={styles.player_page_stats}>
+                    <div className={styles.player_page_stats}>
                             <h2 className='text-xl font-bold'>total players:</h2>
-                            <div>{total_ranked_players[0].count}</div>
+                            <div>{total_registered_players[0].count}</div>
                         </div>
 
                         <div className={styles.player_page_stats}>
-                            <h2 className='text-xl font-bold'>total mogis:</h2>
-                            <div>{total_mogis_played[0].count}</div>
+                            <h2 className='text-xl font-bold'>ranked players:</h2>
+                            <div>{total_ranked_players[0].count}</div>
                         </div>
 
                         {average_mmr ?
@@ -344,8 +366,9 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                     <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>mogi stats</h2>
 
                     <div className={styles.player_page_stats}>
-                        <h2 className='text-xl font-bold'>total mogis played</h2>
-                    </div>
+                            <h2 className='text-xl font-bold'>total mogis:</h2>
+                            <div>{total_mogis_played[0].count}</div>
+                        </div>
                     <div className='pb-2'>
                         <PieChart width={400} height={400}>
                             <Pie
@@ -366,6 +389,38 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                             <Legend />
                         </PieChart>
                     </div>
+
+                    <div className={styles.player_page_stats}>
+                        <h2 className='text-xl font-bold'>mogis by tier</h2>
+                    </div>
+
+
+
+                    <div className='pb-2'>
+                        <BarChart
+                            width={isMobile ? 375 : 750} height={isMobile ? 300 : 400}
+                            data={mogi_tier_data}
+                            margin={{ top: 5, right: 30, left: 20, bottom: 48 }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" angle={-45} textAnchor="end" verticalAnchor="middle" />
+                            <YAxis />
+                            <Tooltip />
+                            {/* <Legend /> */}
+                            <Bar dataKey="mogi_count" fill="#8884d8">
+                                {
+                                    mogi_tier_data.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={tier_colors[index % tier_colors.length]} />
+                                    ))
+                                }
+                            </Bar>
+                        </BarChart>
+                    </div>
+
+
+
+
+
 
 
 
