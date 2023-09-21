@@ -203,7 +203,7 @@ export default function MogiHistory(props) {
                                 </StyledTableCell>
 
                                 <StyledTableCell align="center">
-                                    <div className={row.new_mmr >= 11000 ? 'text-red-800' : row.new_mmr >= 9000 ? 'text-violet-700' : row.new_mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.new_mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.new_mmr >= 4500 ? 'text-yellow-500' : row.new_mmr >= 3000 ? 'text-gray-400' : row.new_mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                    <div className={row.new_mmr >= 11000 ? 'text-red-800' : row.new_mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.new_mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.new_mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.new_mmr >= 4500 ? 'text-yellow-500' : row.new_mmr >= 3000 ? 'text-gray-400' : row.new_mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                         {row.new_mmr}
                                     </div>
                                 </StyledTableCell>

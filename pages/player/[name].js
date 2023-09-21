@@ -275,7 +275,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
       <main className={styles.main}>
         {/* <TileGrid /> */}
         <h1 className={styles.title}>
-          <div className={results[0].rank_name === "Grandmaster" ? 'text-red-800' : results[0].rank_name === "Master" ? 'text-violet-700' : results[0].rank_name === "Diamond" ? 'dark:text-cyan-200 text-cyan-500' : results[0].rank_name === "Platinum" ? 'dark:text-cyan-600 text-cyan-900' : results[0].rank_name === "Gold" ? 'text-yellow-500' : results[0].rank_name === "Silver" ? 'text-gray-400' : results[0].rank_name === "Bronze" ? 'text-orange-400' : results[0].rank_name === "Iron" ? 'text-stone-500' : 'text-white'}><ReactCountryFlag countryCode={results[0]["country"]} style={{ width: '4rem', height: '4rem' }} svg /> {results[0]["player name"]} - {results[0].rank_name}</div>
+          <div className={results[0].rank_name === "Grandmaster" ? 'text-red-800' : results[0].rank_name === "Master" ? 'dark:text-violet-500 text-zinc-900' : results[0].rank_name === "Diamond" ? 'dark:text-cyan-200 text-cyan-500' : results[0].rank_name === "Platinum" ? 'dark:text-cyan-600 text-cyan-900' : results[0].rank_name === "Gold" ? 'text-yellow-500' : results[0].rank_name === "Silver" ? 'text-gray-400' : results[0].rank_name === "Bronze" ? 'text-orange-400' : results[0].rank_name === "Iron" ? 'text-stone-500' : 'text-white'}><ReactCountryFlag countryCode={results[0]["country"]} style={{ width: '4rem', height: '4rem' }} svg /> {results[0]["player name"]} - {results[0].rank_name}</div>
         </h1>
         <div className='flex flex-col w-full m-auto justify-center items-center text-center z-10'>
           <div className='flex flex-row flex-wrap w-full justify-center'>
@@ -286,12 +286,12 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
 
             <div className={styles.player_page_stats}>
               <h2 className='text-xl font-bold'>mmr</h2>
-              <div className={results[0]["mmr"] >= 11000 ? 'text-red-800' : results[0]["mmr"] >= 9000 ? 'text-violet-700' : results[0]["mmr"] >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : results[0]["mmr"] >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : results[0]["mmr"] >= 4500 ? 'text-yellow-500' : results[0]["mmr"] >= 3000 ? 'text-gray-400' : results[0]["mmr"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["mmr"]}</div>
+              <div className={results[0]["mmr"] >= 11000 ? 'text-red-800' : results[0]["mmr"] >= 9000 ? 'dark:text-violet-500 text-zinc-900' : results[0]["mmr"] >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : results[0]["mmr"] >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : results[0]["mmr"] >= 4500 ? 'text-yellow-500' : results[0]["mmr"] >= 3000 ? 'text-gray-400' : results[0]["mmr"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["mmr"]}</div>
             </div>
 
             <div className={styles.player_page_stats}>
               <h2 className='text-xl font-bold'>peak mmr</h2>
-              <div className={results[0]["peak mmr"] >= 11000 ? 'text-red-800' : results[0]["peak mmr"] >= 9000 ? 'text-violet-700' : results[0]["peak mmr"] >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : results[0]["peak mmr"] >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : results[0]["peak mmr"] >= 4500 ? 'text-yellow-500' : results[0]["peak mmr"] >= 3000 ? 'text-gray-400' : results[0]["peak mmr"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["peak mmr"]}</div>
+              <div className={results[0]["peak mmr"] >= 11000 ? 'text-red-800' : results[0]["peak mmr"] >= 9000 ? 'dark:text-violet-500 text-zinc-900' : results[0]["peak mmr"] >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : results[0]["peak mmr"] >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : results[0]["peak mmr"] >= 4500 ? 'text-yellow-500' : results[0]["peak mmr"] >= 3000 ? 'text-gray-400' : results[0]["peak mmr"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["peak mmr"]}</div>
             </div>
 
             <div className={styles.player_page_stats}>
@@ -345,11 +345,11 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
           <div className='m-2 p-2 flex flex-row'>
             <div className='m-2'>
               Start Date:
-              <input className='m-2' type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+              <input className='m-2 border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray' type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
             </div>
             <div className='m-2'>
               End Date:
-              <input className='m-2' type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+              <input className='m-2 border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray' type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
             </div>
           </div>
 

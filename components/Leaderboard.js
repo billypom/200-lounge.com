@@ -298,7 +298,7 @@ export default function Leaderboard(props) {
             {/* search bar */}
             <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
                 <input
-                    className="border border-gray-400 text-black dark:text-amber-50 placeholder:text-gray p-2 w-64"
+                    className="border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray p-2 w-64"
                     type="text"
                     placeholder="player"
                     value={query}
@@ -311,7 +311,7 @@ export default function Leaderboard(props) {
                     id="country"
                     name="country"
                     value={selectedCountry}
-                    className='border border-gray-400 text-black dark:text-amber-50 placeholder:text-gray p-2 w-64'
+                    className='border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray p-2 w-64'
                     onChange={(e) => setSelectedCountry(e.target.value)}
                 >
                     <option value="">all countries</option>
@@ -332,7 +332,7 @@ export default function Leaderboard(props) {
             {/* # of events filters */}
             <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
                 <input
-                    className="border border-gray-400 text-black dark:text-amber-50 placeholder:text-gray p-2 w-32"
+                    className="border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray p-2 w-32"
                     type="number"
                     placeholder="min events"
                     value={minEventsPlayedFilter}
@@ -340,7 +340,7 @@ export default function Leaderboard(props) {
             </div>
             <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
                 <input
-                    className="border border-gray-400 text-black dark:text-amber-50 placeholder:text-gray p-2 w-32"
+                    className="border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray p-2 w-32"
                     type="number"
                     placeholder="max events"
                     value={maxEventsPlayedFilter}
@@ -353,7 +353,7 @@ export default function Leaderboard(props) {
             {/* MMR filters */}
             <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
                 <input
-                    className="border border-gray-400 text-black dark:text-amber-50 placeholder:text-gray p-2 w-32"
+                    className="border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray p-2 w-32"
                     type="number"
                     placeholder="min mmr"
                     value={minMMRFilter}
@@ -361,7 +361,7 @@ export default function Leaderboard(props) {
             </div>
             <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
                 <input
-                    className="border border-gray-400 text-black dark:text-amber-50 placeholder:text-gray p-2 w-32"
+                    className="border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray p-2 w-32"
                     type="number"
                     placeholder="max mmr"
                     value={maxMMRFilter}
