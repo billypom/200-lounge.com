@@ -101,7 +101,7 @@ export async function getServerSideProps() {
   }
 
   let countries = await new Promise((resolve, reject) => {
-    connection.query('select distinct country_code from player where mmr is not null order by country_code ASC;', (error, countries) => {
+    connection.query('select distinct country_code from player where peak_mmr is not null order by country_code ASC;', (error, countries) => {
       if (error) reject(error)
       else resolve(countries)
     })
