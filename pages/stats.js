@@ -3,7 +3,6 @@ import Link from 'next/link';
 import mysql from 'mysql2'
 import styles from '../styles/Home.module.css'
 import { useState, useEffect } from 'react'
-import RecordsTable from '../components/RecordsTable';
 import { Scatter, Pie, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell } from 'recharts';
 
 // Dynamic ssr for chart hydration
@@ -218,8 +217,8 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
         mogi_count: row.mogi_count
     }))
     
+    // Need date conversion in useEffect for hydration purposes
     const [offsetInHours, setOffsetInHours] = useState(0);
-
     useEffect(() => {
         setOffsetInHours(new Date().getTimezoneOffset() / 60);
     }, []);
@@ -232,6 +231,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
             mogi_count: dayData.mogi_count
         };
     });
+    // Keep this around in case I use it again... maybe useful to compare frequencies on the same scale across days
     const maxMogiFrequencyCount = Math.max(...adjustedMogiFrequencyData.map(data => data.mogi_count), 0);
 
     function formatHour(hour) {
