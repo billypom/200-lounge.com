@@ -5,14 +5,11 @@ import Head from 'next/head'
 import mysql from 'mysql2'
 import styles from '../../styles/Home.module.css'
 import Link from 'next/link'
-import dynamic from "next/dynamic"
-
-
-import { Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
-
+import { Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import MogiHistory from '../../components/MogiHistory';
 
-// server/client rendering fix for line charts - recharts only? idk
+// Dynamic ssr for hydration
+import dynamic from "next/dynamic"
 const LineChart = dynamic(() => import('recharts').then(mod => mod.LineChart), {
   ssr: false,
   loading: () => <p>Loading...</p>

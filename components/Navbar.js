@@ -63,52 +63,66 @@ export default function Navbar(props) {
 
                     <Link href={props.currentSeason == 6 ? "/" : `/s${props.currentSeason}`}>
                         {/* onClick={(e) => e.stopPropogation()} */}
-                        <ul className={styles.navitem}>
+                        <a className={styles.navitem}>
                             leaderboard
-                        </ul>
+                        </a>
                     </Link>
                     <Link href={props.currentSeason == 6 ? "/records" : `/s${props.currentSeason}/records`}>
                         {/* onClick={(e) => e.stopPropogation()}> */}
-                        <ul className={styles.navitem}>
+                        <a className={styles.navitem}>
                             records
-                        </ul>
+                        </a>
+                    </Link>
+                    <Link href='/stats'>
+                        {/* onClick={(e) => e.stopPropogation()} */}
+                        <a className={styles.navitem}>
+                            stats
+                        </a>
+                    </Link>
+                    <Link href='/rules'>
+                        {/* onClick={(e) => e.stopPropogation()} */}
+                        <a className={styles.navitem}>
+                            rules
+                        </a>
                     </Link>
                     <a href="https://discord.gg/uR3rRzsjhk">
                         {/* onClick={(e) => e.stopPropogation()}> */}
-                        <ul className={styles.navitem}>
+                        <a className={styles.navitem}>
                             discord
-                        </ul>
+                        </a>
                     </a>
-                    <Link href='/rules'>
-                        {/* onClick={(e) => e.stopPropogation()} */}
-                        <ul className={styles.navitem}>
-                            rules
-                        </ul>
-                    </Link></>}
+                    
+                    </>}
             </div>
         </header>
         {open ?
             <div className={styles.navdropdown} ref={ref}>
                 <Link href="/">
-                    <ul className={styles.navitemmobile} onClick={() => setOpen(!open)}>
+                    <a className={styles.navitemmobile} onClick={() => setOpen(!open)}>
                         leaderboard
-                    </ul>
+                    </a>
                 </Link>
                 <Link href="/records">
-                    <ul className={styles.navitemmobile} onClick={() => setOpen(!open)}>
+                    <a className={styles.navitemmobile} onClick={() => setOpen(!open)}>
                         records
-                    </ul>
+                    </a>
+                </Link>
+                <Link href='/stats'>
+                    <a className={styles.navitemmobile} onClick={() => setOpen(!open)}>
+                        stats
+                    </a>
+                </Link>
+                <Link href='/rules'>
+                    <a className={styles.navitemmobile} onClick={() => setOpen(!open)}>
+                        rules
+                    </a>
                 </Link>
                 <a href="https://discord.gg/uR3rRzsjhk">
-                    <ul className={styles.navitemmobile} onClick={() => setOpen(!open)}>
+                    <a className={styles.navitemmobile} onClick={() => setOpen(!open)}>
                         discord
-                    </ul>
+                    </a>
                 </a>
-                <Link href='/rules'>
-                    <ul className={styles.navitemmobile} onClick={() => setOpen(!open)}>
-                        rules
-                    </ul>
-                </Link>
+                
             </div>
             : <></>}
     </>

@@ -2,7 +2,21 @@ import Head from 'next/head'
 import Link from 'next/link';
 import mysql from 'mysql2'
 import styles from '../styles/Home.module.css'
+import { useState, useEffect } from 'react'
 import RecordsTable from '../components/RecordsTable';
+import { ScatterChart, Scatter, Pie, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell } from 'recharts';
+
+// Dynamic ssr for chart hydration
+import dynamic from "next/dynamic"
+const BarChart = dynamic(() => import('recharts').then(mod => mod.BarChart), {
+    ssr: false,
+    loading: () => <p>Loading...</p>
+});
+
+const PieChart = dynamic(() => import('recharts').then(mod => mod.PieChart), {
+    ssr: false,
+    loading: () => <p>Loading...</p>
+});
 
 
 export async function getServerSideProps() {
@@ -17,57 +31,7 @@ export async function getServerSideProps() {
         }
     )
     connection.connect();
-    const results = []
-    const expected_names = ["all1", "all2", "all3", "all4", "a1", "a2", "a3", "a4", "b1", "b2", "b3", "b4", "c1", "c2", "c3", "c4", "sq2", "sq3", "sq4", "sq6"]
-    for (var i = 0; i < expected_names.length; i++) {
-        // Band-aid fix for players in FFA who happen to have the same score & MMR change
-        // FFA formats
-        if (expected_names[i].includes('1')) {
-            let stuff = await new Promise((resolve, reject) => {
-                connection.query(
-                    `select tier_format, mogi_id, score, players FROM
-          (select pm.mogi_id, GROUP_CONCAT(DISTINCT t.tier_name, m.mogi_format) as tier_format, pm.place, round(sum(pm.score)) as score, round(avg(pm.mmr_change)) as mmr_change, GROUP_CONCAT(p.player_name) as players 
-          from player p 
-          JOIN player_mogi pm ON p.player_id = pm.player_id 
-          JOIN mogi m ON pm.mogi_id = m.mogi_id 
-          JOIN tier t ON t.tier_id = m.tier_id 
-          group by pm.mogi_id, pm.place, pm.mmr_change, t.tier_name, p.player_id) as n
-          where tier_format = ? order by score desc LIMIT 5`, [expected_names[i]], (error, stuff) => {
-                    if (error) reject(error);
-                    else resolve(stuff);
-                }
-                );
-            }
-            );
-            stuff = JSON.parse(JSON.stringify(stuff).replace(/\:null/gi, "\:\"\""))
-            // stuff["title"] = "tier-" + expected_names[i].slice(0, -1)
-            results.push(stuff)
-        } else {
-            // Team formats
-            let stuff = await new Promise((resolve, reject) => {
-                connection.query(
-                    `select tier_format, mogi_id, score, players FROM
-          (select pm.mogi_id, GROUP_CONCAT(DISTINCT t.tier_name, m.mogi_format) as tier_format, pm.place, round(sum(pm.score)) as score, round(avg(pm.mmr_change)) as mmr_change, GROUP_CONCAT(p.player_name) as players 
-          from player p 
-          JOIN player_mogi pm ON p.player_id = pm.player_id 
-          JOIN mogi m ON pm.mogi_id = m.mogi_id 
-          JOIN tier t ON t.tier_id = m.tier_id 
-          group by pm.mogi_id, pm.place, pm.mmr_change, t.tier_name) as n
-          where tier_format = ? order by score desc LIMIT 5`, [expected_names[i]], (error, stuff) => {
-                    if (error) reject(error);
-                    else resolve(stuff);
-                }
-                );
-            }
-            );
-            stuff = JSON.parse(JSON.stringify(stuff).replace(/\:null/gi, "\:\"\""))
-            // stuff["title"] = "tier-" + expected_names[i].slice(0, -1)
-            results.push(stuff)
-        }
-    }
-
     // today's top score
-
     let stuff = await new Promise((resolve, reject) => {
         connection.query(
             `SELECT p.player_name, m.mogi_id, pm.score, m.create_date
@@ -96,59 +60,190 @@ export async function getServerSideProps() {
     })
     const today_mogi_count = JSON.parse(JSON.stringify(stuff).replace(/\:null/gi, "\:\"\""))
 
+    // Count of players in each rank
+    stuff = await new Promise((resolve, reject) => {
+        connection.query('SELECT r.rank_name, COUNT(p.player_id) as player_count FROM player p JOIN ranks r ON p.mmr BETWEEN r.mmr_min AND r.mmr_max GROUP BY r.rank_name, r.mmr_min ORDER BY r.mmr_min;', [], (error, stuff) => {
+            if (error) reject(error)
+            else resolve(stuff)
+        })
+    })
+    const rank_count_by_player = JSON.parse(JSON.stringify(stuff))
 
-    // select p.player_name, p.mmr from player p join player_mogi
-    // where player_mogi.score = (select max(pm.score) from player_mogi pm join mogi m on pm.mogi_id = m.mogi_id where m.create_date = CURDATE());
+    // Count of all players
+    stuff = await new Promise((resolve, reject) => {
+        connection.query('SELECT count(*) FROM player;', [], (error, stuff) => {
+            if (error) reject(error)
+            else resolve(stuff)
+        })
+    })
+    const total_registered_players = JSON.parse(JSON.stringify(stuff))
 
-    // select p.player_name, p.mmr from player p join player_mogi
-    // where player_mogi.score = (select max(pm.score) from player_mogi pm join mogi m on pm.mogi_id = m.mogi_id where m.create_date = '2022-11-15');
+    // Count of all players who have MMR
+    stuff = await new Promise((resolve, reject) => {
+        connection.query('SELECT count(*) as count FROM player WHERE mmr IS NOT NULL;', [], (error, stuff) => {
+            if (error) reject(error)
+            else resolve(stuff)
+        })
+    })
+    const total_ranked_players = JSON.parse(JSON.stringify(stuff))
+
+    // Count of all mogis
+    stuff = await new Promise((resolve, reject) => {
+        connection.query('SELECT count(*) as count FROM mogi;', [], (error, stuff) => {
+            if (error) reject(error)
+            else resolve(stuff)
+        })
+    })
+    const total_mogis_played = JSON.parse(JSON.stringify(stuff))
+
+    // Average MMR
+    stuff = await new Promise((resolve, reject) => {
+        connection.query('SELECT round(avg(mmr),0) as average from player;', [], (error, stuff) => {
+            if (error) reject(error)
+            else resolve(stuff)
+        })
+    })
+    const average_mmr = JSON.parse(JSON.stringify(stuff))
+
+    // Median MMR
+    stuff = await new Promise((resolve, reject) => {
+        connection.query('SELECT ROUND(AVG(sub.mmr),0) AS median FROM (SELECT s.mmr, COUNT(*) AS count_all, SUM(CASE WHEN s2.mmr <= s.mmr THEN 1 ELSE 0 END) AS my_rank FROM player s JOIN player s2 ON 1=1 GROUP BY s.mmr HAVING my_rank - 1 <= count_all / 2 AND my_rank + 1 >= count_all / 2 ORDER BY s.mmr) sub;', [], (error, stuff) => {
+            if (error) reject(error)
+            else resolve(stuff)
+        })
+    })
+    const median_mmr = JSON.parse(JSON.stringify(stuff))
 
 
-    // select 
-    // select pm.player_id, pm.score from player_mogi pm join mogi m on pm.mogi_id = m.mogi_id where m.create_date > '2022-11-16';
+    // Mogi format count
+    stuff = await new Promise((resolve, reject) => {
+        connection.query("SELECT mogi_format, COUNT(mogi_id) as mogi_count, CASE mogi_format WHEN 1 THEN 'FFA' WHEN 2 THEN '2v2' WHEN 3 THEN '3v3' WHEN 4 THEN '4v4' WHEN 6 THEN '6v6' END AS format_name FROM mogi m join tier t on m.tier_id = t.tier_id GROUP BY mogi_format order by mogi_format asc;", [], (error, stuff) => {
+            if (error) reject(error)
+            else resolve(stuff)
+        })
+    })
+    const mogi_format_count = JSON.parse(JSON.stringify(stuff))
+
+    // Mogi day frequency data
+    stuff = await new Promise((resolve, reject) => {
+        connection.query("SELECT DAYNAME(create_date) as day_of_week, HOUR(create_date) as hour_of_day, COUNT(mogi_id) as mogi_count FROM mogi GROUP BY day_of_week, hour_of_day ORDER BY FIELD(day_of_week, 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'), hour_of_day;", [], (error, stuff) => {
+            if (error) reject(error)
+            else resolve(stuff)
+        })
+    })
+    const mogi_day_of_week_data = JSON.parse(JSON.stringify(stuff))
 
 
 
-    // let todays_top_scorer = await new Promise((resolve, reject) => {
-    //   connection.query(
-    //     ``
-    //   )
-    // })
+
+
+
+
+
     connection.end();
-    const all1 = results[0]
-    const all2 = results[1]
-    const all3 = results[2]
-    const all4 = results[3]
 
-    const a1 = results[4]
-    const a2 = results[5]
-    const a3 = results[6]
-    const a4 = results[7]
-
-    const b1 = results[8]
-    const b2 = results[9]
-    const b3 = results[10]
-    const b4 = results[11]
-
-    const c1 = results[12]
-    const c2 = results[13]
-    const c3 = results[14]
-    const c4 = results[15]
-
-    const sq2 = results[16]
-    const sq3 = results[17]
-    const sq4 = results[18]
-    const sq6 = results[19]
-
-
-    // console.log(results)
     return {
-        props: { all1, all2, all3, all4, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, sq2, sq3, sq4, sq6, today_top_score, today_mogi_count }
+        props: { today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data }
     }
 }
 
 
-export default function Stats({ all1, all2, all3, all4, a1, a2, a3, a4, b1, b2, b3, b4, c1, c2, c3, c4, sq2, sq3, sq4, sq6, today_top_score, today_mogi_count }) {
+export default function Stats({ today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data }) {
+
+    // Mobile handling things
+    const [width, setWidth] = useState(typeof window === 'undefined' ? 0 : window.innerWidth)
+    const [isMobile, setIsMobile] = useState(false)
+    useEffect(() => {
+        function handleResize() {
+            setWidth(typeof window === 'undefined' ? 0 : window.innerWidth)
+            setIsMobile(width > 1000 ? false : true)
+        }
+        handleResize()
+        window.addEventListener("resize", handleResize)
+        return () => window.removeEventListener("resize", handleResize)
+    },)
+
+
+
+    // Rank & rank colors
+    const rank_names = ['Iron', 'Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Master', 'Grandmaster']
+    const colors = ['#817876', '#E67E22', '#7D8396', '#F1C40F', '#3FABB8', '#9CCBD6', '#0E0B0B', '#A3022C']
+    // Map data to include a color property based on rank_name
+    const mappedRankData = rank_count_by_player.map((item) => {
+        const index = rank_names.indexOf(item.rank_name);
+        return {
+            ...item,
+            color: colors[index] || '#000000', // Default color if not found in array
+        };
+    });
+
+
+    // Mogi & mogi colors
+    const mogi_colors = ['#ffce47', '#76D7C4', '#85C1E9', '#C39BD3', '#F1948A'];
+    // Mogi format - convert your rows to a format suitable for the Pie Chart
+    const mogi_format_data = mogi_format_count.map(row => ({
+        mogi_format: row.mogi_format,
+        mogi_count: row.mogi_count,
+        name: row.format_name, // Using the word "name" specifically with recharts will make that the legend?
+    }))
+
+
+    const mogi_frequency_data = mogi_day_of_week_data.map(row => ({
+        day_of_week: row.day_of_week,
+        hour_of_day: row.hour_of_day,
+        mogi_count: row.mogi_count
+    }))
+    const offsetInHours = new Date().getTimezoneOffset() / 60;
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const adjustedMogiFrequencyData = mogi_frequency_data.map(dayData => {
+        const adjustedHour = (dayData.hour_of_day - offsetInHours + 24) % 24;
+        return {
+            day_of_week: dayData.day_of_week,
+            hour: adjustedHour,
+            mogi_count: dayData.mogi_count
+        };
+    });
+    const maxMogiFrequencyCount = Math.max(...adjustedMogiFrequencyData.map(data => data.mogi_count), 0);
+
+    function formatHour(hour) {
+        const period = hour < 12 ? 'AM' : 'PM';
+        const formattedHour = hour % 12 || 12; // convert 0 to 12
+        return `${formattedHour}${period}`;
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return (
         <div className={styles.container}>
             <Head>
@@ -182,13 +277,181 @@ export default function Stats({ all1, all2, all3, all4, a1, a2, a3, a4, b1, b2, 
 
                         {today_mogi_count[0] ?
                             <div className={styles.player_page_stats}>
-                                <h2 className='text-xl font-bold'>Mogis Today:</h2>
+                                <h2 className='text-xl font-bold'>mogis today:</h2>
                                 <div>{today_mogi_count[0].count}</div>
                             </div> : <></>}
                     </div>
 
 
-                    <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>tier all</h2>
+
+                    {/* Player Data */}
+                    <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>player stats</h2>
+
+                    <div className={styles.player_page_stats}>
+                        <h2 className='text-xl font-bold'>players by rank</h2>
+                    </div>
+
+                    <div className='pb-2'>
+                        <BarChart
+                            width={isMobile ? 300 : 750} height={isMobile ? 250 : 400}
+                            data={mappedRankData}
+                            margin={{ top: 5, right: 30, left: 20, bottom: 48 }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="rank_name" angle={-45} textAnchor="end" verticalAnchor="middle" />
+                            <YAxis />
+                            <Tooltip />
+                            {/* <Legend /> */}
+                            <Bar dataKey="player_count" fill="#8884d8">
+                                {
+                                    mappedRankData.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={entry.color} />
+                                    ))
+                                }
+                            </Bar>
+                        </BarChart>
+                    </div>
+
+                    <div className='flex flex-row flex-wrap justify-center'>
+                        <div className={styles.player_page_stats}>
+                            <h2 className='text-xl font-bold'>total players:</h2>
+                            <div>{total_ranked_players[0].count}</div>
+                        </div>
+
+                        <div className={styles.player_page_stats}>
+                            <h2 className='text-xl font-bold'>total mogis:</h2>
+                            <div>{total_mogis_played[0].count}</div>
+                        </div>
+
+                        {average_mmr ?
+                            <div className={styles.player_page_stats}>
+                                <h2 className='text-xl font-bold'>average mmr:</h2>
+                                <div className={average_mmr[0].average >= 11000 ? 'text-red-800' : average_mmr[0].average >= 9000 ? 'text-violet-700' : average_mmr[0].average >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : average_mmr[0].average >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : average_mmr[0].average >= 4500 ? 'text-yellow-500' : average_mmr[0].average >= 3000 ? 'text-gray-400' : average_mmr[0].average >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{average_mmr[0].average}</div>
+                            </div>
+                            : <></>}
+
+                        {median_mmr ?
+                            <div className={styles.player_page_stats}>
+                                <h2 className='text-xl font-bold'>median mmr:</h2>
+                                <div className={median_mmr[0].median >= 11000 ? 'text-red-800' : median_mmr[0].median >= 9000 ? 'text-violet-700' : median_mmr[0].median >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : median_mmr[0].median >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : median_mmr[0].median >= 4500 ? 'text-yellow-500' : median_mmr[0].median >= 3000 ? 'text-gray-400' : median_mmr[0].median >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{median_mmr[0].median}</div>
+                            </div>
+                            : <></>}
+                    </div>
+
+
+
+                    {/* Mogi data */}
+                    <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>mogi stats</h2>
+
+                    <div className={styles.player_page_stats}>
+                        <h2 className='text-xl font-bold'>total mogis played</h2>
+                    </div>
+                    <div className='pb-2'>
+                        <PieChart width={400} height={400}>
+                            <Pie
+                                dataKey="mogi_count"
+                                isAnimationActive={false}
+                                data={mogi_format_data}
+                                cx={200}
+                                cy={200}
+                                outerRadius={isMobile ? 80 : 160}
+                                fill="#8884d8"
+                                label
+                            >
+                                {mogi_format_data.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={mogi_colors[index % mogi_colors.length]} />
+                                ))}
+                            </Pie>
+                            <Tooltip />
+                            <Legend />
+                        </PieChart>
+                    </div>
+
+
+
+
+                    <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>activity stats</h2>
+                    <div className={styles.player_page_stats}>
+                        <h2 className='text-xl font-bold'>mogi gathering frequency</h2>
+                        <h3 className='text-gray-400'>(total count by weekday & hour)</h3>
+                    </div>
+                    {/* Scatter Plot for each day of week */}
+                    <div className='flex flex-row flex-wrap justify-center'>
+                        {daysOfWeek.map(day => {
+                            // Filter data for each day
+                            const dataForDay = adjustedMogiFrequencyData.filter(data => data.day_of_week === day);
+
+                            return (
+                                <div key={day} className='pb-12'>
+                                    <h2 className='text-2xl font-bold'>{day}</h2>
+                                    <ScatterChart
+                                        width={400}
+                                        height={300}
+                                        margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                                    >
+                                        <CartesianGrid />
+                                        <XAxis dataKey="hour" name='Hour' unit='' tickFormatter={formatHour} />
+                                        {/* <YAxis dataKey="mogi_count" name='Count' domain={[0, maxMogiFrequencyCount]} /> */}
+                                        <YAxis dataKey="mogi_count" name='Count' />
+                                        <Tooltip />
+                                        <Scatter name='Mogi Count' data={dataForDay} fill="#8884d8" />
+                                    </ScatterChart>
+                                </div>
+                            );
+                        })}
+                    </div>
+
+
+
+                    {/* Separate bar chart for each day of week */}
+                    {/* <div>
+                        {daysOfWeek.map(day => {
+                            // Filter data for each day
+                            const dataForDay = adjustedMogiFrequencyData.filter(data => data.day_of_week === day);
+
+                            return (
+                                <div key={day}>
+                                    <h3>{day}</h3>
+                                    <BarChart
+                                        width={600}
+                                        height={300}
+                                        data={dataForDay}
+                                        margin={{
+                                            top: 20, right: 30, left: 20, bottom: 5,
+                                        }}
+                                    >
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis dataKey={`hour`} />
+                                        <YAxis />
+                                        <Tooltip />
+                                        <Legend />
+                                        {[...Array(24).keys()].map(hour => (
+                                            <Bar key={hour} dataKey={String(hour)} fill={`#${Math.floor(Math.random() * 16777215).toString(16)}`} />
+                                        ))}
+                                    </BarChart>
+                                </div>
+                            );
+                        })}
+                    </div> */}
+
+                    {/* All frequency data */}
+                    {/* <BarChart
+                        width={600}
+                        height={300}
+                        data={adjustedMogiFrequencyData}
+                        margin={{
+                            top: 20, right: 30, left: 20, bottom: 5,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="day_of_week" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        {[...Array(24).keys()].map(hour => (
+                            <Bar key={hour} dataKey={String(hour)} stackId="a" fill={`#${Math.floor(Math.random() * 16777215).toString(16)}`} />
+                        ))}
+                    </BarChart> */}
 
 
 

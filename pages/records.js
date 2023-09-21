@@ -164,29 +164,6 @@ export default function Records({ all1, all2, all3, all4, a1, a2, a3, a4, b1, b2
         
 
         <div className="flex flex-col text-center z-10 items-center">
-        <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>daily stats</h2>
-          <div className='flex flex-row flex-wrap w-full justify-center'>
-            {today_top_score[0] ?
-              <div className={styles.player_page_stats}>
-                <h2 className='text-md font-bold'>Today&apos;s Top Score:</h2>
-                <div className='flex flex-row flex-wrap justify-center font-normal'>
-                  <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
-                    <Link href={`/player/${today_top_score[0].player_name}`}>{today_top_score[0].player_name}</Link>
-                  </div>
-                  <div className='px-2'>{' '}-{' '}</div>
-                  <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
-                    <Link href={`/mogi/${today_top_score[0].mogi_id}`}>{today_top_score[0].score}</Link>
-                  </div>
-                </div>
-              </div> : <></>}
-
-            {today_mogi_count[0] ?
-              <div className={styles.player_page_stats}>
-                <h2 className='text-xl font-bold'>Mogis Today:</h2>
-                <div>{today_mogi_count[0].count}</div>
-              </div> : <></>}
-          </div>
-
 
           <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>tier all</h2>
           {/* <div className={styles.tier_title_background}></div> */}
