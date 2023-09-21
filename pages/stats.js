@@ -226,7 +226,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
         const period = hour < 12 ? 'AM' : 'PM';
         const formattedHour = hour % 12 || 12; // convert 0 to 12
         return `${formattedHour}${period}`;
-      }
+    }
 
 
 
@@ -299,7 +299,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
 
                         {today_mogi_count[0] ?
                             <div className={styles.player_page_stats}>
-                                <h2 className='text-xl font-bold'>mogis today:</h2>
+                                <h2 className='text-xl font-bold'>Mogis Today:</h2>
                                 <div>{today_mogi_count[0].count}</div>
                             </div> : <></>}
                     </div>
@@ -310,7 +310,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                     <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>player stats</h2>
 
                     <div className={styles.player_page_stats}>
-                        <h2 className='text-xl font-bold'>players by rank</h2>
+                        <h2 className='text-xl font-bold'>Players by Rank</h2>
                     </div>
 
                     <div className='pb-2'>
@@ -335,26 +335,26 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                     </div>
 
                     <div className='flex flex-row flex-wrap justify-center'>
-                    <div className={styles.player_page_stats}>
-                            <h2 className='text-xl font-bold'>total players:</h2>
+                        <div className={styles.player_page_stats}>
+                            <h2 className='text-xl font-bold'>Total Players:</h2>
                             <div>{total_registered_players[0].count}</div>
                         </div>
 
                         <div className={styles.player_page_stats}>
-                            <h2 className='text-xl font-bold'>ranked players:</h2>
+                            <h2 className='text-xl font-bold'>Ranked Players:</h2>
                             <div>{total_ranked_players[0].count}</div>
                         </div>
 
                         {average_mmr ?
                             <div className={styles.player_page_stats}>
-                                <h2 className='text-xl font-bold'>average mmr:</h2>
+                                <h2 className='text-xl font-bold'>Average Mmr:</h2>
                                 <div className={average_mmr[0].average >= 11000 ? 'text-red-800' : average_mmr[0].average >= 9000 ? 'text-violet-700' : average_mmr[0].average >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : average_mmr[0].average >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : average_mmr[0].average >= 4500 ? 'text-yellow-500' : average_mmr[0].average >= 3000 ? 'text-gray-400' : average_mmr[0].average >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{average_mmr[0].average}</div>
                             </div>
                             : <></>}
 
                         {median_mmr ?
                             <div className={styles.player_page_stats}>
-                                <h2 className='text-xl font-bold'>median mmr:</h2>
+                                <h2 className='text-xl font-bold'>Median Mmr:</h2>
                                 <div className={median_mmr[0].median >= 11000 ? 'text-red-800' : median_mmr[0].median >= 9000 ? 'text-violet-700' : median_mmr[0].median >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : median_mmr[0].median >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : median_mmr[0].median >= 4500 ? 'text-yellow-500' : median_mmr[0].median >= 3000 ? 'text-gray-400' : median_mmr[0].median >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{median_mmr[0].median}</div>
                             </div>
                             : <></>}
@@ -366,9 +366,13 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                     <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>mogi stats</h2>
 
                     <div className={styles.player_page_stats}>
-                            <h2 className='text-xl font-bold'>total mogis:</h2>
-                            <div>{total_mogis_played[0].count}</div>
-                        </div>
+                        <h2 className='text-xl font-bold'>Total Mogis:</h2>
+                        <div>{total_mogis_played[0].count}</div>
+                    </div>
+
+                    <div className={styles.player_page_stats}>
+                        <h2 className='text-xl font-bold'>Mogis by Format</h2>
+                    </div>
                     <div className='pb-2'>
                         <PieChart width={400} height={400}>
                             <Pie
@@ -391,7 +395,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                     </div>
 
                     <div className={styles.player_page_stats}>
-                        <h2 className='text-xl font-bold'>mogis by tier</h2>
+                        <h2 className='text-xl font-bold'>Mogis by Tier</h2>
                     </div>
 
 
@@ -427,7 +431,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
 
                     <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>activity stats</h2>
                     <div className={styles.player_page_stats}>
-                        <h2 className='text-xl font-bold'>mogi gathering frequency</h2>
+                        <h2 className='text-xl font-bold'>Mogi Gathering Frequency</h2>
                         <h3 className='text-gray-400'>(total count by weekday & hour)</h3>
                     </div>
                     {/* Scatter Plot for each day of week */}
