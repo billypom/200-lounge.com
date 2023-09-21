@@ -390,7 +390,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                                 data={mogi_format_data}
                                 cx={250}
                                 cy={250}
-                                outerRadius={isMobile ? 80 : 160}
+                                outerRadius={isMobile ? 140 : 160}
                                 fill="#8884d8"
                                 label
                             >
