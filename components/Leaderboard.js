@@ -214,14 +214,6 @@ export default function Leaderboard(props) {
     }
 
 
-    // function filter(rows) {
-    //     return rows.filter((row) =>
-    //         columns.some(
-    //             (column) => row[column] ? row[column].toString().toLowerCase().indexOf(query.toLowerCase()) > -1 : "")
-    //     );
-    // }
-
-
     function filter(rows) {
         return rows.filter(row => {
             // Filtering based on the query across all columns
@@ -242,42 +234,7 @@ export default function Leaderboard(props) {
         })
     }
 
-    // Sticky header on scroll ?
-    const tableHeaderRef = useRef()
-    let [headerYScrolled, setHeaderYScrolled] = useState(false)
-    useEffect(() => {
-        const options = { passive: true }; // options must match add/remove event
-        const scroll = (event) => {
-            const { pageYOffset, scrollY } = window;
-            //  console.log('yOffset', pageYOffset, 'scrollY', scrollY)
-            let tableHeaderY = tableHeaderRef.current.offsetTop
-            //  console.log('table y', tableHeaderY)
 
-            if (scrollY >= tableHeaderY) {
-                // console.log('trueeeeee')
-                setHeaderYScrolled(true)
-            } else {
-                // console.log('falseeeeee')
-                setHeaderYScrolled(false)
-            }
-            // console.log('state header scroll', headerYScrolled)
-
-
-        };
-        document.addEventListener("scroll", scroll, options);
-        // remove event on unmount to prevent a memory leak
-        () => document.removeEventListener("scroll", scroll, options);
-    }, [headerYScrolled]);
-
-
-
-
-
-
-
-
-    const tableHeader = useRef(null)
-    const executeScroll = () => tableHeader.current.scrollIntoView()
 
     // Turn countries into a workable list
     const availableCountries = countries.map(row => ({
@@ -322,60 +279,58 @@ export default function Leaderboard(props) {
                     ))}
                 </select>
             </div>
-
-
         </div>
 
 
         <div className='flex flex-row flex-wrap justify-center'>
-        <div className='flex flex-row flex-wrap justify-center'>
-            {/* # of events filters */}
-            <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
-                <input
-                    className="border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray p-2 w-32"
-                    type="number"
-                    placeholder="min events"
-                    value={minEventsPlayedFilter}
-                    onChange={(e) => setMinEventsPlayedFilter(e.target.value)} />
+            <div className='flex flex-row flex-wrap justify-center'>
+                {/* # of events filters */}
+                <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
+                    <input
+                        className="border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray p-2 w-32"
+                        type="number"
+                        placeholder="min events"
+                        value={minEventsPlayedFilter}
+                        onChange={(e) => setMinEventsPlayedFilter(e.target.value)} />
+                </div>
+                <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
+                    <input
+                        className="border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray p-2 w-32"
+                        type="number"
+                        placeholder="max events"
+                        value={maxEventsPlayedFilter}
+                        onChange={(e) => setMaxEventsPlayedFilter(e.target.value)} />
+                </div>
             </div>
-            <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
-                <input
-                    className="border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray p-2 w-32"
-                    type="number"
-                    placeholder="max events"
-                    value={maxEventsPlayedFilter}
-                    onChange={(e) => setMaxEventsPlayedFilter(e.target.value)} />
-            </div>
-        </div>
 
 
-        <div className='flex flex-row flex-wrap justify-center'>
-            {/* MMR filters */}
-            <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
-                <input
-                    className="border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray p-2 w-32"
-                    type="number"
-                    placeholder="min mmr"
-                    value={minMMRFilter}
-                    onChange={(e) => setMinMMRFilter(e.target.value)} />
+            <div className='flex flex-row flex-wrap justify-center'>
+                {/* MMR filters */}
+                <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
+                    <input
+                        className="border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray p-2 w-32"
+                        type="number"
+                        placeholder="min mmr"
+                        value={minMMRFilter}
+                        onChange={(e) => setMinMMRFilter(e.target.value)} />
+                </div>
+                <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
+                    <input
+                        className="border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray p-2 w-32"
+                        type="number"
+                        placeholder="max mmr"
+                        value={maxMMRFilter}
+                        onChange={(e) => setMaxMMRFilter(e.target.value)} />
+                </div>
             </div>
-            <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
-                <input
-                    className="border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray p-2 w-32"
-                    type="number"
-                    placeholder="max mmr"
-                    value={maxMMRFilter}
-                    onChange={(e) => setMaxMMRFilter(e.target.value)} />
-            </div>
-        </div>
         </div>
 
         {/* leaderboard, table */}
         <div className="m-auto p-1 z-10">
             <TableContainer component={Paper} >
-                <Table stickyHeader aria-label="customized table" ref={tableHeaderRef}>
+                <Table stickyHeader aria-label="customized table">
                     {/* header */}
-                    <TableHead ref={tableHeader} className={headerYScrolled ? styles.sticky_header : styles.nothing_header}>
+                    <TableHead>
                         <TableRow>
                             {/* React.Fragment used instead of <> so that each column gets a key. No more error :3 */}
                             {

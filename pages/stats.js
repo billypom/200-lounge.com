@@ -4,7 +4,7 @@ import mysql from 'mysql2'
 import styles from '../styles/Home.module.css'
 import { useState, useEffect } from 'react'
 import RecordsTable from '../components/RecordsTable';
-import { ScatterChart, Scatter, Pie, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell } from 'recharts';
+import { Scatter, Pie, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell } from 'recharts';
 
 // Dynamic ssr for chart hydration
 import dynamic from "next/dynamic"
@@ -17,6 +17,13 @@ const PieChart = dynamic(() => import('recharts').then(mod => mod.PieChart), {
     ssr: false,
     loading: () => <p>Loading...</p>
 });
+
+const ScatterChart = dynamic(() => import('recharts').then(mod => mod.ScatterChart), {
+    ssr: false,
+    loading: () => <p>Loading...</p>
+});
+
+
 
 
 export async function getServerSideProps() {
@@ -210,7 +217,12 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
         hour_of_day: row.hour_of_day,
         mogi_count: row.mogi_count
     }))
-    const offsetInHours = new Date().getTimezoneOffset() / 60;
+    
+    const [offsetInHours, setOffsetInHours] = useState(0);
+
+    useEffect(() => {
+        setOffsetInHours(new Date().getTimezoneOffset() / 60);
+    }, []);
     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const adjustedMogiFrequencyData = mogi_frequency_data.map(dayData => {
         const adjustedHour = (dayData.hour_of_day - offsetInHours + 24) % 24;
@@ -279,7 +291,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                 </h1>
 
 
-
+                {/* Daily stats */}
                 <div className="flex flex-col text-center z-10 items-center">
                     <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>daily stats</h2>
                     <div className='flex flex-row flex-wrap w-full justify-center'>
@@ -305,8 +317,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                     </div>
 
 
-
-                    {/* Player Data */}
+                    {/* Player stats */}
                     <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>player stats</h2>
 
                     <div className={styles.player_page_stats}>
@@ -360,9 +371,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                             : <></>}
                     </div>
 
-
-
-                    {/* Mogi data */}
+                    {/* Mogi stats */}
                     <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>mogi stats</h2>
 
                     <div className={styles.player_page_stats}>
@@ -374,13 +383,13 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                         <h2 className='text-xl font-bold'>Mogis by Format</h2>
                     </div>
                     <div className='pb-2'>
-                        <PieChart width={400} height={400}>
+                        <PieChart width={500} height={500}>
                             <Pie
                                 dataKey="mogi_count"
                                 isAnimationActive={false}
                                 data={mogi_format_data}
-                                cx={200}
-                                cy={200}
+                                cx={250}
+                                cy={250}
                                 outerRadius={isMobile ? 80 : 160}
                                 fill="#8884d8"
                                 label
@@ -397,8 +406,6 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                     <div className={styles.player_page_stats}>
                         <h2 className='text-xl font-bold'>Mogis by Tier</h2>
                     </div>
-
-
 
                     <div className='pb-2'>
                         <BarChart
@@ -421,20 +428,13 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                         </BarChart>
                     </div>
 
-
-
-
-
-
-
-
-
+                    {/* Activity stats */}
                     <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>activity stats</h2>
                     <div className={styles.player_page_stats}>
                         <h2 className='text-xl font-bold'>Mogi Gathering Frequency</h2>
                         <h3 className='text-gray-400'>(total count by weekday & hour)</h3>
                     </div>
-                    {/* Scatter Plot for each day of week */}
+                    
                     <div className='flex flex-row flex-wrap justify-center'>
                         {daysOfWeek.map(day => {
                             // Filter data for each day
@@ -460,99 +460,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                         })}
                     </div>
 
-
-
-                    {/* Separate bar chart for each day of week */}
-                    {/* <div>
-                        {daysOfWeek.map(day => {
-                            // Filter data for each day
-                            const dataForDay = adjustedMogiFrequencyData.filter(data => data.day_of_week === day);
-
-                            return (
-                                <div key={day}>
-                                    <h3>{day}</h3>
-                                    <BarChart
-                                        width={600}
-                                        height={300}
-                                        data={dataForDay}
-                                        margin={{
-                                            top: 20, right: 30, left: 20, bottom: 5,
-                                        }}
-                                    >
-                                        <CartesianGrid strokeDasharray="3 3" />
-                                        <XAxis dataKey={`hour`} />
-                                        <YAxis />
-                                        <Tooltip />
-                                        <Legend />
-                                        {[...Array(24).keys()].map(hour => (
-                                            <Bar key={hour} dataKey={String(hour)} fill={`#${Math.floor(Math.random() * 16777215).toString(16)}`} />
-                                        ))}
-                                    </BarChart>
-                                </div>
-                            );
-                        })}
-                    </div> */}
-
-                    {/* All frequency data */}
-                    {/* <BarChart
-                        width={600}
-                        height={300}
-                        data={adjustedMogiFrequencyData}
-                        margin={{
-                            top: 20, right: 30, left: 20, bottom: 5,
-                        }}
-                    >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="day_of_week" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        {[...Array(24).keys()].map(hour => (
-                            <Bar key={hour} dataKey={String(hour)} stackId="a" fill={`#${Math.floor(Math.random() * 16777215).toString(16)}`} />
-                        ))}
-                    </BarChart> */}
-
-
-
-                    {/* <div className={styles.tier_title_background}></div> */}
-                    {/* <div className="flex flex-row flex-wrap">
-            <RecordsTable data={all1} title='FFA'></RecordsTable>
-            <RecordsTable data={all2} title='2v2'></RecordsTable>
-            <RecordsTable data={all3} title='3v3'></RecordsTable>
-            <RecordsTable data={all4} title='4v4'></RecordsTable>
-          </div>
-
-          <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>tier a</h2>
-          <div className="flex flex-row flex-wrap">
-            <RecordsTable data={a1} title='FFA'></RecordsTable>
-            <RecordsTable data={a2} title='2v2'></RecordsTable>
-            <RecordsTable data={a3} title='3v3'></RecordsTable>
-            <RecordsTable data={a4} title='4v4'></RecordsTable>
-          </div>
-
-          <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>tier b</h2>
-          <div className="flex flex-row flex-wrap">
-            <RecordsTable data={b1} title='FFA'></RecordsTable>
-            <RecordsTable data={b2} title='2v2'></RecordsTable>
-            <RecordsTable data={b3} title='3v3'></RecordsTable>
-            <RecordsTable data={b4} title='4v4'></RecordsTable>
-          </div>
-
-          <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>tier c</h2>
-          <div className="flex flex-row flex-wrap">
-            <RecordsTable data={c1} title='FFA'></RecordsTable>
-            <RecordsTable data={c2} title='2v2'></RecordsTable>
-            <RecordsTable data={c3} title='3v3'></RecordsTable>
-            <RecordsTable data={c4} title='4v4'></RecordsTable>
-          </div>
-
-          <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>squad queue</h2>
-          <div className="flex flex-row flex-wrap">
-            <RecordsTable data={sq2} title='2v2'></RecordsTable>
-            <RecordsTable data={sq3} title='3v3'></RecordsTable>
-            <RecordsTable data={sq4} title='4v4'></RecordsTable>
-            <RecordsTable data={sq6} title='6v6'></RecordsTable>
-          </div> */}
+                    
                 </div>
             </main>
         </div>

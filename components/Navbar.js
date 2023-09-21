@@ -87,9 +87,9 @@ export default function Navbar(props) {
                     </Link>
                     <a href="https://discord.gg/uR3rRzsjhk">
                         {/* onClick={(e) => e.stopPropogation()}> */}
-                        <a className={styles.navitem}>
+                        <ul className={styles.navitem}>
                             discord
-                        </a>
+                        </ul>
                     </a>
                     
                     </>}
@@ -118,9 +118,9 @@ export default function Navbar(props) {
                     </a>
                 </Link>
                 <a href="https://discord.gg/uR3rRzsjhk">
-                    <a className={styles.navitemmobile} onClick={() => setOpen(!open)}>
+                    <ul className={styles.navitemmobile} onClick={() => setOpen(!open)}>
                         discord
-                    </a>
+                    </ul>
                 </a>
                 
             </div>
