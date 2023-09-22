@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import SeasonPreservingLink from './SeasonPreservingLink';
 import styles from '../styles/Table.module.css'
 import { useState } from 'react';

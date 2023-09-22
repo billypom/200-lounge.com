@@ -1,5 +1,3 @@
-import Link from 'next/link'
-import SeasonPreservingLink from './SeasonPreservingLink'
 import styles from '../styles/Navbar.module.css'
 import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
@@ -28,9 +26,9 @@ export default function SeasonPicker2(props) {
             query: { ...router.query, season: newSeason } // Preserve existing query parameters and update the season
         }
         const asPath = `${pathWithoutQuery}?season=${newSeason}`
-        props.setCurrentSeason(newSeason)
-        handleMobileSeasonChoice(newSeason)
-        router.push(newPath, asPath)
+        props.setCurrentSeason(newSeason) // Set current season to retain button choice styling across pages
+        handleMobileSeasonChoice(newSeason) // Close the window if we are mobile
+        router.push(newPath, asPath) // Go to new page
     }
 
     // Closes the menus after choice for mobile devices

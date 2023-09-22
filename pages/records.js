@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Link from 'next/link';
 import mysql from 'mysql2'
 import styles from '../styles/Home.module.css'
 import RecordsTable from '../components/RecordsTable';
@@ -68,28 +67,6 @@ export async function getServerSideProps(context) {
     }
   }
 
-  // today's top score
-  // all time top score
-  // # of mogis today
-
-  
-  // select p.player_name, p.mmr from player p join player_mogi
-  // where player_mogi.score = (select max(pm.score) from player_mogi pm join mogi m on pm.mogi_id = m.mogi_id where m.create_date = CURDATE());
-
-  // select p.player_name, p.mmr from player p join player_mogi
-  // where player_mogi.score = (select max(pm.score) from player_mogi pm join mogi m on pm.mogi_id = m.mogi_id where m.create_date = '2022-11-15');
-
-
-  // select 
-  // select pm.player_id, pm.score from player_mogi pm join mogi m on pm.mogi_id = m.mogi_id where m.create_date > '2022-11-16';
-
-
-
-  // let todays_top_scorer = await new Promise((resolve, reject) => {
-  //   connection.query(
-  //     ``
-  //   )
-  // })
   connection.end();
   const all1 = results[0]
   const all2 = results[1]

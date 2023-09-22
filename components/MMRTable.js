@@ -13,21 +13,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow, { tableRowClasses } from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-
-// const StyledTableCell = styled(TableCell)(({ theme }) => ({
-//   [`&.${tableCellClasses.head}`]: {
-//     backgroundColor: '#1d185f',
-//     fontSize: 20,
-//   },
-//   [`&.${tableCellClasses.body}`]: {
-//     fontSize: 18,
-//     fontWeight: 750,
-//     color: theme.palette.text.primary,
-//     // color: '#e8e6fc',
-//     // padding: "20px 0px 20px 0px"
-//   },
-// }));
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
       backgroundColor: '#1d185f',
