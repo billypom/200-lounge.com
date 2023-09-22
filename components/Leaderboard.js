@@ -54,10 +54,12 @@ export default function Leaderboard(props) {
         [`&.${tableCellClasses.head}`]: {
             backgroundColor: '#1d185f',
             fontSize: 20,
+            // padding: 10,
         },
         [`&.${tableCellClasses.body}`]: {
-            fontSize: 18,
-            fontWeight: 750,
+            fontSize: 20,
+            padding: 3,
+            fontWeight: 600,
             color: theme.palette.text.primary,
             // color: '#e8e6fc',
             // padding: "20px 0px 20px 0px"
@@ -84,6 +86,10 @@ export default function Leaderboard(props) {
             // color: '#e8e6fc',
         },
     }));
+
+
+    const tableHeader = useRef(null)
+    const executeScroll = () => tableHeader.current.scrollIntoView()
 
     function TablePaginationActions(props) {
         const { count, page, rowsPerPage, onPageChange } = props;
@@ -328,7 +334,7 @@ export default function Leaderboard(props) {
         {/* leaderboard, table */}
         <div className="m-auto p-1 z-10">
             <TableContainer component={Paper} >
-                <Table stickyHeader aria-label="customized table">
+                <Table stickyHeader aria-label="customized table" ref={tableHeader}>
                     {/* header */}
                     <TableHead>
                         <TableRow>

@@ -3,9 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --g1: rgb(137, 218, 211);
-  --g2: rgb(216, 213, 162);
-  --g3: rgb(137, 218, 211);
+  --g1: rgb(176, 242, 235);
+  --g2: rgb(246, 245, 231);
+  --g3: rgb(246, 245, 231);
+  /*  another blue */
+  /* rgb(151, 224, 218); */
   /* --linkColor: #52bbc8; */
   /* --linkColor: #0000EE; */
   --linkColor: #3b82f6;

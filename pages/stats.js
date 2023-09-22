@@ -322,7 +322,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
 
 
 
-                    <div className={isMobile ? 'pb-2 border border-gray-100 dark:border-gray-500' : 'pb-2'}>
+                    <div className={ 'pb-2'}>
                         <div className={styles.player_page_stats}>
                             <h2 className='text-xl font-bold'>Players by Rank</h2>
                         </div>
@@ -381,7 +381,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                     </div>
 
 
-                    <div className={isMobile ? 'pb-2 border border-gray-100 dark:border-gray-500' : 'pb-2'}>
+                    <div className={'pb-2'}>
                         <div className={`${styles.player_page_stats}`}>
                             <h2 className='text-xl font-bold'>Mogis by Format</h2>
                         </div>
@@ -407,7 +407,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
 
 
 
-                    <div className={isMobile ? 'mt-6 border border-gray-100 dark:border-gray-500' : 'mt-6'}>
+                    <div className={'mt-6'}>
                         <div className={styles.player_page_stats}>
                             <h2 className='text-xl font-bold'>Mogis by Tier</h2>
                         </div>
@@ -444,7 +444,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                             const dataForDay = adjustedMogiFrequencyData.filter(data => data.day_of_week === day);
 
                             return (
-                                <div key={day} className={'pb-6 m-4 border border-gray-100 dark:border-gray-700'}>
+                                <div key={day} className={ isMobile ? 'pb-6 m-4' : 'pb-6 m-4 border border-gray-100 dark:border-gray-700'}>
                                     <div className={styles.player_page_stats}>
                                         <h2 className='text-2xl font-bold'>{day}</h2>
                                     </div>
