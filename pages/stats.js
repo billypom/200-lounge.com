@@ -457,7 +457,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                                     >
                                         <CartesianGrid />
                                         <XAxis dataKey="hour" name='Hour' unit='' tickFormatter={formatHour} />
-                                        <YAxis dataKey="mogi_count" name='Count' />
+                                        <YAxis dataKey="mogi_count" name='Count' domain={[0, maxMogiFrequencyCount]}/>
                                         <Tooltip />
                                         <Area type="monotone" dataKey="mogi_count" stroke="#8884d8" fill="#8884d8" />
                                     </AreaChart>
