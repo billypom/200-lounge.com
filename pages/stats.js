@@ -4,7 +4,7 @@ import mysql from 'mysql2'
 import styles from '../styles/Home.module.css'
 import { useMediaQuery } from '@mui/material';
 import { useState, useEffect } from 'react'
-import { Area, Pie, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell } from 'recharts';
+import { AreaChart, Area, Pie, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell } from 'recharts';
 
 // Dynamic ssr for chart hydration
 import dynamic from "next/dynamic"
@@ -18,10 +18,10 @@ const PieChart = dynamic(() => import('recharts').then(mod => mod.PieChart), {
     loading: () => <p>Loading...</p>
 });
 
-const AreaChart = dynamic(() => import('recharts').then(mod => mod.ScatterChart), {
-    ssr: false,
-    loading: () => <p>Loading...</p>
-});
+// const AreaChart = dynamic(() => import('recharts').then(mod => mod.ScatterChart), {
+//     ssr: false,
+//     loading: () => <p>Loading...</p>
+// });
 
 
 
