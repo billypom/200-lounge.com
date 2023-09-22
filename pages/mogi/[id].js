@@ -9,12 +9,14 @@ import MMRTable from '../../components/MMRTable';
 
 export async function getServerSideProps(context) {
   const mogi_id = context.query.id
+  const season = context.query.season || 6
+  const db_choice = `s${season}200lounge`
   const connection = mysql.createConnection(
     {
       host: process.env.db_host,
       user: process.env.db_username,
       password: process.env.db_password,
-      database: process.env.db_database,
+      database: db_choice,
       insecureAuth: true,
       supportBigNumbers: true,
     }
@@ -73,17 +75,17 @@ export default function Mogi({ results, pm }) {
       </Head>
 
       <main className={styles.main}>
-          {/* <TileGrid /> */}
-          <div className='flex flex-col w-full m-auto justify-center items-center text-center z-10'>
-            <h1 className={styles.title}>
-              mogi
-            </h1>
-            {/* <div className='max-w-2xl pt-5 z-10 m-auto justify-center'> */}
-              <Image src={results[0].table_url} alt='mogi results image' width='860' height='520' priority></Image>
-              <div className='max-w-9xl'>
-                <MMRTable rows={pm} />
-              </div>
+        {/* <TileGrid /> */}
+        <div className='flex flex-col w-full m-auto justify-center items-center text-center z-10'>
+          <h1 className={styles.title}>
+            mogi
+          </h1>
+          {/* <div className='max-w-2xl pt-5 z-10 m-auto justify-center'> */}
+          <Image src={results[0].table_url} alt='mogi results image' width='860' height='520' priority></Image>
+          <div className='max-w-9xl'>
+            <MMRTable rows={pm} />
           </div>
+        </div>
       </main>
     </div>
   )

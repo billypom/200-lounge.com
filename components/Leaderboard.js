@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import SeasonPreservingLink from './SeasonPreservingLink'
 import styles from '../styles/Table.module.css'
 import React, { useRef, useState, useEffect } from 'react'
 
@@ -369,9 +369,9 @@ export default function Leaderboard(props) {
                                         <StyledTableCell align="center">
                                             <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                                 <div className={'cursor-pointer hover:underline'}>
-                                                    <Link href={current_season == 6 ? "/player/" + row['player name'] : `/s${current_season}/player/${row['player name']}`}>
+                                                    <SeasonPreservingLink to={`/player/` + row['player name']}>
                                                         {parseInt(row.rank)}
-                                                    </Link>
+                                                    </SeasonPreservingLink>
                                                 </div>
                                             </div>
                                         </StyledTableCell>
@@ -383,9 +383,9 @@ export default function Leaderboard(props) {
                                         <StyledTableCell align="center" >
                                             <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                                 <div className='cursor-pointer hover:underline'>
-                                                    <Link href={current_season == 6 ? "/player/" + row['player name'] : `/s${current_season}/player/${row['player name']}`}>
+                                                <SeasonPreservingLink to={`/player/` + row['player name']}>
                                                         {row['player name']}
-                                                    </Link>
+                                                    </SeasonPreservingLink>
                                                 </div>
                                             </div>
                                         </StyledTableCell>
@@ -406,9 +406,9 @@ export default function Leaderboard(props) {
                                         <StyledTableCell align="center">
                                             <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                                 <div className='cursor-pointer hover:underline'>
-                                                    <Link href={current_season == 6 ? "/player/" + row['player name'] : `/s${current_season}/player/${row['player name']}`}>
+                                                <SeasonPreservingLink to={`/player/` + row['player name']}>
                                                         {parseInt(row.rank)}
-                                                    </Link>
+                                                    </SeasonPreservingLink>
                                                 </div>
                                             </div>
                                         </StyledTableCell>
@@ -420,9 +420,9 @@ export default function Leaderboard(props) {
                                         <StyledTableCell align="center">
                                             <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                                 <div className='cursor-pointer hover:underline'>
-                                                    <Link href={current_season == 6 ? "/player/" + row['player name'] : `/s${current_season}/player/${row['player name']}`}>
+                                                <SeasonPreservingLink to={`/player/` + row['player name']}>
                                                         {row['player name']}
-                                                    </Link>
+                                                    </SeasonPreservingLink>
                                                 </div>
                                             </div>
                                         </StyledTableCell>

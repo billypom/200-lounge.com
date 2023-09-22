@@ -2,15 +2,29 @@ import Link from 'next/link'
 import styles from '../styles/Navbar.module.css'
 import { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import SeasonPreservingLink from './SeasonPreservingLink'
 
 
 export default function Navbar(props) {
+    const router = useRouter()
     const [width, setWidth] = useState(typeof window === 'undefined' ? 0 : window.innerWidth)
     const [isMobile, setIsMobile] = useState(false)
     const [open, setOpen] = useState(false)
     const ref = useRef(null)
     const buttonRef = useRef(null)
 
+    const changeSeason = () => {
+        let newPath = `${router.pathname}?season=${props.season}`;
+        Object.keys(router.query).forEach(key => {
+          if (key !== 'season') {
+            newPath += `&${key}=${router.query[key]}`;
+          }
+        });
+        router.push(newPath);
+      };
+
+    // Window resize listener
     useEffect(() => {
         function handleResize() {
             setWidth(typeof window === 'undefined' ? 0 : window.innerWidth)
@@ -25,6 +39,7 @@ export default function Navbar(props) {
         return () => window.removeEventListener("resize", handleResize)
     },)
 
+    // Click outside navbar listener
     useEffect(() => {
         function handleOutsideClick(event) {
             if (buttonRef.current?.contains(event.target)) {
@@ -46,7 +61,7 @@ export default function Navbar(props) {
         <header className={styles.navbar}>
             <div className={styles.navitemwrapper}>
                 <ul>
-                    <Link href={props.currentSeason == 6 ? "/" : `/s${props.currentSeason}`}>
+                    <Link href='/'>
                         <div className={styles.navitem}>
                             200cc lounge
                         </div>
@@ -60,63 +75,54 @@ export default function Navbar(props) {
                     </div>
 
                 </> : <>
+                    
+                    <SeasonPreservingLink to="/">
+                        <a className={styles.navitem}>leaderboard</a>
+                    </SeasonPreservingLink>
 
-                    <Link href={props.currentSeason == 6 ? "/" : `/s${props.currentSeason}`}>
-                        {/* onClick={(e) => e.stopPropogation()} */}
-                        <a className={styles.navitem}>
-                            leaderboard
-                        </a>
-                    </Link>
-                    <Link href={props.currentSeason == 6 ? "/records" : `/s${props.currentSeason}/records`}>
-                        {/* onClick={(e) => e.stopPropogation()}> */}
-                        <a className={styles.navitem}>
-                            records
-                        </a>
-                    </Link>
-                    <Link href='/stats'>
-                        {/* onClick={(e) => e.stopPropogation()} */}
-                        <a className={styles.navitem}>
-                            stats
-                        </a>
-                    </Link>
-                    <Link href='/rules'>
-                        {/* onClick={(e) => e.stopPropogation()} */}
-                        <a className={styles.navitem}>
-                            rules
-                        </a>
-                    </Link>
+                    <SeasonPreservingLink to="/records">
+                        <a className={styles.navitem}>records</a>
+                    </SeasonPreservingLink>
+
+                    <SeasonPreservingLink to="/stats">
+                        <a className={styles.navitem}>stats</a>
+                    </SeasonPreservingLink>
+
+                    <SeasonPreservingLink to="/rules">
+                        <a className={styles.navitem}>rules</a>
+                    </SeasonPreservingLink>
+
                     <a href="https://discord.gg/uR3rRzsjhk">
                         {/* onClick={(e) => e.stopPropogation()}> */}
                         <ul className={styles.navitem}>
                             discord
                         </ul>
                     </a>
-                    
                     </>}
             </div>
         </header>
         {open ?
             <div className={styles.navdropdown} ref={ref}>
-                <Link href="/">
+                <SeasonPreservingLink to="/">
                     <a className={styles.navitemmobile} onClick={() => setOpen(!open)}>
                         leaderboard
                     </a>
-                </Link>
-                <Link href="/records">
+                </SeasonPreservingLink>
+                <SeasonPreservingLink to="/records">
                     <a className={styles.navitemmobile} onClick={() => setOpen(!open)}>
                         records
                     </a>
-                </Link>
-                <Link href='/stats'>
+                </SeasonPreservingLink>
+                <SeasonPreservingLink to="/stats">
                     <a className={styles.navitemmobile} onClick={() => setOpen(!open)}>
                         stats
                     </a>
-                </Link>
-                <Link href='/rules'>
+                </SeasonPreservingLink>
+                <SeasonPreservingLink to="/rules">
                     <a className={styles.navitemmobile} onClick={() => setOpen(!open)}>
                         rules
                     </a>
-                </Link>
+                </SeasonPreservingLink>
                 <a href="https://discord.gg/uR3rRzsjhk">
                     <ul className={styles.navitemmobile} onClick={() => setOpen(!open)}>
                         discord

@@ -4,7 +4,7 @@ import mysql from 'mysql2'
 import styles from '../styles/Home.module.css'
 import { useMediaQuery } from '@mui/material';
 import { useState, useEffect } from 'react'
-import { AreaChart, Area, Scatter, Pie, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell } from 'recharts';
+import { Area, Pie, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell } from 'recharts';
 
 // Dynamic ssr for chart hydration
 import dynamic from "next/dynamic"
@@ -18,7 +18,7 @@ const PieChart = dynamic(() => import('recharts').then(mod => mod.PieChart), {
     loading: () => <p>Loading...</p>
 });
 
-const ScatterChart = dynamic(() => import('recharts').then(mod => mod.ScatterChart), {
+const AreaChart = dynamic(() => import('recharts').then(mod => mod.ScatterChart), {
     ssr: false,
     loading: () => <p>Loading...</p>
 });
@@ -26,16 +26,19 @@ const ScatterChart = dynamic(() => import('recharts').then(mod => mod.ScatterCha
 
 
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+    console.log(context.query)
+    const season = context.query.season || 6
+    const db_choice = `s${season}200lounge`
     const connection = mysql.createConnection(
-        {
-            host: process.env.db_host,
-            user: process.env.db_username,
-            password: process.env.db_password,
-            database: process.env.db_database,
-            insecureAuth: true,
-            supportBigNumbers: true,
-        }
+      {
+        host: process.env.db_host,
+        user: process.env.db_username,
+        password: process.env.db_password,
+        database: db_choice,
+        insecureAuth: true,
+        supportBigNumbers: true,
+      }
     )
     connection.connect();
     // today's top score

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import SeasonPreservingLink from './SeasonPreservingLink';
 import styles from '../styles/Table.module.css'
 import { useState } from 'react';
 
@@ -183,11 +184,12 @@ export default function MogiHistory(props) {
                             <StyledTableRow key={row.mogi_id}>
 
                                 <StyledTableCell align="center">
-                                    <Link href={season ? `/s${season}/mogi/` + row.mogi_id : "/mogi/" + row.mogi_id}>
+                                      <SeasonPreservingLink to={`/mogi` + row.mogi_id}>
                                         <div className='cursor-pointer hover:underline text-blue-500'>
                                             {row.title}
                                         </div>
-                                    </Link>
+                                      </SeasonPreservingLink>
+                                    
                                 </StyledTableCell>
 
                                 <StyledTableCell align="center">

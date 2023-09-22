@@ -4,12 +4,13 @@ import ReactCountryFlag from "react-country-flag"
 import Head from 'next/head'
 import mysql from 'mysql2'
 import styles from '../../styles/Home.module.css'
-import Link from 'next/link'
+import SeasonPreservingLink from '../../components/SeasonPreservingLink';
 import { Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import MogiHistory from '../../components/MogiHistory';
 
 // Dynamic ssr for hydration
 import dynamic from "next/dynamic"
+
 const LineChart = dynamic(() => import('recharts').then(mod => mod.LineChart), {
   ssr: false,
   loading: () => <p>Loading...</p>
@@ -17,12 +18,14 @@ const LineChart = dynamic(() => import('recharts').then(mod => mod.LineChart), {
 
 export async function getServerSideProps(context) {
   const player = context.query.name
+  const season = context.query.season || 6
+  const db_choice = `s${season}200lounge`
   const connection = mysql.createConnection(
     {
       host: process.env.db_host,
       user: process.env.db_username,
       password: process.env.db_password,
-      database: process.env.db_database,
+      database: db_choice,
       insecureAuth: true,
       supportBigNumbers: true,
     }
@@ -62,6 +65,11 @@ export async function getServerSideProps(context) {
   }
   );
   results = JSON.parse(JSON.stringify(results))
+  
+  if (!results[0]) {
+    // Give 404 page on player not found
+    return {notFound: true} 
+  }
 
   // mogi history
   let rows = await new Promise((resolve, reject) => {
@@ -199,14 +207,6 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
   const mmrMin = Math.min(...mmrHistory.map(item => item.mmr));
   const mmrMax = Math.max(...mmrHistory.map(item => item.mmr));
 
-  // const scoreMin = Math.min(...scoreHistory.map(item => item.score));
-  // const scoreMax = Math.max(...scoreHistory.map(item => item.score));
-
-  // const partnerScoreMin = Math.min(...partnerScoreHistory.map(item => item.score));
-  // const partnerScoreMax = Math.max(...partnerScoreHistory.map(item => item.score));
-
-  // const chartAspectRatio = 1
-
 
 
   // Custom dot on line chart
@@ -258,7 +258,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
       setFilteredScoreHistory(scoreHistory)
       setFilteredPartnerScoreHistory(partnerScoreHistory)
     }
-  }, [startDate, endDate])
+  }, [startDate, endDate, rows])
 
 
 
@@ -326,12 +326,20 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
 
             <div className={styles.player_page_stats}>
               <h2 className='text-xl font-bold'>Largest Gain</h2>
-              <div className='cursor-pointer hover:underline dark:text-cyan-300 text-blue-500'><Link href={"/mogi/" + lg[0].mogi_id}>{results[0]["largest gain"]}</Link></div>
+              <div className='cursor-pointer hover:underline dark:text-cyan-300 text-blue-500'>
+                <SeasonPreservingLink to={"/mogi/" + lg[0].mogi_id}>
+                  {results[0]["largest gain"]}
+                  </SeasonPreservingLink>
+                  </div>
             </div>
 
             <div className={styles.player_page_stats}>
               <h2 className='text-xl font-bold'>Largest Loss</h2>
-              <div className='cursor-pointer hover:underline dark:text-cyan-300 text-blue-500'><Link href={"/mogi/" + ll[0].mogi_id}>{results[0]["largest loss"]}</Link></div>
+              <div className='cursor-pointer hover:underline dark:text-cyan-300 text-blue-500'>
+                <SeasonPreservingLink to={"/mogi/" + ll[0].mogi_id}>
+                  {results[0]["largest loss"]}
+                  </SeasonPreservingLink>
+                  </div>
             </div>
 
             <div className={styles.player_page_stats}>
@@ -384,7 +392,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
                 <div className='m-auto z-10 h-72'>
                   <LineChart width={isMobile ? 300 : 500} height={isMobile ? 250 : 300} data={filteredScoreHistory} onClick={handleChartClick}>
                     <XAxis dataKey="date" />
-                    <YAxis domain={[0, 180]} />
+                    <YAxis domain={[12, 180]} />
                     <Tooltip />
                     <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                     <Line type="monotone" dataKey="score" stroke="#8884d8" dot={<CustomDot />} />
@@ -404,7 +412,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
                 <div className='m-auto z-10 h-72'>
                   <LineChart width={isMobile ? 300 : 500} height={isMobile ? 250 : 300} data={filteredPartnerScoreHistory} onClick={handleChartClick}>
                     <XAxis dataKey="date" />
-                    <YAxis domain={[0, 180]} />
+                    <YAxis domain={[12, 180]} />
                     <Tooltip />
                     <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                     <Line type="monotone" dataKey="score" stroke="#8884d8" dot={<CustomDot />} />

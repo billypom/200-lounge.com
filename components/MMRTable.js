@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import SeasonPreservingLink from './SeasonPreservingLink';
 import styles from '../styles/Table.module.css'
 
 // B) style..cool...
@@ -12,6 +12,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow, { tableRowClasses } from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+
 
 // const StyledTableCell = styled(TableCell)(({ theme }) => ({
 //   [`&.${tableCellClasses.head}`]: {
@@ -67,10 +68,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function MMRTable(props) {
   const pm = props.rows
-  const season = props.season
-
-
-
 
   return (<>
     <TableContainer component={Paper} className={styles.leaderboard_style}>
@@ -106,9 +103,9 @@ export default function MMRTable(props) {
               <StyledTableCell align="center">
                 <div className={p.prev_mmr >= 11000 ? 'text-red-800' : p.prev_mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : p.prev_mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : p.prev_mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : p.prev_mmr >= 4500 ? 'text-yellow-500' : p.prev_mmr >= 3000 ? 'text-gray-400' : p.prev_mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                   <div className='cursor-pointer hover:underline'>
-                    <Link href={season ? `/s${season}/player/${p.player_name}` : "/player/" + p.player_name}>
+                    <SeasonPreservingLink to={`/player/` + p.player_name}>
                       {p.player_name}
-                    </Link>
+                    </SeasonPreservingLink>
                   </div>
                 </div>
               </StyledTableCell>

@@ -11,6 +11,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow, { tableRowClasses } from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+import SeasonPreservingLink from './SeasonPreservingLink';
+
 
 
 // const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -25,7 +27,7 @@ import Paper from '@mui/material/Paper';
 //     },
 //   }));
 
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: '#1d185f',
         fontSize: 20,
@@ -39,26 +41,26 @@ import Paper from '@mui/material/Paper';
         // color: '#e8e6fc',
         // padding: "20px 0px 20px 0px"
     },
-  }));
-  
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(even)': {
-      backgroundColor: theme.palette.action.hover
+        backgroundColor: theme.palette.action.hover
     },
     '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.disabledBackground
+        backgroundColor: theme.palette.action.disabledBackground
     },
     // hide last border
     '&:last-child td, &:last-child th': {
-      border: 0,
+        border: 0,
     },
     [`&.${tableRowClasses.footer}`]: {
-      fontSize: 18,
-      fontWeight: 750,
-      // color: theme.palette.text.primary
-      color: '#e8e6fc',
+        fontSize: 18,
+        fontWeight: 750,
+        // color: theme.palette.text.primary
+        color: '#e8e6fc',
     },
-  }));
+}));
 
 
 export default function RecordsTable(props) {
@@ -98,12 +100,22 @@ export default function RecordsTable(props) {
 
                                 <StyledTableCell align="center">
                                     {row.players.split(",").map((player) => (
-                                        <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/player/" + player}>{player}</Link></div>
+                                        <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
+                                            <SeasonPreservingLink to={"/player/" + player}>
+                                                {player}
+                                            </SeasonPreservingLink>
+                                        </div>
                                     ))}
                                 </StyledTableCell>
 
                                 <StyledTableCell align="center">
-                                    <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id}><div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline"><Link href={"/mogi/" + row.mogi_id}>{row.score}</Link></div></Link></div>
+                                    <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
+                                            <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
+                                                <SeasonPreservingLink to={"/mogi/" + row.mogi_id}>
+                                                    {row.score}
+                                                </SeasonPreservingLink>
+                                            </div>
+                                    </div>
                                 </StyledTableCell>
                             </StyledTableRow>
 

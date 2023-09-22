@@ -4,13 +4,15 @@ import mysql from 'mysql2'
 import styles from '../styles/Home.module.css'
 import Leaderboard from '../components/Leaderboard'
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const season = context.query.season || 6
+  const db_choice = `s${season}200lounge`
   const connection = mysql.createConnection(
     {
       host: process.env.db_host,
       user: process.env.db_username,
       password: process.env.db_password,
-      database: process.env.db_database,
+      database: db_choice,
       insecureAuth: true,
       supportBigNumbers: true,
     }
