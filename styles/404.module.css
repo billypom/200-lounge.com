@@ -1,0 +1,76 @@
+.container {
+    text-align: center;
+    margin-top: 100px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .homeLink {
+    margin-top: 20px;
+    color: blue;
+    text-decoration: none;
+    border: 1px solid blue;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+  
+  .homeLink:hover {
+    background-color: blue;
+    color: white;
+  }
+
+
+  .main {
+    min-height: 100vh;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    /* justify-content: center; */
+    /* align-items: center; */
+    color: black;
+    /* title color (and children) */
+    /* z-index: 1; */
+  }
+  
+  .player_page_stats {
+    border: #050606;
+    background-color: #eaeaea;
+  
+    padding: 0.4rem;
+    margin: 0.3rem;
+    border-radius: 0.5rem;
+    border-width: 2px;
+    border-style: solid;
+    font-size: 1.2rem;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .main {
+      color: white;
+    }
+  
+    .player_page_stats {
+      border: #323232;
+      background-color: #181818;
+      padding: 0.4rem;
+      margin: 0.3rem;
+      border-radius: 0.5rem;
+      border-width: 2px;
+      border-style: solid;
+      font-size: 1.1rem;
+    }
+  }
+  
+
+
+  .tier_title {
+    font-family: 'ShinGoProBold';
+    margin: 0;
+    line-height: 1.35;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 2rem;
+    margin: 2rem;
+    border-radius: 40px;
+  }

@@ -8,7 +8,6 @@ Tiles Background
     display: grid;
     grid-template-columns: repeat(var(--columns), 1fr);
     grid-template-rows: repeat(var(--rows), 1fr);
-    z-index: 0;
     position: fixed;
     top: 0;
     left: 0;
