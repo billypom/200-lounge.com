@@ -13,15 +13,31 @@ import Paper from '@mui/material/Paper';
 
 
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+// const StyledTableCell = styled(TableCell)(({ theme }) => ({
+//     [`&.${tableCellClasses.head}`]: {
+//       backgroundColor: '#1d185f',
+//       fontSize: 20,
+//     },
+//     [`&.${tableCellClasses.body}`]: {
+//       fontSize: 18,
+//       fontWeight: 750,
+//       color: theme.palette.text.primary
+//     },
+//   }));
+
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: '#1d185f',
-      fontSize: 20,
+        backgroundColor: '#1d185f',
+        fontSize: 20,
+        // padding: 10,
     },
     [`&.${tableCellClasses.body}`]: {
-      fontSize: 18,
-      fontWeight: 750,
-      color: theme.palette.text.primary
+        fontSize: 18,
+        padding: 8,
+        fontWeight: 600,
+        color: theme.palette.text.primary,
+        // color: '#e8e6fc',
+        // padding: "20px 0px 20px 0px"
     },
   }));
   
