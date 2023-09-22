@@ -1,10 +1,11 @@
 import Head from 'next/head'
 import Link from 'next/link';
+import SeasonPreservingLink from '../components/SeasonPreservingLink';
 import mysql from 'mysql2'
 import styles from '../styles/Home.module.css'
 import { useMediaQuery } from '@mui/material';
 import { useState, useEffect } from 'react'
-import { AreaChart, Area, Pie, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell } from 'recharts';
+import { Area, Pie, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell } from 'recharts';
 
 // Dynamic ssr for chart hydration
 import dynamic from "next/dynamic"
@@ -18,41 +19,30 @@ const PieChart = dynamic(() => import('recharts').then(mod => mod.PieChart), {
     loading: () => <p>Loading...</p>
 });
 
-// const AreaChart = dynamic(() => import('recharts').then(mod => mod.ScatterChart), {
-//     ssr: false,
-//     loading: () => <p>Loading...</p>
-// });
-
+const AreaChart = dynamic(() => import('recharts').then(mod => mod.AreaChart), {
+    ssr: false,
+    loading: () => <p>Loading...</p>
+});
 
 
 
 export async function getServerSideProps(context) {
-    console.log(context.query)
     const season = context.query.season || 6
     const db_choice = `s${season}200lounge`
     const connection = mysql.createConnection(
-      {
-        host: process.env.db_host,
-        user: process.env.db_username,
-        password: process.env.db_password,
-        database: db_choice,
-        insecureAuth: true,
-        supportBigNumbers: true,
-      }
+        {
+            host: process.env.db_host,
+            user: process.env.db_username,
+            password: process.env.db_password,
+            database: db_choice,
+            insecureAuth: true,
+            supportBigNumbers: true,
+        }
     )
     connection.connect();
     // today's top score
     let stuff = await new Promise((resolve, reject) => {
-        connection.query(
-            `SELECT p.player_name, m.mogi_id, pm.score, m.create_date
-      FROM player_mogi pm
-      JOIN mogi m
-      ON m.mogi_id = pm.mogi_id
-      JOIN player p
-      ON p.player_id = pm.player_id
-      WHERE m.create_date >= curdate()
-      ORDER BY score DESC, create_date DESC
-      limit 1;`, [], (error, stuff) => {
+        connection.query(`SELECT p.player_name, m.mogi_id, pm.score, m.create_date FROM player_mogi pm JOIN mogi m ON m.mogi_id = pm.mogi_id JOIN player p ON p.player_id = pm.player_id WHERE m.create_date >= curdate() ORDER BY score DESC, create_date DESC limit 1;`, [], (error, stuff) => {
             if (error) reject(error)
             else resolve(stuff)
         })
@@ -161,16 +151,26 @@ export async function getServerSideProps(context) {
     })
     const mogis_per_rank = JSON.parse(JSON.stringify(stuff12))
 
+    // season top score
+    let stuff13 = await new Promise((resolve, reject) => {
+        connection.query(
+            `SELECT p.player_name, m.mogi_id, pm.score, m.create_date FROM player_mogi pm JOIN mogi m ON m.mogi_id = pm.mogi_id JOIN player p ON p.player_id = pm.player_id ORDER BY score DESC limit 1;`, [], (error, stuff13) => {
+                if (error) reject(error)
+                else resolve(stuff13)
+            })
+    })
+    const all_time_top_score = JSON.parse(JSON.stringify(stuff13))
 
 
-    
 
-    
+
+
+
 
     connection.end();
 
     return {
-        props: { today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data, mogi_count_by_tier, mogis_per_rank }
+        props: { today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data, mogi_count_by_tier, mogis_per_rank, all_time_top_score }
     }
 }
 
@@ -180,8 +180,8 @@ export async function getServerSideProps(context) {
 
 
 
-export default function Stats({ today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data, mogi_count_by_tier, mogis_per_rank }) {
-    
+export default function Stats({ today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data, mogi_count_by_tier, mogis_per_rank, all_time_top_score }) {
+
     // Turns a 24 hour number into an AM PM time
     function formatHour(hour) {
         const period = hour < 12 ? 'AM' : 'PM';
@@ -208,7 +208,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
     const rank_names = ['Iron', 'Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Master', 'Grandmaster']
     if (prefersDarkMode) {
         // Master purple
-        colors = ['#817876', '#E67E22', '#7D8396', '#F1C40F', '#3FABB8', '#9CCBD6', '#8b5cf6', '#A3022C']    
+        colors = ['#817876', '#E67E22', '#7D8396', '#F1C40F', '#3FABB8', '#9CCBD6', '#8b5cf6', '#A3022C']
     } else {
         // Master black
         colors = ['#817876', '#E67E22', '#7D8396', '#F1C40F', '#3FABB8', '#9CCBD6', '#0E0B0B', '#A3022C']
@@ -240,20 +240,20 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
     }))
 
     // Need date conversion in useEffect for hydration purposes
-    const [offsetInHours, setOffsetInHours] = useState(0);
+    const [offsetInHours, setOffsetInHours] = useState(0)
     useEffect(() => {
-        setOffsetInHours(new Date().getTimezoneOffset() / 60);
-    }, []);
-    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        setOffsetInHours(new Date().getTimezoneOffset() / 60)
+    }, [])
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     const adjustedMogiFrequencyData = mogi_frequency_data.map(dayData => {
-        const adjustedHour = (dayData.hour_of_day - offsetInHours + 24) % 24;
+        const adjustedHour = (dayData.hour_of_day - offsetInHours + 24) % 24
         return {
             day_of_week: dayData.day_of_week,
             hour: adjustedHour,
             mogi_count: dayData.mogi_count
-        };
-    });
-    const maxMogiFrequencyCount = Math.max(...adjustedMogiFrequencyData.map(data => data.mogi_count), 0);
+        }
+    })
+    const maxMogiFrequencyCount = Math.max(...adjustedMogiFrequencyData.map(data => data.mogi_count), 0)
 
     // Mogi by tier data
     const tier_colors = ['#9339bd', '#bd397b', '#39bd7d', '#39b6bd', '#bd7b39']
@@ -310,25 +310,51 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                 <div className="flex flex-col text-center z-10 items-center">
                     <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>daily stats</h2>
                     <div className='flex flex-row flex-wrap w-full justify-center'>
-                        {today_top_score[0] ?
-                            <div className={styles.player_page_stats}>
-                                <h2 className='text-md font-bold'>Today&apos;s Top Score:</h2>
-                                <div className='flex flex-row flex-wrap justify-center font-normal'>
-                                    <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
-                                        <Link href={`/player/${today_top_score[0].player_name}`}>{today_top_score[0].player_name}</Link>
-                                    </div>
-                                    <div className='px-2'>{' '}-{' '}</div>
-                                    <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
-                                        <Link href={`/mogi/${today_top_score[0].mogi_id}`}>{today_top_score[0].score}</Link>
-                                    </div>
-                                </div>
-                            </div> : <></>}
 
                         {today_mogi_count[0] ?
                             <div className={styles.player_page_stats}>
                                 <h2 className='text-xl font-bold'>Mogis Today:</h2>
                                 <div>{today_mogi_count[0].count}</div>
                             </div> : <></>}
+
+
+                        {today_top_score[0] ?
+                            <div className={styles.player_page_stats}>
+                                <h2 className='text-md font-bold'>Today&apos;s Top Score:</h2>
+                                <div className='flex flex-row flex-wrap justify-center font-normal'>
+                                    <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
+                                        <SeasonPreservingLink to={`/player/${today_top_score[0].player_name}`}>
+                                            {today_top_score[0].player_name}
+                                        </SeasonPreservingLink>
+                                    </div>
+                                    <div className='px-2'>{' '}-{' '}</div>
+                                    <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
+                                        <SeasonPreservingLink to={`/mogi/${today_top_score[0].mogi_id}`}>
+                                            {today_top_score[0].score}
+                                        </SeasonPreservingLink>
+                                    </div>
+                                </div>
+                            </div> : <></>}
+
+                        {all_time_top_score[0] ?
+                            <div className={styles.player_page_stats}>
+                                <h2 className='text-md font-bold'>Season Top Score:</h2>
+                                <div className='flex flex-row flex-wrap justify-center font-normal'>
+                                    <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
+                                        <SeasonPreservingLink to={`/player/${all_time_top_score[0].player_name}`}>
+                                            {all_time_top_score[0].player_name}
+                                        </SeasonPreservingLink>
+                                    </div>
+                                    <div className='px-2'>{' '}-{' '}</div>
+                                    <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
+                                        <SeasonPreservingLink to={`/mogi/${all_time_top_score[0].mogi_id}`}>
+                                            {all_time_top_score[0].score}
+                                        </SeasonPreservingLink>
+                                    </div>
+                                </div>
+                            </div> : <></>}
+
+
                     </div>
 
 
@@ -337,7 +363,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
 
 
 
-                    <div className={ 'pb-2'}>
+                    <div className={'pb-2'}>
                         <div className={styles.player_page_stats}>
                             <h2 className='text-xl font-bold'>Players by Rank</h2>
                         </div>
@@ -390,7 +416,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                     {/* Mogi stats */}
                     <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>mogi stats</h2>
 
-                    
+
 
 
                     <div className={'pb-2'}>
@@ -478,10 +504,10 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                             <div>{total_mogis_played[0].count}</div>
                         </div>
 
-                        
+
                     </div>
 
-                    
+
 
                     {/* Activity stats */}
                     <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>activity stats</h2>
@@ -493,10 +519,10 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                     <div className='flex flex-row flex-wrap justify-center'>
                         {daysOfWeek.map(day => {
                             // Filter data for each day
-                            const dataForDay = adjustedMogiFrequencyData.filter(data => data.day_of_week === day);
+                            const dataForDay = adjustedMogiFrequencyData.filter(data => data.day_of_week === day)
 
                             return (
-                                <div key={day} className={ isMobile ? 'pb-6 m-4' : 'pb-6 m-4 border border-gray-100 dark:border-gray-700'}>
+                                <div key={day} className={isMobile ? 'pb-6 m-4' : 'pb-6 m-4 border border-gray-100 dark:border-gray-700'}>
                                     <div className={styles.player_page_stats}>
                                         <h2 className='text-2xl font-bold'>{day}</h2>
                                     </div>
@@ -508,7 +534,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                                     >
                                         <CartesianGrid />
                                         <XAxis dataKey="hour" name='Hour' unit='' tickFormatter={formatHour} />
-                                        <YAxis dataKey="mogi_count" name='Count' domain={[0, maxMogiFrequencyCount]}/>
+                                        <YAxis dataKey="mogi_count" name='Count' domain={[0, maxMogiFrequencyCount]} />
                                         <Tooltip />
                                         <Area type="monotone" dataKey="mogi_count" stroke="#8884d8" fill="#8884d8" />
                                     </AreaChart>
