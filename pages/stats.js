@@ -375,13 +375,13 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                         <div className={`${styles.player_page_stats}`}>
                             <h2 className='text-xl font-bold'>Mogis by Format</h2>
                         </div>
-                        <PieChart width={376} height={376}>
+                        <PieChart width={isMobile ? 376 : 500} height={isMobile ? 376 : 500}>
                             <Pie
                                 dataKey="mogi_count"
                                 isAnimationActive={false}
                                 data={mogi_format_data}
-                                cx={376 / 2}
-                                cy={376 / 2}
+                                cx={isMobile ? 376 / 2 : 250}
+                                cy={isMobile ? 376 / 2 : 250}
                                 outerRadius={isMobile ? 120 : 160}
                                 fill="#8884d8"
                                 label
