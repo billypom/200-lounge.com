@@ -3,7 +3,7 @@ import Link from 'next/link';
 import mysql from 'mysql2'
 import styles from '../styles/Home.module.css'
 import { useState, useEffect } from 'react'
-import { Scatter, Pie, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell } from 'recharts';
+import { AreaChart, Area, Scatter, Pie, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell } from 'recharts';
 
 // Dynamic ssr for chart hydration
 import dynamic from "next/dynamic"
@@ -216,7 +216,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
         hour_of_day: row.hour_of_day,
         mogi_count: row.mogi_count
     }))
-    
+
     // Need date conversion in useEffect for hydration purposes
     const [offsetInHours, setOffsetInHours] = useState(0);
     useEffect(() => {
@@ -320,11 +320,12 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                     {/* Player stats */}
                     <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>player stats</h2>
 
-                    <div className={styles.player_page_stats}>
-                        <h2 className='text-xl font-bold'>Players by Rank</h2>
-                    </div>
 
-                    <div className='pb-2'>
+
+                    <div className={isMobile ? 'pb-2 border border-gray-100 dark:border-gray-500' : 'pb-2'}>
+                        <div className={styles.player_page_stats}>
+                            <h2 className='text-xl font-bold'>Players by Rank</h2>
+                        </div>
                         <BarChart
                             width={isMobile ? 375 : 750} height={isMobile ? 300 : 400}
                             data={mappedRankData}
@@ -379,18 +380,19 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                         <div>{total_mogis_played[0].count}</div>
                     </div>
 
-                    <div className={styles.player_page_stats}>
-                        <h2 className='text-xl font-bold'>Mogis by Format</h2>
-                    </div>
-                    <div className='pb-2'>
-                        <PieChart width={500} height={500}>
+
+                    <div className={isMobile ? 'pb-2 border border-gray-100 dark:border-gray-500' : 'pb-2'}>
+                        <div className={`${styles.player_page_stats}`}>
+                            <h2 className='text-xl font-bold'>Mogis by Format</h2>
+                        </div>
+                        <PieChart width={376} height={376}>
                             <Pie
                                 dataKey="mogi_count"
                                 isAnimationActive={false}
                                 data={mogi_format_data}
-                                cx={250}
-                                cy={250}
-                                outerRadius={isMobile ? 140 : 160}
+                                cx={376 / 2}
+                                cy={376 / 2}
+                                outerRadius={isMobile ? 120 : 160}
                                 fill="#8884d8"
                                 label
                             >
@@ -403,11 +405,12 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                         </PieChart>
                     </div>
 
-                    <div className={styles.player_page_stats}>
-                        <h2 className='text-xl font-bold'>Mogis by Tier</h2>
-                    </div>
 
-                    <div className='pb-2'>
+
+                    <div className={isMobile ? 'mt-6 border border-gray-100 dark:border-gray-500' : 'mt-6'}>
+                        <div className={styles.player_page_stats}>
+                            <h2 className='text-xl font-bold'>Mogis by Tier</h2>
+                        </div>
                         <BarChart
                             width={isMobile ? 375 : 750} height={isMobile ? 300 : 400}
                             data={mogi_tier_data}
@@ -432,35 +435,37 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                     <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>activity stats</h2>
                     <div className={styles.player_page_stats}>
                         <h2 className='text-xl font-bold'>Mogi Gathering Frequency</h2>
-                        <h3 className='text-gray-400'>(total count by weekday & hour)</h3>
+                        <p className='text-gray-400'>(total count by weekday & hour)</p>
                     </div>
-                    
+
                     <div className='flex flex-row flex-wrap justify-center'>
                         {daysOfWeek.map(day => {
                             // Filter data for each day
                             const dataForDay = adjustedMogiFrequencyData.filter(data => data.day_of_week === day);
 
                             return (
-                                <div key={day} className='pb-12'>
-                                    <h2 className='text-2xl font-bold'>{day}</h2>
-                                    <ScatterChart
+                                <div key={day} className={'pb-6 m-4 border border-gray-100 dark:border-gray-700'}>
+                                    <div className={styles.player_page_stats}>
+                                        <h2 className='text-2xl font-bold'>{day}</h2>
+                                    </div>
+                                    <AreaChart
                                         width={400}
                                         height={300}
+                                        data={dataForDay}
                                         margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
                                     >
                                         <CartesianGrid />
                                         <XAxis dataKey="hour" name='Hour' unit='' tickFormatter={formatHour} />
-                                        {/* <YAxis dataKey="mogi_count" name='Count' domain={[0, maxMogiFrequencyCount]} /> */}
                                         <YAxis dataKey="mogi_count" name='Count' />
                                         <Tooltip />
-                                        <Scatter name='Mogi Count' data={dataForDay} fill="#8884d8" />
-                                    </ScatterChart>
+                                        <Area type="monotone" dataKey="mogi_count" stroke="#8884d8" fill="#8884d8" />
+                                    </AreaChart>
                                 </div>
                             );
                         })}
                     </div>
 
-                    
+
                 </div>
             </main>
         </div>
