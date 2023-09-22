@@ -56,106 +56,99 @@ export async function getServerSideProps() {
     const today_top_score = JSON.parse(JSON.stringify(stuff).replace(/\:null/gi, "\:\"\""))
 
     // # of mogis today
-    stuff = await new Promise((resolve, reject) => {
+    let stuff2 = await new Promise((resolve, reject) => {
         connection.query(
-            `select count(*) as "count" from mogi where create_date >= curdate();`, [], (error, stuff) => {
+            `select count(*) as "count" from mogi where create_date >= curdate();`, [], (error, stuff2) => {
                 if (error) reject(error)
-                else resolve(stuff)
+                else resolve(stuff2)
             }
         )
     })
-    const today_mogi_count = JSON.parse(JSON.stringify(stuff).replace(/\:null/gi, "\:\"\""))
+    const today_mogi_count = JSON.parse(JSON.stringify(stuff2).replace(/\:null/gi, "\:\"\""))
 
     // Count of players in each rank
-    stuff = await new Promise((resolve, reject) => {
-        connection.query('SELECT r.rank_name, COUNT(p.player_id) as player_count FROM player p JOIN ranks r ON p.mmr BETWEEN r.mmr_min AND r.mmr_max GROUP BY r.rank_name, r.mmr_min ORDER BY r.mmr_min;', [], (error, stuff) => {
+    let stuff3 = await new Promise((resolve, reject) => {
+        connection.query('SELECT r.rank_name, COUNT(p.player_id) as player_count FROM player p JOIN ranks r ON p.mmr BETWEEN r.mmr_min AND r.mmr_max GROUP BY r.rank_name, r.mmr_min ORDER BY r.mmr_min;', [], (error, stuff3) => {
             if (error) reject(error)
-            else resolve(stuff)
+            else resolve(stuff3)
         })
     })
-    const rank_count_by_player = JSON.parse(JSON.stringify(stuff))
+    const rank_count_by_player = JSON.parse(JSON.stringify(stuff3))
 
     // Count of all players
-    stuff = await new Promise((resolve, reject) => {
-        connection.query('SELECT count(*) as count FROM player;', [], (error, stuff) => {
+    let stuff4 = await new Promise((resolve, reject) => {
+        connection.query('SELECT count(*) as count FROM player;', [], (error, stuff4) => {
             if (error) reject(error)
-            else resolve(stuff)
+            else resolve(stuff4)
         })
     })
-    const total_registered_players = JSON.parse(JSON.stringify(stuff))
+    const total_registered_players = JSON.parse(JSON.stringify(stuff4))
 
     // Count of all players who have MMR
-    stuff = await new Promise((resolve, reject) => {
-        connection.query('SELECT count(*) as count FROM player WHERE mmr IS NOT NULL;', [], (error, stuff) => {
+    let stuff5 = await new Promise((resolve, reject) => {
+        connection.query('SELECT count(*) as count FROM player WHERE mmr IS NOT NULL;', [], (error, stuff5) => {
             if (error) reject(error)
-            else resolve(stuff)
+            else resolve(stuff5)
         })
     })
-    const total_ranked_players = JSON.parse(JSON.stringify(stuff))
+    const total_ranked_players = JSON.parse(JSON.stringify(stuff5))
 
     // Count of all mogis
-    stuff = await new Promise((resolve, reject) => {
-        connection.query('SELECT count(*) as count FROM mogi;', [], (error, stuff) => {
+    let stuff6 = await new Promise((resolve, reject) => {
+        connection.query('SELECT count(*) as count FROM mogi;', [], (error, stuff6) => {
             if (error) reject(error)
-            else resolve(stuff)
+            else resolve(stuff6)
         })
     })
-    const total_mogis_played = JSON.parse(JSON.stringify(stuff))
+    const total_mogis_played = JSON.parse(JSON.stringify(stuff6))
 
     // Average MMR
-    stuff = await new Promise((resolve, reject) => {
-        connection.query('SELECT round(avg(mmr),0) as average from player;', [], (error, stuff) => {
+    let stuff7 = await new Promise((resolve, reject) => {
+        connection.query('SELECT round(avg(mmr),0) as average from player;', [], (error, stuff7) => {
             if (error) reject(error)
-            else resolve(stuff)
+            else resolve(stuff7)
         })
     })
-    const average_mmr = JSON.parse(JSON.stringify(stuff))
+    const average_mmr = JSON.parse(JSON.stringify(stuff7))
 
     // Median MMR
-    stuff = await new Promise((resolve, reject) => {
-        connection.query('SELECT ROUND(AVG(sub.mmr),0) AS median FROM (SELECT s.mmr, COUNT(*) AS count_all, SUM(CASE WHEN s2.mmr <= s.mmr THEN 1 ELSE 0 END) AS my_rank FROM player s JOIN player s2 ON 1=1 GROUP BY s.mmr HAVING my_rank - 1 <= count_all / 2 AND my_rank + 1 >= count_all / 2 ORDER BY s.mmr) sub;', [], (error, stuff) => {
+    let stuff8 = await new Promise((resolve, reject) => {
+        connection.query('SELECT ROUND(AVG(sub.mmr),0) AS median FROM (SELECT s.mmr, COUNT(*) AS count_all, SUM(CASE WHEN s2.mmr <= s.mmr THEN 1 ELSE 0 END) AS my_rank FROM player s JOIN player s2 ON 1=1 GROUP BY s.mmr HAVING my_rank - 1 <= count_all / 2 AND my_rank + 1 >= count_all / 2 ORDER BY s.mmr) sub;', [], (error, stuff8) => {
             if (error) reject(error)
-            else resolve(stuff)
+            else resolve(stuff8)
         })
     })
-    const median_mmr = JSON.parse(JSON.stringify(stuff))
+    const median_mmr = JSON.parse(JSON.stringify(stuff8))
 
 
     // Mogi format count
-    stuff = await new Promise((resolve, reject) => {
-        connection.query("SELECT mogi_format, COUNT(mogi_id) as mogi_count, CASE mogi_format WHEN 1 THEN 'FFA' WHEN 2 THEN '2v2' WHEN 3 THEN '3v3' WHEN 4 THEN '4v4' WHEN 6 THEN '6v6' END AS format_name FROM mogi m join tier t on m.tier_id = t.tier_id GROUP BY mogi_format order by mogi_format asc;", [], (error, stuff) => {
+    let stuff9 = await new Promise((resolve, reject) => {
+        connection.query("SELECT mogi_format, COUNT(mogi_id) as mogi_count, CASE mogi_format WHEN 1 THEN 'FFA' WHEN 2 THEN '2v2' WHEN 3 THEN '3v3' WHEN 4 THEN '4v4' WHEN 6 THEN '6v6' END AS format_name FROM mogi m join tier t on m.tier_id = t.tier_id GROUP BY mogi_format order by mogi_format asc;", [], (error, stuff9) => {
             if (error) reject(error)
-            else resolve(stuff)
+            else resolve(stuff9)
         })
     })
-    const mogi_format_count = JSON.parse(JSON.stringify(stuff))
+    const mogi_format_count = JSON.parse(JSON.stringify(stuff9))
 
     // Mogi day frequency data
-    stuff = await new Promise((resolve, reject) => {
-        connection.query("SELECT DAYNAME(create_date) as day_of_week, HOUR(create_date) as hour_of_day, COUNT(mogi_id) as mogi_count FROM mogi GROUP BY day_of_week, hour_of_day ORDER BY FIELD(day_of_week, 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'), hour_of_day;", [], (error, stuff) => {
+    let stuff10 = await new Promise((resolve, reject) => {
+        connection.query("SELECT DAYNAME(create_date) as day_of_week, HOUR(create_date) as hour_of_day, COUNT(mogi_id) as mogi_count FROM mogi GROUP BY day_of_week, hour_of_day ORDER BY FIELD(day_of_week, 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'), hour_of_day;", [], (error, stuff10) => {
             if (error) reject(error)
-            else resolve(stuff)
+            else resolve(stuff10)
         })
     })
-    const mogi_day_of_week_data = JSON.parse(JSON.stringify(stuff))
+    const mogi_day_of_week_data = JSON.parse(JSON.stringify(stuff10))
 
     // Tier usages
-    stuff = await new Promise((resolve, reject) => {
-        connection.query("select t.tier_name, count(mogi_id) as mogi_count from mogi m join tier t on m.tier_id = t.tier_id group by t.tier_id;", [], (error, stuff) => {
+    let stuff11 = await new Promise((resolve, reject) => {
+        connection.query("select t.tier_name, count(mogi_id) as mogi_count from mogi m join tier t on m.tier_id = t.tier_id group by t.tier_id;", [], (error, stuff11) => {
             if (error) reject(error)
-            else resolve(stuff)
+            else resolve(stuff11)
         })
     })
-    const mogi_count_by_tier = JSON.parse(JSON.stringify(stuff))
+    const mogi_count_by_tier = JSON.parse(JSON.stringify(stuff11))
 
-
-
-
-
-
-
-
-
+    
 
     connection.end();
 
@@ -375,10 +368,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                     {/* Mogi stats */}
                     <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>mogi stats</h2>
 
-                    <div className={styles.player_page_stats}>
-                        <h2 className='text-xl font-bold'>Total Mogis:</h2>
-                        <div>{total_mogis_played[0].count}</div>
-                    </div>
+                    
 
 
                     <div className={'pb-2'}>
@@ -430,6 +420,17 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                             </Bar>
                         </BarChart>
                     </div>
+
+                    <div className='flex flex-row flex-wrap justify-center'>
+                        <div className={styles.player_page_stats}>
+                            <h2 className='text-xl font-bold'>Total Mogis:</h2>
+                            <div>{total_mogis_played[0].count}</div>
+                        </div>
+
+                        
+                    </div>
+
+                    
 
                     {/* Activity stats */}
                     <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>activity stats</h2>
