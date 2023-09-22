@@ -73,6 +73,7 @@ export default function SeasonPicker2(props) {
     return (<>
         <header className={styles.navbar}>
             <div className={styles.navitemwrapper}>
+                {/* This bit here is required to move the picker to the right side of screen */}
             </div>
             <div className={styles.navitemwrapper2}>
                 {isMobile ? <>

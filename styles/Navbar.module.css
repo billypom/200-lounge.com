@@ -30,19 +30,6 @@
     overflow: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-    .navdropdown .navdropdown2 {
-        background-color: rgba(7, 18, 18, 0.95);
-        color: #eaeaea;
-    }
-    .navbar {
-        background-color: rgba(7, 18, 18, 0.95);
-    }
-}
-
-
-
-
 
 /* Goes around the entire navbar */
 .navbar {
@@ -83,6 +70,26 @@
 
 
 
+/* Turns nav item blue when particular season is active/chosen */
+.navitemactive {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    color: var(--navbarLinkColor);
+    transition: transform 500ms;
+    pointer-events: none; /* when a season is chosen, disable ability to click button again */
+}
+
+.navitemactive:hover,
+.navitemactive:focus {
+    border-color: #eaeaea;
+    color: var(--navbarLinkColor);
+    pointer-events: none;
+    transition: transform 100ms;
+    transform: translateY(3px);
+}
+
+
+
 
 
 
@@ -91,7 +98,7 @@
 .navitem {
     padding-right: 1rem;
     padding-left: 1rem;
-    color: white;
+    color: var(--textColor);
     transition: transform 500ms;
 }
 
@@ -122,6 +129,7 @@
     z-index: 35;
     top: 0px;
     right: 0;
+    font-family: 'ShinGoProBold';
 }
 
 .navitem3:hover,
@@ -143,16 +151,14 @@
 .navitemmobile {
     padding-right: 1rem;
     padding-left: 1rem;
+    color: var(--textColor);
     color: white;
 }
 
 .navitemmobile:hover,
-.navitemmobile:focus {
+.navitemmobile:focus,
+.navitemmobile:active {
     border-color: #eaeaea;
     color: var(--navbarLinkColor);
     cursor: pointer;
-}
-
-.navitemmobile:active {
-    color: var(--navbarLinkColor);
 }
