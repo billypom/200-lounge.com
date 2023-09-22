@@ -285,22 +285,22 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
             </div>
 
             <div className={styles.player_page_stats}>
-              <h2 className='text-xl font-bold'>mmr</h2>
+              <h2 className='text-xl font-bold'>MMR</h2>
               <div className={results[0]["mmr"] >= 11000 ? 'text-red-800' : results[0]["mmr"] >= 9000 ? 'dark:text-violet-500 text-zinc-900' : results[0]["mmr"] >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : results[0]["mmr"] >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : results[0]["mmr"] >= 4500 ? 'text-yellow-500' : results[0]["mmr"] >= 3000 ? 'text-gray-400' : results[0]["mmr"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["mmr"]}</div>
             </div>
 
             <div className={styles.player_page_stats}>
-              <h2 className='text-xl font-bold'>peak mmr</h2>
+              <h2 className='text-xl font-bold'>Peak MMR</h2>
               <div className={results[0]["peak mmr"] >= 11000 ? 'text-red-800' : results[0]["peak mmr"] >= 9000 ? 'dark:text-violet-500 text-zinc-900' : results[0]["peak mmr"] >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : results[0]["peak mmr"] >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : results[0]["peak mmr"] >= 4500 ? 'text-yellow-500' : results[0]["peak mmr"] >= 3000 ? 'text-gray-400' : results[0]["peak mmr"] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>{results[0]["peak mmr"]}</div>
             </div>
 
             <div className={styles.player_page_stats}>
-              <h2 className='text-xl font-bold'>win rate</h2>
+              <h2 className='text-xl font-bold'>Win Rate</h2>
               <div>{results[0]["win rate"]}%</div>
             </div>
 
             <div className={styles.player_page_stats}>
-              <h2 className='text-xl font-bold'>win/loss (last 10)</h2>
+              <h2 className='text-xl font-bold'>Win/Loss (Last 10)</h2>
               <div>{results[0]["win/loss (last 10)"]}</div>
             </div>
 
@@ -310,32 +310,32 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
             </div>
 
             <div className={styles.player_page_stats}>
-              <h2 className='text-xl font-bold'>avg score</h2>
+              <h2 className='text-xl font-bold'>Avg Score</h2>
               <div>{score_stuff[0]["avg score"]}</div>
             </div>
 
             <div className={styles.player_page_stats}>
-              <h2 className='text-xl font-bold'>top score</h2>
+              <h2 className='text-xl font-bold'>Top Score</h2>
               <div>{score_stuff[0]["top score"]}</div>
             </div>
 
             <div className={styles.player_page_stats}>
-              <h2 className='text-xl font-bold'>events played</h2>
+              <h2 className='text-xl font-bold'>Events Played</h2>
               <div>{results[0]["events played"]}</div>
             </div>
 
             <div className={styles.player_page_stats}>
-              <h2 className='text-xl font-bold'>largest gain</h2>
+              <h2 className='text-xl font-bold'>Largest Gain</h2>
               <div className='cursor-pointer hover:underline dark:text-cyan-300 text-blue-500'><Link href={"/mogi/" + lg[0].mogi_id}>{results[0]["largest gain"]}</Link></div>
             </div>
 
             <div className={styles.player_page_stats}>
-              <h2 className='text-xl font-bold'>largest loss</h2>
+              <h2 className='text-xl font-bold'>Largest Loss</h2>
               <div className='cursor-pointer hover:underline dark:text-cyan-300 text-blue-500'><Link href={"/mogi/" + ll[0].mogi_id}>{results[0]["largest loss"]}</Link></div>
             </div>
 
             <div className={styles.player_page_stats}>
-              <h2 className='text-xl font-bold'>partner average</h2>
+              <h2 className='text-xl font-bold'>Partner Avg</h2>
               <div>{pa[0]["pa"]}</div>
             </div>
 
@@ -359,50 +359,57 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
 
             {mmrHistory ?
               <div className='flex flex-col p-2'>
-                <div className='text-2xl'>
-                  MMR History
-                </div>
-                <div className='m-auto z-10 h-72'>
-                  <LineChart width={isMobile ? 300 : 500} height={isMobile ? 250 : 300} data={filteredMmrHistory} onClick={handleChartClick}>
-                    <XAxis dataKey="date" />
-                    <YAxis domain={[mmrMin, mmrMax]} />
-                    <Tooltip />
-                    <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                    <Line type="monotone" dataKey="mmr" stroke="#8884d8" dot={<CustomDot />} />
-                  </LineChart>
+                <div className={isMobile ? 'pb-2 m-4' : 'pb-6 m-4 border border-gray-100 dark:border-gray-700'}>
+                  <div className={styles.player_page_stats}>
+                    MMR History
+                  </div>
+                  <div className='m-auto z-10 h-72'>
+                    <LineChart width={isMobile ? 300 : 500} height={isMobile ? 250 : 300} data={filteredMmrHistory} onClick={handleChartClick}>
+                      <XAxis dataKey="date" />
+                      <YAxis domain={[mmrMin, mmrMax]} />
+                      <Tooltip />
+                      <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+                      <Line type="monotone" dataKey="mmr" stroke="#8884d8" dot={<CustomDot />} />
+                    </LineChart>
+                  </div>
                 </div>
               </div>
               : <></>}
 
             {scoreHistory ? <div className='flex flex-col p-2'>
-              <div className='text-2xl'>
-                Score History
-              </div>
-              <div className='m-auto z-10 h-72'>
-                <LineChart width={isMobile ? 300 : 500} height={isMobile ? 250 : 300} data={filteredScoreHistory} onClick={handleChartClick}>
-                  <XAxis dataKey="date" />
-                  <YAxis domain={[0, 180]} />
-                  <Tooltip />
-                  <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                  <Line type="monotone" dataKey="score" stroke="#8884d8" dot={<CustomDot />} />
-                </LineChart>
+              <div className={isMobile ? 'pb-2 m-4' : 'pb-6 m-4 border border-gray-100 dark:border-gray-700'}>
+                <div className={styles.player_page_stats}>
+                  Score History
+                </div>
+                <div className='m-auto z-10 h-72'>
+                  <LineChart width={isMobile ? 300 : 500} height={isMobile ? 250 : 300} data={filteredScoreHistory} onClick={handleChartClick}>
+                    <XAxis dataKey="date" />
+                    <YAxis domain={[0, 180]} />
+                    <Tooltip />
+                    <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+                    <Line type="monotone" dataKey="score" stroke="#8884d8" dot={<CustomDot />} />
+                  </LineChart>
+                </div>
               </div>
             </div>
               : <></>}
 
 
             {partnerScoreHistory ? <div className='flex flex-col p-2'>
-              <div className='text-2xl'>
-                Partner Score History
-              </div>
-              <div className='m-auto z-10 h-72'>
-                <LineChart width={isMobile ? 300 : 500} height={isMobile ? 250 : 300} data={filteredPartnerScoreHistory} onClick={handleChartClick}>
-                  <XAxis dataKey="date" />
-                  <YAxis domain={[0, 180]} />
-                  <Tooltip />
-                  <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                  <Line type="monotone" dataKey="score" stroke="#8884d8" dot={<CustomDot />} />
-                </LineChart>
+              <div className={isMobile ? 'pb-2 m-4' : 'pb-6 m-4 border border-gray-100 dark:border-gray-700'}>
+                <div className={styles.player_page_stats}>
+                  Partner Score History
+                </div>
+
+                <div className='m-auto z-10 h-72'>
+                  <LineChart width={isMobile ? 300 : 500} height={isMobile ? 250 : 300} data={filteredPartnerScoreHistory} onClick={handleChartClick}>
+                    <XAxis dataKey="date" />
+                    <YAxis domain={[0, 180]} />
+                    <Tooltip />
+                    <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+                    <Line type="monotone" dataKey="score" stroke="#8884d8" dot={<CustomDot />} />
+                  </LineChart>
+                </div>
               </div>
             </div>
               : <></>}
