@@ -1,10 +1,4 @@
-.navbar_wrapper {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
+/* Drop down for normal nav items */
 .navdropdown {
     color: #0e0e0e;
     background-color: var(--navbarBgColor);
@@ -14,16 +8,13 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    /* border: #eaeaea solid; */
-    /* border-width: 2px; */
     border-radius: 40px;
-    /* width: 900; */
-    /* position: fixed; */
     top: 60px;
     right: 5px;
     overflow: hidden;
 }
 
+/* Drop down for season picker */
 .navdropdown2 {
     color: #0e0e0e;
     background-color: var(--navbarBgColor);
@@ -50,13 +41,15 @@
 }
 
 
+
+
+
+/* Goes around the entire navbar */
 .navbar {
     display: flex;
     flex: 1;
     flex-wrap: wrap;
     background-color: var(--navbarBgColor);
-    /* background-color: rgb(255, 195, 14); */
-    /* justify-content: center; */
     min-width: 100%;
     top: 0;
     font-size: xx-large;
@@ -67,33 +60,68 @@
 }
 
 
+
+
+
+
+
+
+
+/* Goes around the top-left elements only (200cc Lounge) */
 .navitemwrapper {
     display: flex;
-    /* flex: 1; */
     flex-wrap: wrap;
 }
 
+/* Goes around the top right elements only (leaderboard, records, stats, etc) */
 .navitemwrapper2 {
     display: flex;
     flex-wrap: wrap;
-    /* color: white; */
     position: relative;
     z-index: 40;
 }
 
-/* hamburger menu */
+
+
+
+
+
+
+/* Goes around each item in the desktop navbar */
+.navitem {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    color: white;
+    transition: transform 500ms;
+}
+
+.navitem:hover,
+.navitem:focus {
+    border-color: #eaeaea;
+    color: var(--navbarLinkColor);
+    cursor: pointer;
+    transition: transform 100ms;
+    transform: translateY(3px);
+}
+
+.navitem:active {
+    color: var(--navbarLinkColor);
+}
+
+
+
+
+
+
+
+
+/* Goes around the hamburger icon only */
 .navitem3 {
     padding-right: 1rem;
     color: var(--textColor);
-    /* padding-left: 1rem; */
-    /* padding-top: 0.5rem; */
-    color: white;
-    /* padding-top: 2rem; */
     z-index: 35;
-    /* position: fixed; */
     top: 0px;
     right: 0;
-    font-family: 'ShinGoProBold';
 }
 
 .navitem3:hover,
@@ -111,117 +139,11 @@
 
 
 
-
-/* normal nav items */
-.navitem {
-    padding-right: 1rem;
-    padding-left: 1rem;
-    color: white;
-    transition: transform 500ms;
-    /* font-family: 'ShinGoProBold'; */
-    /* font-size: 1.5rem; */
-}
-
-.navitem:hover,
-.navitem:focus {
-    border-color: #eaeaea;
-    color: var(--navbarLinkColor);
-    cursor: pointer;
-    transition: transform 100ms;
-    transform: translateY(3px)
-        /* transition: cubic-bezier(0.6, -0.28, 0.735, 0.045); */
-        /* transform: translateY(5px); */
-        /* transform: scale(2, 2); */
-}
-
-.navitem:active {
-    color: var(--navbarLinkColor);
-}
-
-
-
-
-
-
-
-
-
-
-
-.navitemactive {
-    padding-right: 1rem;
-    padding-left: 1rem;
-    color: var(--navbarLinkColor);
-    transition: transform 500ms;
-    pointer-events: none; /* when a season is chosen, disable ability to click button again
-    /* or else we navigate to /s5/s5/s5/s5/s5 */
-    /* font-family: 'ShinGoProBold'; */
-    /* font-size: 1.5rem; */
-}
-
-.navitemactive:hover,
-.navitemactive:focus {
-    border-color: #eaeaea;
-    color: var(--navbarLinkColor);
-    /* cursor: pointer; */
-    pointer-events: none;
-    transition: transform 100ms;
-    transform: translateY(3px)
-        /* transition: cubic-bezier(0.6, -0.28, 0.735, 0.045); */
-        /* transform: translateY(5px); */
-        /* transform: scale(2, 2); */
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 200cc lounge title in navbar */
-.navitem2 {
-    padding-right: 1rem;
-    padding-left: 1rem;
-    padding-bottom: 0.5rem;
-    color: white;
-    font-family: 'Hey Gorgeous';
-    font-size: 20px;
-    padding-top: 0.6rem;
-    /* justify-content: flex-start; */
-    /* display: flex; */
-    /* flex: 1; */
-    /* flex-wrap: wrap; */
-}
-
-
-
-
-
-
-
-
-
-
-
-
+/* Goes around each nav item for mobile */
 .navitemmobile {
     padding-right: 1rem;
     padding-left: 1rem;
-    /* padding-top: 0.5rem; */
     color: white;
-    /* padding-left: 6rem; */
-    /* display: flex; */
-    /* flex: 1; */
-    /* flex-wrap: wrap; */
-    /* justify-content: flex-end; */
 }
 
 .navitemmobile:hover,
