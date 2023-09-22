@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link';
 import mysql from 'mysql2'
 import styles from '../styles/Home.module.css'
+import { useMediaQuery } from '@mui/material';
 import { useState, useEffect } from 'react'
 import { AreaChart, Area, Scatter, Pie, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell } from 'recharts';
 
@@ -148,12 +149,25 @@ export async function getServerSideProps() {
     })
     const mogi_count_by_tier = JSON.parse(JSON.stringify(stuff11))
 
+    // mogis per rank
+    let stuff12 = await new Promise((resolve, reject) => {
+        connection.query("SELECT r.rank_name, COUNT(DISTINCT pm.mogi_id) as mogis_played FROM player_mogi pm INNER JOIN ranks r ON pm.prev_mmr BETWEEN r.mmr_min AND r.mmr_max GROUP BY r.rank_name ORDER BY mogis_played DESC;", [], (error, stuff12) => {
+            if (error) reject(error)
+            else resolve(stuff12)
+        })
+    })
+    const mogis_per_rank = JSON.parse(JSON.stringify(stuff12))
+
+
+
+    
+
     
 
     connection.end();
 
     return {
-        props: { today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data, mogi_count_by_tier }
+        props: { today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data, mogi_count_by_tier, mogis_per_rank }
     }
 }
 
@@ -163,7 +177,14 @@ export async function getServerSideProps() {
 
 
 
-export default function Stats({ today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data, mogi_count_by_tier }) {
+export default function Stats({ today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data, mogi_count_by_tier, mogis_per_rank }) {
+    
+    // Turns a 24 hour number into an AM PM time
+    function formatHour(hour) {
+        const period = hour < 12 ? 'AM' : 'PM';
+        const formattedHour = hour % 12 || 12; // convert 0 to 12
+        return `${formattedHour}${period}`;
+    }
 
     // Mobile handling things
     const [width, setWidth] = useState(typeof window === 'undefined' ? 0 : window.innerWidth)
@@ -178,11 +199,18 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
         return () => window.removeEventListener("resize", handleResize)
     },)
 
-
-
     // Rank & rank colors
+    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+    var colors = []
     const rank_names = ['Iron', 'Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Master', 'Grandmaster']
-    const colors = ['#817876', '#E67E22', '#7D8396', '#F1C40F', '#3FABB8', '#9CCBD6', '#0E0B0B', '#A3022C']
+    if (prefersDarkMode) {
+        // Master purple
+        colors = ['#817876', '#E67E22', '#7D8396', '#F1C40F', '#3FABB8', '#9CCBD6', '#8b5cf6', '#A3022C']    
+    } else {
+        // Master black
+        colors = ['#817876', '#E67E22', '#7D8396', '#F1C40F', '#3FABB8', '#9CCBD6', '#0E0B0B', '#A3022C']
+    }
+
     // Map data to include a color property based on rank_name
     const mappedRankData = rank_count_by_player.map((item) => {
         const index = rank_names.indexOf(item.rank_name);
@@ -192,7 +220,6 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
         };
     });
 
-
     // Mogi & mogi colors
     const mogi_colors = ['#ffce47', '#76D7C4', '#85C1E9', '#C39BD3', '#F1948A'];
     // Mogi format - convert your rows to a format suitable for the Pie Chart
@@ -201,7 +228,6 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
         mogi_count: row.mogi_count,
         name: row.format_name, // Using the word "name" specifically with recharts will make that the legend?
     }))
-
 
     // Mogi day of week/hour data
     const mogi_frequency_data = mogi_day_of_week_data.map(row => ({
@@ -224,16 +250,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
             mogi_count: dayData.mogi_count
         };
     });
-    // Keep this around in case I use it again... maybe useful to compare frequencies on the same scale across days
     const maxMogiFrequencyCount = Math.max(...adjustedMogiFrequencyData.map(data => data.mogi_count), 0);
-
-    function formatHour(hour) {
-        const period = hour < 12 ? 'AM' : 'PM';
-        const formattedHour = hour % 12 || 12; // convert 0 to 12
-        return `${formattedHour}${period}`;
-    }
-
-
 
     // Mogi by tier data
     const tier_colors = ['#9339bd', '#bd397b', '#39bd7d', '#39b6bd', '#bd7b39']
@@ -242,9 +259,11 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
         name: row.tier_name, // Using the word "name" specifically with recharts will make that the legend?
     }))
 
-
-
-
+    // Mogis by rank data
+    const mogis_per_rank_data = mogis_per_rank.map(row => ({
+        name: row.rank_name,
+        mogi_count: row.mogis_played
+    }))
 
 
 
@@ -420,6 +439,35 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                             </Bar>
                         </BarChart>
                     </div>
+
+
+                    <div className={'mt-6'}>
+                        <div className={styles.player_page_stats}>
+                            <h2 className='text-xl font-bold'>Mogis by Rank</h2>
+                        </div>
+                        <BarChart
+                            width={isMobile ? 375 : 750} height={isMobile ? 300 : 400}
+                            data={mogis_per_rank_data}
+                            margin={{ top: 5, right: 30, left: 20, bottom: 48 }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" angle={-45} textAnchor="end" verticalAnchor="middle" />
+                            <YAxis />
+                            <Tooltip />
+                            {/* <Legend /> */}
+                            <Bar dataKey="mogi_count" fill="#8884d8">
+                                {
+                                    mogis_per_rank_data.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                                    ))
+                                }
+                            </Bar>
+                        </BarChart>
+                    </div>
+
+
+
+
 
                     <div className='flex flex-row flex-wrap justify-center'>
                         <div className={styles.player_page_stats}>
