@@ -159,7 +159,7 @@ export async function getServerSideProps(context) {
   connection.end();
   // return props as object ALWAYS
   return {
-    props: { results, rows, lg, ll, pa, rank, score_stuff, partner_score_history, grid_color }
+    props: { results, rows, lg, ll, pa, rank, score_stuff, partner_score_history, season, grid_color }
   }
 }
 
@@ -167,7 +167,7 @@ export async function getServerSideProps(context) {
 
 
 
-export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, partner_score_history, grid_color }) {
+export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, partner_score_history, season, grid_color }) {
 
   // Mobile handling things
   const [width, setWidth] = useState(typeof window === 'undefined' ? 0 : window.innerWidth)
@@ -222,7 +222,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
     if (data && data.activePayload && data.activePayload[0]) {
       const clickedData = data.activePayload[0].payload;
       // Navigate using the mogi_id from the clickedData
-      window.location.href = `/mogi/${clickedData.mogi_id}`;
+      window.location.href = `/mogi/${clickedData.mogi_id}?season=${season}`;
     }
   };
 
