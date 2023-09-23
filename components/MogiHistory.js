@@ -186,7 +186,7 @@ export default function MogiHistory(props) {
               <StyledTableRow key={row.mogi_id}>
 
                 <StyledTableCell align="center">
-                  <SeasonPreservingLink to={`/mogi` + row.mogi_id}>
+                  <SeasonPreservingLink to={`/mogi/` + row.mogi_id}>
                     <div className='cursor-pointer hover:underline text-blue-500'>
                       {row.title}
                     </div>
