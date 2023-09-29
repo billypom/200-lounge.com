@@ -350,7 +350,7 @@ export default function Rules() {
                             </ul>
 
                             <ul className='m-4'>
-                                13. Teams missing a player for more than 6 races will receive an MMR loss proportionate to the number of races the missing player is absent from. For instance, if a player is missing for 10 races, the team will receive 2/10 loss. The missing player will still lose MMR and will receive an additional <penalty>-100 MMR + strike</penalty> penalty.
+                                13. Teams missing a player for more than 6 races will receive an MMR loss proportional to the number of races the missing player is absent from. For instance, if a player is missing for 10 races, the team will receive 2/12 loss. The missing player will still lose MMR and will receive an additional <penalty>-100 MMR + strike</penalty> penalty.
                             </ul>
 
                             <ul className='m-4'>
