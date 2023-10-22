@@ -81,7 +81,8 @@ export default function Mogi({ results, pm }) {
             mogi
           </h1>
           {/* <div className='max-w-2xl pt-5 z-10 m-auto justify-center'> */}
-          <Image src={results[0].table_url} alt='mogi results image' width='860' height='520' priority></Image>
+          {results[0].table_url ? <Image src={results[0].table_url} alt='mogi results image' width='860' height='520' priority></Image> : <div className='m-10'>Lorenzi Table Image Not Found</div>}
+          
           <div className='max-w-9xl'>
             <MMRTable rows={pm} />
           </div>
