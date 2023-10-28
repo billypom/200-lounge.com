@@ -161,6 +161,26 @@ export async function getServerSideProps(context) {
     })
     const all_time_top_score = JSON.parse(JSON.stringify(stuff13))
 
+    // average mogis per day
+    let stuff14 = await new Promise((resolve, reject) => {
+        connection.query(
+            `SELECT ROUND(AVG(mogis_per_day),0) AS avg_mogis_per_day FROM (SELECT DATE(create_date) as day_created, COUNT(*) as mogis_per_day FROM mogi GROUP BY DATE(create_date)) as daily_mogis;`, [], (error, stuff14) => {
+                if (error) reject(error)
+                else resolve(stuff14)
+            })
+    })
+    const avg_mogis_per_day = JSON.parse(JSON.stringify(stuff14))
+
+    // length of season
+    let stuff15 = await new Promise((resolve, reject) => {
+        connection.query(
+            `SELECT DATEDIFF(MAX(DATE(create_date)), MIN(DATE(create_date)))as season_length_in_days FROM mogi;`, [], (error, stuff15) => {
+                if (error) reject(error)
+                else resolve(stuff15)
+            })
+    })
+    const season_length_in_days = JSON.parse(JSON.stringify(stuff15))
+
 
 
 
@@ -170,7 +190,7 @@ export async function getServerSideProps(context) {
     connection.end();
 
     return {
-        props: { today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data, mogi_count_by_tier, mogis_per_rank, all_time_top_score }
+        props: { today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data, mogi_count_by_tier, mogis_per_rank, all_time_top_score, avg_mogis_per_day, season_length_in_days }
     }
 }
 
@@ -180,7 +200,7 @@ export async function getServerSideProps(context) {
 
 
 
-export default function Stats({ today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data, mogi_count_by_tier, mogis_per_rank, all_time_top_score }) {
+export default function Stats({ today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data, mogi_count_by_tier, mogis_per_rank, all_time_top_score, avg_mogis_per_day, season_length_in_days }) {
 
     // Turns a 24 hour number into an AM PM time
     function formatHour(hour) {
@@ -308,15 +328,8 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
 
                 {/* Daily stats */}
                 <div className="flex flex-col text-center z-10 items-center">
-                    <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>daily stats</h2>
+                    {/* <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>daily stats</h2> */}
                     <div className='flex flex-row flex-wrap w-full justify-center'>
-
-                        {today_mogi_count[0] ?
-                            <div className={styles.player_page_stats}>
-                                <h2 className='text-xl font-bold'>Mogis Today:</h2>
-                                <div>{today_mogi_count[0].count}</div>
-                            </div> : <></>}
-
 
                         {today_top_score[0] ?
                             <div className={styles.player_page_stats}>
@@ -353,6 +366,34 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                                     </div>
                                 </div>
                             </div> : <></>}
+
+                        {today_mogi_count[0].count > 0 ?
+                            <div className={styles.player_page_stats}>
+                                <h2 className='text-md font-bold'>Mogis Today:</h2>
+                                <div>{today_mogi_count[0].count}</div>
+                            </div> : <></>}
+                        
+                        {avg_mogis_per_day[0] ?
+                            <div className={styles.player_page_stats}>
+                                <h2 className='text-md font-bold'>Average Mogis Per Day:</h2>
+                                <div>{avg_mogis_per_day[0].avg_mogis_per_day}</div>
+                            </div> : <></>}
+
+                        <div className={styles.player_page_stats}>
+                            <h2 className='text-md font-bold'>Total Mogis:</h2>
+                            <div>{total_mogis_played[0].count}</div>
+                        </div>
+
+                        {season_length_in_days[0] ?
+                            <div className={styles.player_page_stats}>
+                                <h2 className='text-md font-bold'>Season Length:</h2>
+                                <div>{season_length_in_days[0].season_length_in_days} days</div>
+                            </div> : <></>}
+                            
+
+                            
+                        
+                    
 
 
                     </div>
@@ -492,19 +533,6 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                                 }
                             </Bar>
                         </BarChart>
-                    </div>
-
-
-
-
-
-                    <div className='flex flex-row flex-wrap justify-center'>
-                        <div className={styles.player_page_stats}>
-                            <h2 className='text-xl font-bold'>Total Mogis:</h2>
-                            <div>{total_mogis_played[0].count}</div>
-                        </div>
-
-
                     </div>
 
 
