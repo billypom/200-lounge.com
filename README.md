@@ -49,8 +49,6 @@ Useful for MKC staff team to check for player bans. `unban_date` is a Unix times
 
 ### Example:
 ```js
-// Request ➡️
-
 async function apiRequest() {
   const response = await fetch("https://200-lounge.com/api/mkc/154");
   const result = await response.json();
@@ -78,8 +76,6 @@ Useful for [MogiBot](https://255mp.github.io/) caching.
 
 ### Example:
 ```js
-// Request ➡️
-
 async function apiRequest() {
   const response = await fetch("https://200-lounge.com/api/all_players");
   const result = await response.json();
