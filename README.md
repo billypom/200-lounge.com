@@ -48,10 +48,6 @@ Useful for MKC staff team to check for player bans - `unban_date` is a Unix time
 - `/api/mkc/[MKC_FORUM_ID]`
 
 ### Example:
-request:
-
-↪️ `/api/mkc/154`
-
 ```js
 // Request ➡️
 
@@ -81,7 +77,6 @@ Useful for [MogiBot](https://255mp.github.io/) caching.
 - `/api/all_players`
 
 ### Example:
-
 ```js
 // Request ➡️
 
