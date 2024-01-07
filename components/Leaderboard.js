@@ -230,8 +230,8 @@ export default function Leaderboard(props) {
             const matchesMinEventFilter = minEventsPlayedFilter ? row['events played'] >= parseInt(minEventsPlayedFilter) : true
             const matchesMaxEventFilter = maxEventsPlayedFilter ? row['events played'] <= parseInt(maxEventsPlayedFilter) : true
             // MMR filter
-            const matchesMinMMRFilter = minMMRFilter ? row['MMR'] >= parseInt(minMMRFilter) : true
-            const matchesMaxMMRFilter = maxMMRFilter ? row['MMR'] <= parseInt(maxMMRFilter) : true
+            const matchesMinMMRFilter = minMMRFilter ? parseInt(row['mmr']) >= parseInt(minMMRFilter) : true
+            const matchesMaxMMRFilter = maxMMRFilter ? parseInt(row['mmr']) <= parseInt(maxMMRFilter) : true
             // Filtering based on selected country
             const matchesCountry = selectedCountry ? row['country'] === selectedCountry : true // Adjust this line if the country code is stored differently in your rows.
 
