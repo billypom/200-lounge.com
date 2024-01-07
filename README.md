@@ -1,7 +1,9 @@
 # 200-lounge.com
 Leaderboard for MK8DX 200cc Lounge.
 
-# API
+
+
+# 🧑‍💻 API
 
 ## Player leaderboard data
 Retrieve leaderboard stats with the following endpoints
@@ -10,10 +12,9 @@ Retrieve leaderboard stats with the following endpoints
 - `/api/player/[PLAYER_NAME]`
 
 ### Example:
-
-#### `/api/discord/166818526768791552` or 
-#### `/api/player/popuko`
-
+Request:
+↪️ `/api/discord/166818526768791552` or `/api/player/popuko`
+Response:
 ```
 [
     {
@@ -38,9 +39,9 @@ Useful for MKC staff team to check for player bans - `unban_date` is a Unix time
 - `/api/mkc/[MKC_FORUM_ID]`
 
 ### Example:
-
-#### `/api/mkc/154`
-
+Request:
+↪️ `/api/mkc/154`
+Response:
 ```
 [
     {
@@ -58,9 +59,9 @@ Useful for [MogiBot](https://255mp.github.io/) caching.
 - `/api/all_players`
 
 ### Example:
-
-#### `/api/all_players`
-
+Request:
+↪️ `/api/all_players`
+Response:
 ```
 [
     {
