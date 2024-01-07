@@ -12,9 +12,11 @@ Retrieve leaderboard stats with the following endpoints
 - `/api/player/[PLAYER_NAME]`
 
 ### Example:
-Request:
+request:
+
 ↪️ `/api/discord/166818526768791552` or `/api/player/popuko`
-Response:
+
+response:
 ```
 [
     {
@@ -39,9 +41,11 @@ Useful for MKC staff team to check for player bans - `unban_date` is a Unix time
 - `/api/mkc/[MKC_FORUM_ID]`
 
 ### Example:
-Request:
+request:
+
 ↪️ `/api/mkc/154`
-Response:
+
+response:
 ```
 [
     {
@@ -59,9 +63,11 @@ Useful for [MogiBot](https://255mp.github.io/) caching.
 - `/api/all_players`
 
 ### Example:
-Request:
+request:
+
 ↪️ `/api/all_players`
-Response:
+
+response:
 ```
 [
     {
