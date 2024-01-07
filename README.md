@@ -12,12 +12,47 @@ Retrieve leaderboard stats with the following endpoints
 - `/api/player/[PLAYER_NAME]`
 
 ### Example:
-request:
-
-↪️ `/api/discord/166818526768791552` or `/api/player/popuko`
-
-response:
+```js
+// Request ➡️
+async function apiRequest() {
+  const response = await fetch("https://200-lounge.com/api/player/popuko");
+  const result = await response.json();
+  console.log(result);
+}
 ```
+
+```json
+// ⬅️ Response
+[
+    {
+        "player_id":"166818526768791552",
+        "country_code":"US",
+        "player_name":"popuko",
+        "mmr":977,
+        "peak_mmr":977,
+        "win_rate":"0.00",
+        "last_ten":"0-1",
+        "gain/loss (last 10)":"-23",
+        "events_played":1,
+        "largest_gain":-23,
+        "largest_loss":-23,
+        "rank_name":"Iron"
+    }
+]
+```
+
+```js
+// Request ➡️
+
+async function apiRequest() {
+  const response = await fetch("https://200-lounge.com/api/discord/166818526768791552");
+  const result = await response.json();
+  console.log(result);
+}
+```
+
+```json
+// ⬅️ Response
 [
     {
         "player_id":"166818526768791552",
@@ -45,8 +80,20 @@ request:
 
 ↪️ `/api/mkc/154`
 
-response:
+```js
+// Request ➡️
+
+async function apiRequest() {
+  const response = await fetch("https://200-lounge.com/api/mkc/154");
+  const result = await response.json();
+  console.log(result);
+}
+
 ```
+
+
+```json
+// ⬅️ Response
 [
     {
         "mkc_id":154,
@@ -63,12 +110,19 @@ Useful for [MogiBot](https://255mp.github.io/) caching.
 - `/api/all_players`
 
 ### Example:
-request:
 
-↪️ `/api/all_players`
+```js
+// Request ➡️
 
-response:
+async function apiRequest() {
+  const response = await fetch("https://200-lounge.com/api/all_players");
+  const result = await response.json();
+  console.log(result);
+}
 ```
+
+```json
+// ⬅️ Response
 [
     {
         "player_id":71024311338536960,
