@@ -29,7 +29,7 @@ export default async function handler(req, res) {
       pm.events_played as "events_played",
       pm.largest_gain as "largest_gain",
       pm.largest_loss as "largest_loss",
-      r.rank_name
+      r.rank_name,
       p.unban_date
       FROM player as p 
       JOIN ranks as r ON r.rank_id = p.rank_id 
