@@ -38,7 +38,8 @@ apiRequest("https://200-lounge.com/api/discord/166818526768791552");
         "events_played":1,
         "largest_gain":-23,
         "largest_loss":-23,
-        "rank_name":"Iron"
+        "rank_name":"Iron",
+        "unban_date":1704663797
     }
 ]
 ```
