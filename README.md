@@ -144,7 +144,8 @@ async function apiRequest() {
     "player_name": "JulianSMM",
     "mmr": 5482
   }
-]```
+]
+```
 
 
 
