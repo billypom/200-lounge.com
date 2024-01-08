@@ -1,7 +1,17 @@
-# 200-lounge.com
-Leaderboard for MK8DX 200cc Lounge.
+# [200-lounge.com](https://200-lounge.com/)
+Leaderboard for MK8DX 200cc Lounge. See current standings, previous match results, statistics, and more.
 
+### Leaderboard filtering
+![Leaderboard](https://imgur.com/kqlMvBL)
 
+### Stats
+![Stats](https://imgur.com/mDKoS9B)
+
+### Hi-scores
+![Hi-scores](https://imgur.com/hEfMjwU)
+
+### Match results
+![Results](https://imgur.com/GXMpkhi)
 
 # 🧑‍💻 API
 
@@ -72,7 +82,7 @@ async function apiRequest() {
 ```
 
 ## 🔌 All players
-Useful for [MogiBot](https://255mp.github.io/) caching.
+Returns every player on the leadeboard. Useful for [MogiBot](https://255mp.github.io/) caching.
 - `/api/all_players`
 
 ### Example:
