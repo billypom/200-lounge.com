@@ -1,17 +1,6 @@
 # [200-lounge.com](https://200-lounge.com/)
-Leaderboard for MK8DX 200cc Lounge. See current standings, previous match results, statistics, and more.
-
-### Leaderboard filtering
 ![Leaderboard](https://i.imgur.com/kqlMvBL.png)
-
-### Stats
-![Stats](https://i.imgur.com/mDKoS9B.png)
-
-### Hi-scores
-![Hi-scores](https://i.imgur.com/hEfMjwU.png)
-
-### Match results
-![Results](https://i.imgur.com/GXMpkhi.png)
+Leaderboard for MK8DX 200cc Lounge. See current standings, previous match results, statistics, and more.
 
 # 🧑‍💻 API
 
