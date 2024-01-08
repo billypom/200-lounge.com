@@ -80,9 +80,11 @@ async function apiRequest() {
 ]
 ```
 
-## 🔌 All players
-Returns every player on the leadeboard. Useful for [MogiBot](https://255mp.github.io/) caching.
+## 🔌 All players / List of players
+Returns every player or a set of players from the leadeboard. Useful for [MogiBot](https://255mp.github.io/) caching.
+
 - `/api/all_players`
+- `/api/all_players?player_id=123456789`
 
 ### Example:
 ```js
@@ -118,6 +120,33 @@ async function apiRequest() {
     ...
 ]
 ```
+
+Pass `player_id` as a query parameter, as many times as you need, to get only a list of specific players.
+
+### Example:
+```js
+async function apiRequest() {
+  const response = await fetch("https://200-lounge.com/api/all_players?player_id=166818526768791552&player_id=219494120010416128");
+  const result = await response.json();
+  console.log(result);
+}
+```
+
+```json
+[
+  {
+    "player_id": "166818526768791552",
+    "player_name": "popuko",
+    "mmr": 977
+  },
+  {
+    "player_id": "219494120010416128",
+    "player_name": "JulianSMM",
+    "mmr": 5482
+  }
+]```
+
+
 
 ### Credits
 

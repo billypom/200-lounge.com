@@ -1,33 +1,40 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import mysql from 'mysql2'
+import mysql from 'mysql2';
 
 export default async function handler(req, res) {
-  const connection = mysql.createConnection(
-    {
-      host: process.env.db_host,
-      user: process.env.db_username,
-      password: process.env.db_password,
-      database: process.env.db_database,
-      insecureAuth: true,
-      supportBigNumbers: true,
+  const connection = mysql.createConnection({
+    host: process.env.db_host,
+    user: process.env.db_username,
+    password: process.env.db_password,
+    database: process.env.db_database,
+    insecureAuth: true,
+    supportBigNumbers: true,
+  });
+
+  try {
+    connection.connect();
+
+    const playerIds = [].concat(req.query.player_id || []);
+    let query = 'SELECT player_id, player_name, mmr FROM player';
+    let queryParams = [];
+
+    if (playerIds.length > 0) {
+      query += ' WHERE player_id IN (?)';
+      queryParams.push(playerIds);
     }
-  )
-  // Connect to server
-  connection.connect();
-  // Store table results
-  let results = await new Promise((resolve, reject) => {
-    connection.query(
-      `SELECT player_id, player_name, mmr FROM player;`, [], (error, results) => {
+
+    let results = await new Promise((resolve, reject) => {
+      connection.query(query, queryParams, (error, results) => {
         if (error) reject(error);
         else resolve(results);
-        }
-      );
-    }
-  );
-  // Parse mysql output into json table
-  results = JSON.parse(JSON.stringify(results))
-  // End connection to server
-  connection.end();
-  // return props as object ALWAYS
-  res.status(200).json(results);
+      });
+    });
+
+    results = JSON.parse(JSON.stringify(results));
+    res.status(200).json(results);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  } finally {
+    connection.end();
+  }
 }
