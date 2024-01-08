@@ -4,6 +4,16 @@ Leaderboard for MK8DX 200cc Lounge. See current standings, previous match result
 
 # 🧑‍💻 API
 
+If you plan on using the API, it would be really awesome if you included a User-Agent header.
+
+```py
+# User-Agent header simple example
+headers = {'User-Agent': 'YOUR_APP_NAME'}
+response = requests.get('https://200-lounge.com/api/all_players', headers=headers)
+response = response.json()
+...
+```
+
 ## 🔌 Player data
 Retrieve leaderboard stats with the following endpoints
 
