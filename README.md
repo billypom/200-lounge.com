@@ -1,10 +1,10 @@
 # [200-lounge.com](https://200-lounge.com/)
-![Leaderboard](https://i.imgur.com/kqlMvBL.png)
 Leaderboard for MK8DX 200cc Lounge. See current standings, previous match results, statistics, and more.
+![Leaderboard](https://i.imgur.com/kqlMvBL.png)
 
 # 🧑‍💻 API
 
-If you plan on using the API, it would be really awesome if you included a User-Agent header.
+If you plan on using the API, it would be really awesome if you included a User-Agent header. ❤️
 
 ```py
 # User-Agent header simple example
