@@ -2,16 +2,16 @@
 Leaderboard for MK8DX 200cc Lounge. See current standings, previous match results, statistics, and more.
 
 ### Leaderboard filtering
-![Leaderboard](https://imgur.com/kqlMvBL)
+![Leaderboard](https://i.imgur.com/kqlMvBL.png)
 
 ### Stats
-![Stats](https://imgur.com/mDKoS9B)
+![Stats](https://i.imgur.com/mDKoS9B.png)
 
 ### Hi-scores
-![Hi-scores](https://imgur.com/hEfMjwU)
+![Hi-scores](https://i.imgur.com/hEfMjwU.png)
 
 ### Match results
-![Results](https://imgur.com/GXMpkhi)
+![Results](https://i.imgur.com/GXMpkhi.png)
 
 # 🧑‍💻 API
 
