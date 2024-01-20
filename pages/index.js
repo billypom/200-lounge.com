@@ -42,7 +42,7 @@ export async function getServerSideProps(context) {
             FROM player_mogi as pm2 
             JOIN mogi as m on pm2.mogi_id = m.mogi_id 
             WHERE pm2.player_id = p.player_id
-            ORDER BY m.create_date DESC) 
+            ) 
           as pm2 
           ON pm2.mogi_id = pm.mogi_id 
           AND pm2.place = pm.place 

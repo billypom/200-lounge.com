@@ -71,7 +71,7 @@ export default function Navbar(props) {
             <div className={styles.navitemwrapper2} ref={buttonRef}>
                 {isMobile ? <>
                     <div className={styles.navitem3}>
-                        <Image src='/icons8-menu.svg' alt='navigation' width={30} height={30} onClick={() => setOpen(!open)} />
+                        <Image src='/icons8-menu.svg' className={styles.colorinvert} alt='navigation' width={30} height={30} onClick={() => setOpen(!open)} />
                     </div>
 
                 </> : <>

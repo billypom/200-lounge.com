@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --g1: rgb(176, 242, 235);
+  --g1: rgba(219, 240, 238, 0.801);
   --g2: rgb(246, 245, 231);
   --g3: rgb(246, 245, 231);
   /*  another blue */
@@ -12,7 +12,7 @@
   /* --linkColor: #0000EE; */
   --linkColor: #3b82f6;
   --navbarLinkColor: #3b82f6;
-  --navbarBgColor: rgba(86, 86, 96, 0.95);
+  --navbarBgColor: rgba(236, 233, 219, 0.95);
   --textColor: rgba(7, 18, 18, 1);
   --tableHeaderBgColor: #1d185f;
 }

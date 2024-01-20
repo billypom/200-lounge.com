@@ -152,7 +152,6 @@
     padding-right: 1rem;
     padding-left: 1rem;
     color: var(--textColor);
-    color: white;
 }
 
 .navitemmobile:hover,
@@ -162,3 +161,10 @@
     color: var(--navbarLinkColor);
     cursor: pointer;
 }
+
+.colorinvert {
+    /* Invert colors if not in dark mode */
+    @media (prefers-color-scheme: light) {
+      filter: invert(100%);
+    }
+  }
