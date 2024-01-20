@@ -23,16 +23,16 @@ ______________
 ## I. WHAT IS 200 LOUNGE? {#i-what-is-200-lounge}
 ______________
 
-200 Lounge is a competitive solo ladder for the MK8DX 200cc engine class. To compete on the ladder you will need to join the [Discord server](https://discord.gg/uR3rRzsjhk) where we host 24/7 instant wars for MK8DX. 12 players can gather and play an event at any time. All other public channels have their own purposes for players and teams outside of lounge events. See channel descriptions in the server for more information.
+200 Lounge is a competitive solo ladder for the MK8DX 200cc engine class. To compete on the ladder you will need to join the [Discord server](https://discord.gg/uR3rRzsjhk "Discord invite") where we host 24/7 instant wars for MK8DX. 12 players can gather and play an event at any time. All other public channels have their own purposes for players and teams outside of lounge events. See channel descriptions in the server for more information.
 
 ## II. JOINING THE LOUNGE {#ii-joining-the-lounge}
 ______________
 
-Use the **`/verify`** command in our [Discord server](https://discord.gg/uR3rRzsjhk) to provide the leaderboard system with your [Mario Kart Central](https://www.mariokartcentral.com/mkc/) account.
+Use the **`/verify`** command in our [Discord server](https://discord.gg/uR3rRzsjhk "Discord invite") to provide the leaderboard system with your [Mario Kart Central](https://www.mariokartcentral.com/mkc/ "mariokartcentral.com") account.
 
-A tutorial video on how to do this can be found in the [#verification](https://discord.gg/uR3rRzsjhk) channel in the Discord server.
+A tutorial video on how to do this can be found in the [#verification](https://discord.gg/uR3rRzsjhk "Discord invite") channel in the Discord server.
 
-For help making a registry account, refer to [this guide.](https://www.mariokartcentral.com/wp/mkcentral-registry-guide/)
+For help making a registry account, refer to [this guide.](https://www.mariokartcentral.com/wp/mkcentral-registry-guide/ "MKCentral Registry Guide")
 
 You can request nickname, once every 60 days, by using the **`/name`** command in the Discord server.
 
@@ -145,7 +145,7 @@ ______________
 
 4. Players who leave an event after the poll has started:
 	1. Do not gain MMR on a winning team.
-	2. Receive 1 strike and a *-100 MMR* penalty.
+	2. Receive *1 strike* and a *-100 MMR* penalty.
 	3. Lose any MMR their team lost in addition to the strike.
 
 5. Players who sub in a match that has already started:
@@ -219,7 +219,7 @@ If there is an issue with your command, our Discord bot should inform you of wha
 
 3. Room hosts are responsible for taking screenshots of results. If an event fails to have a screenshot or table created within 30 minutes of the last race, the host of the room will receive *-100 MMR* and a *strike*.
 
-4. Only certain people will be given access to the results channels in order to prevent spam. If you want to become a reporter, look in the [#self-roles](https://discord.gg/uR3rRzsjhk) channel in the Discord server
+4. Only certain people will be given access to the results channels in order to prevent spam. If you want to become a reporter, look in the [#self-roles](https://discord.gg/uR3rRzsjhk "Discord invite") channel in the Discord server
 
 ## VIII. STRIKE SYSTEM {#viii-strike-system}
 ______________
@@ -245,3 +245,5 @@ ______________
 ______________
 
 That is all that we are expecting each and every one of you to follow. We hope you enjoy your community and lounge experience and follow the rules and guidelines accordingly.
+
+![200 Lounge Logo](/200.png)

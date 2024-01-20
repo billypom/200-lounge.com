@@ -335,13 +335,13 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                             <div className={styles.player_page_stats}>
                                 <h2 className='text-md font-bold'>Today&apos;s Top Score:</h2>
                                 <div className='flex flex-row flex-wrap justify-center font-normal'>
-                                    <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
+                                    <div className="dark:text-cyan-600 text-blue-500 cursor-pointer hover:underline">
                                         <SeasonPreservingLink to={`/player/${today_top_score[0].player_name}`}>
                                             {today_top_score[0].player_name}
                                         </SeasonPreservingLink>
                                     </div>
                                     <div className='px-2'>{' '}-{' '}</div>
-                                    <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
+                                    <div className="dark:text-cyan-600 text-blue-500 cursor-pointer hover:underline">
                                         <SeasonPreservingLink to={`/mogi/${today_top_score[0].mogi_id}`}>
                                             {today_top_score[0].score}
                                         </SeasonPreservingLink>
@@ -353,13 +353,13 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                             <div className={styles.player_page_stats}>
                                 <h2 className='text-md font-bold'>Season Top Score:</h2>
                                 <div className='flex flex-row flex-wrap justify-center font-normal'>
-                                    <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
+                                    <div className="dark:text-cyan-600 text-blue-500 cursor-pointer hover:underline">
                                         <SeasonPreservingLink to={`/player/${all_time_top_score[0].player_name}`}>
                                             {all_time_top_score[0].player_name}
                                         </SeasonPreservingLink>
                                     </div>
                                     <div className='px-2'>{' '}-{' '}</div>
-                                    <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
+                                    <div className="dark:text-cyan-600 text-blue-500 cursor-pointer hover:underline">
                                         <SeasonPreservingLink to={`/mogi/${all_time_top_score[0].mogi_id}`}>
                                             {all_time_top_score[0].score}
                                         </SeasonPreservingLink>

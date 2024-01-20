@@ -10,8 +10,10 @@
   /* rgb(151, 224, 218); */
   /* --linkColor: #52bbc8; */
   /* --linkColor: #0000EE; */
-  --linkColor: #3b82f6;
-  --navbarLinkColor: #3b82f6;
+  /* --linkColor: #3b82f6; */
+  /* --navbarLinkColor: #3b82f6; */
+  --linkColor: #36899c;
+  --navbarLinkColor: #36899c;
   --navbarBgColor: rgba(236, 233, 219, 0.95);
   --textColor: rgba(7, 18, 18, 1);
   --tableHeaderBgColor: #1d185f;

@@ -27,13 +27,13 @@ import SeasonPreservingLink from './SeasonPreservingLink';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: '#1d185f',
-        fontSize: 20,
+        fontSize: 18,
         // padding: 10,
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 18,
         padding: 8,
-        fontWeight: 600,
+        fontWeight: 400,
         color: theme.palette.text.primary,
         // color: '#e8e6fc',
         // padding: "20px 0px 20px 0px"
@@ -97,7 +97,7 @@ export default function RecordsTable(props) {
 
                                 <StyledTableCell align="center">
                                     {row.players.split(",").map((player) => (
-                                        <div key={player} className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
+                                        <div key={player} className="dark:text-cyan-500 text-blue-500 cursor-pointer hover:underline">
                                             <SeasonPreservingLink to={"/player/" + player}>
                                                 {player}
                                             </SeasonPreservingLink>
@@ -106,16 +106,13 @@ export default function RecordsTable(props) {
                                 </StyledTableCell>
 
                                 <StyledTableCell align="center">
-                                    <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
-                                            <div className="dark:text-cyan-300 text-blue-500 cursor-pointer hover:underline">
-                                                <SeasonPreservingLink to={"/mogi/" + row.mogi_id}>
-                                                    {row.score}
-                                                </SeasonPreservingLink>
-                                            </div>
+                                    <div className="dark:text-cyan-500 text-blue-500 cursor-pointer hover:underline">
+                                        <SeasonPreservingLink to={"/mogi/" + row.mogi_id}>
+                                            {row.score}
+                                        </SeasonPreservingLink>
                                     </div>
                                 </StyledTableCell>
                             </StyledTableRow>
-
                         ))}
                     </TableBody>
                 </Table>

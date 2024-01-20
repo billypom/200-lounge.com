@@ -53,12 +53,12 @@ export default function Leaderboard(props) {
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
             backgroundColor: '#1d185f',
-            fontSize: 20,
+            fontSize: 16,
             // padding: 10,
         },
         [`&.${tableCellClasses.body}`]: {
-            fontSize: 20,
-            padding: 3,
+            fontSize: 16,
+            padding: 0,
             fontWeight: 600,
             color: theme.palette.text.primary,
             // color: '#e8e6fc',
@@ -258,23 +258,23 @@ export default function Leaderboard(props) {
     return (<>
 
         <div className='flex flex-row flex-wrap justify-center'>
-            {/* search bar */}
+            {/* player search */}
             <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1">
                 <input
-                    className="border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray p-2 w-64"
+                    className="border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 p-2 w-64"
                     type="text"
                     placeholder="player"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)} />
             </div>
 
-            {/* countries picker */}
+            {/* country filter */}
             <div className="pb-3 gap-2 z-10 text-xl pl-1 pr-1 box-content">
                 <select
                     id="country"
                     name="country"
                     value={selectedCountry}
-                    className='border border-gray-400 text-black bg-zinc-300 dark:text-amber-50 dark:bg-zinc-800 placeholder:text-gray p-2 w-64'
+                    className='border border-gray-400 text-black bg-zinc-300 dark:text-zinc-400 dark:bg-zinc-800 p-2 w-64'
                     onChange={(e) => setSelectedCountry(e.target.value)}
                 >
                     <option value="">all countries</option>
