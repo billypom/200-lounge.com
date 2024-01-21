@@ -25,8 +25,8 @@ The personal data that the bot may store or process includes, but is not limited
 
 - Your Discord user ID
 - Your nickname in the 200cc Lounge Server
-- Nintendo Switch Online Friend-Code
-- Twitch.tv username
+- Your Nintendo Switch Online Friend-Code (if provided)
+- Your Twitch.tv username (if provided)
 
 ## Limitation of Liability
 
