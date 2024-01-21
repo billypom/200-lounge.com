@@ -23,11 +23,8 @@ Users are responsible for any personal data they share through the bot.
 
 The personal data that the bot may store or process includes, but is not limited to:
 
-- Discord guild ID
-- Discord user ID
-- Discord channel ID
-- Discord username
-- Discord nickname
+- Your Discord user ID
+- Your nickname in the 200cc Lounge Server
 - Nintendo Switch Online Friend-Code
 - Twitch.tv username
 
