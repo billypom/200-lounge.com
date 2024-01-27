@@ -32,10 +32,11 @@ export async function getServerSideProps(context) {
   )
   // Connect to server
   connection.connect();
-  // Store table results
-  let results = await new Promise((resolve, reject) => {
-    connection.query(
-      `SELECT p.player_id, 
+  try {
+    // Store table results
+    let results = await new Promise((resolve, reject) => {
+      connection.query(
+        `SELECT p.player_id, 
       p.country_code as "country", 
       p.player_name as "player name", 
       p.mmr as "mmr", 
@@ -58,105 +59,107 @@ export async function getServerSideProps(context) {
         JOIN (SELECT player_id, sum(if(mmr_change>0,1,0)) as wins FROM player_mogi GROUP BY player_id) as wintable
       ON wintable.player_id = p.player_id
       WHERE p.player_name= ?`, [player, player], (error, results) => {
-      if (error) reject(error);
-      else resolve(results);
+        if (error) reject(error);
+        else resolve(results);
+      }
+      );
     }
     );
-  }
-  );
-  results = JSON.parse(JSON.stringify(results))
-  
-  if (!results[0]) {
-    // Give 404 page on player not found
-    return {notFound: true} 
-  }
+    results = JSON.parse(JSON.stringify(results))
 
-  // mogi history
-  let rows = await new Promise((resolve, reject) => {
-    connection.query(
-      `SELECT pm.mogi_id, pm.mmr_change, pm.new_mmr, CONCAT(if(t.tier_name="sq","squad queue",CONCAT("tier-",t.tier_name))," ", if(m.mogi_format=1,"FFA",CONCAT(m.mogi_format,"v",m.mogi_format))) as title, UNIX_TIMESTAMP(m.create_date) as create_date, pm.score
+    if (!results[0]) {
+      // Give 404 page on player not found
+      return { notFound: true }
+    }
+
+    // mogi history
+    let rows = await new Promise((resolve, reject) => {
+      connection.query(
+        `SELECT pm.mogi_id, pm.mmr_change, pm.new_mmr, CONCAT(if(t.tier_name="sq","squad queue",CONCAT("tier-",t.tier_name))," ", if(m.mogi_format=1,"FFA",CONCAT(m.mogi_format,"v",m.mogi_format))) as title, UNIX_TIMESTAMP(m.create_date) as create_date, pm.score
       FROM player_mogi pm 
       JOIN mogi m ON pm.mogi_id = m.mogi_id 
       JOIN tier t on m.tier_id = t.tier_id
       WHERE pm.player_id = ?
       ORDER BY m.create_date DESC`, [results[0].player_id], (error, rows) => {
-      if (error) reject(error);
-      else resolve(rows);
-    }
-    );
-  });
-  rows = JSON.parse(JSON.stringify(rows))
-
-  // largest gain
-  let lg = await new Promise((resolve, reject) => {
-    connection.query(
-      `SELECT mogi_id FROM player_mogi WHERE player_id = ? AND mmr_change = ?`, [results[0].player_id, results[0]["largest gain"]], (error, lg) => {
         if (error) reject(error);
-        else resolve(lg);
+        else resolve(rows);
       }
-    );
-  });
-  lg = JSON.parse(JSON.stringify(lg))
+      );
+    });
+    rows = JSON.parse(JSON.stringify(rows))
 
-  // largest loss
-  let ll = await new Promise((resolve, reject) => {
-    connection.query(
-      `SELECT mogi_id FROM player_mogi WHERE player_id = ? AND mmr_change = ?`, [results[0].player_id, results[0]["largest loss"]], (error, ll) => {
-        if (error) reject(error);
-        else resolve(ll);
-      }
-    );
-  });
-  ll = JSON.parse(JSON.stringify(ll))
+    // largest gain
+    let lg = await new Promise((resolve, reject) => {
+      connection.query(
+        `SELECT mogi_id FROM player_mogi WHERE player_id = ? AND mmr_change = ?`, [results[0].player_id, results[0]["largest gain"]], (error, lg) => {
+          if (error) reject(error);
+          else resolve(lg);
+        }
+      );
+    });
+    lg = JSON.parse(JSON.stringify(lg))
 
-  // partner avg2
-  let pa = await new Promise((resolve, reject) => {
-    connection.query(
-      `SELECT ROUND(AVG(score),2) as pa FROM (SELECT pm.player_id, pm.mogi_id, pm.place, pm.score, pm.mmr_change FROM player_mogi as pm INNER JOIN (SELECT pm.mogi_id, pm.place, pm.mmr_change FROM player_mogi as pm JOIN mogi as m on pm.mogi_id = m.mogi_id WHERE pm.player_id = ? ORDER BY m.create_date DESC) as pm2 ON pm2.mogi_id = pm.mogi_id AND pm2.place = pm.place AND pm.mmr_change = pm2.mmr_change WHERE player_id <> ?) as a;`, [results[0].player_id, results[0].player_id], (error, pa) => {
-        if (error) reject(error);
-        else resolve(pa);
-      }
-    );
-  });
-  pa = JSON.parse(JSON.stringify(pa))
+    // largest loss
+    let ll = await new Promise((resolve, reject) => {
+      connection.query(
+        `SELECT mogi_id FROM player_mogi WHERE player_id = ? AND mmr_change = ?`, [results[0].player_id, results[0]["largest loss"]], (error, ll) => {
+          if (error) reject(error);
+          else resolve(ll);
+        }
+      );
+    });
+    ll = JSON.parse(JSON.stringify(ll))
+
+    // partner avg2
+    let pa = await new Promise((resolve, reject) => {
+      connection.query(
+        `SELECT ROUND(AVG(score),2) as pa FROM (SELECT pm.player_id, pm.mogi_id, pm.place, pm.score, pm.mmr_change FROM player_mogi as pm INNER JOIN (SELECT pm.mogi_id, pm.place, pm.mmr_change FROM player_mogi as pm JOIN mogi as m on pm.mogi_id = m.mogi_id WHERE pm.player_id = ? ORDER BY m.create_date DESC) as pm2 ON pm2.mogi_id = pm.mogi_id AND pm2.place = pm.place AND pm.mmr_change = pm2.mmr_change WHERE player_id <> ?) as a;`, [results[0].player_id, results[0].player_id], (error, pa) => {
+          if (error) reject(error);
+          else resolve(pa);
+        }
+      );
+    });
+    pa = JSON.parse(JSON.stringify(pa))
 
 
-  let partner_score_history = await new Promise((resolve, reject) => {
-    connection.query(
-      `SELECT pm.mogi_id, pm.score, UNIX_TIMESTAMP(pm2.create_date) as create_date FROM player_mogi as pm INNER JOIN (SELECT pm.mogi_id, pm.place, pm.mmr_change, m.create_date FROM player_mogi as pm JOIN mogi as m on pm.mogi_id = m.mogi_id WHERE pm.player_id = ? ORDER BY m.create_date DESC) as pm2 ON pm2.mogi_id = pm.mogi_id  AND pm2.place = pm.place AND pm.mmr_change = pm2.mmr_change WHERE player_id <> ?`, [results[0].player_id, results[0].player_id], (error, partner_score_history) => {
-        if (error) reject(error)
-        else resolve(partner_score_history)
-      }
-    )
-  })
-  partner_score_history = JSON.parse(JSON.stringify(partner_score_history))
+    let partner_score_history = await new Promise((resolve, reject) => {
+      connection.query(
+        `SELECT pm.mogi_id, pm.score, UNIX_TIMESTAMP(pm2.create_date) as create_date FROM player_mogi as pm INNER JOIN (SELECT pm.mogi_id, pm.place, pm.mmr_change, m.create_date FROM player_mogi as pm JOIN mogi as m on pm.mogi_id = m.mogi_id WHERE pm.player_id = ? ORDER BY m.create_date DESC) as pm2 ON pm2.mogi_id = pm.mogi_id  AND pm2.place = pm.place AND pm.mmr_change = pm2.mmr_change WHERE player_id <> ?`, [results[0].player_id, results[0].player_id], (error, partner_score_history) => {
+          if (error) reject(error)
+          else resolve(partner_score_history)
+        }
+      )
+    })
+    partner_score_history = JSON.parse(JSON.stringify(partner_score_history))
 
-  // # rank
-  let rank = await new Promise((resolve, reject) => {
-    connection.query(
-      `SELECT COUNT(player_id) as "rank" FROM player WHERE mmr >= ?`, [results[0]["mmr"]], (error, rank) => {
-        if (error) reject(error);
-        else resolve(rank);
-      }
-    );
-  });
-  rank = JSON.parse(JSON.stringify(rank))
+    // # rank
+    let rank = await new Promise((resolve, reject) => {
+      connection.query(
+        `SELECT COUNT(player_id) as "rank" FROM player WHERE mmr >= ?`, [results[0]["mmr"]], (error, rank) => {
+          if (error) reject(error);
+          else resolve(rank);
+        }
+      );
+    });
+    rank = JSON.parse(JSON.stringify(rank))
 
-  // score stuff
-  let score_stuff = await new Promise((resolve, reject) => {
-    connection.query(
-      `SELECT MAX(score) as "top score", ROUND(AVG(score),2) as "avg score" FROM player_mogi WHERE player_id = ?`, [results[0].player_id], (error, score_stuff) => {
-        if (error) reject(error);
-        else resolve(score_stuff);
-      }
-    );
-  });
-  score_stuff = JSON.parse(JSON.stringify(score_stuff))
+    // score stuff
+    let score_stuff = await new Promise((resolve, reject) => {
+      connection.query(
+        `SELECT MAX(score) as "top score", ROUND(AVG(score),2) as "avg score" FROM player_mogi WHERE player_id = ?`, [results[0].player_id], (error, score_stuff) => {
+          if (error) reject(error);
+          else resolve(score_stuff);
+        }
+      );
+    });
+    score_stuff = JSON.parse(JSON.stringify(score_stuff))
 
-  let grid_color = 'a'
+    let grid_color = 'a'
 
-  // End connection to server
-  connection.end();
+  } finally {
+    // End connection to server
+    connection.end();
+  }
   // return props as object ALWAYS
   return {
     props: { results, rows, lg, ll, pa, rank, score_stuff, partner_score_history, season, grid_color }
@@ -329,8 +332,8 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
               <div className='cursor-pointer hover:underline dark:text-cyan-300 text-blue-500'>
                 <SeasonPreservingLink to={"/mogi/" + lg[0].mogi_id}>
                   {results[0]["largest gain"]}
-                  </SeasonPreservingLink>
-                  </div>
+                </SeasonPreservingLink>
+              </div>
             </div>
 
             <div className={styles.player_page_stats}>
@@ -338,8 +341,8 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
               <div className='cursor-pointer hover:underline dark:text-cyan-300 text-blue-500'>
                 <SeasonPreservingLink to={"/mogi/" + ll[0].mogi_id}>
                   {results[0]["largest loss"]}
-                  </SeasonPreservingLink>
-                  </div>
+                </SeasonPreservingLink>
+              </div>
             </div>
 
             <div className={styles.player_page_stats}>

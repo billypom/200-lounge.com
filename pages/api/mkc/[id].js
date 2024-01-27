@@ -16,18 +16,21 @@ export default async function handler(req, res) {
   // Connect to server
   connection.connect();
 
-  let results = await new Promise((resolve, reject) => {
-    connection.query(
-      `SELECT mkc_id, player_id, player_name, country_code, unban_date FROM player WHERE mkc_id = ?;`, [mkc], (error, results) => {
-        if (error) reject(error);
-        else resolve(results);
-      }
+  try {
+    let results = await new Promise((resolve, reject) => {
+      connection.query(
+        `SELECT mkc_id, player_id, player_name, country_code, unban_date FROM player WHERE mkc_id = ?;`, [mkc], (error, results) => {
+          if (error) reject(error);
+          else resolve(results);
+        }
+      );
+    }
     );
+    // Parse mysql output into json table
+    results = JSON.parse(JSON.stringify(results))
+    res.status(200).json(results);
+  } finally {
+    // End connection to server
+    connection.end();
   }
-  );
-  // Parse mysql output into json table
-  results = JSON.parse(JSON.stringify(results))
-  // End connection to server
-  connection.end();
-  res.status(200).json(results);
 }

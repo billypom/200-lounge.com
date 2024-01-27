@@ -19,10 +19,11 @@ export async function getServerSideProps(context) {
   )
   // Connect to server
   connection.connect();
-  // Store table results
-  let rows = await new Promise((resolve, reject) => {
-    connection.query(
-      `SELECT p.player_id, 
+  try {
+    // Store table results
+    let rows = await new Promise((resolve, reject) => {
+      connection.query(
+        `SELECT p.player_id, 
       RANK() OVER ( ORDER BY p.mmr DESC ) as "rank",
       p.country_code as "country", 
       p.player_name as "player name", 
@@ -68,18 +69,18 @@ export async function getServerSideProps(context) {
           GROUP BY player_id) 
       as wintable
       ON wintable.player_id = p.player_id`, (error, rows) => {
-      if (error) reject(error);
-      else resolve(rows);
+        if (error) reject(error);
+        else resolve(rows);
+      }
+      );
     }
     );
-  }
-  );
-  rows = JSON.parse(JSON.stringify(rows).replace(/\:null/gi, "\:\"\""))
-  // return props as object ALWAYS
-  if (rows.length === 0) {
-    rows = await new Promise((resolve, reject) => {
-      connection.query(
-        `SELECT
+    rows = JSON.parse(JSON.stringify(rows).replace(/\:null/gi, "\:\"\""))
+    // return props as object ALWAYS
+    if (rows.length === 0) {
+      rows = await new Promise((resolve, reject) => {
+        connection.query(
+          `SELECT
         0 as "rank",
         0 as "country", 
         0 as "player name", 
@@ -93,26 +94,28 @@ export async function getServerSideProps(context) {
         0 as "avg score",
         0 as "largest gain",
         0 as "largest loss"`, (error, rows) => {
-        if (error) reject(error)
-        else resolve(rows)
+          if (error) reject(error)
+          else resolve(rows)
+        }
+        );
       }
-      );
+      )
+      rows = JSON.parse(JSON.stringify(rows).replace(/\:null/gi, "\:\"\""))
     }
-    )
-    rows = JSON.parse(JSON.stringify(rows).replace(/\:null/gi, "\:\"\""))
-  }
 
-  let countries = await new Promise((resolve, reject) => {
-    connection.query('select distinct country_code from player where peak_mmr is not null order by country_code ASC;', (error, countries) => {
-      if (error) reject(error)
-      else resolve(countries)
+    let countries = await new Promise((resolve, reject) => {
+      connection.query('select distinct country_code from player where peak_mmr is not null order by country_code ASC;', (error, countries) => {
+        if (error) reject(error)
+        else resolve(countries)
+      })
     })
-  })
-  countries = JSON.parse(JSON.stringify(countries))
+    countries = JSON.parse(JSON.stringify(countries))
 
 
-  // End connection to server
-  connection.end();
+  } finally {
+    // End connection to server
+    connection.end();
+  }
   let current_season = process.env.current_season
   return {
     props: { rows, current_season, countries }

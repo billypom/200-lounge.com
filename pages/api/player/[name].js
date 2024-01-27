@@ -16,6 +16,7 @@ export default async function handler(req, res) {
   // Connect to server
   connection.connect();
   // Store table results
+  try {
   let results = await new Promise((resolve, reject) => {
     connection.query(
       `SELECT p.player_id, 
@@ -50,8 +51,10 @@ export default async function handler(req, res) {
   );
   // Parse mysql output into json table
   results = JSON.parse(JSON.stringify(results))
-  // End connection to server
-  connection.end();
   // return props as object ALWAYS
   res.status(200).json(results);
+  } finally {
+    // End connection to server
+    connection.end();
+  }
 }

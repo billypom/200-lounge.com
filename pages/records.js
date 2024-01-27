@@ -18,15 +18,16 @@ export async function getServerSideProps(context) {
     }
   )
   connection.connect();
-  const results = []
-  const expected_names = ["all1", "all2", "all3", "all4", "all6", "a1", "a2", "a3", "a4", "a6", "b1", "b2", "b3", "b4", "b6", "c1", "c2", "c3", "c4", "c6", "sq2", "sq3", "sq4", "sq6"]
-  for (var i = 0; i < expected_names.length; i++) {
-    // Band-aid fix for players in FFA who happen to have the same score & MMR change
-    // FFA formats
-    if (expected_names[i].includes('1')) {
-      let stuff = await new Promise((resolve, reject) => {
-        connection.query(
-          `select tier_format, mogi_id, score, players FROM
+  try {
+    const results = []
+    const expected_names = ["all1", "all2", "all3", "all4", "all6", "a1", "a2", "a3", "a4", "a6", "b1", "b2", "b3", "b4", "b6", "c1", "c2", "c3", "c4", "c6", "sq2", "sq3", "sq4", "sq6"]
+    for (var i = 0; i < expected_names.length; i++) {
+      // Band-aid fix for players in FFA who happen to have the same score & MMR change
+      // FFA formats
+      if (expected_names[i].includes('1')) {
+        let stuff = await new Promise((resolve, reject) => {
+          connection.query(
+            `select tier_format, mogi_id, score, players FROM
           (select pm.mogi_id, GROUP_CONCAT(DISTINCT t.tier_name, m.mogi_format) as tier_format, pm.place, round(sum(pm.score)) as score, round(avg(pm.mmr_change)) as mmr_change, GROUP_CONCAT(p.player_name) as players 
           from player p 
           JOIN player_mogi pm ON p.player_id = pm.player_id 
@@ -34,20 +35,20 @@ export async function getServerSideProps(context) {
           JOIN tier t ON t.tier_id = m.tier_id 
           group by pm.mogi_id, pm.place, pm.mmr_change, t.tier_name, p.player_id) as n
           where tier_format = ? order by score desc LIMIT 5`, [expected_names[i]], (error, stuff) => {
-          if (error) reject(error);
-          else resolve(stuff);
+            if (error) reject(error);
+            else resolve(stuff);
+          }
+          );
         }
         );
-      }
-      );
-      stuff = JSON.parse(JSON.stringify(stuff).replace(/\:null/gi, "\:\"\""))
-      // stuff["title"] = "tier-" + expected_names[i].slice(0, -1)
-      results.push(stuff)
-    } else {
-      // Team formats
-      let stuff = await new Promise((resolve, reject) => {
-        connection.query(
-          `select tier_format, mogi_id, score, players FROM
+        stuff = JSON.parse(JSON.stringify(stuff).replace(/\:null/gi, "\:\"\""))
+        // stuff["title"] = "tier-" + expected_names[i].slice(0, -1)
+        results.push(stuff)
+      } else {
+        // Team formats
+        let stuff = await new Promise((resolve, reject) => {
+          connection.query(
+            `select tier_format, mogi_id, score, players FROM
           (select pm.mogi_id, GROUP_CONCAT(DISTINCT t.tier_name, m.mogi_format) as tier_format, pm.place, round(sum(pm.score)) as score, round(avg(pm.mmr_change)) as mmr_change, GROUP_CONCAT(p.player_name) as players 
           from player p 
           JOIN player_mogi pm ON p.player_id = pm.player_id 
@@ -55,19 +56,21 @@ export async function getServerSideProps(context) {
           JOIN tier t ON t.tier_id = m.tier_id 
           group by pm.mogi_id, pm.place, pm.mmr_change, t.tier_name) as n
           where tier_format = ? order by score desc LIMIT 5`, [expected_names[i]], (error, stuff) => {
-          if (error) reject(error);
-          else resolve(stuff);
+            if (error) reject(error);
+            else resolve(stuff);
+          }
+          );
         }
         );
+        stuff = JSON.parse(JSON.stringify(stuff).replace(/\:null/gi, "\:\"\""))
+        // stuff["title"] = "tier-" + expected_names[i].slice(0, -1)
+        results.push(stuff)
       }
-      );
-      stuff = JSON.parse(JSON.stringify(stuff).replace(/\:null/gi, "\:\"\""))
-      // stuff["title"] = "tier-" + expected_names[i].slice(0, -1)
-      results.push(stuff)
     }
-  }
 
-  connection.end();
+  } finally {
+    connection.end();
+  }
   const all1 = results[0]
   const all2 = results[1]
   const all3 = results[2]
@@ -119,7 +122,7 @@ export default function Records({ all1, all2, all3, all4, all6, a1, a2, a3, a4, 
         </h1>
         <div className="flex flex-col text-center z-10 items-center">
           <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>tier all</h2>
-              {/* <div className={styles.tier_title_background}></div> */}
+          {/* <div className={styles.tier_title_background}></div> */}
           <div className="flex flex-row flex-wrap">
             {!isObjectEmpty(all1) ? <RecordsTable data={all1} title='FFA'></RecordsTable> : <></>}
             {!isObjectEmpty(all2) ? <RecordsTable data={all2} title='2v2'></RecordsTable> : <></>}
@@ -145,7 +148,7 @@ export default function Records({ all1, all2, all3, all4, all6, a1, a2, a3, a4, 
             {!isObjectEmpty(b4) ? <RecordsTable data={b4} title='4v4'></RecordsTable> : <></>}
             {!isObjectEmpty(b6) ? <RecordsTable data={b6} title='6v6'></RecordsTable> : <></>}
           </div>
-            
+
           <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>tier c</h2>
           <div className="flex flex-row flex-wrap">
             {!isObjectEmpty(c1) ? <RecordsTable data={c1} title='FFA'></RecordsTable> : <></>}
