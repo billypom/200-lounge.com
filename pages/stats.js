@@ -188,12 +188,13 @@ export async function getServerSideProps(context) {
 
 
 
+
+
+        return {
+            props: { today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data, mogi_count_by_tier, mogis_per_rank, all_time_top_score, avg_mogis_per_day, season_length_in_days }
+        }
     } finally {
         connection.end();
-    }
-
-    return {
-        props: { today_top_score, today_mogi_count, rank_count_by_player, total_registered_players, total_ranked_players, total_mogis_played, average_mmr, median_mmr, mogi_format_count, mogi_day_of_week_data, mogi_count_by_tier, mogis_per_rank, all_time_top_score, avg_mogis_per_day, season_length_in_days }
     }
 }
 

@@ -60,13 +60,14 @@ export async function getServerSideProps(context) {
 
 
 
+
+    // return props as object ALWAYS
+    return {
+      props: { results, pm, avg_room_mmr }
+    }
   } finally {
     // End connection to server
     connection.end();
-  }
-  // return props as object ALWAYS
-  return {
-    props: { results, pm, avg_room_mmr }
   }
 }
 

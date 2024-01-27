@@ -68,38 +68,39 @@ export async function getServerSideProps(context) {
       }
     }
 
+
+    const all1 = results[0]
+    const all2 = results[1]
+    const all3 = results[2]
+    const all4 = results[3]
+    const all6 = results[4]
+    const a1 = results[5]
+    const a2 = results[6]
+    const a3 = results[7]
+    const a4 = results[8]
+    const a6 = results[9]
+    const b1 = results[10]
+    const b2 = results[11]
+    const b3 = results[12]
+    const b4 = results[13]
+    const b6 = results[14]
+    const c1 = results[15]
+    const c2 = results[16]
+    const c3 = results[17]
+    const c4 = results[18]
+    const c6 = results[19]
+    const sq2 = results[20]
+    const sq3 = results[21]
+    const sq4 = results[22]
+    const sq6 = results[23]
+
+
+    // console.log(results)
+    return {
+      props: { all1, all2, all3, all4, all6, a1, a2, a3, a4, a6, b1, b2, b3, b4, b6, c1, c2, c3, c4, c6, sq2, sq3, sq4, sq6 }
+    }
   } finally {
     connection.end();
-  }
-  const all1 = results[0]
-  const all2 = results[1]
-  const all3 = results[2]
-  const all4 = results[3]
-  const all6 = results[4]
-  const a1 = results[5]
-  const a2 = results[6]
-  const a3 = results[7]
-  const a4 = results[8]
-  const a6 = results[9]
-  const b1 = results[10]
-  const b2 = results[11]
-  const b3 = results[12]
-  const b4 = results[13]
-  const b6 = results[14]
-  const c1 = results[15]
-  const c2 = results[16]
-  const c3 = results[17]
-  const c4 = results[18]
-  const c6 = results[19]
-  const sq2 = results[20]
-  const sq3 = results[21]
-  const sq4 = results[22]
-  const sq6 = results[23]
-
-
-  // console.log(results)
-  return {
-    props: { all1, all2, all3, all4, all6, a1, a2, a3, a4, a6, b1, b2, b3, b4, b6, c1, c2, c3, c4, c6, sq2, sq3, sq4, sq6 }
   }
 }
 

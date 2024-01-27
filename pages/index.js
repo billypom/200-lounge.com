@@ -112,13 +112,14 @@ export async function getServerSideProps(context) {
     countries = JSON.parse(JSON.stringify(countries))
 
 
+
+    let current_season = process.env.current_season
+    return {
+      props: { rows, current_season, countries }
+    }
   } finally {
     // End connection to server
     connection.end();
-  }
-  let current_season = process.env.current_season
-  return {
-    props: { rows, current_season, countries }
   }
 }
 

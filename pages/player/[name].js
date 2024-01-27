@@ -156,13 +156,14 @@ export async function getServerSideProps(context) {
 
     let grid_color = 'a'
 
+
+    // return props as object ALWAYS
+    return {
+      props: { results, rows, lg, ll, pa, rank, score_stuff, partner_score_history, season, grid_color }
+    }
   } finally {
     // End connection to server
     connection.end();
-  }
-  // return props as object ALWAYS
-  return {
-    props: { results, rows, lg, ll, pa, rank, score_stuff, partner_score_history, season, grid_color }
   }
 }
 
