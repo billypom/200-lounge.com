@@ -23,14 +23,12 @@ ______________
 ## I. WHAT IS 200 LOUNGE? {#i-what-is-200-lounge}
 ______________
 
-200 Lounge is a competitive solo ladder for the MK8DX 200cc engine class. To compete on the ladder you will need to join the [Discord server](https://discord.gg/uR3rRzsjhk "Discord invite") where we host 24/7 instant wars for MK8DX. 12 players can gather and play an event at any time. All other public channels have their own purposes for players and teams outside of lounge events. See channel descriptions in the server for more information.
+200 Lounge is a competitive solo ladder for the MK8DX 200cc engine class. To compete in events you will need to join the [Discord server](https://discord.gg/uR3rRzsjhk "Discord invite") where we host 24/7 instant wars. 12 players can gather and play an event at any time. All other public channels have their own purposes for players and teams outside of lounge events. See channel descriptions in the server for more information.
 
 ## II. JOINING THE LOUNGE {#ii-joining-the-lounge}
 ______________
 
-Use the **`/verify`** command in our [Discord server](https://discord.gg/uR3rRzsjhk "Discord invite") to provide the leaderboard system with your [Mario Kart Central](https://www.mariokartcentral.com/mkc/ "mariokartcentral.com") account.
-
-A tutorial video on how to do this can be found in the [#verification](https://discord.gg/uR3rRzsjhk "Discord invite") channel in the Discord server.
+Use the **`/verify`** command in our [Discord server](https://discord.gg/uR3rRzsjhk "Discord invite") to provide the leaderboard system with your [Mario Kart Central](https://www.mariokartcentral.com/mkc/ "mariokartcentral.com") account. A tutorial video on how to do this can be found in the [#verification-info](https://discord.gg/uR3rRzsjhk "Discord invite") channel in the Discord server.
 
 For help making a registry account, refer to [this guide.](https://www.mariokartcentral.com/wp/mkcentral-registry-guide/ "MKCentral Registry Guide")
 
@@ -51,20 +49,18 @@ The guidelines by which we expect every player to behave include, but are not li
 
 These guidelines also apply to your Lounge Name (discord nickname) or any public-facing aspect of your Discord profile in any of our social spaces.
 ### Player Reporting {#player-reporting}
-If you see behavior in the server that does not comply with our guidelines, we urge you to create a ticket by clicking the "Create ticket" button in the #support channel. Your ticket should include:
+If you see behavior in the server that does not comply with our guidelines, we urge you to create a ticket by clicking the **Create ticket** button in the [#support](https://discord.gg/uR3rRzsjhk "Discord invite") channel. Your ticket should include:
 - The date & time that the offenses started
 - Timezone you are reporting from
 - Screenshots of the offenses
 - Links to the offending messages, if applicable
 ### Breaches of Conduct {#breaches-of-conduct}
 We take our Code of Conduct seriously. Accounts that we determine to have breached our Code of Conduct will have action taken on them. Account actions may range from warnings and restrictions to permanent termination from the Lounge. Breaches of conduct are reviewed by multiple members of the moderation team and acted upon at our discretion. Should a player attempt to circumvent enforcement action by using an alternate account, all associated accounts will be terminated immediately. The staff team reserves the right to remove any player from the Lounge.
-### Player Appeals & Reinstatement {#player-appeals--reinstatement}
-`someone pretty please come up with a method for handling this`
 
 ## IV. JOINING AN EVENT {#iv-joining-an-event}
 ______________
 
-1. Go to the #tier channels under the Lounge section of the Discord server
+1. Go to the [#tier]() channels under the Lounge section of the Discord server
 
 2. Use the **`/start`** command to start the mogi.
 
@@ -139,9 +135,9 @@ ______________
 
 1. Once a room has been opened, players will have 5 minutes to join the room. Players that join the room late will receive a *-50 MMR* and a *strike*.
 
-2. Players who do not join the room 5 minutes after the penalty time will receive *-100* and a *strike* (V.11) and must be replaced by a sub as soon as possible. The mogi should NOT be started with less than 12 players.
+2. Players who do not join the room 5 minutes after the penalty time will receive *-100* and a *strike* and must be replaced by a sub as soon as possible. The mogi should NOT be started with less than 12 players.
 
-3. If a player seems to be purposefully delaying the room, they can be subbed out. This would hold the same consequences as dropping from the line-up after poll.
+3. If a player seems to be purposefully delaying the room, they can be subbed out. This would hold the same consequences as dropping from the line-up.
 
 4. Players who leave an event after the poll has started:
 	1. Do not gain MMR on a winning team.
