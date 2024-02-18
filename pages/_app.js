@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }) {
   }), [prefersDarkMode])
 
 
-  const [currentSeason, setCurrentSeason] = useState(6)
+  const [currentSeason, setCurrentSeason] = useState(7)
 
   return (<>
     <ThemeProvider theme={theme}>

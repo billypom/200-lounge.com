@@ -9,7 +9,7 @@ import MMRTable from '../../components/MMRTable';
 
 export async function getServerSideProps(context) {
   const mogi_id = context.query.id
-  const season = context.query.season || 6
+  const season = context.query.season || 7
   const db_choice = `s${season}200lounge`
   const connection = mysql.createConnection(
     {

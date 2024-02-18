@@ -18,7 +18,7 @@ const LineChart = dynamic(() => import('recharts').then(mod => mod.LineChart), {
 
 export async function getServerSideProps(context) {
   const player = context.query.name
-  const season = context.query.season || 6
+  const season = context.query.season || 7
   const db_choice = `s${season}200lounge`
   const connection = mysql.createConnection(
     {

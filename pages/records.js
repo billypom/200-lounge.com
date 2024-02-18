@@ -5,7 +5,7 @@ import RecordsTable from '../components/RecordsTable';
 
 
 export async function getServerSideProps(context) {
-  const season = context.query.season || 6
+  const season = context.query.season || 7
   const db_choice = `s${season}200lounge`
   const connection = mysql.createConnection(
     {
