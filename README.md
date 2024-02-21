@@ -36,7 +36,7 @@ apiRequest("https://200-lounge.com/api/discord/166818526768791552");
 ```json
 [
     {
-        "player_id":"166818526768791552",
+        "player_id":"123456789123",
         "country_code":"US",
         "player_name":"popuko",
         "mmr":977,
@@ -72,7 +72,7 @@ async function apiRequest() {
 [
     {
         "mkc_id":154,
-        "player_id":"166818526768791552",
+        "player_id":"123456789123",
         "player_name":"popuko",
         "country_code":"US",
         "unban_date":1704663797
@@ -84,7 +84,7 @@ async function apiRequest() {
 Returns every player or a set of players from the leadeboard. Useful for [MogiBot](https://255mp.github.io/) caching.
 
 - `/api/all_players`
-- `/api/all_players?player_id=123456789`
+- `/api/all_players?player_id=123456789123`
 
 ### Example:
 ```js
@@ -98,24 +98,19 @@ async function apiRequest() {
 ```json
 [
     {
-        "player_id":71024311338536960,
+        "player_id":123123123123,
         "player_name":"mustea",
         "mmr":null
     },
     {
-        "player_id":71153366322913280,
+        "player_id":456456456456,
         "player_name":"LawrySauce",
         "mmr":null
     },
     {
-        "player_id":"80838419575484416",
+        "player_id":"789789789789",
         "player_name":"royal",
         "mmr":2286
-    },
-    {
-        "player_id":"82703095506669568",
-        "player_name":"Tyler",
-        "mmr":2199
     },
     ...
 ]
@@ -135,12 +130,12 @@ async function apiRequest() {
 ```json
 [
   {
-    "player_id": "166818526768791552",
+    "player_id": "123456789123",
     "player_name": "popuko",
     "mmr": 977
   },
   {
-    "player_id": "219494120010416128",
+    "player_id": "987654321987",
     "player_name": "JulianSMM",
     "mmr": 5482
   }
