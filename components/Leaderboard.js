@@ -332,7 +332,7 @@ export default function Leaderboard(props) {
         </div>
 
         {/* leaderboard, table */}
-        <div className="m-auto p-1 z-10">
+        <div className={styles.leaderboard_style}>
             <TableContainer component={Paper} >
                 <Table stickyHeader aria-label="customized table" ref={tableHeader}>
                     {/* header */}
@@ -340,7 +340,7 @@ export default function Leaderboard(props) {
                         <TableRow>
                             {/* React.Fragment used instead of <> so that each column gets a key. No more error :3 */}
                             {
-                                columns.map((column, idx) => (column === "player_id" ? <React.Fragment key={column}></React.Fragment> : isMobile && column === "country" || isMobile && idx > 4 ? <React.Fragment key={column}></React.Fragment> :
+                                columns.map((column, idx) => (column === "player_id" ? <React.Fragment key={column}></React.Fragment>:
                                     <StyledTableCell key={column} align="center">
                                         <div
                                             className={styles.table_header_text}
@@ -364,45 +364,8 @@ export default function Leaderboard(props) {
                         {/* each record gets these divs */}
                         {(rowsPerPage > 0
                             ? sort(filter(rows)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : sort(filter(rows))).map((row, idx) => (
-                                isMobile ?
-                                    <StyledTableRow key={row.player_id}>
-                                        <StyledTableCell align="center">
-                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
-                                                <div className={'cursor-pointer hover:underline'}>
-                                                    <SeasonPreservingLink to={`/player/` + row['player name']}>
-                                                        {parseInt(row.rank)}
-                                                    </SeasonPreservingLink>
-                                                </div>
-                                            </div>
-                                        </StyledTableCell>
-
-                                        {/* <StyledTableCell align="center">
-                                <ReactCountryFlag countryCode={row.country} style={{width: '2rem', height: '2rem'}} svg />
-                              </StyledTableCell> */}
-                                        {/* {console.log(row)} */}
-                                        <StyledTableCell align="center" >
-                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
-                                                <div className='cursor-pointer hover:underline'>
-                                                <SeasonPreservingLink to={`/player/` + row['player name']}>
-                                                        {row['player name']}
-                                                    </SeasonPreservingLink>
-                                                </div>
-                                            </div>
-                                        </StyledTableCell>
-
-                                        <StyledTableCell align="center">
-                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
-                                                {row.mmr}
-                                            </div>
-                                        </StyledTableCell>
-                                    </StyledTableRow> :
-
-
-
-
 
                                     <StyledTableRow key={row.player_id}>
-
                                         <StyledTableCell align="center">
                                             <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                                 <div className='cursor-pointer hover:underline'>

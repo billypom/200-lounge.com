@@ -59,7 +59,7 @@ body {
     var(--g1)
   );
   background-size: 200%;
-  overflow-x: hidden;
+  /*overflow-x: hidden;*/
   min-height: 100vh;
   min-height: --webkit-fill-available;
   color-scheme: dark;

@@ -9,7 +9,10 @@
   }
 
   .leaderboard_style {
-      align-items: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
   }
 
 
@@ -36,6 +39,6 @@
       flex: 1;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
+      font-weight: normal;
       font-size: xx-large
   }
