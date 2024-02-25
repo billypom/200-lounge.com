@@ -454,7 +454,7 @@ export default function Leaderboard(props) {
                                         </StyledTableCell>
 
                                         <StyledTableCell align="center">
-                                            {parseFloat(row['partner avg'])}
+                                            {parseFloat(row['partner avg']) || "N/A"}
                                             {/* {score_stuff[idx]["avg score"]} */}
                                         </StyledTableCell>
 
