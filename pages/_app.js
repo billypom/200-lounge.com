@@ -22,8 +22,10 @@ export default function App({ Component, pageProps }) {
 
   return (<>
     <ThemeProvider theme={theme}>
-      <Navbar currentSeason={currentSeason}/>
-      <SeasonPicker2 currentSeason={currentSeason} setCurrentSeason={setCurrentSeason} />
+      <div className="sticky top-0 z-20">
+        <Navbar currentSeason={currentSeason}/>
+        <SeasonPicker2 currentSeason={currentSeason} setCurrentSeason={setCurrentSeason} />
+      </div>
       <Component {...pageProps} />
       <TileGrid />
     </ThemeProvider>

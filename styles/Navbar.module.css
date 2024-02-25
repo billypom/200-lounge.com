@@ -4,12 +4,12 @@
     background-color: var(--navbarBgColor);
     font-size: 2rem;
     z-index: 21;
-    position: absolute;
+    position: fixed;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     border-radius: 40px;
-    top: 60px;
+    top: 100px;
     right: 5px;
     overflow: hidden;
 }
@@ -19,13 +19,13 @@
     color: #0e0e0e;
     background-color: var(--navbarBgColor);
     font-size: 2rem;
-    z-index: 21;
-    position: absolute;
+    z-index: 30;
+    position: fixed;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     border-radius: 25px;
-    top: 120px;
+    top: 100px;
     right: 5px;
     overflow: hidden;
 }
@@ -40,8 +40,8 @@
     min-width: 100%;
     top: 0;
     font-size: xx-large;
-    z-index: 20;
-    position: sticky;
+    z-index: 30;
+    /* position: sticky; */
     justify-content: space-between;
     align-items: center;
 }
