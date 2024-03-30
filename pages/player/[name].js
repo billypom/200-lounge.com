@@ -314,7 +314,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
             </div>
 
             <div className={styles.player_page_stats}>
-              <h2 className='text-xl font-bold'>Avg Score</h2>
+              <h2 className='text-xl font-bold'>AVG Score</h2>
               <div>{score_stuff[0]["avg score"]}</div>
             </div>
 
@@ -347,7 +347,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
             </div>
 
             <div className={styles.player_page_stats}>
-              <h2 className='text-xl font-bold'>Partner Avg</h2>
+              <h2 className='text-xl font-bold'>Partner AVG</h2>
               <div>{pa[0]["pa"]}</div>
             </div>
 

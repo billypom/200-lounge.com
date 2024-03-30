@@ -1,4 +1,4 @@
-# rules
+# Rules
 ______________
 ## CONTENTS
 - [I. WHAT IS 200 LOUNGE?](#i-what-is-200-lounge)

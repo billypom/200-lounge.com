@@ -63,7 +63,7 @@ export default function Navbar(props) {
                 <ul>
                     <Link href='/'>
                         <div className={styles.navitem}>
-                            200cc lounge
+                            200cc Lounge
                         </div>
                     </Link>
                 </ul>
@@ -77,25 +77,25 @@ export default function Navbar(props) {
                 </> : <>
                     
                     <SeasonPreservingLink to="/">
-                        <div className={styles.navitem}>leaderboard</div>
+                        <div className={styles.navitem}>Leaderboard</div>
                     </SeasonPreservingLink>
 
                     <SeasonPreservingLink to="/records">
-                        <div className={styles.navitem}>records</div>
+                        <div className={styles.navitem}>Records</div>
                     </SeasonPreservingLink>
 
                     <SeasonPreservingLink to="/stats">
-                        <div className={styles.navitem}>stats</div>
+                        <div className={styles.navitem}>Stats</div>
                     </SeasonPreservingLink>
 
                     <SeasonPreservingLink to="/rules">
-                        <div className={styles.navitem}>rules</div>
+                        <div className={styles.navitem}>Rules</div>
                     </SeasonPreservingLink>
 
                     <a href="https://discord.gg/uR3rRzsjhk">
                         {/* onClick={(e) => e.stopPropogation()}> */}
                         <ul className={styles.navitem}>
-                            discord
+                            Discord
                         </ul>
                     </a>
                     </>}
@@ -105,30 +105,30 @@ export default function Navbar(props) {
             <div className={styles.navdropdown} ref={ref}>
                 <SeasonPreservingLink to="/">
                     <div className={styles.navitemmobile} onClick={() => setOpen(!open)}>
-                        leaderboard
+                        Leaderboard
                     </div>
                 </SeasonPreservingLink>
                 <SeasonPreservingLink to="/records">
                     <div className={styles.navitemmobile} onClick={() => setOpen(!open)}>
-                        records
+                        Records
                     </div>
                 </SeasonPreservingLink>
                 <SeasonPreservingLink to="/stats">
                     <div className={styles.navitemmobile} onClick={() => setOpen(!open)}>
-                        stats
+                        Stats
                     </div>
                 </SeasonPreservingLink>
                 <SeasonPreservingLink to="/rules">
                     <div className={styles.navitemmobile} onClick={() => setOpen(!open)}>
-                        rules
+                        Rules
                     </div>
                 </SeasonPreservingLink>
                 <a href="https://discord.gg/uR3rRzsjhk">
                     <ul className={styles.navitemmobile} onClick={() => setOpen(!open)}>
-                        discord
+                        Discord
                     </ul>
                 </a>
-                
+
             </div>
             : <></>}
     </>

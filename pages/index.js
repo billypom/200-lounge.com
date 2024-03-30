@@ -24,13 +24,13 @@ export async function getServerSideProps(context) {
     let rows = await new Promise((resolve, reject) => {
       connection.query(
         `SELECT p.player_id, 
-      RANK() OVER ( ORDER BY p.mmr DESC ) as "rank",
-      p.country_code as "country", 
-      p.player_name as "player name", 
-      p.mmr as "mmr", 
-      p.peak_mmr as "peak mmr", 
-      (wintable.wins/pm.events_played) as "win rate",
-      pm.events_played as "events played",
+      RANK() OVER ( ORDER BY p.mmr DESC ) as "Rank",
+      p.country_code as "Country", 
+      p.player_name as "Player Name", 
+      p.mmr as "MMR", 
+      p.peak_mmr as "Peak MMR", 
+      (wintable.wins/pm.events_played) as "Win Rate",
+      pm.events_played as "Events Played",
       (
         SELECT ROUND(AVG(score),2) as pa 
         FROM (
@@ -50,12 +50,12 @@ export async function getServerSideProps(context) {
           AND pm2.mmr_change = pm.mmr_change
           WHERE player_id <> p.player_id) 
         as a
-      ) "partner avg",
+      ) "Partner AVG",
       (
         SELECT ROUND(AVG(score),2) FROM player_mogi WHERE player_id = p.player_id
-      ) "avg score",
-      pm.largest_gain as "largest gain",
-      pm.largest_loss as "largest loss"
+      ) "AVG Score",
+      pm.largest_gain as "Largest Gain",
+      pm.largest_loss as "Largest Loss"
       FROM player as p 
       JOIN (
         SELECT player_id, count(*) as events_played, MAX(mmr_change) as largest_gain, MIN(mmr_change) as largest_loss 
@@ -81,19 +81,19 @@ export async function getServerSideProps(context) {
       rows = await new Promise((resolve, reject) => {
         connection.query(
           `SELECT
-        0 as "rank",
-        0 as "country", 
-        0 as "player name", 
-        0 as "mmr", 
-        0 as "peak mmr",
-        0 as "win rate",
-        0 as "win/loss (Last 10)",
-        0 as "gain/loss (Last 10)",
-        0 as "events played",
-        0 as "partner avg",
-        0 as "avg score",
-        0 as "largest gain",
-        0 as "largest loss"`, (error, rows) => {
+        0 as "Rank",
+        0 as "Country", 
+        0 as "Player Name", 
+        0 as "MMR", 
+        0 as "Peak MMR",
+        0 as "Win Rate",
+        0 as "Win/Loss (Last 10)",
+        0 as "Gain/Loss (Last 10)",
+        0 as "Events Played",
+        0 as "Partner AVG",
+        0 as "AVG Score",
+        0 as "Largest Gain",
+        0 as "Largest Loss"`, (error, rows) => {
           if (error) reject(error)
           else resolve(rows)
         }
@@ -167,7 +167,7 @@ export default function Home({ rows, current_season, countries }) {
       </Head>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          leaderboard
+          Leaderboard
         </h1>
         <div className='flex flex-col w-full m-auto justify-center items-center text-center z-10'>
           <Leaderboard rows={rows} season={current_season} isMobile={isMobile} countries={countries} />

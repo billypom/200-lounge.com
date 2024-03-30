@@ -200,7 +200,7 @@ export default function Leaderboard(props) {
             try {
                 // Sort by country
                 // I guess the country flag object I am using gets parsed to NaN - need to account for this
-                if (column == 'country') {
+                if (column == 'Country') {
                     throw err
                 }
                 // Sort decimal numbers
@@ -227,13 +227,13 @@ export default function Leaderboard(props) {
                 row[column] ? row[column].toString().toLowerCase().includes(query.toLowerCase()) : false
             )
             // Filtering based on events played
-            const matchesMinEventFilter = minEventsPlayedFilter ? row['events played'] >= parseInt(minEventsPlayedFilter) : true
-            const matchesMaxEventFilter = maxEventsPlayedFilter ? row['events played'] <= parseInt(maxEventsPlayedFilter) : true
+            const matchesMinEventFilter = minEventsPlayedFilter ? row['Events Played'] >= parseInt(minEventsPlayedFilter) : true
+            const matchesMaxEventFilter = maxEventsPlayedFilter ? row['Events Played'] <= parseInt(maxEventsPlayedFilter) : true
             // MMR filter
-            const matchesMinMMRFilter = minMMRFilter ? parseInt(row['mmr']) >= parseInt(minMMRFilter) : true
-            const matchesMaxMMRFilter = maxMMRFilter ? parseInt(row['mmr']) <= parseInt(maxMMRFilter) : true
+            const matchesMinMMRFilter = minMMRFilter ? parseInt(row['MMR']) >= parseInt(minMMRFilter) : true
+            const matchesMaxMMRFilter = maxMMRFilter ? parseInt(row['MMR']) <= parseInt(maxMMRFilter) : true
             // Filtering based on selected country
-            const matchesCountry = selectedCountry ? row['country'] === selectedCountry : true // Adjust this line if the country code is stored differently in your rows.
+            const matchesCountry = selectedCountry ? row['Country'] === selectedCountry : true // Adjust this line if the country code is stored differently in your rows.
 
             return matchesQuery && matchesMinEventFilter && matchesMaxEventFilter && matchesCountry && matchesMinMMRFilter && matchesMaxMMRFilter
 
@@ -367,42 +367,42 @@ export default function Leaderboard(props) {
 
                                     <StyledTableRow key={row.player_id}>
                                         <StyledTableCell align="center">
-                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                            <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.MMR >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.MMR >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                                 <div className='cursor-pointer hover:underline'>
-                                                <SeasonPreservingLink to={`/player/` + row['player name']}>
-                                                        {parseInt(row.rank)}
+                                                <SeasonPreservingLink to={`/player/` + row['Player Name']}>
+                                                        {parseInt(row.Rank)}
                                                     </SeasonPreservingLink>
                                                 </div>
                                             </div>
                                         </StyledTableCell>
 
                                         <StyledTableCell align="center">
-                                            <ReactCountryFlag countryCode={row.country} style={{ width: '2rem', height: '2rem' }} svg />
+                                            <ReactCountryFlag countryCode={row.Country} style={{ width: '2rem', height: '2rem' }} svg />
                                         </StyledTableCell>
 
                                         <StyledTableCell align="center">
-                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                            <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.MMR >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.MMR >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                                                 <div className='cursor-pointer hover:underline'>
-                                                <SeasonPreservingLink to={`/player/` + row['player name']}>
-                                                        {row['player name']}
+                                                <SeasonPreservingLink to={`/player/` + row['Player Name']}>
+                                                        {row['Player Name']}
                                                     </SeasonPreservingLink>
                                                 </div>
                                             </div>
                                         </StyledTableCell>
 
                                         <StyledTableCell align="center">
-                                            <div className={row.mmr >= 11000 ? 'text-red-800' : row.mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.mmr >= 4500 ? 'text-yellow-500' : row.mmr >= 3000 ? 'text-gray-400' : row.mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
-                                                {row.mmr}
+                                            <div className={row.MMR >= 11000 ? 'text-red-800' : row.MMR >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.MMR >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.MMR >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.MMR >= 4500 ? 'text-yellow-500' : row.MMR >= 3000 ? 'text-gray-400' : row.MMR >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                                {row.MMR}
                                             </div>
                                         </StyledTableCell>
 
 
                                         <StyledTableCell align="center">
-                                            <div className={row['peak mmr'] >= 11000 ? 'text-red-800' : row['peak mmr'] >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row['peak mmr'] >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row['peak mmr'] >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row['peak mmr'] >= 4500 ? 'text-yellow-500' : row['peak mmr'] >= 3000 ? 'text-gray-400' : row['peak mmr'] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
-                                                {row['peak mmr']}
+                                            <div className={row['Peak MMR'] >= 11000 ? 'text-red-800' : row['Peak MMR'] >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row['Peak MMR'] >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row['Peak MMR'] >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row['Peak MMR'] >= 4500 ? 'text-yellow-500' : row['Peak MMR'] >= 3000 ? 'text-gray-400' : row['Peak MMR'] >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
+                                                {row['Peak MMR']}
                                             </div>
                                         </StyledTableCell>
-                                        <StyledTableCell align="center">{(row['win rate'] * 100).toFixed(2)}%</StyledTableCell>
+                                        <StyledTableCell align="center">{(row['Win Rate'] * 100).toFixed(2)}%</StyledTableCell>
                                         {/* 
                           <StyledTableCell align="center">{row['Win/Loss (Last 10)']}</StyledTableCell>
                         
@@ -413,17 +413,15 @@ export default function Leaderboard(props) {
                           </StyledTableCell> */}
 
                                         <StyledTableCell align="center">
-                                            {row['events played']}
+                                            {row['Events Played']}
                                         </StyledTableCell>
 
                                         <StyledTableCell align="center">
-                                            {parseFloat(row['partner avg']) || "N/A"}
-                                            {/* {score_stuff[idx]["avg score"]} */}
+                                            {parseFloat(row['Partner AVG']) || "N/A"}
                                         </StyledTableCell>
 
                                         <StyledTableCell align="center">
-                                            {parseFloat(row['avg score'])}
-                                            {/* {pa[idx]["pa"]} */}
+                                            {parseFloat(row['AVG Score'])}
                                         </StyledTableCell>
 
 
@@ -431,14 +429,14 @@ export default function Leaderboard(props) {
 
 
                                         <StyledTableCell align="center">
-                                            <div className={row['largest gain'] > 0 ? 'text-green-500' : 'text-red-500'}>
-                                                {row['largest gain']}
+                                            <div className={row['Largest Gain'] > 0 ? 'text-green-500' : 'text-red-500'}>
+                                                {row['Largest Gain']}
                                             </div>
                                         </StyledTableCell>
 
                                         <StyledTableCell align="center">
-                                            <div className={row['largest loss'] > 0 ? 'text-green-500' : 'text-red-500'}>
-                                                {row['largest loss']}
+                                            <div className={row['Largest Loss'] > 0 ? 'text-green-500' : 'text-red-500'}>
+                                                {row['Largest Loss']}
                                             </div>
                                         </StyledTableCell>
                                     </StyledTableRow>

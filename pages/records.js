@@ -119,7 +119,7 @@ export default function Records({ all1, all2, all3, all4, all6, a1, a2, a3, a4, 
       <main className={styles.main}>
         {/* <TileGrid /> */}
         <h1 className={styles.title}>
-          records
+          Records
         </h1>
         <div className="flex flex-col text-center z-10 items-center">
           <h2 className={`${styles.tier_title} dark:bg-zinc-800/75 bg-neutral-200/75`}>tier all</h2>

@@ -159,12 +159,12 @@ export default function MogiHistory(props) {
           <TableRow>
             <StyledTableCell>
               <div className={styles.table_header_text}>
-                event
+                Event
               </div>
             </StyledTableCell>
             <StyledTableCell>
               <div className={styles.table_header_text}>
-                time
+                Time
               </div>
             </StyledTableCell>
             <StyledTableCell>
@@ -174,7 +174,7 @@ export default function MogiHistory(props) {
             </StyledTableCell>
             <StyledTableCell>
               <div className={styles.table_header_text}>
-                mmr
+                MMR
               </div>
             </StyledTableCell>
           </TableRow>

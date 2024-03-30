@@ -326,7 +326,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
             </Head>
             <main className={styles.main}>
                 <h1 className={styles.title}>
-                    stats
+                    Stats
                 </h1>
 
 

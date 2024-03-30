@@ -2,7 +2,7 @@
 .navdropdown {
     color: #0e0e0e;
     background-color: var(--navbarBgColor);
-    font-size: 2rem;
+    font-size: x-large;
     z-index: 21;
     position: fixed;
     display: flex;
@@ -12,6 +12,7 @@
     top: 100px;
     right: 5px;
     overflow: hidden;
+    font-family: 'ShinGoProBold';
 }
 
 /* Drop down for season picker */
@@ -39,11 +40,12 @@
     background-color: var(--navbarBgColor);
     min-width: 100%;
     top: 0;
-    font-size: xx-large;
     z-index: 30;
     /* position: sticky; */
     justify-content: space-between;
     align-items: center;
+    font-size: x-large;
+    font-family: 'ShinGoProBold';
 }
 
 

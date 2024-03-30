@@ -61,12 +61,12 @@ export default function MMRTable(props) {
           <TableRow>
             <StyledTableCell>
               <div className={styles.table_header_text}>
-                player
+                Player
               </div>
             </StyledTableCell>
             <StyledTableCell>
               <div className={styles.table_header_text}>
-                prev mmr
+                Prev MMR
               </div>
             </StyledTableCell>
             <StyledTableCell>
@@ -76,7 +76,7 @@ export default function MMRTable(props) {
             </StyledTableCell>
             <StyledTableCell>
               <div className={styles.table_header_text}>
-                mmr
+                MMR
               </div>
             </StyledTableCell>
           </TableRow>
