@@ -371,12 +371,12 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
 
             {mmrHistory ?
               <div className='flex flex-col p-2'>
-                <div className={isMobile ? 'pb-2 m-4' : 'pb-6 m-4 border border-gray-100 dark:border-gray-700'}>
+                <div className={'pb-6 m-auto border-double border-4 border-black dark:border-gray-700 bg-neutral-100 dark:bg-zinc-900'}>
                   <div className={styles.player_page_stats}>
                     MMR History
                   </div>
                   <div className='m-auto z-10 h-72'>
-                    <LineChart width={isMobile ? 300 : 500} height={isMobile ? 250 : 300} data={filteredMmrHistory} onClick={handleChartClick}>
+                    <LineChart width={isMobile ? 400 : 500} height={isMobile ? 300 : 300} data={filteredMmrHistory} onClick={handleChartClick}>
                       <XAxis dataKey="date" />
                       <YAxis domain={[mmrMin, mmrMax]} />
                       <Tooltip />
@@ -389,12 +389,12 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
               : <></>}
 
             {scoreHistory ? <div className='flex flex-col p-2'>
-              <div className={isMobile ? 'pb-2 m-4' : 'pb-6 m-4 border border-gray-100 dark:border-gray-700'}>
+              <div className={'pb-6 m-auto border-double border-4 border-black dark:border-gray-700 bg-neutral-100 dark:bg-zinc-900'}>
                 <div className={styles.player_page_stats}>
                   Score History
                 </div>
                 <div className='m-auto z-10 h-72'>
-                  <LineChart width={isMobile ? 300 : 500} height={isMobile ? 250 : 300} data={filteredScoreHistory} onClick={handleChartClick}>
+                  <LineChart width={isMobile ? 400 : 500} height={isMobile ? 300 : 300} data={filteredScoreHistory} onClick={handleChartClick}>
                     <XAxis dataKey="date" />
                     <YAxis domain={[12, 180]} />
                     <Tooltip />
@@ -408,13 +408,13 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
 
 
             {partnerScoreHistory ? <div className='flex flex-col p-2'>
-              <div className={isMobile ? 'pb-2 m-4' : 'pb-6 m-4 border border-gray-100 dark:border-gray-700'}>
+              <div className={'pb-6 m-auto border-double border-4 border-black dark:border-gray-700 bg-neutral-100 dark:bg-zinc-900'}>
                 <div className={styles.player_page_stats}>
                   Partner Score History
                 </div>
 
                 <div className='m-auto z-10 h-72'>
-                  <LineChart width={isMobile ? 300 : 500} height={isMobile ? 250 : 300} data={filteredPartnerScoreHistory} onClick={handleChartClick}>
+                  <LineChart width={isMobile ? 400 : 500} height={isMobile ? 300 : 300} data={filteredPartnerScoreHistory} onClick={handleChartClick}>
                     <XAxis dataKey="date" />
                     <YAxis domain={[12, 180]} />
                     <Tooltip />
@@ -430,7 +430,7 @@ export default function Player({ results, rows, lg, ll, pa, rank, score_stuff, p
 
 
 
-          <div className='text-2xl'>
+          <div className={styles.title}>
             Mogi History
           </div>
 

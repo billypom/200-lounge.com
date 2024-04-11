@@ -59,7 +59,7 @@ export default function Leaderboard(props) {
         [`&.${tableCellClasses.body}`]: {
             fontSize: 16,
             padding: 0,
-            fontWeight: 600,
+            fontWeight: 500,
             color: theme.palette.text.primary,
             // color: '#e8e6fc',
             // padding: "20px 0px 20px 0px"

@@ -159,7 +159,6 @@ export default function Home({ rows, current_season, countries }) {
 
   return (
     <div className={styles.container}>
-      {/* <TileGrid /> */}
       <Head>
         <title>200 Lounge | Leaderboard</title>
         <meta name="description" content="MK8DX 200cc Lounge Leaderboard" />

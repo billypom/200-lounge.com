@@ -249,7 +249,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
 
     // Mogi & mogi colors
     const mogi_colors = ['#ffce47', '#76D7C4', '#85C1E9', '#C39BD3', '#F1948A'];
-    // Mogi format - convert your rows to a format suitable for the Pie Chart
+    // Mogi format - convert rows to a format suitable for the Pie Chart
     const mogi_format_data = mogi_format_count.map(row => ({
         mogi_format: row.mogi_format,
         mogi_count: row.mogi_count,
@@ -291,28 +291,6 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
         name: row.rank_name,
         mogi_count: row.mogis_played
     }))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -408,8 +386,8 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
 
 
 
-                    <div className={'pb-2'}>
-                        <div className={styles.player_page_stats}>
+                    <div className={'mt-6 pb-10 bg-neutral-100 border-double border-4 border-black rounded-lg dark:border-gray-700 dark:bg-zinc-900'}>
+                        <div className={styles.chart_title}>
                             <h2 className='text-xl font-bold'>Players by Rank</h2>
                         </div>
                         <BarChart
@@ -464,8 +442,8 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
 
 
 
-                    <div className={'pb-2'}>
-                        <div className={`${styles.player_page_stats}`}>
+                    <div className={'mt-6 pb-10 bg-neutral-100 border-double border-4 border-black rounded-lg dark:border-gray-700 dark:bg-zinc-900'}>
+                        <div className={styles.chart_title}>
                             <h2 className='text-xl font-bold'>Mogis by Format</h2>
                         </div>
                         <PieChart width={isMobile ? 376 : 500} height={isMobile ? 376 : 500}>
@@ -490,8 +468,8 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
 
 
 
-                    <div className={'mt-6'}>
-                        <div className={styles.player_page_stats}>
+                    <div className={'mt-6 pb-10 bg-neutral-100 border-double border-4 border-black rounded-lg dark:border-gray-700 dark:bg-zinc-900'}>
+                        <div className={styles.chart_title}>
                             <h2 className='text-xl font-bold'>Mogis by Tier</h2>
                         </div>
                         <BarChart
@@ -515,14 +493,14 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                     </div>
 
 
-                    <div className={'mt-6'}>
-                        <div className={styles.player_page_stats}>
+                    <div className={'mt-6 pb-10 bg-neutral-100 border-double border-4 border-black rounded-lg dark:border-gray-700 dark:bg-zinc-900'}>
+                        <div className={styles.chart_title}>
                             <h2 className='text-xl font-bold'>Mogis by Rank</h2>
                         </div>
                         <BarChart
                             width={isMobile ? 375 : 750} height={isMobile ? 300 : 400}
                             data={mogis_per_rank_data}
-                            margin={{ top: 5, right: 30, left: 20, bottom: 48 }}
+                            margin={{ top: 5, right: 30, left: 20, bottom: 52 }}
                         >
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="name" angle={-45} textAnchor="end" verticalAnchor="middle" />
@@ -554,8 +532,8 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                             const dataForDay = adjustedMogiFrequencyData.filter(data => data.day_of_week === day)
 
                             return (
-                                <div key={day} className={isMobile ? 'pb-6 m-4' : 'pb-6 m-4 border border-gray-100 dark:border-gray-700'}>
-                                    <div className={styles.player_page_stats}>
+                                <div key={day} className={isMobile ? 'pb-6 m-4' : 'pb-6 m-4 border-double border-4 border-black dark:border-gray-700 bg-neutral-100 dark:bg-zinc-900'}>
+                                    <div className={styles.chart_title}>
                                         <h2 className='text-2xl font-bold'>{day}</h2>
                                     </div>
                                     <AreaChart

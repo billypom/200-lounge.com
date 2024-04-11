@@ -3,31 +3,30 @@
 @tailwind utilities;
 
 :root {
-  --g1: rgba(219, 240, 238, 0.801);
-  --g2: rgb(246, 245, 231);
-  --g3: rgb(246, 245, 231);
-  /*  another blue */
-  /* rgb(151, 224, 218); */
-  /* --linkColor: #52bbc8; */
-  /* --linkColor: #0000EE; */
-  /* --linkColor: #3b82f6; */
-  /* --navbarLinkColor: #3b82f6; */
-  --linkColor: #36899c;
-  --navbarLinkColor: #36899c;
-  --navbarBgColor: rgba(236, 233, 219, 0.95);
+  --g1: hsl(359, 89%, 75%);
+  --g2: hsl(179, 49%, 75%);
+  --g3: hsl(359, 89%, 75%);
+  --linkColor: hsl(359, 89%, 65%);
+  --navbarLinkColor: hsl(359, 89%, 65%);
+  --navbarBgColor: hsl(240, 3%, 95%);
   --textColor: rgba(7, 18, 18, 1);
   --tableHeaderBgColor: #1d185f;
+  --tileColor: hsl(210, 3%, 96%);
+  --readableBackgroundColor: hsl(210, 3%, 96%);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --g1: rgb(22, 29, 82);
-    --g2: rgb(38, 34, 34);
-    --g3: rgb(22, 29, 82);
-    /* --linkColor: #67e8f9; */
-    /* --navbarLinkColor: #3b82f6; */
+    --g1: hsl(359, 49%, 20%);
+    --g2: hsl(179, 49%, 20%);
+    --g3: hsl(359, 49%, 20%);
+    --linkColor: hsl(179, 89%, 65%);
+    /* --navbarLinkColor: hsl(179, 89%, 65%); */
+    --navbarLinkColor: hsl(359, 89%, 65%);
     --navbarBgColor: rgba(15, 15, 17, 0.96);
     --textColor: rgba(247, 247, 247, 1);
+    --tileColor: hsl(240, 11%, 10%);
+    --readableBackgroundColor: hsl(240, 11%, 10%);
   }
   html {
     color-scheme: dark;

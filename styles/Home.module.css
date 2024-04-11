@@ -4,11 +4,13 @@
   display: flex;
   flex-direction: column;
   margin: auto;
-  /* justify-content: center; */
-  /* align-items: center; */
-  color: black;
-  /* title color (and children) */
-  /* z-index: 1; */
+  color: var(--textColor);
+}
+
+.chart_title {
+  font-size: 1.2rem;
+  padding: 0.4rem;
+  margin: 0.3rem;
 }
 
 .player_page_stats {
@@ -24,10 +26,6 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .main {
-    color: white;
-  }
-
   .player_page_stats {
     border: #323232;
     background-color: #181818;
@@ -79,7 +77,8 @@
 
 
 .title {
-  margin: 0;
+  font-family: 'ShinGoProBold';
+  margin: 2rem;
   line-height: 1.15;
   font-size: 2.8rem;
   font-weight: bold;
@@ -162,11 +161,6 @@
 } */
 
 @media (max-width: 1000px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
-  }
-
   .container {
     padding: 1rem;
     /* margin: auto; */

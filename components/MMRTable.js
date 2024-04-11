@@ -20,9 +20,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
       // padding: 10,
   },
   [`&.${tableCellClasses.body}`]: {
-      fontSize: 20,
+      fontSize: 16,
       padding: 3,
-      fontWeight: 600,
       color: theme.palette.text.primary,
       // color: '#e8e6fc',
       // padding: "20px 0px 20px 0px"
@@ -54,7 +53,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function MMRTable(props) {
   const pm = props.rows
 
-  return (<>
+  return (<div className='pb-10'>
     <TableContainer component={Paper} className={styles.leaderboard_style}>
       <Table stickyHeader aria-label="customized table">
         <TableHead>
@@ -102,14 +101,18 @@ export default function MMRTable(props) {
               </StyledTableCell>
 
               <StyledTableCell align="center">
+                <div className='font-bold'>
                 <div className={p.mmr_change > 0 ? 'text-green-500' : 'text-red-500'}>
                   {p.mmr_change}
+                </div>
                 </div>
               </StyledTableCell>
 
               <StyledTableCell align="center">
+                <div className='font-bold'>
                 <div className={p.new_mmr >= 11000 ? 'text-red-800' : p.new_mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : p.new_mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : p.new_mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : p.new_mmr >= 4500 ? 'text-yellow-500' : p.new_mmr >= 3000 ? 'text-gray-400' : p.new_mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                   {p.new_mmr}
+                </div>
                 </div>
               </StyledTableCell>
             </StyledTableRow>
@@ -118,7 +121,7 @@ export default function MMRTable(props) {
       </Table>
     </TableContainer>
 
-  </>
+  </div>
 
   )
 }

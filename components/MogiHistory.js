@@ -103,9 +103,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     // padding: 10,
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 20,
+    fontSize: 16,
     padding: 3,
-    fontWeight: 600,
+    // fontWeight: 600,
     color: theme.palette.text.primary,
     // color: '#e8e6fc',
     // padding: "20px 0px 20px 0px"
@@ -185,7 +185,7 @@ export default function MogiHistory(props) {
 
               <StyledTableRow key={row.mogi_id}>
 
-                <StyledTableCell align="center">
+                <StyledTableCell align="left">
                   <SeasonPreservingLink to={`/mogi/` + row.mogi_id}>
                     <div className='cursor-pointer hover:underline text-blue-500'>
                       {row.title}
@@ -194,21 +194,25 @@ export default function MogiHistory(props) {
 
                 </StyledTableCell>
 
-                <StyledTableCell align="center">
-                  <div className=''>
+                <StyledTableCell align="left">
+                  <div className='font-mono'>
                     {(new Date(row.create_date * 1000)).toLocaleString()}
                   </div>
                 </StyledTableCell>
 
                 <StyledTableCell align="center">
+                  <div className='font-bold'>
                   <div className={row.mmr_change > 0 ? 'text-green-500' : 'text-red-500'}>
                     {row.mmr_change}
+                  </div>
                   </div>
                 </StyledTableCell>
 
                 <StyledTableCell align="center">
+                  <div className='font-bold'>
                   <div className={row.new_mmr >= 11000 ? 'text-red-800' : row.new_mmr >= 9000 ? 'dark:text-violet-500 text-zinc-900' : row.new_mmr >= 7500 ? 'dark:text-cyan-200 text-cyan-500' : row.new_mmr >= 6000 ? 'dark:text-cyan-600 text-cyan-900' : row.new_mmr >= 4500 ? 'text-yellow-500' : row.new_mmr >= 3000 ? 'text-gray-400' : row.new_mmr >= 1500 ? 'text-orange-400' : 'text-stone-500'}>
                     {row.new_mmr}
+                  </div>
                   </div>
                 </StyledTableCell>
               </StyledTableRow>
@@ -227,7 +231,7 @@ export default function MogiHistory(props) {
               count={rows.length}
               rowsPerPage={rowsPerPage}
               page={page}
-              sx={{ bgcolor: '#0d1d30', color: '#ffffff' }}
+              sx={{ bgcolor: '#1d185f', color: '#ffffff' }}
               SelectProps={{
                 inputProps: {
                   'aria-label': 'rows per page',

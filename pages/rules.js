@@ -37,7 +37,7 @@ export default function Rules() {
                 <ReactMarkdown
                     children={markdownContent}
                     remarkPlugins={[remarkHeadingId]}
-                    className='z-4 m-auto prose lg:prose-xl prose-blue dark:prose-cyan dark:text-white dark:prose-h1:text-zinc-50 dark:prose-h2:text-zinc-100 dark:prose-h3:text-zinc-200 dark:prose-p:text-white prose-code:text-emerald-500 dark:prose-strong:text-yellow-400 prose-strong:text-orange-700 prose-em:text-red-500 break-words'>
+                    className='dark:bg-zinc-900 bg-neutral-100 p-10 z-4 m-auto prose lg:prose-xl prose-blue dark:prose-cyan dark:text-white dark:prose-h1:text-zinc-50 dark:prose-h2:text-zinc-100 dark:prose-h3:text-zinc-200 dark:prose-p:text-white prose-code:text-emerald-500 dark:prose-strong:text-yellow-400 prose-strong:text-orange-700 prose-em:text-red-500 break-words'>
                     {/* {markdownContent} */}
                 </ReactMarkdown>
             </main>

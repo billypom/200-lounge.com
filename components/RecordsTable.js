@@ -55,17 +55,17 @@ export default function RecordsTable(props) {
                 <Table stickyHeader aria-label="customized table">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell className={styles.tableheader}>
+                            <StyledTableCell className={styles.record_table_header}>
                                 <div className={styles.records_column}>
                                     🏆
                                 </div>
                             </StyledTableCell>
-                            <StyledTableCell className={styles.tableheader}>
+                            <StyledTableCell className={styles.record_table_header}>
                                 <div className={styles.records_column}>
                                     Players
                                 </div>
                             </StyledTableCell>
-                            <StyledTableCell className={styles.tableheader}>
+                            <StyledTableCell className={styles.record_table_header}>
                                 <div className={styles.records_column}>
                                     🏁
                                 </div>
