@@ -121,7 +121,7 @@ Pass `player_id` as a query parameter, as many times as you need, to get only a 
 ### Example:
 ```js
 async function apiRequest() {
-  const response = await fetch("https://200-lounge.com/api/all_players?player_id=166818526768791552&player_id=219494120010416128");
+  const response = await fetch("https://200-lounge.com/api/all_players?player_id=123456789123&player_id=987654321987");
   const result = await response.json();
   console.log(result);
 }
