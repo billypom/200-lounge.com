@@ -45,9 +45,9 @@ The guidelines by which we expect every player to behave include, but are not li
 - **Be welcoming of new players** - We were all new karters once. Welcome first-time players and those still learning to play. It will set them an example of how to behave and make them want to return!
 - **Behave** - Discriminatory, hostile, or intentionally provoking messages or language will not be tolerated, whether based on a person’s race, ethnicity, culture, national origin, socioeconomic class, educational level, sex, sexual orientation, gender identity, age, family status, political belief, religion, or mental or physical ability. Harassment of other players through private messaging or in the server will not be tolerated. 
 - **Be cool** - 200 Lounge is meant to be fun. If you become angry or frustrated, take a break. Don't act out your anger in a way that could ruin the experience for others.
-- **Be appropriate** - Remember, 200 Lounge is home to players of all ages. Keep your posts appropriate for younger members and families. NSFW content has no place in our community.
+- **Be appropriate** - Remember, 200 Lounge is home to players of all ages. Keep your posts appropriate. Inappropriate content has no place in our community.
 
-These guidelines also apply to your Lounge Name (discord nickname) or any public-facing aspect of your Discord profile in any of our social spaces.
+These guidelines also apply to your Lounge Name, in-game name  or any public-facing aspect of your profile in any of our social spaces.
 ### Player Reporting {#player-reporting}
 If you see behavior in the server that does not comply with our guidelines, we urge you to create a ticket by clicking the **Create ticket** button in the [#support](https://discord.gg/uR3rRzsjhk "Discord invite") channel. Your ticket should include:
 - The date & time that the offenses started
