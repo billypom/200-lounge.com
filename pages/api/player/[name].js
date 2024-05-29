@@ -17,9 +17,9 @@ export default async function handler(req, res) {
   connection.connect();
   // Store table results
   try {
-  let results = await new Promise((resolve, reject) => {
-    connection.query(
-      `SELECT p.player_id, 
+    let results = await new Promise((resolve, reject) => {
+      connection.query(
+        `SELECT p.player_id, 
       p.country_code, 
       p.player_name, 
       p.mmr, 
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       pm.largest_gain as "largest_gain",
       pm.largest_loss as "largest_loss",
       r.rank_name,
-      p.unban_date
+      p.banned_by_strikes_unban_date
       FROM player as p 
       JOIN ranks as r ON r.rank_id = p.rank_id 
       JOIN (SELECT ten.player_id, SUM(CASE WHEN ten.mmr_change > 0 THEN 1 ELSE 0 END) as wins, SUM(CASE WHEN ten.mmr_change <= 0 THEN 1 ELSE 0 END) as losses, SUM(ten.mmr_change) as last_ten_change
@@ -42,17 +42,17 @@ export default async function handler(req, res) {
       ON p.player_id = pm.player_id
         JOIN (SELECT player_id, sum(if(mmr_change>0,1,0)) as wins FROM player_mogi GROUP BY player_id) as wintable
       ON wintable.player_id = p.player_id
-      WHERE p.player_name= ?`, [player, player] , (error, results) => {
+      WHERE p.player_name= ?`, [player, player], (error, results) => {
         if (error) reject(error);
         else resolve(results);
-        }
+      }
       );
     }
-  );
-  // Parse mysql output into json table
-  results = JSON.parse(JSON.stringify(results))
-  // return props as object ALWAYS
-  res.status(200).json(results);
+    );
+    // Parse mysql output into json table
+    results = JSON.parse(JSON.stringify(results))
+    // return props as object ALWAYS
+    res.status(200).json(results);
   } finally {
     // End connection to server
     connection.end();

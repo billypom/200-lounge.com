@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       pm.largest_gain as "largest_gain",
       pm.largest_loss as "largest_loss",
       r.rank_name,
-      p.unban_date
+      p.banned_by_strikes_unban_date
       FROM player as p 
       JOIN ranks as r ON r.rank_id = p.rank_id 
       JOIN (SELECT ten.player_id, SUM(CASE WHEN ten.mmr_change > 0 THEN 1 ELSE 0 END) as wins, SUM(CASE WHEN ten.mmr_change <= 0 THEN 1 ELSE 0 END) as losses, SUM(ten.mmr_change) as last_ten_change
