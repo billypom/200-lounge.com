@@ -167,23 +167,25 @@ ______________
 
 13. Teams missing a player for more than 6 races will receive an MMR loss proportional to the number of races the missing player is absent from. For instance, if a player is missing for 10 races, the team will receive 2/12 loss. The missing player will still lose MMR and will receive an additional *-100 MMR* + *strike* penalty.
 
-14. If any players happen to be intentionally throwing, teaming, or lap-trolling and there is convincing proof, staff has the right to bestow a *-100 MMR* penalty and a *strike* on the individual in question.
+14. If a player drops after the 1st race, their teammates can choose whether or not to find a sub for the dropped player
 
-15. Hosts that start the room with less than 12 players, close the room for no reason, or otherwise cause unnecessary disruptions will receive *-50 MMR* and a *strike*, and may be prohibited from hosting in the future. In a mogi, hosts must take a 30-second clip to prove that it was unintentional (streaming archive is also allowed). Typing !hostban in any channel will show the list of host-banned players.
+15. If any players happen to be intentionally throwing, teaming, or lap-trolling and there is convincing proof, staff has the right to bestow a *-100 MMR* penalty and a *strike* on the individual in question.
 
-16. 12 full races must be completed. If 12 races are not completed, the event will not count.
+16. Hosts that start the room with less than 12 players, close the room for no reason, or otherwise cause unnecessary disruptions will receive *-50 MMR* and a *strike*, and may be prohibited from hosting in the future. In a mogi, hosts must take a 30-second clip to prove that it was unintentional (streaming archive is also allowed). Typing !hostban in any channel will show the list of host-banned players.
 
-17. If there is no host for a mogi 20 minutes after the poll ends, the entire lineup will receive *-50 MMR* and a *strike*.
+17. 12 full races must be completed. If 12 races are not completed, the event will not count.
 
-18. Hosts must wait 2 minutes after posting their friend code before opening the room to accept friend requests. Other players may request the room to be reopened, if the room was opened early. Refusal will incur *1 strike* to the host.
+18. If there is no host for a mogi 20 minutes after the poll ends, the entire lineup will receive *-50 MMR* and a *strike*.
 
-19. If a player is unable to sub when needed or does not respond within 5 minutes, they will receive a *-50 MMR* penalty and a *strike*.
+19. Hosts must wait 2 minutes after posting their friend code before opening the room to accept friend requests. Other players may request the room to be reopened, if the room was opened early. Refusal will incur *1 strike* to the host.
 
-20. Players who ignore the order of sub priority will receive *-50 MMR* and a *strike*.
+20. If a player is unable to sub when needed or does not respond within 5 minutes, they will receive a *-50 MMR* penalty and a *strike*.
 
-21. After 8 races have passed in the current mogi, users not currently playing are allowed to start a new mogi by typing **`/esn`** (esn = end start new).
+21. Players who ignore the order of sub priority will receive *-50 MMR* and a *strike*.
 
-22. Players must use their Lounge Nickname (or a shortened version if more than 10 characters) in FFA format events. Refusal after the first 2 races will result in *-50 MMR*.
+22. After 8 races have passed in the current mogi, users not currently playing are allowed to start a new mogi by typing **`/esn`** (esn = end start new).
+
+23. Players must use their Lounge Nickname (or a shortened version if more than 10 characters) in FFA format events. Refusal after the first 2 races will result in *-50 MMR*.
 
 ### DISCONNECTIONS {#disconnections}
 
@@ -211,18 +213,21 @@ Example of a properly formatted **`/table`** command:
 
 If there is an issue with your command, our Discord bot should inform you of what is causing the error.
 
-2. Any penalties that occurred during the match must also be stated by the reporter posting the table.
+2. Any penalties accumulated during the match must be stated by the reporter submitting the table, after the table has been posted in the results channel
 
-3. Room hosts are responsible for taking screenshots of results. If an event fails to have a screenshot or table created within 30 minutes of the last race, the host of the room will receive *-100 MMR* and a *strike*.
+3. Room hosts are responsible for taking screenshots of results. If an event fails to have a screenshot or table created within 30 minutes of the last race, the match will not count and the host of the room will receive *-100 MMR* and a *strike*.
 
 4. Only certain people will be given access to the results channels in order to prevent spam. If you want to become a reporter, look in the [#self-roles](https://discord.gg/uR3rRzsjhk "Discord invite") channel in the Discord server
 
 ## VIII. STRIKE SYSTEM {#viii-strike-system}
 ______________
+1. Strikes expire after 30 days.
 
-1. Players who receive MMR penalties for quitting matches, lap-trolling, joining the room late, or teaming will receive a strike. Strikes expire after 30 days. Players have a limit of three strikes.
+2. Players have a limit of 3 strikes.
 
-2. Players who reach the 3 strike limit will be banned from Lounge for 1 week. Each time the strike limit is reached, the ban will increase by an additional week.
+3. Players who receive MMR penalties for quitting matches, lap-trolling, joining the room late, teaming, or any of the offenses listed in above sections will receive a strike.
+
+4. Players who reach the 3 strike limit will be banned from Lounge for 1 week. Each time the strike limit is reached, the ban will increase by an additional week.
 
 ## IX. SQUAD QUEUE {#ix-squad-queue}
 ______________
@@ -240,6 +245,8 @@ ______________
 ## X. CONCLUSION {#x-conclusion}
 ______________
 
-That is all that we are expecting each and every one of you to follow. We hope you enjoy your community and lounge experience and follow the rules and guidelines accordingly.
+1. Playing in the lounge is a privilege. Users who breach our code of conduct, ignore the guidelines above, or abuse commands may be removed from the Lounge at any time without warning.
+
+2. We hope you enjoy your Lounge experience!
 
 ![200 Lounge Logo](/200.png)
