@@ -532,7 +532,7 @@ export default function Stats({ today_top_score, today_mogi_count, rank_count_by
                             const dataForDay = adjustedMogiFrequencyData.filter(data => data.day_of_week === day)
 
                             return (
-                                <div key={day} className={isMobile ? 'pb-6 m-4' : 'pb-6 m-4 border-double border-4 border-black dark:border-gray-700 bg-neutral-100 dark:bg-zinc-900'}>
+                                <div key={day} className={'pb-6 m-4 border-double border-4 border-black dark:border-gray-700 bg-neutral-100 dark:bg-zinc-900'}>
                                     <div className={styles.chart_title}>
                                         <h2 className='text-2xl font-bold'>{day}</h2>
                                     </div>
