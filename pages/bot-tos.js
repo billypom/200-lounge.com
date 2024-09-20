@@ -28,10 +28,10 @@ export default function TOS() {
             </Head>
             <main className={styles.main}>
                 <ReactMarkdown
-                    children={markdownContent}
+                    // children={markdownContent}
                     remarkPlugins={[remarkHeadingId]}
                     className='z-4 m-auto prose lg:prose-xl prose-blue prose-blockquote:text-white prose-blockquote:not-italic prose-blockquote:quoteless dark:prose-cyan dark:text-white dark:prose-h1:text-zinc-50 dark:prose-h2:text-zinc-100 dark:prose-h3:text-zinc-200 dark:prose-p:text-white prose-code:text-emerald-500 dark:prose-strong:text-yellow-400 prose-strong:text-orange-700 prose-em:text-red-500 break-words'>
-                    {/* {markdownContent} */}
+                    {markdownContent}
                 </ReactMarkdown>
             </main>
         </div>
