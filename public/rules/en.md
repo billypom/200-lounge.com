@@ -159,7 +159,7 @@ ______________
 
 9. Courses repicked more than once will incur 1 strike and a *-100* MMR penalty for each repick chosen.
 
-10. Players who have an incorrect tag for more than 2 races will receive a *-25 MMR* penalty.
+10. Players who have an incorrect tag for more than 2 races will receive *-25 MMR* and a *strike*
 
 11. Teams missing a player for at least 4 races will get ⅔ MMR loss.
 
