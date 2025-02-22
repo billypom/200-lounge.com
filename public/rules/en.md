@@ -137,7 +137,7 @@ ______________
 
 2. Players who do not join the room 5 minutes after the penalty time will receive *-100* and a *strike* and must be replaced by a sub as soon as possible. The mogi should NOT be started with less than 12 players.
 
-3. If a player seems to be purposefully delaying the room, they can be subbed out. This would hold the same consequences as dropping from the line-up.
+3. If a player is purposefully delaying the room, they can be forced to drop and subbed out.
 
 4. Players who leave an event after the poll has started:
 	1. Do not gain MMR on a winning team.
@@ -145,13 +145,20 @@ ______________
 	3. Lose any MMR their team lost in addition to the strike.
 
 5. Players who sub in a match that has already started:
-	1. Must be placed on the table instead of the person they subbed.
-	2. Do not lose MMR on a losing team.
-	3. Only gain MMR on the winning team if they play 4 or more races in said event.
-	4. In a situation where placing a sub on a table results in -MMR and placing the dropped player on the table results in +MMR, the player who played more races should be listed on the table.
-	5. In the same situation above, if both players played exactly 6 races, the sub should be listed on the table.
+	1. Do not lose MMR on a losing team.
+	2. Only gain MMR on the winning team if they play 4 or more races in said event.
+	3. Only get placed on the results table if they participated in more races than the dropper that they replaced.
 
-6. Players are not allowed to type **`/c`** while already participating in a mogi. Players who violate this rule will receive *-50 MMR* and a *strike*.
+6. Who goes on the results table?
+	1. All 12 players who originally canned up should have priority on the `/table`
+	2. Matches with droppers and subs will have more than 12 players. The results should be submitted according to the matrix below:
+![sub drop matrix](/sub-drop-matrix.png)
+	- If placing both the dropper and sub on the table results in `positive` MMR for the team, the sub goes on the table.
+	- If placing the dropper on the table results in `positive` MMR for the team and placing the sub on the table results in *negative* MMR for the team - 1. the sub should be placed on the table - 2. the sub should be given no MMR loss - 3. the dropper should be given an *MMR penalty* equal to the amount that the team lost.
+	- If placing the dropper on the table results in *negative* MMR for the team and placing the sub on the table results in `positive` MMR for the team, the sub should be placed on the table.
+	- If placing both the dropper and the sub on the table results in *negative* MMR for the team, the dropper goes on the table.
+
+6. Players who  `/c`an for another mogi while already participating in a mogi will receive *-50 MMR* and a *strike*.
 
 7. Course repicks in an FFA will receive a *-10 score* penalty.
 
@@ -169,7 +176,7 @@ ______________
 
 14. If a player drops after the 1st race, their teammates can choose whether or not to find a sub for the dropped player
 
-15. If any players happen to be intentionally throwing, teaming, or lap-trolling and there is convincing proof, staff has the right to bestow a *-100 MMR* penalty and a *strike* on the individual in question.
+15. Players who intentionally throw, team, or lap-troll with convincing proof will receive a *-100 MMR* penalty and a *strike*.
 
 16. Hosts that start the room with less than 12 players, close the room for no reason, or otherwise cause unnecessary disruptions will receive *-50 MMR* and a *strike*, and may be prohibited from hosting in the future. In a mogi, hosts must take a 30-second clip to prove that it was unintentional (streaming archive is also allowed). Typing !hostban in any channel will show the list of host-banned players.
 
@@ -217,7 +224,7 @@ If there is an issue with your command, our Discord bot should inform you of wha
 
 3. Room hosts are responsible for taking screenshots of results. If an event fails to have a screenshot or table created within 30 minutes of the last race, the match will not count and the host of the room will receive *-100 MMR* and a *strike*.
 
-4. Only certain people will be given access to the results channels in order to prevent spam. If you want to become a reporter, look in the [#self-roles](https://discord.gg/uR3rRzsjhk "Discord invite") channel in the Discord server
+4. Only approved players will be given access to the results channels in order to prevent spam.
 
 ## VIII. STRIKE SYSTEM {#viii-strike-system}
 ______________
