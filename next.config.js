@@ -7,8 +7,8 @@ const nextConfig = {
 module.exports = {
   // nextConfig,
   reactStrictMode: true,
-  swcMinify: true,
+  // swcMinify: true,
   images: {
-    domains: ['cdn.discordapp.com'],
+    //remotePatterns: ['cdn.discordapp.com'],
   },
 }
